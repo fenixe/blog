@@ -1,0 +1,85 @@
+themes > next > source > css > _custom > custom.styl
+// Custom styles.
+// 颜色块-绿
+span.ib_green {
+display: inline;
+padding: 1px 4px !important;
+font-size:80%;
+font-weight:bold;
+line-height:1;
+color:#fff;
+text-align:center;
+white-space:nowrap;
+vertical-align:baseline;
+border-radius:0;
+background-color: #5cb85c;
+}
+// 颜色块-蓝
+span.ib_blue {
+display:inline;
+padding: 1px 4px !important;
+font-size:80%;
+font-weight:bold;
+line-height:1;
+color:#fff;
+text-align:center;
+white-space:nowrap;
+vertical-align:baseline;
+border-radius:0;
+background-color: #2780e3;
+}
+// 颜色块-紫
+span.ib_purple {
+display:inline;
+padding: 1px 4px !important;
+font-size:80%;
+font-weight:bold;
+line-height:1;
+color:#fff;
+text-align:center;
+white-space:nowrap;
+vertical-align:baseline;
+border-radius:0;
+background-color: #9954bb;
+}
+// 颜色块-黄
+span.ib_yellow {
+display:inline;
+padding: 1px 4px !important;
+font-size:80%;
+font-weight:bold;
+line-height:1;
+color:#fff;
+text-align:center;
+white-space:nowrap;
+vertical-align:baseline;
+border-radius:0;
+background-color: #f0ad4e;
+}
+
+code {
+  background-color: #fff5f5;
+  color: #ff0000;
+}
+
+pre .variable, pre .attribute, pre .tag, pre .regexp, pre .ruby .constant, pre .xml .tag .title, pre .xml .pi, pre .xml .doctype, pre .html .doctype, pre .css .id, pre .css .class, pre .css .pseudo {
+  color: #569bd5;
+}
+
+pre .ruby .class .title, pre .css .rules .attribute, pre .string, pre .value, pre .inheritance, pre .header, pre .ruby .symbol, pre .xml .cdata, pre .special, pre .number, pre .formula {
+  color: #cd9077;
+}
+
+pre .tag .attr {
+  color: #9bdbfc;
+}
+
+themes > next > source > css > _variables > custom.styl
+.custom_red {
+    background-color: #fff5f5;
+    color: #ff502c;
+    padding: .065em .4em;
+    border-radius: 2px;
+    word-break: break-word;
+    overflow-x: auto;
+}
