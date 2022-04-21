@@ -108,3 +108,4 @@ deploy:
   type: git
   repo: root@122.51.101.113:/home/git/kil-blog.git
   branch: master
+
