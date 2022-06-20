@@ -87,6 +87,13 @@ window.addEventListener('message', function(e) {
 });
 
 ## 阻止事件
+### form 表单内回车 刷新页面
+```html
+<form onsubmit="event.preventDefault();">
+  <input type="text">
+  <button onclick="test()">submit</button>
+</form>
+```
 ### a 标签跳转
 1、e.preventDefault();
 2、href="javascript:void(0);"

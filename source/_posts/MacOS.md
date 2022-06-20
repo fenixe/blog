@@ -328,3 +328,15 @@ Welcome to nginx!
 找到终端.app(找到自己用的终端)，显示简介，把使用 Rosetta打开勾选上，然后重启终端，再运行brew install ，
 
 最后装好了别忘了去掉勾
+
+"departmentId": 9,
+"departmentName": "普通内科",
+"doctorEthNo": "8623777",
+"doctorName": "AAA",
+"doctorTitle": "高级",
+"doctorTitleId": 3,
+"hospitalId": 225471,
+"hospitalName": "上海乐静门诊部",
+"imgs": [{"url": "https://dev-digilink-cdn.oss-cn-shanghai.aliyuncs.com/2022-05-11/6ce51e1b-b361-4983-942b-05922ab72b72"}],
+"msgMobile": null,
+"status": "NoSubmit"
