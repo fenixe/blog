@@ -672,13 +672,22 @@ splice(索引，长度)
 第三个参数 可以添加元素
 改变原数组
 
-### join
+### 数组返回字符串
+toString()	将数组转换成一个字符串
+toLocalString()	把数组转换成本地约定的字符串
+join()	将数组元素连接起来以构建一个字符串
+
+#### join
 join() 方法将一个数组（或一个类数组对象）的所有元素连接成一个字符串并返回这个字符串.
 ``` js
 const elements = ['Fire', 'Air', 'Water'];
 
 console.log(elements.join());
 // expected output: "Fire,Air,Water"
+
+var a = [1,2,3,4,5]; 
+var s = a.join("==");  //指定分隔符
+console.log(s);  //返回字符串“1==2==3==4==5”
 ```
 
 
