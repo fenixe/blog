@@ -15,6 +15,15 @@ Regular Expression
 校验
 提取
 
+# Base
+| -- | -- |
+| 特别字符 ｜ 说明 ｜
+｜ . ｜ 匹配除换行符 \n之外的任何单字符。要匹配 .，请使用 \。 |
+| $1 | 小括号中的值 |
+
+
+更多字符：https://www.cnblogs.com/afarmer/archive/2011/08/29/2158860.html
+
 # 写法
 ## 创建正则
 js风格 new RegExp()
@@ -151,6 +160,11 @@ var emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@
 （数字、字母、下划线）8～12位
 /^\w{8,32}$/
 
-
+## 银行卡4个字符空格
+```js
+let cardNo = '123412341234';
+const cardNoFormat = cardNo.replace(/(.{4})/g, '$1,');
+console.log(cardNoFormat.split(','));
+```
 
 
