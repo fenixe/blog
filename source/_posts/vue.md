@@ -395,6 +395,63 @@ props: ['postTitle'],
 
 [第三第四种双向绑定](https://juejin.im/post/5aaa9eabf265da237b21d36a)
 
+## watche
+```js
+var app = new Vue({
+    el: '#app', 
+    data: {
+        msg: 'hello vue',
+        firstName: 'kil',
+        lastName: 'Q',
+        fullName: '',
+        obj:{
+            a: '123'
+        }
+    },
+    watch: {
+        // 应用一 值变化才更新
+        // firstName(newName){
+        //     this.fullName = newName+ this.lastName
+        // }
+
+        //应用二 立即执行
+        firstName:{
+            handler(newName){
+                this.fullName = newName+ this.lastName
+            },
+            immediate: true
+        },
+
+        //应用二 深度观察更新
+        //给对象的所有属性都加上这个监听器，性能开销就会非常大了，任何修改obj里面任何一个属性都会触发这个监听器里的 handler
+        obj: {
+            handler(newA){
+                console.log('obj.a change', newA)
+            },
+            immediate: true,
+            deep: true,
+        },
+        //优化：使用字符串形式监听
+        'obj.a': {
+            handler(newName, oldName) {
+            console.log('obj.a changed');
+            },
+            immediate: true,
+            // deep: true
+        }
+
+        //注销watch
+        //组件中随着组件的销毁而销毁
+        //全局手动绑定的
+        const unWatch = app.$watch('text', (newVal, oldVal) => {
+            console.log(`${newVal} : ${oldVal}`);
+        })
+        //app.$watch调用后会返回一个值，就是unWatch方法
+        unWatch(); // 手动注销watch
+    }
+  })
+```
+
 # vuex
 Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。
 
