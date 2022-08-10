@@ -20,6 +20,7 @@ Regular Expression
 | 特别字符 ｜ 说明 ｜
 ｜ . ｜ 匹配除换行符 \n之外的任何单字符。要匹配 .，请使用 \。 |
 | $1 | 小括号中的值 |
+| \W | 非字母和数字 |
 
 
 更多字符：https://www.cnblogs.com/afarmer/archive/2011/08/29/2158860.html
