@@ -35,6 +35,11 @@ IIFE（立即调用函数表达式）
 })()
 ```
 
+## 格式化数字
+```js
+number.toFixed(2) // 2: 可以自定义小数位
+```
+
 ## 定时器
 setInterval
 interval: 间隔

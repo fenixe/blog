@@ -10,7 +10,7 @@ tags:
 
 
 # Base
-渐进式：主张最少
+渐进式：主张最少（用到什么学习什么）
 设计理念：自低向上逐层应用
 你可以使用vue核心：声明式渲染，组件系统
 你也可以使用下面这个图的全部
@@ -77,8 +77,8 @@ app.vue
 />
 ```
 
-## 组件
-小型、独立和通常可复用的组件构建大型应用
+## 组件·
+小型、独立和通常可`复用`的组件构建大型应用
 一个组件本质上是一个拥有预定义选项的一个 Vue 实例
 ``` js
 // 定义名为 todo-item 的新组件
@@ -137,6 +137,25 @@ vm.$watch('a', function (newValue, oldValue) {
 ### 生命周期 life cycle
 `{% asset_img lifecycle.png %}`
 
+### 混入 mixin
+```js
+var myMixin = {
+    created: function(){
+        this.hello()
+    },
+    methods:{
+        hello: function(){
+            console.log('hello from mixin');
+        }
+    }
+}
+export default {
+    name: 'Test',
+    mixins: [myMixin]
+}
+```
+
+created、methods、components 和 directives，将被合并为同一个对象。两个对象键名冲突时，取组件对象的键值对。
 
 ## 模版语法
 基于 HTML 的模板语法
@@ -453,7 +472,7 @@ var app = new Vue({
 ```
 
 # vuex
-Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。
+一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。
 
 Vuex 可以帮助我们管理共享状态，并附带了更多的概念和框架。这需要对短期和长期效益进行权衡。
 如果您不打算开发大型单页应用，使用 Vuex 可能是繁琐冗余的。确实是如此——如果您的应用够简单，您最好不要使用 Vuex。一个简单的 store （仓库）模式就足够您所需了。但是，如果您需要构建一个中大型单页应用，您很可能会考虑如何更好地在组件外部管理状态，Vuex 将会成为自然而然的选择。
@@ -545,6 +564,11 @@ Vue.use(vuex);
 var store = new vuex.Store({//store对象
     state:{
         show:false
+    },
+    mutations:{
+      changeShowStatus(state){
+        state.show = true
+      }
     }
 })
 // 为了在 Vue 组件中访问 this.$store property，你需要为 Vue 实例提供创建好的 store。Vuex 提供了一个从根组件向所有子组件，以 store 选项的方式“注入”该 store 的机制
@@ -646,7 +670,7 @@ const Counter = {
 ```
 
 #### mapState辅助函数
-当一个组件需要获取多个状态的时候，将这些状态都声明为计算属性会有些重复和冗余
+当一个组件需要获取`多个状态`的时候，将这些状态都声明为计算属性会有些重复和冗余
 ``` js
 // 在单独构建的版本中辅助函数为 Vuex.mapState
 import { mapState } from 'vuex'
@@ -810,6 +834,7 @@ export default {
 ```
 
 ### Actions
+内部执行异步，mutations只能同步
 Action 类似于 mutation，不同在于：
 - Action 提交的是 mutation，而不是直接变更状态。
 - Action 可以包含任意异步操作。
