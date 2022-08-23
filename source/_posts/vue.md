@@ -345,6 +345,19 @@ methods: {
 ```
 
 ## 组件
+### 注册
+```js
+Vue.component('todo-item', {
+    template: '<li>待办</li>',
+    data: function(){return } //组件会出现复用，如果是对象{}, js中是引用类型，在一个地方改动会影响其他地方的使用
+});
+var app = new Vue({
+    el: '#app', 
+    data: { // 根事例不会出现复用
+        msg: '',
+    },
+})
+```
 ### 父子组件传值
 父级组件可以像处理 native DOM 事件一样通过 v-on 监听子组件实例的任意事件：
 ``` html

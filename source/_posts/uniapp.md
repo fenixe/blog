@@ -78,3 +78,16 @@ uni.navigateTo({
 - [ ] 弹窗（toast、alert）
 - [ ] 消息通知
 - [ ] 消息通知
+
+# 热更新
+iOS的wgt更新肯定是违反apple政策的，注意事项：
+- 审核期间请不要弹窗升级
+- 升级完后尽量不要自行重启
+- 尽量使用静默更新
+
+## uni admin
+项目名：uni-admin（不要改其他名字）
+登录账号密码在：https://unicloud.dcloud.net.cn/
+云数据库 - uni-id-users 库里面。忘记密码删除重新注册
+
+## 
