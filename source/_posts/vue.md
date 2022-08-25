@@ -63,6 +63,8 @@ app.vue
 
 `v-model` 双向绑定
 
+`v-bind` 绑定属性 （可以省略写法 :）
+
 ### v-model 指令
 ``` html
 <input v-model="text" />
@@ -79,6 +81,11 @@ app.vue
 
 ## 组件·
 小型、独立和通常可`复用`的组件构建大型应用
+
+组件的三大核心概念：属性、事件和插槽
+
+`{% asset_img component.png %}`
+
 一个组件本质上是一个拥有预定义选项的一个 Vue 实例
 ``` js
 // 定义名为 todo-item 的新组件
@@ -89,18 +96,26 @@ Vue.component('todo-item', {
 
 ``` html
 <!-- 创建一个 todo-item 组件的实例 -->
-<todo-item></todo-item>
+// class如果组建没有声明 props声明，直接挂在根节点上。渲染结果：<li class="todo">待办</li>
+<todo-item class='todo'></todo-item>
 ```
 
 ### 父传子 prop
 props(或properties)是我们将数据从父组件向下传递到其子组件的方式。
 
 ``` js
+// 'todo-item' 组件名唯一
 Vue.component('todo-item', {
   // todo-item 组件现在接受一个
   // "prop"，类似于一个自定义特性。
   // 这个 prop 名为 todo。
   props: ['todo'],
+  props: {
+    del: {
+      type: Boolean,
+      default: false // 默认值
+    }
+  }
   template: '<li>{{ todo.text }}</li>'
 })
 ```
@@ -192,6 +207,7 @@ v-once 指令，执行一次性地插值，当数据改变时，插值处的内�
 ```
 
 ### 指令
+指令的本质：一个标志位，他被标记了什么标志，vue底层就会根据这个标志做出相应的处理
 #### 修饰符
 修饰符 (Modifiers) 是以半角句号 . 指明的特殊后缀，用于指出一个指令应该以特殊方式绑定。
 
@@ -314,6 +330,13 @@ methods: {
 
 ## 事件处理
 ### 事件修饰符
+#### .stop 阻止单击事件继续传播，防止冒泡
+<a v-on:click.stop="doThis"></a>
+```js
+handleClick(e){
+  e.stop;
+}
+```
 #### .sync 修饰符
 ``` html
 <my-dialog :visible.sync="dialogVisible" />
