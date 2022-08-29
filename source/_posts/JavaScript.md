@@ -74,6 +74,9 @@ function fbLogin(token) {
 }
 ```
 
+## 运算符优先级
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_Precedence
+
 ## iframe
 ### 调用父级dom方法
 window.parent.parentFn();
@@ -1667,4 +1670,7 @@ function unique(arr) {
 ## sort()排序后，相邻比较
 
 ## includes，数组是否含有某个值
-
+```js
+const a = [1,2];
+a.includes(1);
+```

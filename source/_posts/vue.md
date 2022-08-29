@@ -70,7 +70,7 @@ app.vue
 <input v-model="text" />
 ```
 
-上例不过是一个语法糖，展开来是：
+上例不过是一个语法糖，本质是单向数据流，展开来是：
 
 ``` html
 <input
@@ -79,7 +79,7 @@ app.vue
 />
 ```
 
-## 组件·
+## 组件
 小型、独立和通常可`复用`的组件构建大型应用
 
 组件的三大核心概念：属性、事件和插槽
@@ -171,6 +171,26 @@ export default {
 ```
 
 created、methods、components 和 directives，将被合并为同一个对象。两个对象键名冲突时，取组件对象的键值对。
+
+### 单文件组件
+template 缺点
+- 全局定义
+- 字符串模版
+- 不支持css
+- 没有构建步骤，不能使用Babel
+
+#### scoped
+只会在本组件生效，不会污染其他组件
+```
+<style scoped>
+.test{
+    color: red;
+}
+</style>
+.test[data-v-e43c18bc] {
+    color: red;
+}
+```
 
 ## 模版语法
 基于 HTML 的模板语法
@@ -269,6 +289,54 @@ data: {
 }
 ```
 
+### 插槽
+传递复杂内容的方式，如：标签
+新老语法都要掌握
+2.5语法
+```
+<todo-item class="todo">
+    <span slot="pre-icon">前置图标</span>
+</todo-item>
+
+template: `<li>
+  <slot name="pre-icon"></slot>  // 具名插槽
+  待办
+  </li>`,
+```
+
+2.6语法提供 v-slot 指令
+```
+<template v-slot:pre-icon>
+    <span>前置图标</span>
+</template>
+```
+#### 默认插槽
+```
+<template v-slot>
+    <span>前置图标</span>
+</template>
+```
+
+#### 作用域插槽
+能接受子组件传递的值
+```
+template: `<li>
+    <slot name="pre-icon" :val="val"></slot>
+    待办
+    </li>`,
+data: function(){
+    return {
+        val: 5
+    }
+}
+
+<todo-item class="todo">
+    <template v-slot:pre-icon="{val}">
+        <span>前置图标 {{val}}</span>
+    </template>
+</todo-item>
+```
+
 ## 条件渲染
 ### 用 key 管理可复用的元素
 切换登录方式时，是否保留用户输入的文本
@@ -338,6 +406,7 @@ handleClick(e){
 }
 ```
 #### .sync 修饰符
+使用场景：一个组件需要提供多个双向绑定的属性时使用，你只能选用一个属性来提供 v-model 功能，但如果有其他属性也要提供双向绑定，就需要.sync
 ``` html
 <my-dialog :visible.sync="dialogVisible" />
 ```

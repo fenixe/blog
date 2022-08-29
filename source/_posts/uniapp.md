@@ -39,6 +39,10 @@ if (process.env.UNI_PLATFORM === "mp-weixin") {}
 if (process.env.UNI_PLATFORM === "mp-baidu") {}
 ```
 
+## 内置方法
+uni.hideKeyboard() //隐藏软键盘
+
+
 ## http request
 ```js
 ureq =>
