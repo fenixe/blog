@@ -24,11 +24,6 @@ jQuery时代的开发逻辑，就是我们先要找到目标元素，然后再�
 Angular 双向绑定
 Vue 在不同组件间强制使用单向数据流。这使应用中的数据流更加清晰易懂。
 
-## vue3
-### 优秀的设计
-Composition 组合 API、基于 Proxy 的响应式系统、自定义渲染器
-
-
 ## config
 ### change port
 vue.config.js
@@ -1127,7 +1122,7 @@ store.registerModule('myModule', {
     └── modules
         ├── cart.js       # 购物车模块
         └── products.js   # 产品模块
-```        
+```
 
 # Vue实例
 ## 数据
@@ -1157,13 +1152,11 @@ vm.$watch('a', function (newValue, oldValue) {
 created: () => console.log(this.a) 或 vm.$watch('a', newValue => this.myMethod())。
 因为箭头函数并没有 this，this 会作为变量一直向上级词法作用域查找，直至找到为止
 
-
 {% asset_img life_cycle.png %}
 created:在模板渲染成html前调用，即通常初始化某些属性值，然后再渲染成视图。
 mounted:在模板渲染成html后调用，通常是初始化页面完成后，再对html的dom节点进行一些需要的操作。
 
-### 生命周期 life cycle
-{% asset_img lifecycle.png %}
+{% asset_img life2.png %}
 
 ### 混入 mixin
 ```js
