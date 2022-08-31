@@ -50,6 +50,10 @@ app.vue
 }
 ```
 
+### 内置方法
+强制刷新
+$forceUpdate()
+
 ## 声明式渲染
 指令
 指令带有前缀 `v-`
@@ -254,6 +258,9 @@ v-once 指令，执行一次性地插值，当数据改变时，插值处的内�
 
 ## 计算属性和侦听器
 ### 计算属性
+- 减少模版中计算逻辑，只会在数据变化的时候才计算
+- 数据缓存
+- 依赖固定的数据类型（响应式数据）
 ``` js
 computed: {
   // 计算属性的 getter
@@ -1166,6 +1173,9 @@ created: () => console.log(this.a) 或 vm.$watch('a', newValue => this.myMethod(
 `{% asset_img life_cycle.png %}`
 created:在模板渲染成html前调用，即通常初始化某些属性值，然后再渲染成视图。
 mounted:在模板渲染成html后调用，通常是初始化页面完成后，再对html的dom节点进行一些需要的操作。
+
+### updated
+在组件因为一个响应式状态变更而更新其 DOM 树之后调用。
 
 # 系统的看 vue 官网 
 evan you：我想你会乐在其中
