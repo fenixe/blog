@@ -103,7 +103,7 @@ systemctl start nginx
 nginx -s start;
 
 启动成功后浏览器输入ip，显示相应信息
-`{% asset_img nginx1.png %}`
+{% asset_img nginx1.png %}
 
 重启
 systemctl restart nginx
@@ -184,7 +184,7 @@ root /opt/dist;
 ```
 
 浏览器输入地址：http://96.45.180.121/
-`{% asset_img nginx2.png %}`
+{% asset_img nginx2.png %}
 
 # 检查
 ``` zsh

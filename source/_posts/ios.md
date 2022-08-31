@@ -106,7 +106,7 @@ iphone 12        宽：390，高：844
 
 ## icon
 iPad Pro	167px × 167px (83.5pt × 83.5pt @2x)
-`{% asset_img icon.png %}`
+{% asset_img icon.png %}
 
 # OC
 Objective-C是C语言的严格超集
@@ -122,7 +122,7 @@ Objective-C是C语言的严格超集
 ## 创建OC文件
 Xcode -> Create a new Xcode project -> OS X -> Command Line Tool
 中国人的探索精神就是这样，没有
-`{% asset_img explore.png %}`
+{% asset_img explore.png %}
 
 
 ## basis
@@ -275,13 +275,13 @@ Wireless Accessory Configuration：无线附件配置
 ## Xcode
 ### 账号登录
 Xcode -> xcode server -> account
-`{% asset_img ios02.png %}`
+{% asset_img ios02.png %}
 ### 调试
 Automatically manage signing
 自动配置证书,自动创建和更新证书
 
-`{% asset_img ios00.png %}`
-`{% asset_img ios01.png %}`
+{% asset_img ios00.png %}
+{% asset_img ios01.png %}
 
 创建的证书名称是开发者的名字后面括号加上我电脑的名称。
 https://developer.apple.com/account/resources/certificates/list
@@ -311,7 +311,7 @@ new Date("2021-02-03 00:00:00").getTime()
 1
 android端显示正常，获取结果为1612281600000
 经网上查阅资料使用new Date()移动端兼容性如下图所示
-`{% asset_img ios_date.png %}`
+{% asset_img ios_date.png %}
 
 解决办法
 根据上图采用第四种解决办法，将"-“替换为”/"

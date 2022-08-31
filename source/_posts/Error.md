@@ -9,7 +9,7 @@ tags:
 
 
 # Error
-`{% asset_img get_parame.png %}`
+{% asset_img get_parame.png %}
 
 原因：方法上面没有属性 getUserToken().parame
 

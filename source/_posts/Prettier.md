@@ -21,7 +21,7 @@ yarn add prettier --dev --exact
 
 # Project
 
-`{% asset_img insert.png %}`
+{% asset_img insert.png %}
 
 
 

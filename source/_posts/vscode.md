@@ -461,5 +461,5 @@ editor.detectIndentation 这项改成 false 就生效了
 | Ctrl + comd + k | 删除线  |
 
 ## view-git-commit-log
-`{% asset_img vscode-view-git-commit-log.png%}`
+{% asset_img vscode-view-git-commit-log.png%}
 

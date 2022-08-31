@@ -142,7 +142,7 @@ foo1 先入栈，foo2 再入栈，foo3执行玩，foo3出栈，foo2出栈，foo1
 这个过程满足先进后出的规则，因此形成调用栈。
 
 借助JavaScript引擎清晰地看到错误堆栈信息。
-`{% asset_img call_stack.png %}`
+{% asset_img call_stack.png %}
 
 ### 日常错误
 const c = '1';
@@ -1040,7 +1040,7 @@ let res2 = gen.next();
 console.log(res2); // {value: undefined, done: true}
 ```
 
-`{% asset_img yield.png %}`
+{% asset_img yield.png %}
 
 ## 异步带逻辑
 generator最大的好处是：当有了逻辑以后，非常方便

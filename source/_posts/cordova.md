@@ -317,8 +317,8 @@ https://github.com/apache/cordova-plugin-wkwebview-engine
 # android
 
 ## sdk version
-`{% asset_img android_v.png%}`
-`{% asset_img android_v1.png%}`
+{% asset_img android_v.png%}
+{% asset_img android_v1.png%}
 
 ## debug
 ### chrome not inspect
@@ -438,7 +438,7 @@ Product > Archive > Distribute App
 vue dist : serve
 
 ## 缓存
-`{% asset_img cache.png%}`
+{% asset_img cache.png%}
 
 ## 刘海
 简单操作
@@ -599,10 +599,10 @@ cordova-hot-code-push-plugin
 - 本地服务侦听web项目
 
 ## workflow
-`{% asset_img workflow.png%}`
+{% asset_img workflow.png%}
 
 
-`{% asset_img cordova-hot-code-push.png%}`
+{% asset_img cordova-hot-code-push.png%}
 ``` js
 function checkForUpdate() {
   chcp.fetchUpdate((error, data) => {

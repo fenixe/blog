@@ -50,9 +50,12 @@ app.vue
 }
 ```
 
-### 内置方法
-强制刷新
+## 内置方法
+### 强制刷新
 $forceUpdate()
+
+### 等待下一次 DOM 更新刷新的工具方法。
+$nextTick()
 
 ## 声明式渲染
 指令
@@ -88,7 +91,7 @@ $forceUpdate()
 
 组件的三大核心概念：属性、事件和插槽
 
-`{% asset_img component.png %}`
+{% asset_img component.png %}
 
 一个组件本质上是一个拥有预定义选项的一个 Vue 实例
 ``` js
@@ -152,29 +155,6 @@ vm.$watch('a', function (newValue, oldValue) {
 ```
 
 不要在选项属性或回调上使用箭头函数, 因为箭头函数是和父级上下文绑定在一起的，this 不会是如你所预期的 Vue 实例.
-
-### 生命周期 life cycle
-`{% asset_img lifecycle.png %}`
-
-### 混入 mixin
-```js
-var myMixin = {
-    created: function(){
-        this.hello()
-    },
-    methods:{
-        hello: function(){
-            console.log('hello from mixin');
-        }
-    }
-}
-export default {
-    name: 'Test',
-    mixins: [myMixin]
-}
-```
-
-created、methods、components 和 directives，将被合并为同一个对象。两个对象键名冲突时，取组件对象的键值对。
 
 ### 单文件组件
 template 缺点
@@ -526,7 +506,15 @@ props: ['postTitle'],
 
 [第三第四种双向绑定](https://juejin.im/post/5aaa9eabf265da237b21d36a)
 
-## watche
+## watch
+侦听器
+- 更加灵活、通用
+- watch 中可以执行任何逻辑，如函数节流，Ajax异步获取数据
+
+computed vs watch
+- computed 能做的，watch都能做，反之则不行
+- 能用computed的尽量用computed，简单
+
 ```js
 var app = new Vue({
     el: '#app', 
@@ -617,14 +605,14 @@ new Vue({
 - actions，响应在 view 上的用户输入导致的状态变化。
 
 "单向数据流"理念图
-`{% asset_img flow.png %}`
+{% asset_img flow.png %}
 
 多个组件共享状态时，单向数据流容易破坏
 - 多个视图依赖同一状态（兄弟组件间的状态传递无能为力）
 - 来自不同视图的行为需要变更同一状态（父子props $emit传值模式不利于维护）
 
 vuex 设计理念：把组件的共享状态抽取出来，以一个全局单例模式管理。
-`{% asset_img vuex.png %}`
+{% asset_img vuex.png %}
 
 ### 什么情况下我应该使用 Vuex？
 大型单页应用
@@ -1170,9 +1158,32 @@ created: () => console.log(this.a) 或 vm.$watch('a', newValue => this.myMethod(
 因为箭头函数并没有 this，this 会作为变量一直向上级词法作用域查找，直至找到为止
 
 
-`{% asset_img life_cycle.png %}`
+{% asset_img life_cycle.png %}
 created:在模板渲染成html前调用，即通常初始化某些属性值，然后再渲染成视图。
 mounted:在模板渲染成html后调用，通常是初始化页面完成后，再对html的dom节点进行一些需要的操作。
+
+### 生命周期 life cycle
+{% asset_img lifecycle.png %}
+
+### 混入 mixin
+```js
+var myMixin = {
+    created: function(){
+        this.hello()
+    },
+    methods:{
+        hello: function(){
+            console.log('hello from mixin');
+        }
+    }
+}
+export default {
+    name: 'Test',
+    mixins: [myMixin]
+}
+```
+
+created、methods、components 和 directives，将被合并为同一个对象。两个对象键名冲突时，取组件对象的键值对。
 
 ### updated
 在组件因为一个响应式状态变更而更新其 DOM 树之后调用。
@@ -1310,7 +1321,7 @@ location /{
 
 ### 成功解决
 刷新home页面，正常访问资源
-`{% asset_img history.png %}`
+{% asset_img history.png %}
 
 # 自己的理解
 Vue

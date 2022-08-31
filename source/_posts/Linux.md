@@ -498,7 +498,7 @@ $ ssh-keygen -t rsa -C "your_email@example.com"
 ```
 $ ssh-keygen -p
 ```
-`{% asset_img ssh-key.png %}`
+{% asset_img ssh-key.png %}
 在重设密码的时候，需要输入一次之前的密码old passphrase用来验证，正常输就行了，
 然后接下来就是需要输入两次new passphrase，此时什么都不输，直接回车即可
 

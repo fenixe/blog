@@ -27,7 +27,7 @@ css提供了一种方法来告诉浏览器页面中的元素如何显示
 text-decoration:none;
 ## 不能加分号
 样式显示不出来，也不会报错
-`{% asset_img semicolon.png %}`
+{% asset_img semicolon.png %}
 
 ## 文字修饰
 text-decoration-line
@@ -394,7 +394,7 @@ css3时代
 过渡需要的时间，单位可指定s秒。默认是0, 表示立刻变化
 
 ### transition-timing-function 过渡方法，运动曲线
-`{% asset_img timing-function.png %}`
+{% asset_img timing-function.png %}
 看贝赛尔曲线就知道了，linear是匀速过渡，ease是先快再慢的节奏，ease-in是加速冲刺的节奏，ease-out是减速到停止的节奏，ease-in-out是先加速后减速的节奏。
 
 ### transition-delay 过渡延迟，何时开始

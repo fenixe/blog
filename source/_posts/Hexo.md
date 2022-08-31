@@ -190,7 +190,7 @@ _config.yml
 post_asset_folder: true
 
 标签插件(注：Hexo >3)
-`{% asset_img terminal_theme.png %}`
+{% asset_img terminal_theme.png %}
 
 ### 链接
 [链接](http://www.example.com)

@@ -435,8 +435,9 @@ Angular 有 3 个内置的结构型指令：*ngIf、*ngFor、ngSwitch。ngSwitch
 
 在模板里面使用`属性型指令`
 使用频率比较高的 3 个内置指令是：NgClass、NgStyle、NgModel。
-
+```
 {{ 内部只能是表达式，不能是语句：var a = 1}}
+```
 
 ## [组件]组件间通讯
 组件之间有几种典型的关系：父子关系、兄弟关系、没有直接关系。
@@ -455,7 +456,7 @@ Angular 有 3 个内置的结构型指令：*ngIf、*ngFor、ngSwitch。ngSwitch
 我们可以将其providedIn视为反向指定的依赖项。现在，不再是模块提供所有服务，而是服务本身声明应该在哪里提供…
 模块可以是providedIn在'root'或在任何可用的模块（例如providedIn: SomeModule）。除此之外'root'，实际上是AppModule（因此是根注入器）的别名，这是一个很好的便利功能，它节省了我们AppModule在代码库中的所有导入。
 
-`{% asset_img inject.png %}`
+{% asset_img inject.png %}
 
 cart.service.ts
 ``` ts
@@ -672,10 +673,10 @@ AsyncPipe
 
 # 生命周期
 钩子 就是 事件
-`{% asset_img life1.png %}`
-`{% asset_img life2.png %}`
+{% asset_img life1.png %}
+{% asset_img life2.png %}
 先去加载内容投影的例子，再去加载自身视图
-`{% asset_img life3.png %}`
+{% asset_img life3.png %}
 
 组件是带有视图的指令
 Component extends Directive
@@ -821,7 +822,7 @@ export class MyHighLightDirective {
 - 模块是@angular/cli打包的最小单位【编译出来的，一个一个的js】
 - 模块也是Router异步加载时的最小单位
 
-`{% asset_img module.png %}`
+{% asset_img module.png %}
 
 ## 编译文件
 wendor.js：angular内核，和周边的工具
@@ -1152,7 +1153,7 @@ Reactive Extensions
 
 是promise的火力增强版
 
-`{% asset_img rxjs.png %}`
+{% asset_img rxjs.png %}
 
 最常用的23个Operator（操作员，接线员）
 - 创建型：Create/ defer/ from/ interval/ just
@@ -1236,7 +1237,7 @@ g2. // 输入 `.` 后是不会有任何方法或属性
 猛哥解决办法：
 根目录新建lib文件，把dragonBones相关文件复制进去
 然后，鼠标放在 dragonBones 上面，使用编辑器自动修复引用
-`{% asset_img dragonBones.png %}`
+{% asset_img dragonBones.png %}
 
 # 依赖注入
 providers  依赖提供者
@@ -1286,8 +1287,8 @@ webpack-bundle-analyzer
 ## 服务器更新后，页面没有实时显示，必须清缓存才可以显示
 网页 ，每次更新后，要清缓存。。。 
 runner 18分钟后浏览器不清缓存情况
-`{% asset_img cache01.png %}`
-`{% asset_img cache02.png %}`
+{% asset_img cache01.png %}
+{% asset_img cache02.png %}
 
 We're currently working on a new project with regular updates that's being used daily by one of our clients. This project is being developed using angular 2 and we're facing cache issues, that is our clients are not seeing the latest changes on their machines.
 

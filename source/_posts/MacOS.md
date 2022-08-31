@@ -30,7 +30,7 @@ open platforms/ios/UpdateDemo.xcodeproj
  lsof -i:8070
 
 # 系统更新
-`{% asset_img mac_os.jpeg %}`
+{% asset_img mac_os.jpeg %}
 
 # brew
 [Homebrew](https://github.com/Homebrew/brew)是一款自由及开放源代码的软件包管理系统，用以简化macOS系统上的软件安装过程

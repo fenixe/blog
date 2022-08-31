@@ -24,7 +24,7 @@ JavaScript的服务器版本
   + 丰富接口功能
 - 工具开发  （webpack）
 
-`{% asset_img middle.png %}`
+{% asset_img middle.png %}
 
 # nvm
 node 版本管理器

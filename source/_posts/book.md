@@ -86,7 +86,7 @@ tags:
 2. 交谈风格
 
 ##### 大脑就范
-`{% asset_img on_your_marks.jpg %}`
+{% asset_img on_your_marks.jpg %}
 
 ### 建议
 1、至少两种浏览器（了解不同浏览器之间的差异）

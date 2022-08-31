@@ -175,11 +175,11 @@ job_name:
 
 # issuse
 ## 跑了两个merge_build_test
-`{% asset_img merge_request.png %}`
+{% asset_img merge_request.png %}
 
 原因：
 merge 请求没有关掉，触发了 merge_requests 条件
-`{% asset_img merge.png %}`
+{% asset_img merge.png %}
 
 # demo
 ## Inventory 目录

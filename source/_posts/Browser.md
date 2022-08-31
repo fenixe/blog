@@ -8,7 +8,7 @@ tags:
 ---
 
 # 回流与重绘
-`{% asset_img dom-tree.png %}`
+{% asset_img dom-tree.png %}
 
 ## 渲染过程
 （1）解析HTML文件，构建 DOM Tree

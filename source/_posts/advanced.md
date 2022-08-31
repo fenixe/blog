@@ -17,11 +17,11 @@ tags:
 
 # JS
 ## 语言通识
-`{% asset_img language.png %}`
+{% asset_img language.png %}
 
-`{% asset_img type.png%}`
+{% asset_img type.png%}
 
-`{% asset_img js01.png%}`
+{% asset_img js01.png%}
 
 ## 乔姆斯基谱系
 乔姆斯基谱系：是计算机科学中刻画形式文法表达能力的一个分类谱系，是由诺姆·乔姆斯基于 1956 年提出的。它包括四个层次：
@@ -35,8 +35,8 @@ tags:
 
 是一种用于表示上下文无关文法的语言，上下文无关文法描述了一类形式语言。它是由约翰·巴科斯（John Backus）和彼得·诺尔（Peter Naur）首先引入的用来描述计算机语言语法的符号集。
 
-`{% asset_img bnf.png %}`
-`{% asset_img bnf02.png %}`
+{% asset_img bnf.png %}
+{% asset_img bnf02.png %}
 
 ### 理解
 [链接](https://www.cnblogs.com/huiyenashen/p/4445676.html)
@@ -96,7 +96,7 @@ BNF 规定是推导规则(产生式)的集合，写为：
 
 # JS类型
 ## String
-`{% asset_img code.png %}`
+{% asset_img code.png %}
 ASCII 0-127个字符 ；出来的较早，计算机的基础
 Unicode 世界编码集
 GB 国标里的字符码点跟Unicode码点不一致
@@ -106,15 +106,15 @@ UTF8
 
 UTF16
 16个比特位，2个字节表示一个字符
-`{% asset_img utf.png %}`
+{% asset_img utf.png %}
 
 控制位
-`{% asset_img utf02.pngs %}`
+{% asset_img utf02.pngs %}
 
 
 # 浏览器工作原理
 ## 浏览器总论
-`{% asset_img browser.png %}`
+{% asset_img browser.png %}
 最后显示在计算机上的是图片的形式 Bitmap，最后传给显卡驱动设备，转换成人眼可识别的光信号。
 
 浏览器目标：
@@ -122,12 +122,12 @@ UTF16
 
 ## 状态机
 有限状态机**处理字符串**
-`{% asset_img state.png %}`
+{% asset_img state.png %}
 
 意义：在各个状态加入自己的逻辑，处理业务
 
 debug 添加监视
-`{% asset_img state02.png %}`
+{% asset_img state02.png %}
 
 ## HTTP
 浏览器的第一步：http状态解析
@@ -135,7 +135,7 @@ debug 添加监视
 - header
 
 ### 网络模型
-`{% asset_img http.jpg %}`
+{% asset_img http.jpg %}
 
 ``` js
 new Request({
@@ -176,7 +176,7 @@ HTTP 协议是文本型的协议，所有内容都是字符串
 method: GET/POST
 
 #### http协议 request
-`{% asset_img request.png %}`
+{% asset_img request.png %}
 
 第一步HTTP请求总结
 - 设计一个HTTP请求的类
@@ -191,7 +191,7 @@ method: GET/POST
 - send函数应该是异步的，所以返回Promise
 
 response 格式
-`{% asset_img response.png %}`
+{% asset_img response.png %}
 
 第三步发送请求到服务端（重要）
 - 设计支持已有的connection或者自己新建connection
@@ -290,7 +290,7 @@ npm install css (css == css parser, 把css的代码变成 AST抽象语法树)
 
 ## 规则
 普通规则和@规则
-`{% asset_img css.png %}`
+{% asset_img css.png %}
 ### At-rules
 • @charset : https://www.w3.org/TR/css-syntax-3/
 • @import :https://www.w3.org/TR/css-cascade-4/
@@ -303,7 +303,7 @@ npm install css (css == css parser, 把css的代码变成 AST抽象语法树)
 • @namespace :https://www.w3.org/TR/css-namespaces-3/
 
 ### css-rule
-`{% asset_img css01.png %}`
+{% asset_img css01.png %}
 
 - Selector
   + https://www.w3.org/TR/selectors-3/ 
@@ -367,7 +367,7 @@ SVG 标签里面有一个跟HTML重名的a标签
 - <复合选择器> " || " <复合选择器>
 
 ### 优先级
-`{% asset_img css02.png %}`
+{% asset_img css02.png %}
 
 ### 伪类
 链接/行为
@@ -396,12 +396,12 @@ SVG 标签里面有一个跟HTML重名的a标签
 - ::first-line
 - ::first-letter
 
-`{% asset_img css03.png %}`
-`{% asset_img css04.png %}`
+{% asset_img css03.png %}
+{% asset_img css04.png %}
 
 ## CSS排版
 ### 盒(box)
-`{% asset_img css05.png %}`
+{% asset_img css05.png %}
 
 ### 正常流
 Normal Flow
@@ -412,7 +412,7 @@ Normal Flow
 - 计算行的排布
 
 BFC IFC
-`{% asset_img css06.png %}`
+{% asset_img css06.png %}
 正常流里面有两种 Formatting Context
 - 块格式化上下文（Block Formatting Context，BFC）
 - 行级格式化上下文（Inline Formatting Context，IFC）
@@ -421,11 +421,11 @@ BFC IFC
 
 #### 行级排布
 基线对齐
-`{% asset_img css07.png %}`
+{% asset_img css07.png %}
 
 ##### 文字在字体里面的定义
 文字有宽和高，加上基线
-`{% asset_img css08.png %}`
+{% asset_img css08.png %}
 origin 就是基线
 yMin 就是基线到低缘的距离
 bearingX 决定了一个默认的字间距
@@ -452,7 +452,7 @@ clear：找一块干净的空间，浮动
 
 #### margin折叠
 从上往下排，受盒模型影响
-`{% asset_img css09.png %}`
+{% asset_img css09.png %}
 叠出来的高度跟最大的margin的高度相等，这个现象叫margin collapse, 也叫留白的折叠现象，也叫边距折叠。
 古老的印刷行业也是这种排版体系。
 注意：只会发生在BFC里面
@@ -481,7 +481,7 @@ clear：找一块干净的空间，浮动
 所有能够容纳里面不是特殊的display的模式的，它里面默认就是正常流
 
 ##### Block-level Box
-`{% asset_img css10.png %}`
+{% asset_img css10.png %}
 
 ##### 设立BFC
 什么时候什么样的盒，它会创建BFC呢，Establish BFC

@@ -1142,7 +1142,7 @@ JavaScript 具有自动垃圾回收机制（GC:Garbage Collecation），也就�
 ### 闭包
 #### 定义
 函数嵌套函数，内层函数引用了外层函数作用域下的变量，并且内层函数在全局环境下可访问，进而形成闭包。
-`{% asset_img closure.png %}`
+{% asset_img closure.png %}
 
 ``` js
 function numGenerator() {
@@ -1214,7 +1214,7 @@ getNum();
 
 ## 轻松理解原型链
 原型链图
-`{% asset_img proto.png %}`
+{% asset_img proto.png %}
 
 - js分为函数对象和普通对象，每个对象都有__proto__属性，但是只有函数对象才有prototype属性
 - Object、Function都是js内置的函数, 类似的还有我们常用到的Array、RegExp、Date、Boolean、Number、String

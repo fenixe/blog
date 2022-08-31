@@ -72,7 +72,7 @@ https://support.google.com/chrome/answer/157179?hl=zh-Hans
 https://support.microsoft.com/zh-cn/help/4028606/windows-10-change-your-default-browser
 
 ### 语言设置
-`{% asset_img language.png %}`
+{% asset_img language.png %}
 
 ### 设置开机启动
 禁用

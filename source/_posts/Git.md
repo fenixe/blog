@@ -8,7 +8,7 @@ tags:
 ---
 
 # 基础
-`{% asset_img git1.png %}`
+{% asset_img git1.png %}
 
 How to change the URI (URL) for a remote Git repository?
 git remote set-url origin new.git.url/here
@@ -104,7 +104,7 @@ Host github.com
 
 ## token
 gitlab import github   授权
-`{% asset_img register.png%}`
+{% asset_img register.png%}
 
 # 指令
 git配置
@@ -566,7 +566,7 @@ sudo chmod +x /usr/local/bin/gitlab-runner
 
 ## 注册
 gitlab-runner register
-`{% asset_img register.png%}`
+{% asset_img register.png%}
 
 Enter the GitLab instance URL (for example, https://gitlab.com/):
 https://code.apowo.com/
@@ -593,7 +593,7 @@ test-job1:
   script:
     - echo "This job tests something"
 ```
-`{% asset_img runner.png%}`
+{% asset_img runner.png%}
 
 ## unregister
 gitlab-runner unregister --name test-runner
@@ -633,7 +633,7 @@ CD：Continuous Delivery
 CD：Continuous Deployment 
 
 ## Basic CI/CD workflow
-`{% asset_img ci.png%}`
+{% asset_img ci.png%}
 
 ``` yml
 stages:
