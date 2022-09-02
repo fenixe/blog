@@ -64,7 +64,7 @@ console.log(buffer); // => <Buffer e4 b8 ad>
 ```
 
 ## 方法二
-{% label ib_yellow@只会转义非英文字符 %}
+{% label yellow@只会转义非英文字符 %}
 ``` js
 var str = '中';
  
@@ -118,7 +118,7 @@ function findAB(str) {
 }
 findAB('sdsdab');
 ```
-{% label ib_yellow@注意，作业错误，此处应为：str.length - 1 %}
+{% label yellow@注意，作业错误，此处应为：str.length - 1 %}
 助教点评：
 最后一个字符就是i = 4
 str[i + 1]取得是什么？

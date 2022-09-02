@@ -37,8 +37,7 @@ module.exports = {
 
 ## font
 app.vue
-``` vue
-<style lang="scss">
+``` scss
 @font-face {
   font-family: "SourceHanSansCN";
   src: url(./assets/font/SourceHanSansCN-Normal.otf);
@@ -53,7 +52,11 @@ $forceUpdate()
 $nextTick()
 
 ## 声明式渲染
-指令
+命令式：一步一步告诉程序如何去做，能否达成结果取决于开发者的设计。
+声明式：只告诉程序想要什么结果，如何达成由程序保证，开发者不用关心。
+
+## 指令
+指令的本质：一个标志位，他被标记了什么标志，vue底层就会根据这个标志做出相应的处理
 指令带有前缀 `v-`
 ``` html
 <span v-bind:title="message">
@@ -79,6 +82,75 @@ $nextTick()
   :value="text"
   @input="e => text = e.target.value"
 />
+```
+
+### 文本
+v-once 指令，执行一次性地插值，当数据改变时，插值处的内容不会更新
+
+### 原始 HTML
+``` html
+<div v-html="html1"></div>
+
+<div><i>1111</i></div>
+```
+
+### 修饰符
+修饰符 (Modifiers) 是以半角句号 . 指明的特殊后缀，用于指出一个指令应该以特殊方式绑定。
+
+[修饰符大全](https://segmentfault.com/a/1190000016786254).
+
+### 缩写
+#### v-bind 缩写
+``` html
+<!-- 完整语法 -->
+<a v-bind:href="url">...</a>
+
+<!-- 缩写 -->
+<a :href="url">...</a>
+```
+
+#### v-on 缩写
+``` html
+<!-- 完整语法 -->
+<a v-on:click="doSomething">...</a>
+
+<!-- 缩写 -->
+<a @click="doSomething">...</a>
+```
+
+#### 特殊指令
+``` html
+<div v-pre>{{this will not be compiled}}</div>
+```
+
+### 自定义指令
+``` js
+<button v-append-text="`hello ${number}`" @click="number++">按钮</button>
+export default {
+    name: 'Test',
+    directives:{
+        appendText: {
+            bind(){
+                console.log('bind');
+            },
+            inserted(el, binding){
+                el.appendChild(document.createTextNode(binding.value));
+                console.log('inserted', el, binding);
+            },
+            update(){
+                console.log('update');
+            },
+            componentUpdated(el, binding){
+                el.removeChild(el.childNodes[el.childNodes.length - 1]);
+                el.appendChild(document.createTextNode(binding.value));
+                console.log('componentUpdate');
+            },
+            unbind(){
+                console.log('unbind');
+            }
+        }
+    },
+}
 ```
 
 ## 组件
@@ -127,6 +199,86 @@ Vue.component('todo-item', {
   v-bind:todo="item">
 </todo-item>
 ```
+
+### 函数式组件
+- 无状态
+- 无实例
+
+
+### 注册
+```js
+Vue.component('todo-item', {
+    template: '<li>待办</li>',
+    data: function(){return } //组件会出现复用，如果是对象{}, js中是引用类型，在一个地方改动会影响其他地方的使用
+});
+var app = new Vue({
+    el: '#app', 
+    data: { // 根事例不会出现复用
+        msg: '',
+    },
+})
+```
+### 父子组件传值
+父级组件可以像处理 native DOM 事件一样通过 v-on 监听子组件实例的任意事件：
+``` html
+<blog-post
+  v-on:enlarge-text="postFontSize += 0.1"
+></blog-post>
+```
+子组件可以通过调用内建的 $emit 方法并传入事件名称来触发一个事件：
+``` html
+<button v-on:click="$emit('enlarge-text')">
+  Enlarge text
+</button>
+```
+
+### provide/inject提供注入 隔代传值
+{% label purple@重点 %}
+底层通用组件中使用频率高
+
+### 使用事件抛出一个值
+使用 $emit 的第二个参数来提供这个值：
+``` html
+<button v-on:click="$emit('enlarge-text', 0.1)">
+  Enlarge text
+</button>
+```
+父级组件监听这个事件的时候，我们可以通过 $event 访问到被抛出的这个值：
+``` html
+<blog-post
+  v-on:enlarge-text="postFontSize += $event"
+></blog-post>
+```
+这个事件处理函数是一个方法：
+``` html
+<blog-post
+  v-on:enlarge-text="onEnlargeText"
+></blog-post>
+```
+
+### 在组件上使用 v-model
+``` html
+<input v-model="searchText">
+
+<input
+  v-bind:value="searchText"
+  v-on:input="searchText = $event.target.value"
+>
+```
+
+### prop
+Prop 的大小写 (camelCase vs kebab-case)
+HTML 中的 attribute 名是大小写不敏感的，所以浏览器会把所有大写字符解释为小写字符。这意味着当你使用 DOM 中的模板时，camelCase (驼峰命名法) 的 prop 名需要使用其等价的 kebab-case (短横线分隔命名) 命名：
+``` html
+props: ['postTitle'],
+<blog-post post-title="hello!"></blog-post>
+```
+
+[第三第四种双向绑定](https://juejin.im/post/5aaa9eabf265da237b21d36a)
+
+
+
+
 
 ## Vue实例
 没有完全遵循 MVVM 模型
@@ -178,15 +330,7 @@ template 缺点
 如果你熟悉虚拟 DOM 并且偏爱 JavaScript 的原始力量，你也可以不用模板，直接写渲染 (render) 函数，使用可选的 JSX 语法。
 
 ### 插值
-#### 文本
-v-once 指令，执行一次性地插值，当数据改变时，插值处的内容不会更新
 
-#### 原始 HTML
-``` html
-<div v-html="html1"></div>
-
-<div><i>1111</i></div>
-```
 
 #### 特性
 ``` html
@@ -205,31 +349,7 @@ v-once 指令，执行一次性地插值，当数据改变时，插值处的内�
 {{ if (ok) { return message } }}
 ```
 
-### 指令
-指令的本质：一个标志位，他被标记了什么标志，vue底层就会根据这个标志做出相应的处理
-#### 修饰符
-修饰符 (Modifiers) 是以半角句号 . 指明的特殊后缀，用于指出一个指令应该以特殊方式绑定。
 
-[修饰符大全](https://segmentfault.com/a/1190000016786254).
-
-### 缩写
-#### v-bind 缩写
-``` html
-<!-- 完整语法 -->
-<a v-bind:href="url">...</a>
-
-<!-- 缩写 -->
-<a :href="url">...</a>
-```
-
-#### v-on 缩写
-``` html
-<!-- 完整语法 -->
-<a v-on:click="doSomething">...</a>
-
-<!-- 缩写 -->
-<a @click="doSomething">...</a>
-```
 
 ## 计算属性和侦听器
 ### 计算属性
@@ -417,89 +537,6 @@ handleClick(e){
 ``` html
 <input v-model.trim="msg">
 ```
-
-## 组件
-### 注册
-```js
-Vue.component('todo-item', {
-    template: '<li>待办</li>',
-    data: function(){return } //组件会出现复用，如果是对象{}, js中是引用类型，在一个地方改动会影响其他地方的使用
-});
-var app = new Vue({
-    el: '#app', 
-    data: { // 根事例不会出现复用
-        msg: '',
-    },
-})
-```
-### 父子组件传值
-父级组件可以像处理 native DOM 事件一样通过 v-on 监听子组件实例的任意事件：
-``` html
-<blog-post
-  v-on:enlarge-text="postFontSize += 0.1"
-></blog-post>
-```
-子组件可以通过调用内建的 $emit 方法并传入事件名称来触发一个事件：
-``` html
-<button v-on:click="$emit('enlarge-text')">
-  Enlarge text
-</button>
-```
-
-#### 使用事件抛出一个值
-使用 $emit 的第二个参数来提供这个值：
-``` html
-<button v-on:click="$emit('enlarge-text', 0.1)">
-  Enlarge text
-</button>
-```
-父级组件监听这个事件的时候，我们可以通过 $event 访问到被抛出的这个值：
-``` html
-<blog-post
-  v-on:enlarge-text="postFontSize += $event"
-></blog-post>
-```
-这个事件处理函数是一个方法：
-``` html
-<blog-post
-  v-on:enlarge-text="onEnlargeText"
-></blog-post>
-```
-
-### 在组件上使用 v-model
-``` html
-<input v-model="searchText">
-==
-<input
-  v-bind:value="searchText"
-  v-on:input="searchText = $event.target.value"
->
-```
-
-### prop
-Prop 的大小写 (camelCase vs kebab-case)
-HTML 中的 attribute 名是大小写不敏感的，所以浏览器会把所有大写字符解释为小写字符。这意味着当你使用 DOM 中的模板时，camelCase (驼峰命名法) 的 prop 名需要使用其等价的 kebab-case (短横线分隔命名) 命名：
-``` html
-props: ['postTitle'],
-<blog-post post-title="hello!"></blog-post>
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-[第三第四种双向绑定](https://juejin.im/post/5aaa9eabf265da237b21d36a)
 
 ## watch
 侦听器
@@ -1157,6 +1194,9 @@ created:在模板渲染成html前调用，即通常初始化某些属性值，�
 mounted:在模板渲染成html后调用，通常是初始化页面完成后，再对html的dom节点进行一些需要的操作。
 
 {% asset_img life2.png %}
+{% asset_img life3.png %}
+{% asset_img life4.png %}
+{% asset_img life5.png %}
 
 ### 混入 mixin
 ```js

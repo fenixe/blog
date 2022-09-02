@@ -140,6 +140,14 @@ eval Scope	eval作用域 【eval() 函数会将传入的字符串当做 JavaScri
 ### 作用域链
 变量作用域的查找是一个扩散过程，就像各个环节相扣的链条（"变量提升"一直向上找），逐次递进，这就是“作用域链”的由来。
 
+## 生成固定长度数组
+```js
+this.lastReport = Array.from({length: 5},(item,index)=>item = {
+    skuName: "消息推送tst",
+    taskId: 98
+})
+```
+
 ## 点击事件
 ```js
 <h1 onclick="test()">click</h1>

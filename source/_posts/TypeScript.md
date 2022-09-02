@@ -317,7 +317,7 @@ export class Game {
 
   owner: Partial<User>;
 ```
-{% label ib_yellow@2020.11.4 %}
+{% label yellow@2020.11.4 %}
 
 Partial 作用是将传入的属性变为可选项.
 首先我们需要理解两个关键字 keyof 和 in, keyof 可以用来取得一个对象接口的所有 key 值.
@@ -585,7 +585,7 @@ interface
 ### 概念
 约定、限制
 
-{% label ib_blue@2020/7/21 添加 %}
+{% label blue@2020/7/21 添加 %}
 如果实现 `implements` 了接口interface，则 在类中必须有接口的所有成员（属性），否则ts报错
 Angular例子：
 ``` ts

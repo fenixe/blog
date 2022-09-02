@@ -56,31 +56,91 @@ cd 项目目录路径
 avatar: 在主题模版的设置文件 _config.yml 找到avatar 字段
 头像下面的签名：在根目录的设置文件 _config.yml 找到description 字段
 阅读全文：
-a. 手动截断 {% label ib_green@推荐 %}
+a. 手动截断 {% label green@推荐 %}
 ``<!-- more -->``
-b. 自动形成摘要，在{% label ib_purple@主题配置文件 %}中添加
+b. 自动形成摘要，在{% label purple@主题配置文件 %}中添加
 ```
 auto_excerpt:
   enable: true
   length: 150
 ```
 文字增加背景色块：
-文件位置  `` ~themes/next/source/css/_custom/custom.styl``
+文件位置  `` ~themes/next/source/css/_custom/custom.styl`` 或者 `css/main.styl`
 ``` 
-// 添加色系 span.ib_green (ib = inline-block)
-{% label ib_green@推荐1 %}
-{% label ib_yellow@推荐1 %}
-{% label ib_blue@推荐1 %}
-{% label ib_purple@推荐1 %}
+// 添加色系 span.green
+{% label green@推荐1 %}
+{% label yellow@推荐1 %}
+{% label blue@推荐1 %}
+{% label purple@推荐1 %}
 ```
 效果 
-{% label ib_green@推荐1 %}
+{% label green@推荐1 %}
 注意，警告：
-{% label ib_yellow@推荐1 %}
+{% label yellow@推荐1 %}
 后面修改，加日期:
-{% label ib_blue@推荐1 %}
+{% label blue@推荐1 %}
 重点：
-{% label ib_purple@推荐1 %}
+{% label purple@推荐1 %}
+
+添加自定义样式
+```css
+code {
+    background-color: #fff5f5;
+    color: #f00;
+}
+span.green{
+   display: inline;
+    padding: 1px 4px !important;
+    font-size: 80%;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff !important;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0;
+    background-color: #5cb85c;
+}
+span.yellow {
+    display: inline;
+    padding: 1px 4px !important;
+    font-size: 80%;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff !important;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0;
+    background-color: #f0ad4e;
+}
+span.blue {
+    display: inline;
+    padding: 1px 4px !important;
+    font-size: 80%;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff !important;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0;
+    background-color: #2780e3;
+}
+span.purple {
+    display: inline;
+    padding: 1px 4px !important;
+    font-size: 80%;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff !important;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0;
+    background-color: #9954bb;
+}
+```
 
 ## image
 https://hexo.io/zh-cn/docs/asset-folders.html
@@ -228,7 +288,7 @@ deploy:
   branch: master
 ```
 
-{% label ib_blue@2020/2/23 修改 %}
+{% label blue@2020/2/23 修改 %}
 每次hexo d 部署时，总要输入git 用户名&&密码。
 现在修改为SSH连接方式
 
