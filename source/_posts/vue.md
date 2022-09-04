@@ -236,6 +236,28 @@ var app = new Vue({
 {% label purple@重点 %}
 底层通用组件中使用频率高
 
+```vue
+<h3>{{theme1.color}}</h3>
+provide(){
+  return{
+    theme:{
+      color: this
+    }
+  }
+}
+inject: {
+  theme1:{ //别名
+    from: 'theme',
+    defalut: () => ({})
+  }
+}
+
+函数式组件
+<template functional>
+{{injections.theme.color}}
+</template>
+```
+
 ### 使用事件抛出一个值
 使用 $emit 的第二个参数来提供这个值：
 ``` html
