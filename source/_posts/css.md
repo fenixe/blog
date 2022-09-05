@@ -289,6 +289,28 @@ background-size: 35.625vh 11.71875vh;
 ### 水平垂直剧中
 retryEle.style.cssText = 'display: inline-block; padding: 6px 16px; background: #4d37b3; color: #ffffff; border-radius: 10px; position: absolute; left: 50%; transform: translateX(-50%); top: 50%;';
 
+## 无滚动条，列表
+顶部悬浮
+其余部分列表
+```scss
+.app{
+  height: 100vh;
+  display: flex;
+	flex-direction: column;
+  .top{
+    height: 308rpx;
+  }
+  .list-wrap{
+    min-height: calc(100vh - 308rpx) !important;
+    fix: 1; // 也可以，剩余空间放大
+  }
+}
+```
+
+fix: 1;
+flex-grow : 1;    ➜ The div will grow in same proportion as the window-size       
+flex-shrink : 1;  ➜ The div will shrink in same proportion as the window-size 
+flex-basis : 0;
 
 # 适配
 ``` css

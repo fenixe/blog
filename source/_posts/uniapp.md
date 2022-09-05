@@ -63,6 +63,16 @@ uni.navigateTo({
 });
 ```
 
+## page
+```json
+"path": "",
+"style": {
+  "app-plus":{
+    "bounce": "none" // 将回弹属性关掉
+  }
+}
+```
+
 # Function
 ## Map
 - [ ] 环境变量（最少三个环境）

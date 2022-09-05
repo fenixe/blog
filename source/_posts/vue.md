@@ -298,8 +298,61 @@ props: ['postTitle'],
 
 [第三第四种双向绑定](https://juejin.im/post/5aaa9eabf265da237b21d36a)
 
+### 获取组件实例
+#### ref引用信息
+```vue
+<p ref="p">hello</p>
+```
 
+### 跨层级
+callback ref
+- 主动通知(setXxxRef)
+- 主动获取(getXxxRef)
 
+```
+provide(){
+  return{
+    setChildrenRef:(name, ref)=>{
+      this[name] = ref;
+    },
+    getChildrenRef: name =>{
+      return this[name];
+    },
+    getRef: ()=>{
+      return this;
+    }
+  }
+}
+```
+
+```html
+<ChildrenH v-ant-ref="c => setChildrenRef('childrenH', c)" />
+inject:{
+  setChildrenRef:{
+    defalut: () => ()
+  }
+}
+```
+
+### 于JSX搭配使用
+```html
+<VNodes :vnodes="getJSXSpan()"></VNodes>
+<VNodes :vnodes="getAnchoredHeading(6)"/>
+components:{
+    VNodes:{
+      functional: true,
+      render: (h, ctx) => ctx.props.vnodes
+    }
+  },
+
+  getJSXSpan(){
+      return <span>Message: {this.msg}</span>
+    },
+    getAnchoredHeading(level){
+      const Tag = `h${level}`;
+      return <Tag>Hello world!!</Tag>
+    }
+```
 
 
 ## Vue实例
@@ -668,6 +721,7 @@ new Vue({
 vuex 设计理念：把组件的共享状态抽取出来，以一个全局单例模式管理。
 {% asset_img vuex.png %}
 
+
 ### 什么情况下我应该使用 Vuex？
 大型单页应用
 
@@ -702,7 +756,9 @@ var vmB = new Vue({
   }
 })
 ```
-
+### 源码
+<!-- $store是如何挂载到实例this上的 -->
+{% asset_img vuex2.png %}
 ### 开始
 每一个 Vuex 应用的核心就是 store（仓库）。“store”基本上就是一个容器，它包含着你的应用中大部分的状态 (state)。Vuex 和单纯的全局对象有以下两点不同：
 
@@ -870,7 +926,7 @@ babel配置文件
 "plugins":["transform-object-rest-spread"]
 
 ### Getters
-Vuex 允许我们在 store 中定义“getter”（可以认为是 store 的计算属性）。就像计算属性一样，getter 的返回值会根据它的依赖被缓存起来，且只有当它的依赖值发生了改变才会被重新计算。
+Vuex 允许我们在 store 中定义“getter”（可以认为是 store 的计算属性）。就像计算属性一样，getter 的返回值会根据它的依赖被`缓存`起来，且只有当它的依赖值发生了改变才会被重新计算。
 ``` js
 const store = new Vuex.Store({
   state: {
@@ -889,7 +945,7 @@ const store = new Vuex.Store({
 
 #### 通过属性访问
 ```js
-store.getters.doneTodos // -> [{ id: 1, text: '...', done: true }]
+$store.getters.doneTodos // -> [{ id: 1, text: '...', done: true }]
 
 computed: {
   ...mapGetters([
@@ -1004,9 +1060,12 @@ const store = new Vuex.Store({
       state.count++
     }
   },
-  actions: {
-    increment (context) {
-      context.commit('increment')
+  actions: { // actions 应该避免直接操作 state，state 的更改应该由 mutations 去修改，不然 vue-devtools 插件记录不到 state 变更。
+    increment ({commit}) {
+      setTimeout(()=>{
+        commit('increment')
+      })
+      
     }
   }
 })
@@ -1014,6 +1073,9 @@ const store = new Vuex.Store({
 
 #### 分发Action
 Action 通过 `store.dispatch` 方法触发：
+```html
+<button @click="$store.dispatch('changeShowStatus')"></button>
+```
 ``` js
 store.dispatch('increment')
 ```
