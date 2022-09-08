@@ -301,6 +301,12 @@ printenv
 dig kaifaweb.com
 curl -v https://api.kaifaweb.com
 
+查看端口占用
+mac
+netstat -anvp tcp |grep 4000
+Linux
+netstat -tunlp | grep 4000
+
 # niekaifa @ niekaifadeMacBook-Pro in ~/workspace/apowo/tooqing-cordova/tooqing-webapp/src/assets/imgs on git:c91647c o [14:40:47] 
 $ dd if=/dev/zero of=tmp.png bs=1M count=50
 dd: bs: illegal numeric value
@@ -739,3 +745,7 @@ var nowDate = new Date().getTime(); // 本地时间距 1970 年 1 月 1 日午�
 var targetDate = new Date(nowDate + offset_GMT * 60 * 1000 + timezone * 60 * 60 * 1000);
 console.log("东8区现在是：" + targetDate);
 ```
+
+# 备注
+telnet 指令
+ansible 自动化运维工具

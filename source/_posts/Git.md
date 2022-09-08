@@ -289,7 +289,7 @@ URL: git@code.apowo.com:PixelPai/platform-client.git
  * [pruned] origin/feature_maker_avatar
  * [pruned] origin/feature_new_game_cover
  * [pruned] origin/temp_avatar
- ```
+```
 
 ## 再次添加gitlab分支
 ``` zsh

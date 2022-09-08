@@ -289,6 +289,12 @@ $.ajax('xxxx') => {
 // 提取想要的数据
 let { code, data } = $.ajax('xxx');
 
+vuex
+const options = {
+    state: 1,
+    mutations: 2
+}
+const {state = {}, mutations = {}} = options;
 ```
 
 # 数组

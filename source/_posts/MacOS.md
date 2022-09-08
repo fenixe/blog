@@ -318,7 +318,7 @@ home address
 brew services start nginx // 重启的命令是: brew services restart nginx
 
 http://localhost:8080/
-Welcome to nginx!
+Welcome to nginx! 
 
 ## issues
 ### MacBook M1 brew安装其他软件遇到问题（Error: Cannot install in Homebrew on ARM processor in Intel default prefix (/usr/local)!）的处理方法
