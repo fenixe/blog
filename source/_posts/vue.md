@@ -439,6 +439,15 @@ computed: {
     return this.message.split('').reverse().join('')
   }
 }
+
+//列表 需要 闭包
+computed: {
+  aliasDisplay(){
+    return function(item){
+      return item.aliases.slice(0, 3).toString();
+    }
+  }
+},
 ```
 
 #### 计算属性缓存 vs 方法
