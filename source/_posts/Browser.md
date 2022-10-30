@@ -74,3 +74,6 @@ CORS 规范（即 XMLHttpRequest Level 2）是 HTML5 时才制定出，IE 早期
 ## 清除缓存，强制刷新网站
 `{ asset_img web_clear_cache.png }`
 
+## 证书有误
+浏览器直接按：thisisunsafe
+打开链接
