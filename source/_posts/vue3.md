@@ -110,3 +110,69 @@ let allDone = computed<boolean>({
   }
 })
 ```
+
+# DOC
+## api
+### Options
+``` vue
+<script>
+export default {
+  data() {
+    return {
+      count: 0
+    }
+  },
+  methods: {
+    increment() {
+      this.count++
+    }
+  },
+  mounted() {
+    console.log(`The initial count is ${this.count}.`)
+  }
+}
+</script>
+
+<template>
+  <button @click="increment">Count is: {{ count }}</button>
+</template>
+```
+
+### Composition
+导入API函数
+组合式API Composition 与 `<script setup></script>` 配合使用；setup 属性，是一个标识。
+与cocos组件类似
+
+优点：
+1. 逻辑复用
+2. 自由灵活
+3. 类型推导
+4. 生产包小
+
+但：
+需要对 Vue 的响应式系统有更深的理解才能高效使用
+``` vue
+<script setup>
+import { ref, onMounted } from 'vue'
+const count = ref(0)
+
+function increment() {
+  count.value++
+}
+
+// 生命周期钩子
+onMounted(() => {
+  console.log(`The initial count is ${count.value}.`)
+})
+</script>
+
+<template>
+  <button @click="increment">Count is: {{ count }}</button>
+</template>
+```
+
+
+
+
+
+
