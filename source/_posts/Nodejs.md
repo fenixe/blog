@@ -7,6 +7,9 @@ tags:
 - Nodejs
 ---
 
+# Base
+历史版本：https://nodejs.org/zh-cn/download/releases/
+
 # what
 JavaScript的服务器版本
 
@@ -77,6 +80,15 @@ lts/carbon -> v8.17.0 (-> N/A)
 lts/dubnium -> v10.24.1 (-> N/A)
 lts/erbium -> v12.22.1
 lts/fermium -> v14.16.1 (-> N/A)
+```
+
+## 设置默认版本
+```
+$ nvm alias default 16.14.2
+# nvm set default node.js version 16.14.2
+
+$ node -v
+# v16.14.2
 ```
 
 # npx
@@ -208,6 +220,24 @@ $ npm list -g
 /home/kil/.npm-global/lib
 ├─┬ node-sass@4.13.1
 │ ├── async-foreach@0.1.3
+```
+
+``` zsh
+#全局查看包
+$ npm ls --global pnpm
+/Users/niekaifa/.nvm/versions/node/v14.16.0/lib
+└── pnpm@6.30.1
+
+#删除全局包
+$ npm rm --global pnpm
+removed 1 package in 0.151s
+
+$ npm ls --global pnpm
+/Users/niekaifa/.nvm/versions/node/v14.16.0/lib
+└── (empty)
+
+#安装全局包
+$ npm install -g pnpm
 ```
 
 # process

@@ -5,9 +5,10 @@ categories:
 - Tool
 tags:
 - Yarn
+- Pnpm
 ---
 
-# basic
+# Yarn
 一、安装
 brew install yarn
 
@@ -52,7 +53,7 @@ yarn config set proxy http://XX
 yarn config set https-proxy http://XX
 
 
-# 源
+## 源
 查看
 ``` zsh
 $ yarn config get registry https://registry.yarnpkg.com
@@ -66,8 +67,8 @@ success Set "registry" to "https://registry.npm.taobao.org".
 ✨  Done in 0.03s.
 ```
 
-# link
-# niekaifa @ Mac-mini in ~/workspace/apowo/game-core on git:dev x [11:31:10] 
+## link
+## niekaifa @ Mac-mini in ~/workspace/apowo/game-core on git:dev x [11:31:10] 
 $ yarn link
 
 改变依赖路径
@@ -100,7 +101,7 @@ ls -l node_modules | grep ^l
 ## 解除link后
 yarn install --force
 
-# 版本
+## 版本
 版本好自动 + 1
 yarn version --major
 yarn version --minor
@@ -108,7 +109,8 @@ yarn version --patch
 
 https://classic.yarnpkg.com/en/docs/cli/version/
 
-# 缓存
+## 缓存
+```
 $ yarn cache dir
 /Users/niekaifa/Library/Caches/Yarn/v6
 
@@ -118,4 +120,7 @@ Couldn't find match for "2811863d46248ffea1013be2ba97884a0da46fd0" in "refs/head
 
 解决办法:
 yarn cache clean
+```
 
+# Pnpm
+解决的问题：yarn复制包到node_modules里面

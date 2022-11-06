@@ -454,6 +454,10 @@ editor.detectIndentation 这项改成 false 就生效了
 插件：JS-CSS-HTML
 修改：indent-size: 2
 
+## 花括号回车，不自动换行缩紧，不另起新的一行
+ctrl+shift+p 唤出控制台，在搜索栏中输入 settings.json
+打开：Open User Settings(JSON)
+删除空配置参数："editor.language.brackets": []
 
 ## 赋印象笔记快捷键
 | Mac快捷键 | 作用  |
