@@ -317,6 +317,8 @@ home address
 ## 启动
 brew services start nginx // 重启的命令是: brew services restart nginx
 
+brew services reload nginx
+
 http://localhost:8080/
 Welcome to nginx! 
 

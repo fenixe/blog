@@ -100,6 +100,10 @@ transform:rotate(-3deg);
 
 
 # 样式
+## 不同大小的字体底部对齐
+display: flex
+align-items: baseline;
+
 ## 超出部分省略号
 ``` css
 overflow: hidden; // 超出的文本隐藏
