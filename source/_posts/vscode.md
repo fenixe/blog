@@ -226,6 +226,9 @@ Win用户按住快捷键 <span class="custom_red">F1<span>
 
 + **编辑器**：code pathName/fileName命令：通过 VS Code 软件打开指定目录/指定文件。
 
+### node 设置
+因为vscode用的zsh
+在vscode的settings里加一句"terminal.integrated.shellArgs.osx": []就好了
 
 ## VS Code 的常见设置项
 ### VS Code 设置为中文语言

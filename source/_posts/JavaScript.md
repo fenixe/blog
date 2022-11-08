@@ -35,6 +35,16 @@ IIFE（立即调用函数表达式）
 })()
 ```
 
+## 处理 URL 查询字符串
+```js
+var prms = new URLSearchParams({
+  firstName: "Jonas",
+  lastName: "Gauffin"
+});
+console.log(prms.toString());
+// firstName=Jonas&lastName=Gauffin
+```
+
 ## 格式化数字
 ```js
 number.toFixed(2) // 2: 可以自定义小数位

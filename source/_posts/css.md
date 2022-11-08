@@ -43,6 +43,12 @@ text-decoration-thickness
 font-family: tahoma, arial, 宋体, sans-serif;
 sans-serif: 如果其他字体都找不到，就使用浏览器默认字体
 
+## vertical-align
+一个元素属于inline或是inline-block水平，其身上的vertical-align属性才会起作用。
+
+所谓inline-block水平的元素，就是既可以“吸”又可以“咬”的元素，既可以与inline水平元素混排，又能设置高宽属性的元素。哪些元素呢，例如图片，按钮，单复选框，单行/多行文本框等HTML控件，只有这些元素默认情况下会对vertical-align属性起作用。
+
+baseline，默认。元素的基线与父元素的基线对齐。
 
 ## 字间距
 letter-spacing

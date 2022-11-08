@@ -124,3 +124,7 @@ yarn cache clean
 
 # Pnpm
 解决的问题：yarn复制包到node_modules里面
+
+## cli
+### 项目内全局安装
+pnpm i eslint -w

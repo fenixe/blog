@@ -171,8 +171,61 @@ onMounted(() => {
 </template>
 ```
 
+### 计算属性
+推荐用`计算属性`来描述依赖响应式状态的复杂逻辑
+```vue
+<!-- 之前 -->
+<span>{{ books.length > 0 ? 'Yes' : 'No' }}</span>
+<!-- 现在 -->
+<span>{{show}}</span>
+<script lang="ts">
+  const show = computed(()=>{
+    return books.length > 0 'Yes': 'No'
+  })
+</script>
+```
 
+注意：
+计算属性的 getter 应只做计算而没有任何其他的副作用，这一点非常重要，请务必牢记。举例来说，不要在 getter 中做异步请求或者更改 DOM！
 
+### 类与样式绑定
+```vue
+<!-- 方式一 -->
+<div
+  class="static"
+  :class="{ active: isActive, 'text-danger': hasError }"
+></div>
 
+<!-- 方式二 -->
+<div :class="classObject"></div>
+<script>
+  const classObject = reactive({
+    active: true,
+    'text-danger': false
+  })
+</script>
 
+<!-- 方式三 -->
+<div :class="[activeClass, errorClass]"></div>
+<script>
+const activeClass = ref('active')
+const errorClass = ref('text-danger')
+</script>
+```
 
+#### 绑定内联样式
+```vue
+<div :style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
+```
+
+### 列表渲染
+展示过滤或排序后的结果
+```vue
+<li v-for="n in evenNumbers">{{ n }}</li>
+<script>
+  const numbers = ref([1, 2, 3, 4, 5])
+  const evenNumbers = computed(() => {
+    return numbers.value.filter((n) => n % 2 === 0)
+  })
+</script>
+```
