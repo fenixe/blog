@@ -320,6 +320,10 @@ document.documentElement.scrollTop
 距离父级高度：
 document.getElementById('onlinePlayerCount').offsetTop
 
+### cookie
+set
+document.cookie = 'key=value'
+
 ## window
 窗口高度：
 window.innerHeight

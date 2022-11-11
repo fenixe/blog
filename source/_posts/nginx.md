@@ -81,8 +81,8 @@ deb-src http://nginx.org/packages/ubuntu/ codename nginx
 注意 codename 要根据系统来选择[系统](http://nginx.org/en/linux_packages.html#stable)
 sudo vim /etc/apt/sources.list
 ``` zsh
-deb http://nginx.org/packages/ubuntu/ bionic nginx
-deb-src http://nginx.org/packages/ubuntu/ bionic nginx
+deb http://nginx.org/packages/ubuntu/ kinetic nginx
+deb-src http://nginx.org/packages/ubuntu/ kinetic nginx
 ```
 
 安装
@@ -94,7 +94,7 @@ sudo apt-get install nginx
 查看
 ``` zsh
 root@VM-0-4-ubuntu:/home# nginx -v
-nginx version: nginx/1.18.0
+nginx version: nginx/1.22.1
 ```
 
 # 命令
