@@ -393,15 +393,35 @@ template 缺点
 
 #### scoped
 只会在本组件生效，不会污染其他组件
-```
+```vue
+
 <style scoped>
-.test{
+h1 {
+  color: red;
+}
+</style>>
+<!-- 解析成 -->
+<h1 data-v-3de47834="">1</h1>
+<style scoped>
+h1[data-v-3de47834] {
     color: red;
 }
 </style>
-.test[data-v-e43c18bc] {
-    color: red;
+```
+
+#### CSS功能
+`v-bind` CSS函数
+```vue
+<script setup>
+const theme = {
+  color: 'red'
 }
+</script>
+<style scoped>
+p {
+  color: v-bind('theme.color');
+}
+</style>
 ```
 
 ## 模版语法

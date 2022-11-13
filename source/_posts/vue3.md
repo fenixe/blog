@@ -171,6 +171,11 @@ onMounted(() => {
 </template>
 ```
 
+Composition代码组织
+因为 ref 和 computed 等功能都可以从 Vue 中全局引入，所以我们就可以把组件进行任意颗粒度的拆分和组合，这样就大大提高了代码的可维护性和复用性。
+可以任意拆分组件的功能，抽离出独立的工具函数，大大提高了代码的可维护性。
+例子：追踪鼠标位置，utils方法
+
 ### 计算属性
 推荐用`计算属性`来描述依赖响应式状态的复杂逻辑
 ```vue
@@ -229,3 +234,82 @@ const errorClass = ref('text-danger')
   })
 </script>
 ```
+
+## Route
+### 简单路由，不使用路由库
+```vue
+<template>
+  <a href="#/">首页 hello</a> 
+  <a href="#/about" style="margin-left:10px">about</a>
+  <component :is="currentView" />
+</template>
+
+<script setup>
+import { computed, ref } from 'vue'
+import About from './components/About.vue'
+import HelloWorld from './components/HelloWorld.vue'
+const count = ref(1)
+const routes={
+  '/': HelloWorld,
+  '/about':About
+}
+
+const currentPath = ref(window.location.hash)
+window.addEventListener('hashchange',()=>{
+  currentPath.value=window.location.hash
+})
+const currentView=computed(()=>{
+  return routes[currentPath.value.slice(1) || '/'] || NotFound
+})
+</script>
+```
+
+# 响应式
+JavaScript变量是没有响应式概念的。js代码自上而下执行
+``` js
+let count = 1
+let double = count * 2
+console.log(double) // 2
+count = 2
+console.log(double) // 2。结果不会随着count的值改变而改变
+
+// doube 能够跟着 count 的变化而变化
+let count = 1
+// 计算过程封装成函数
+let getDouble = n=>n*2 //箭头函数
+let double = getDouble(count)
+console.log(double) // 2
+count = 2
+// 重新计算double，这里我们不能自动执行对double的计算
+double = getDouble(count)
+console.log(double) // 4
+```
+
+double的值自动计算，getDouble函数自动执行
+{% asset_img xiangyingshi01.png %}
+图解：我们使用 JavaScript 的某种机制，把 count 包裹一层，每当对 count 进行修改时，就去同步更新 double 的值，那么就有一种 double 自动跟着 count 的变化而变化的感觉，这就算是响应式的雏形
+
+## 响应式原理
+### vue2 defineProperty
+```js
+let getDouble = n=>n*2
+let obj = {}
+let count = 1
+let double = getDouble(count)
+
+Object.defineProperty(obj,'count',{
+    get(){
+        return count
+    },
+    set(val){
+        count = val
+        double = getDouble(val)
+    }
+})
+console.log(double)  // 打印2
+obj.count = 2
+console.log(double) // 打印4  有种自动变化的感觉
+```
+
+缺陷
+删除 obj.count 属性，set 函数就不会执行，double 还是之前的数值。
