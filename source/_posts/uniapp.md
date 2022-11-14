@@ -16,6 +16,15 @@ keystore生成：https://ask.dcloud.net.cn/article/35777
 keytool -genkey -alias testalias -keyalg RSA -keysize 2048 -validity 36500 -keystore test.keystore
 ```
 
+就是一个壳子，包含manifest里面的所有设置，还有HBuilderX版本
+
+### 云打包模式
+1. 安心打包，不会上传开发者证书代码
+2. 传统云打包，没有mac需要打ios包的开发者，代码和证书上传到DCloud的mac打包服务器
+## 两套开发模式
+1. HBuilderX 可视化界面
+2. cli创建项目
+
 ## 启动界面
 android: 自定义启动图
 ios：自定义storyboard
@@ -73,6 +82,54 @@ uni.navigateTo({
 }
 ```
 
+## css
+### 不支持的选择器
+非H5端不支持*选择器；
+body的元素选择器请改为page，同样，div和ul和li等改为view、span和font改为text、a改为navigator、img改为image...
+
+### scoped
+非H5端默认并未启用 scoped，如需要隔离组件样式可以在 style 标签增加 scoped 属性，H5端为了隔离页面间的样式默认启用了 scoped
+
+## 小程序
+小程序要求连接的网址都要配白名单
+
+- 不能使用浏览器自带对象，document、window、localstorage、cookie等
+- 不同的端，每个平台的专有api，比如wx.、plus.等api可以分别在微信下和app下使用
+- 推荐使用flex布局模型，支持多平台
+- 位置坐标系统一为国测局坐标系gcj02，这种坐标系可以被多端支持
+
+## 跨域
+跨域是浏览器的专用概念
+做App、小程序等非H5平台，是不涉及跨域问题
+iOS的 wkWebview ，会产生跨域
+
+## 跨端
+组件内（页面除外）不支持 onLoad、onShow 等页面生命周期。
+
+## 分包
+小游戏
+小程序 工具 vendor.js过大
+
+## 全局变量
+赋值：getApp().globalData.text = 'test'
+取值：console.log(getApp().globalData.text) // 'test'
+
+## vuex
+main.js 挂载 Vuex
+import store from './store'  
+Vue.prototype.$store = store
+
+## 存储
+uni.storage的键值对存储，全端支持。
+
+## 升级
+HBuilderX升级后，其自带的app运行基座、uni-app编译器、云打包配套引擎会同步升级。但在开发者使用cli创建项目、使用自定义基座、使用5+sdk离线打包时，就需要手动维护版本更新。
+
+小程序，提交代码到小程序后台
+app，ios去appstore，android直接下载apk，只要包名和证书不变，就可以覆盖安装。
+
+App升级，也可使用uniCloud。
+
 # Function
 ## Map
 - [ ] 环境变量（最少三个环境）
@@ -92,6 +149,7 @@ uni.navigateTo({
 - [ ] 弹窗（toast、alert）
 - [ ] 消息通知
 - [ ] 消息通知
+- [ ] 导航栏 https://ask.dcloud.net.cn/article/34921
 
 # 热更新
 iOS的wgt更新肯定是违反apple政策的，注意事项：
