@@ -1376,11 +1376,23 @@ data: {
 
 
 # router
+## base
+``` js
+this.$router.push('/store')
+
+const id = this.$route.params.id;
+{
+  path: '/contract/detail/:id',
+  component: () => import('@/pages/contract/detail'),
+},
+```
+
+## 原理
 两个模式：
 - hash
 - history
 
-## history
+### history
 利用 history.pushState API 来完成 URL 跳转而无须重新加载页面。
 
 w
