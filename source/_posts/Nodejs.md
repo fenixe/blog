@@ -9,6 +9,10 @@ tags:
 
 # Base
 历史版本：https://nodejs.org/zh-cn/download/releases/
+版本一览表：https://github.com/nodejs/Release
+
+## 查看当前镜像源
+npm config get registry
 
 # what
 JavaScript的服务器版本
@@ -28,6 +32,7 @@ JavaScript的服务器版本
 - 工具开发  （webpack）
 
 {% asset_img middle.png %}
+
 
 # nvm
 node 版本管理器
