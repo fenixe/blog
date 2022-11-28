@@ -5,6 +5,78 @@ tags:
 ---
 
 # Base
+## 安装
+python.org download
+
+python3 -V
+pip3 -V
+
+## 卸载
+删除Python 3.7 框架，打开终端，输入
+sudo rm -rf /Library/Frameworks/Python.framework/Versions/3.7
+
+删除 Python 3.7 应用目录
+cd /Applications
+sudo rm -rf Python 3.7
+
+删除/usr/local/bin 目录下指向的Python3.7 的连接
+cd /usr/local/bin/
+
+ls -l /usr/local/bin
+
+rm Python3.7相关的文件和链接
+
+#Python3.7相关的文件和链接需要自行确认是否删除
+
+5. 删除 Python 的环境路径
+
+vi ~/.bash_profile
+
+6. 确认python 是否已经删除
+
+python3.7
+
+-bash: python3.7: command not found
+
+## 语言
+- 高级编程语言
+- 解释型语言（翻译）
+  C：编译型语言，执行前先编译，再汇编，再链接，更接近机器执行的代码。比python速度更快，执行效率更高
+- 语法和自然语言很像
+
+## 运行特定版本
+```zsh
+python3.9 -V
+python3.10 -V
+
+# 查看python3 多少位
+$ python3
+Python 3.11.0 (v3.11.0:deaf509e8f, Oct 24 2022, 14:43:23) [Clang 13.0.0 (clang-1300.0.29.30)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import platform
+>>> platform.architecture()
+('64bit', '')
+>>>
+```
+
+## 交互式运行
+```
+$ python3 -i 2.py
+Hello world!
+>>> print('h')
+h
+
+非交互式运行
+$ python3 -i 2.py
+Hello world!
+```
+
+# 语法
+## 输入输出
+``` py
+var=input()
+print(var)
+```
 
 
 # 研究
@@ -44,3 +116,6 @@ OCR：Optical Character Recognition，光学字符识别
 ## 应用
 - 银行卡拍照识别
 - 快递信息拍照，自动录入
+
+# Paddle
+人工智能 > 机器学习 > 深度学习
