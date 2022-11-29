@@ -38,6 +38,77 @@ python3.7
 
 -bash: python3.7: command not found
 
+## requirements.txt 管理套件相依性
+### 安装
+```zsh
+$ pip install -r requirements.txt
+```
+
+## pyenv
+Python版本管理
+
+### 安装pyenv
+```zsh
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+
+
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n eval "$(pyenv init -)"\nfi' >> ~/.zshrc
+```
+
+echo 命令的含义是：将引号中内容写入某文件中
+请注意，以上的三条 echo 命令的最后一条长长的命令，请你保证它引号中的内容处于 ~/.bashrc 或者 ~/.zshrc 的最底部。
+因为在 pyenv 初始化期间会操作 path 环境变量，导致不可预测的行为。
+
+### CLI
+``` zsh
+# 查看当前版本
+pyenv version
+
+# 查看所有版本
+pyenv versions
+
+# 查看所有可安装的版本
+pyenv install --list
+
+# 安装指定版本
+pyenv install 3.6.5
+# 安装新版本后rehash一下
+pyenv rehash
+
+# 删除指定版本
+pyenv uninstall 3.5.2
+
+# 指定全局版本
+pyenv global 3.6.5
+
+# 指定多个全局版本, 3版本优先
+pyenv global 3.6.5 2.7.14
+
+# 实际上当你切换版本后, 相应的pip和包仓库都是会自动切换过去的
+```
+
+### install 太慢问题
+进入源码页面下载`.tar.xz`文件，https://www.python.org/downloads/source/
+
+将下载的 Python 版本压缩包放到 pyenv 的缓存文件夹: `~/.pyenv/cache`
+
+执行安装命令
+```zsh
+$ pyenv install 3.9.15
+python-build: use openssl@1.1 from homebrew
+Downloading readline-8.1.tar.gz...
+-> https://ftpmirror.gnu.org/readline/readline-8.1.tar.gz
+Installing readline-8.1...
+Installed readline-8.1 to /Users/qkil/.pyenv/versions/3.9.15
+
+Installing Python-3.9.15...
+python-build: use zlib from xcode sdk
+WARNING: The Python lzma extension was not compiled. Missing the lzma lib?
+Installed Python-3.9.15 to /Users/qkil/.pyenv/versions/3.9.15
+```
+
 ## 语言
 - 高级编程语言
 - 解释型语言（翻译）

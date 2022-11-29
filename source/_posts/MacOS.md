@@ -8,7 +8,7 @@ tags:
 - MacOS
 ---
 
-# basic
+# Base
 ## 工作区设置
 ### 鼠标
 大屏幕，鼠标跟踪速度调高一点。
@@ -47,10 +47,12 @@ install
 
 版本
 ``` zsh
-brew --version
+$ brew -v
+Homebrew 3.6.12
+Homebrew/homebrew-core (git revision 250e2930521; last commit 2022-11-29)
 ```
 
-更新
+更新自己
 ``` zsh
 brew update
 ```
@@ -75,6 +77,10 @@ cd /Applications
 ``` zsh
 brew cask install --verbose --debug java
 ```
+
+## 安装软件
+brew install ffmpeg
+brew install wget
 
 ## 问题
 ### Updating Homebrew...
