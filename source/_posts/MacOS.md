@@ -331,9 +331,8 @@ Welcome to nginx!
 ## issues
 ### MacBook M1 brew安装其他软件遇到问题（Error: Cannot install in Homebrew on ARM processor in Intel default prefix (/usr/local)!）的处理方法
 
-打开Finder-> 打开应用程序->打开实用工具
-
-找到终端.app(找到自己用的终端)，显示简介，把使用 Rosetta打开勾选上，然后重启终端，再运行brew install ，
+打开Finder-> 打开应用程序->打开实用工具->终端
+找到终端.app(找到自己用的终端，或者iTerm)，显示简介，把使用 Rosetta打开勾选上，然后重启终端，再运行brew install ，
 
 最后装好了别忘了去掉勾
 
