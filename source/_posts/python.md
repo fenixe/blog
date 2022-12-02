@@ -5,6 +5,13 @@ tags:
 ---
 
 # Base
+## CLI
+pip install aliyun-python-sdk-core==2.13.3
+pip uninstall aliyun-python-sdk-core
+
+pip升级包命令：pip install --upgrade packagename
+pip检测更新命令：pip list –outdated
+
 ## 安装
 python.org download
 
