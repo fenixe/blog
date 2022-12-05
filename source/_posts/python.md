@@ -150,6 +150,22 @@ Hello world!
 ```
 
 # 语法
+## 目录
+```py
+# 程序运行时所在的目录
+import os
+# 获取当前工作目录
+current_dir = os.getcwd()
+# 打印当前工作目录
+print(current_dir)
+
+
+# 获取当前工作目录
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# 打印当前工作目录
+print(current_dir)
+```
 ## 输入输出
 ``` py
 var=input()
@@ -262,6 +278,17 @@ for s in [1,2,3]:
 
 for i in range(1,13): # range(13) 1,--12; 不包含最后一个数
   print(i)
+
+
+arr = [{"name": "Alice", "age": 20}, {"name": "Bob", "age": 25}]
+# 遍历数组
+for item in arr:
+    # 获取并打印每项里面的 name 属性
+    print(item["name"])
+
+# 输出：
+# Alice
+# Bob
 ```
 
 ## 函数
@@ -282,6 +309,21 @@ Python 本身在没有安装 pysocks 时并不支持 socks5 代理
 取消代理后，安装
 pip install pysocks
 
+
+# 轮子
+## 随机不重复字符串
+``` py
+import random
+
+# 定义字符集，用于生成随机字符串
+charset = "abcdefghijklmnopqrstuvwxyz0123456789"
+
+# 生成随机字符串
+random_str = "".join(random.choice(charset) for _ in range(16))
+
+# 打印字符串
+print(random_str)
+```
 
 
 # 研究
