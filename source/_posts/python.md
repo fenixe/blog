@@ -12,6 +12,10 @@ pip uninstall aliyun-python-sdk-core
 pip升级包命令：pip install --upgrade packagename
 pip检测更新命令：pip list –outdated
 
+更新 pip：pip install --upgrade pip
+
+安装了那些包
+pip list
 ## 安装
 python.org download
 
