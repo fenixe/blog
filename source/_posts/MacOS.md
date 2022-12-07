@@ -347,3 +347,10 @@ Welcome to nginx!
 "imgs": [{"url": "https://dev-digilink-cdn.oss-cn-shanghai.aliyuncs.com/2022-05-11/6ce51e1b-b361-4983-942b-05922ab72b72"}],
 "msgMobile": null,
 "status": "NoSubmit"
+
+### 打不开xxx,因为Apple无法检查其是否包含恶意软件
+{% asset_img software.jpg %}
+
+安全性与隐私 -> 允许从以下位置下载的应用 -> 任何来源
+如果 “任何来源”被隐藏，输入指令：
+sudo spctl --master-disable

@@ -5,6 +5,13 @@ tags:
 ---
 
 # Base
+## CLI
+pip install aliyun-python-sdk-core==2.13.3
+pip uninstall aliyun-python-sdk-core
+
+pip升级包命令：pip install --upgrade packagename
+pip检测更新命令：pip list –outdated
+
 ## 安装
 python.org download
 
@@ -145,10 +152,179 @@ Hello world!
 ```
 
 # 语法
+## 目录
+```py
+# 程序运行时所在的目录
+import os
+# 获取当前工作目录
+current_dir = os.getcwd()
+# 打印当前工作目录
+print(current_dir)
+
+
+# 获取当前工作目录
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# 打印当前工作目录
+print(current_dir)
+```
 ## 输入输出
 ``` py
 var=input()
 print(var)
+```
+
+## 类型
+- 整数 int 8
+- 浮点数 float 8.8
+- 字符串 str '8'
+- 布尔值 bool True,False
+
+### 判断类型
+type(8)
+type('8')
+type("8")
+type(True)
+
+### 类型转换
+int('8')
+str(123)
+bool(123) //非0返回True
+
+## 注释
+```py
+# 首先第一行写程序用来做什么的
+```
+
+## int
+n += 1
+
+## 字符串
+### 长度
+len(str)
+### 取值
+单个：str[0]
+多个：str[0:4] /不包含4
+后面：str[-1]
+
+### 判断是否在字符串中
+'1' in '123'
+'0' not in '123'
+
+### 分割
+data.split('|')
+
+### 去除
+line.strip('\n')
+
+### 元组
+存储内容，不可变更
+（1, 10) > (2, 20)
+看成：110 > 220
+
+```py
+a=(1,3,5,7)
+b=4
+list filter(lambda x: x < b, a) #取出a中小于4的元素
+```
+
+### 字符串模版
+'%s 年的生肖是 %s' %(year, s)
+
+## 数组
+```py
+list = []
+list.append('X') #新增
+list.remove('X') #删除
+``` 
+
+## 逻辑判断
+### 条件语句
+``` py
+x = 'abcd'
+if x == 'abc' :
+  print('相等')
+elif x == 'xyz':
+  print('xyz')
+else:
+  print('都不相等')
+```
+
+### 循环语句
+#### while语句
+``` py
+while 表达式：# 表达式如果为真，会一直执行, 直到表达式为假
+  代码块
+
+while True:
+  print('a')
+  break # 终断
+
+import time
+num = 5
+while True:
+  num = num + 1
+  if num == 10:
+    continue # 跳过本次
+  print(num)
+  time.sleep(1)
+```
+
+#### for语句
+``` py
+for 迭代变量 in 可迭代对象：
+  代码块
+
+for s in [1,2,3]:
+  print(s)
+
+for i in range(1,13): # range(13) 1,--12; 不包含最后一个数
+  print(i)
+
+
+arr = [{"name": "Alice", "age": 20}, {"name": "Bob", "age": 25}]
+# 遍历数组
+for item in arr:
+    # 获取并打印每项里面的 name 属性
+    print(item["name"])
+
+# 输出：
+# Alice
+# Bob
+```
+
+## 函数
+### 定义
+``` py
+def 函数名称():
+  代码
+  return 需要返回的内容
+```
+
+### 调用
+函数名称()
+
+# Issuse
+## Missing dependencies for SOCKS support
+环境变量中则设置了 socks5 的代理; ~/.zshrc
+Python 本身在没有安装 pysocks 时并不支持 socks5 代理
+取消代理后，安装
+pip install pysocks
+
+
+# 轮子
+## 随机不重复字符串
+``` py
+import random
+
+# 定义字符集，用于生成随机字符串
+charset = "abcdefghijklmnopqrstuvwxyz0123456789"
+
+# 生成随机字符串
+random_str = "".join(random.choice(charset) for _ in range(16))
+
+# 打印字符串
+print(random_str)
 ```
 
 
@@ -192,3 +368,5 @@ OCR：Optical Character Recognition，光学字符识别
 
 # Paddle
 人工智能 > 机器学习 > 深度学习
+
+
