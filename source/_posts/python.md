@@ -49,6 +49,8 @@ Python版本管理
 
 ### 安装pyenv
 ```zsh
+brew install pyenv 
+# 或
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 
 
