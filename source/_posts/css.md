@@ -520,6 +520,10 @@ alternate-reverse
 white-space: pre;
 white-space CSS 属性是用来设置如何处理元素中的 空白。
 
+## 响应式
+Responsive Web Design，简称 RWD，响应式 Web 设计
+响应式这个词源自于建筑学领域，原本指的是建筑物本身会“响应”实际的使用情况，来自我调整。在Web开发领域，“响应式”的意思就变成了，我们开发的 Web 页面会“响应”用户的设备尺寸而自动调整布局。在这篇文章中提到过，我们可以基于 流体网格（Fluid Grids）、灵活的图片（Flexible Images）和媒体查询（Media Queries） 三种技术来构建一个响应式 Web 网站或 Web 应用。
+
 # 性能
 ## table
 由于浏览器使用流式布局，对Render Tree的计算通常只需要遍历一次就可以完成，但table及其内部元素除外，他们可能需要多次计算，通常要花3倍于同等元素的时间，这也是为什么要避免使用table布局的原因之一。
@@ -563,3 +567,7 @@ box-sizing: border-box;
 ### 公共样式导入项目
 vue
 main.js 中
+
+# 特效
+## 彩带
+https://www.kirilv.com/canvas-confetti/

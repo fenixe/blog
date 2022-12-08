@@ -12,6 +12,9 @@ pip uninstall aliyun-python-sdk-core
 pip升级包命令：pip install --upgrade packagename
 pip检测更新命令：pip list –outdated
 
+pip --version
+pip install --upgrade pip
+
 ## 安装
 python.org download
 
@@ -45,6 +48,12 @@ python3.7
 
 -bash: python3.7: command not found
 
+## 查看当前环境安装了哪些py程序包
+pip freeze
+
+将这个命令的输出保存到文件中，以备将来需要安装相同版本的包时使用。例如，您可以运行以下命令来将输出保存到名为 requirements.txt 的文件中：
+pip freeze > requirements.txt
+
 ## requirements.txt 管理套件相依性
 ### 安装
 ```zsh
@@ -67,6 +76,11 @@ echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n eval "$(pyenv init -)"\nfi
 echo 命令的含义是：将引号中内容写入某文件中
 请注意，以上的三条 echo 命令的最后一条长长的命令，请你保证它引号中的内容处于 ~/.bashrc 或者 ~/.zshrc 的最底部。
 因为在 pyenv 初始化期间会操作 path 环境变量，导致不可预测的行为。
+
+### 卸载pyenv
+如果是手动安装的
+rm -rf ~/.pyenv
+vim .zshrc 删除pyenv配置
 
 ### CLI
 ``` zsh

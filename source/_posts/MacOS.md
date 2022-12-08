@@ -82,6 +82,9 @@ brew cask install --verbose --debug java
 brew install ffmpeg
 brew install wget
 
+## 卸载软件
+brew uninstall wget
+
 ## 问题
 ### Updating Homebrew...
 解决办法
