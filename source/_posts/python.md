@@ -15,6 +15,10 @@ pip检测更新命令：pip list –outdated
 pip --version
 pip install --upgrade pip
 
+更新 pip：pip install --upgrade pip
+
+安装了那些包
+pip list
 ## 安装
 python.org download
 
@@ -65,6 +69,8 @@ Python版本管理
 
 ### 安装pyenv
 ```zsh
+brew install pyenv 
+# 或
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 
 
@@ -381,4 +387,10 @@ OCR：Optical Character Recognition，光学字符识别
 # Paddle
 人工智能 > 机器学习 > 深度学习
 
+# 包
+## cv2
+cv2是Python语言的一个计算机视觉库，用于图像处理和计算机视觉领域的开发。它是OpenCV库的Python语言绑定，提供了许多图像处理和计算机视觉的算法和方法，使得Python开发者可以方便地实现图像处理和计算机视觉的功能。
 
+cv2库提供了常用的图像处理和计算机视觉算法，例如图像分割、目标检测、图像分类、视频分析等。它还提供了一些图像处理和计算机视觉的工具，例如图像显示、图像读取、图像保存等。
+
+使用Python的cv2包，开发者可以快速实现图像处理和计算机视觉功能，并且可以通过深度学习模型来提高算法的性能。
