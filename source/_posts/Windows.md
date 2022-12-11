@@ -80,3 +80,24 @@ win 搜索框搜索：msconfig，打开系统配置，切换到启动项，打�
 
 启用
 win + R；输入指令：shell:startup, 复制图标即可
+
+### 代理
+windows
+cmd
+设置临时代理（关闭cmd即设置的代理消失）
+set all_proxy=socks5://127.0.0.1:10808 (端口号为你代理软件socks5协议的端口)
+删除临时代理
+set all_proxy=
+查看当前环境变量
+set
+查看当前公网ip判断代理是否成功
+curl cip.cc
+
+powershell
+设置临时代理（关闭powershell即设置的代理消失）
+$env:all_proxy="socks5://127.0.0.1:10808" (端口号为你代理软件socks5协议的端口)
+删除当前临时代理
+$env:all_proxy=""
+查看当前环境变量
+ls env:*
+暂不知晓curl 和 ping层面上检测代理是否成功,设置完临时代理，通过命令行界面已成功获得下载相关速度
