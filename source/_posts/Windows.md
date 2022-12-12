@@ -7,6 +7,11 @@ tags:
 - Windows
 ---
 
+# Base
+## version
+win + R 
+输入：winver
+
 ## 指令
 ### 进入D盘
 ```
