@@ -150,6 +150,15 @@ or this flavor if you need SSH:
 
 git+ssh://git@github.com/visionmedia/express.git
 
+### permission denied
+npm config set unsafe-perm=true
+
+###  spawn cmd.exe ENOENT using WSL
+This error stems from the fact that CRA tries to open your browser:
+In order to skip opening the browser, add
+BROWSER=none
+to your .env or .env.local file
+
 ## 包
 ### rimraf
 The UNIX command rm -rf for node.

@@ -371,38 +371,13 @@ function debounce(func){
 ```
 
 ## String
-### slice()、substr()、substring() 区别
+### slice()、substring() 区别
 操作长度：
-substr(start, length?)
-start: 要抽取的子串的起始下标; 如果是负数，那么该参数声明从字符串的尾部开始算起的位置。也就是说，-1 指字符串中最后一个字符，
-length：可选。子串中的字符数。必须是数值。如果省略了该参数，那么返回从 stringObject 的开始位置到结尾的字串。
-
-``` js
-let code = random.substr(-1, 4);
-console.log('code', code); // 5
-
-console.log('12345'.substr(-4, 4)); // 2345
-
-public static generateSmsCode(len = 4): string {
-  const random = Math.random().toString();
-  const code = random.substr(-len, len);
-  return code;
-}
-```
-
-注：MDA 它并非JavaScript核心语言的一部分，未来将可能会被移除掉。如果可以的话，使用 substring() 替代它.
-
-操作索引
-slice(start,end?)
-start: 要抽取的片断的起始下标。如果是负数，则该参数规定的是从字符串的尾部开始算起的位置。也就是说，-1 指字符串的最后一个字符，-2 指倒数第二个字符，以此类推。
-end: 紧接着要抽取的片段的结尾的下标。若未指定此参数，则要提取的子串包括 start 到原字符串结尾的字符串。如果该参数是负数，那么它规定的是从字符串的尾部开始算起的位置。
-
 substring(start, end?)
-start: 必需。一个非负的整数
-end: 选填。不含尾
+indexStart: 必需。一个非负的整数
+indexEnd: 选填。不含尾
 
 ```js
-alert("abc".substr(1,2)); // returns "bc"
 alert("abc".substring(1,2)); // returns "b"
 ```
 
