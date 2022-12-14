@@ -5,6 +5,9 @@ tags:
 ---
 
 # Base
+## 查看系统版本
+python -c "import platform;print(platform.architecture()[0]);print(platform.machine())"
+
 ## CLI
 pip install aliyun-python-sdk-core==2.13.3
 pip uninstall aliyun-python-sdk-core
@@ -345,6 +348,21 @@ random_str = "".join(random.choice(charset) for _ in range(16))
 print(random_str)
 ```
 
+# fastapi
+## 文件处理
+image
+```py
+@router.post("/ocr-test",  name="test")
+async def ocrTest(
+    file: UploadFile = File(...)
+) -> None:
+    print("file", file)
+    contents = await file.read()
+    random_str = "".join(random.choice(charset) for _ in range(16))
+    save_path = "./assets/test/" + random_str + ".png"
+    with open(save_path, 'wb') as f: # write() 是同步
+        f.write(contents)
+```
 
 # 研究
 ## NLP
@@ -394,3 +412,9 @@ cv2是Python语言的一个计算机视觉库，用于图像处理和计算机�
 cv2库提供了常用的图像处理和计算机视觉算法，例如图像分割、目标检测、图像分类、视频分析等。它还提供了一些图像处理和计算机视觉的工具，例如图像显示、图像读取、图像保存等。
 
 使用Python的cv2包，开发者可以快速实现图像处理和计算机视觉功能，并且可以通过深度学习模型来提高算法的性能。
+
+
+# Issuse
+## pycharm报错提示：无法加载文件\venv\Scripts\activate.ps1
+此系统上禁止运行脚本
+https://blog.csdn.net/freedomofu/article/details/126537492

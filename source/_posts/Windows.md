@@ -106,3 +106,10 @@ $env:all_proxy=""
 查看当前环境变量
 ls env:*
 暂不知晓curl 和 ping层面上检测代理是否成功,设置完临时代理，通过命令行界面已成功获得下载相关速度
+
+
+# Issues
+## Please run SwitchHosts! as an Administrator 原因
+1. 进入 C:\Windows\System32\drivers\etc，查看hosts文件属性
+  1.1 取消文件只读状态
+2. 修改用户权限,文件属性->安全
