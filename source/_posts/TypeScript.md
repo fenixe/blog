@@ -126,6 +126,13 @@ import axios from 'axios'
 // function request(url: string, obj: any) {
 //   return axios.post(url, obj)
 // }
+const config = {
+  headers:{
+    header1: value1,
+    header2: value2
+  }
+};
+axios.post(url, data, config)
 
 // <预先定义一些类型变量，给后面函数用>
 function request<T extends keyof API>(url: T, data: API[T]) {
