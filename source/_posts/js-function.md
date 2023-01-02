@@ -93,4 +93,9 @@ export const localStore = {
 };
 ```
 
+## @input 节流
+``` js
+  clearTimeout(this.throttleTimer);
+  this.throttleTimer = setTimeout(this.busIdDetail, 2000);
+```
 
