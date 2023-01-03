@@ -168,4 +168,9 @@ const cardNoFormat = cardNo.replace(/(.{4})/g, '$1,');
 console.log(cardNoFormat.split(','));
 ```
 
-
+## 花括号内的字符串
+```js
+const str = `{{first.DATA}}\n资料名称：{{keyword1.DATA}}\n资料简介：{{keyword2.DATA}}\n{{remark.DATA}}`;
+const regex = /\{\{(.+?)\}\}/g;
+let wxTemplateParams =  str.match(regex);
+```

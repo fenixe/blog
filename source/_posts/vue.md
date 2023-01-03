@@ -262,6 +262,23 @@ inject: {
 <template functional>
 {{injections.theme.color}}
 </template>
+
+// vue2
+  data(){
+    return{
+      testStatus: true,
+      obj: {
+        color: 'red',
+      } 
+    }  
+  },
+  provide(){
+    return{
+      theme: this.obj
+    }
+  },
+
+  inject: ['theme'],
 ```
 
 ### 使用事件抛出一个值
