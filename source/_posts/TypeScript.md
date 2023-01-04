@@ -13,6 +13,11 @@ tags:
 - 强类型（直接帮你做类型检测）
 - 真正面向对象：有接口、有范型、有枚举、有访问修饰符 
 
+## 资料
+https://ts.xcatliu.com/
+https://jkchao.github.io/typescript-book-chinese/
+这俩电子书够了，然后日常看源码和代码的时候，也可以学一些高级写法 其实就够了，遇事不决any[旺柴]
+
 ## CLI
 ### 初始化
 生成tsconfig.json 文件
