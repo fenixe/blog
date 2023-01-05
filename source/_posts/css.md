@@ -10,6 +10,18 @@ tags:
 # base
 浏览器会把CSS解析成CSSOM
 
+## Route-Map
+{% asset_img css_map.jpeg %}
+### RWD
+Responsive Web Design：响应式 Web 布局
+
+> 响应式这个词源自于建筑学领域，原本指的是建筑物本身会“响应”实际的使用情况，来自我调整。在Web开发领域，“响应式”的意思就变成了，我们开发的 Web 页面会“响应”用户的设备尺寸而自动调整布>局。在这篇文章中提到过，我们可以基于 流体网格（Fluid Grids）、灵活的图片（Flexible Images）和媒体查询（Media Queries） 三种技术来构建一个响应式 Web 网站或 Web 应用。
+
+### IWD
+Intrinsic Web Design：内在 Web 设计
+以最少的代码量来实现复杂的 Web 设计。
+浮动（float）还是引用外部第三方 CSS 框架（CSS Frameworks）和库（比如Bootstrap）将内容放置在 Web 页面上想要的任何位置（即布局），几乎都有一些 Hack 的身影存在！
+
 ## initial & inherit
 initial 初始值或默认值
 inherit 继承父元素
