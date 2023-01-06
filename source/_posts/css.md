@@ -51,6 +51,8 @@ text-decoration-style
 text-decoration-thickness
 文本修饰线的粗细
 
+text-indent 首行缩进
+
 ## font-family
 font-family: tahoma, arial, 宋体, sans-serif;
 sans-serif: 如果其他字体都找不到，就使用浏览器默认字体
