@@ -22,6 +22,13 @@ Intrinsic Web Design：内在 Web 设计
 以最少的代码量来实现复杂的 Web 设计。
 浮动（float）还是引用外部第三方 CSS 框架（CSS Frameworks）和库（比如Bootstrap）将内容放置在 Web 页面上想要的任何位置（即布局），几乎都有一些 Hack 的身影存在！
 
+> 内在 Web 设计（Intrinsic Web Design）不是内容以设计为导向（Content Design-Driven），而是只专注于让设计受内容驱动（Design Content-Driven）。
+
+### CDWD
+Component-Driven Web Design：组件驱动式Web设计
+一种新的响应式
+基于组件驱动的开发，即CSS新增的特性将直接基于组件而不是基于页面注入式响应能力
+
 ## initial & inherit
 initial 初始值或默认值
 inherit 继承父元素
