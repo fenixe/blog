@@ -29,6 +29,40 @@ Component-Driven Web Design：组件驱动式Web设计
 一种新的响应式
 基于组件驱动的开发，即CSS新增的特性将直接基于组件而不是基于页面注入式响应能力
 
+## 技术术语
+### Web坐标轴
+#### 平面
+{% asset_img coord.png %}
+
+#### 三维
+除平面画布中的 x 和 y 轴, 还有三维度的 z 轴
+transform 绘制 3D 图形或使用第三维度从前往后对对象进行分层：
+{% asset_img z.png %}
+在定位元素（显式使用position 属性值为非 static 的元素）上使用 z-index 控制其层叠的顺序（z 轴上的层叠顺序），它表示的是用户与屏幕的这条看不见的垂直线：
+{% asset_img z2.png %}
+
+内联与块元素
+
+### 容器和容器空间
+HTML 的每一个元素在 CSS 中都是一个盒子，这个盒子又被称为 容器
+容器的称呼也会有不同。它主要由 CSS 的 display 属性的值来决定：
+- block 时称为块容器；
+- inline 时称为内联容器；
+- flex 或 inline-flex 时称为Flexbox容器；
+- grid 或 inline-grid 时称为 Grid 容器（网格容器）。
+
+外边距：元素与元素之间的间距，margin 或 gap
+内边距：元素内容与元素边框，padding
+
+### 逻辑属性
+多语言
+```css
+.thumb {
+    margin-inline-end: 1rem;
+}
+```
+文档排版无论从左还是右，都可以兼容
+
 ## initial & inherit
 initial 初始值或默认值
 inherit 继承父元素
@@ -275,6 +309,15 @@ length
 - 绝对长度单位
   + px
 
+### fr
+fr：fraction，分数
+网格剩余空间比例单位
+```css
+.container {
+    grid-template-columns: 200px 1fr 1fr;
+}
+```
+
 ### platform-client 皮卡堂公告 字体在多设备显示不一致问题
 由于网页会根据屏幕宽度调整布局，所以不能使用绝对宽度的布局，也不能使用具有绝对宽度的元素。
 width:xxx px;
@@ -396,6 +439,8 @@ cover
 
 ## input focus 边框
 style="outline:none;"属性即可去掉边框。
+
+
 
 # css3 动画
 ## transition 过渡
@@ -596,3 +641,9 @@ main.js 中
 # 特效
 ## 彩带
 https://www.kirilv.com/canvas-confetti/
+
+# Future
+子网格（subgrid）、容器查询 和 父选择器 :has()
+Shapes 能帮助我们打破矩形的布局模式，CSS 的多列布局能让我们在 Web 中实现报纸排版的效果
+[CSS发展报告](https://2021.stateofcss.com/en-US/opinions/#currently_missing_from_css_wins)
+

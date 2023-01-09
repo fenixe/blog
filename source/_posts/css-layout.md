@@ -6,10 +6,11 @@ categroces:
 tags:
 - CSS
 - Flex
+- Grid
 ---
 
 
-# base
+# Flex
 ## 是什么
 Flex 是 Flexible Box 的缩写，意为"弹性布局"，用来为盒状模型提供最大的灵活性。
 
@@ -39,7 +40,7 @@ Flex 是 Flexible Box 的缩写，意为"弹性布局"，用来为盒状模型�
 
 注意，设为 Flex 布局以后，子元素的float、clear和vertical-align属性将失效。
 
-# how
+
 ## 容器的属性
 flex-direction
 flex-wrap
@@ -56,7 +57,7 @@ row-reverse：主轴为水平方向，起点在右端。
 column：主轴为垂直方向，起点在上沿。
 column-reverse：主轴为垂直方向，起点在下沿。
 
-### flex-wrap属性
+## flex-wrap属性
 nowrap（默认）：不换行。
 wrap：换行，第一行在上方。
 wrap-reverse：换行，第一行在下方。
@@ -107,3 +108,93 @@ flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 au
 
 ### align-self属性
 align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。
+
+
+# Grid
+布局创建
+```css
+div{
+  display: grid;
+}
+```
+此时该div就是“grid容器”，其子元素称为“grid子项”。
+
+## 作用在grid上的css属性
+### grid-template-columns和grid-template-rows
+```css
+.container {
+    grid-template-columns: 80px auto 100px;
+    grid-template-rows: 25% 100px auto 60px;
+}
+```
+{% asset_img template.png %}
+
+### grid-template-areas
+给网格划分区域
+```html
+.container {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-areas: 
+        "葡萄 葡萄 葡萄"
+        "龙虾 养鱼 养鱼"
+        "龙虾 养鱼 养鱼"
+        "西瓜 西瓜 西瓜";
+}
+.putao { grid-area: 葡萄; }
+.longxia { grid-area: 龙虾; }
+.yangyu { grid-area: 养鱼; }
+.xigua { grid-area: 西瓜; }
+<div class="container">
+    <div class="putao"></div>
+    <div class="longxia"></div>
+    <div class="yangyu"></div>
+    <div class="xigua"></div>
+</div>
+```
+
+### grid-template
+grid-template-rows，grid-template-columns和grid-template-areas属性的缩写。
+
+### grid-column-gap和grid-row-gap
+用来定义网格中网格间隙的尺寸。可以理解成田地之间走路的田垄宽度。
+推荐使用column-gap和row-gap属性，兼容性也不错
+
+### grid-gap
+推荐使用gap属性作为缩写，grid-gap已经很老了。
+grid-gap属性是grid-column-gap和grid-row-gap属性的缩写
+```css
+.container {
+    grid-gap: <grid-row-gap> <grid-column-gap>;
+}
+```
+
+## repeat()
+repeat() 函数表示轨道列表的重复片段，允许以更紧凑的形式写入大量显示重复模式的列或行。
+repeat(4, 1fr)
+
+只能作用在grid-template-columns和grid-template-rows这两个CSS属性上，由于目前Firefox浏览器只支持在grid-template-columns属性上使用repeat()函数
+
+Grid布局提升并不是repeat()函数，而是repeat()函数里面支持的那些关键字和函数，以及整个全新的CSS体系
+
+### auto-fill
+根据Grid布局中每一个子项的尺寸自动计算需要填充的数量
+计算规则是，当前列表数量下的总尺寸不会超出Grid容器的最大正整数值。
+
+### auto-fit
+会把空的匿名格子进行折叠合并
+如果Grid容器的尺寸特别的宽，则最后会有一些空的格子会合并成1个，且宽度是0
+
+## gap属性
+grid布局，Multi-column布局，以及Flex布局的间隙现在也都统一使用gap属性了。
+{% asset_img gap.png %}
+
+## minmax()
+定义了一个长宽范围的闭区间，它与CSS 网格布局一起使用。
+```css
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+```
+[demo](https://codepen.io/xboxyan/pen/zYYgYdL)
