@@ -18,7 +18,7 @@ Flex 是 Flexible Box 的缩写，意为"弹性布局"，用来为盒状模型�
 传统布局，基于盒状模型，依赖 display 属性 + position属性 + float属性 。它对于那些特殊布局非常不方便，比如，垂直居中就不容易实现。
 所以浏览器都支持。
 
-# 使用
+
 ## 基本概念
 采用 Flex 布局的元素，称为 Flex 容器（flex container），简称"容器"。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称"项目"。
 `<% asset_img flex.png %>`
