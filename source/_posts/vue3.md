@@ -68,7 +68,11 @@ reused 复用的模块
 import { ref } from "vue";
 export default{
   setup(){
+    // 声明响应式
     let count = ref(2)
+    // 深层响应式
+    const state = reactive({ count: 0 })
+
     function add(){
       count.value++
     }
@@ -76,7 +80,7 @@ export default{
   }
 }
 
-// 简写
+// 简写。使用构建工具简化上面操作
 <script lang="ts" setup>
 import { ref } from "vue";
 let val = ref('')
@@ -112,8 +116,32 @@ let allDone = computed<boolean>({
 ```
 
 # DOC
+## 创建应用
+### 根组件
+传入 `createApp` 的对象实际上是一个组件，应用需要一个“根组件”和多个字组件
+单文件组件可以使用导入的方式
+```js
+import { createApp } from 'vue'
+// 从一个单文件组件中导入根组件
+import App from './App.vue'
+const app = createApp(App)
+```
+
+### 挂载应用
+应用实例必须在调用了 `.mount()` 方法后才会渲染出来。该方法接收一个“容器”参数，可以是一个实际的 DOM 元素或是一个 CSS 选择器字符串。
+app.mount('#app')
+
+### 配置
+`.conifg`对象配置一些应用级的选项
+例如：捕获所有字组件上的错误
+``` js
+app.config.errorHandler = (err)=>{  
+}
+```
+
 ## api
 ### Options
+以“组件实例”的概念为中心 (this)
 ``` vue
 <script>
 export default {
@@ -139,6 +167,7 @@ export default {
 ```
 
 ### Composition
+核心思想：直接在函数作用域内定义响应式状态变量，并将从多个函数中得到的状态组合起来处理复杂问题。更自由。
 导入API函数
 组合式API Composition 与 `<script setup></script>` 配合使用；setup 属性，是一个标识。
 与cocos组件类似
@@ -264,6 +293,14 @@ const currentView=computed(()=>{
 </script>
 ```
 
+## 生命周期
+### 选项式 vs 组合式
+mounted vs onMounted
+```js
+onMounted(()=>{
+})
+```
+
 # 响应式
 JavaScript变量是没有响应式概念的。js代码自上而下执行
 ``` js
@@ -313,3 +350,24 @@ console.log(double) // 打印4  有种自动变化的感觉
 
 缺陷
 删除 obj.count 属性，set 函数就不会执行，double 还是之前的数值。
+
+# 其他
+## 单页面中使用
+``` html
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<body>
+    <div id="app">
+        <button @click="count++">Count is: {{count}}</button>
+    </div>
+    <script>
+        const { createApp } = Vue;
+        createApp({
+            data(){
+                return{
+                    count: 0
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+```
