@@ -359,6 +359,29 @@ vscode footer Watch Sass
 # 《Head First HTML 与 CSS》
 
 
+# 组件库
+## Element
+```html
+<el-date-picker :disabled="dialogForm.syncProjCycle==1?true:false" @change="onDetailChange"
+    v-model="dialogForm.periodTime"
+    range-separator="至"
+    start-placeholder="开始"
+    end-placeholder="结束"
+    type="datetimerange"
+    placeholder="请选择时间"
+    value-format="YYYY-MM-DD HH:mm:ss"
+    placement="top" 
+/>
+top: 官方文档上没有此属性
+Popover 与 Tooltip 基于Vue-popper
+
+placement
+出现位置
+String
+top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end
+bottom
+```
+https://cloud.tencent.com/developer/article/1693100
 
 
 

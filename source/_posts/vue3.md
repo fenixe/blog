@@ -371,3 +371,21 @@ console.log(double) // 打印4  有种自动变化的感觉
     </script>
 </body>
 ```
+
+## 后台管理，更新记录
+```js
+updateDialog(item){
+    console.log('item', item);
+    // 此方法会导致，第二条记录改成第一条记录
+    this.dialogForm = item;
+    // 正确做法
+    this.dialogForm = {
+        id: item.id,
+        clientId: item.clientId,
+        wxTemplateId: item.wxTemplateId,
+        wxTemplateTitle: item.wxTemplateTitle,
+        content: item.content
+    };
+    this.dialogVisible = true;
+},
+```
