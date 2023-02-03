@@ -1398,8 +1398,9 @@ data: {
 this.$router.push('/store')
 
 const id = this.$route.params.id;
+// id 可有可无
 {
-  path: '/contract/detail/:id',
+  path: '/contract/detail/:id?',
   component: () => import('@/pages/contract/detail'),
 },
 ```
