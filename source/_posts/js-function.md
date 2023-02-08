@@ -99,3 +99,11 @@ export const localStore = {
   this.throttleTimer = setTimeout(this.busIdDetail, 2000);
 ```
 
+## Number 转数组
+```js
+let num1 = 123;
+var num2 = num1.toString().split("").map(_ => +_);
+num2 //[1,2,3]
+// 调用 split 方法后是一个数组，里面的元素是字符串，字符串要转回数字。
+// 把_当作是一个遍历后的val,然后再给个加就变成了数字了
+```
