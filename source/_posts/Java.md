@@ -22,6 +22,10 @@ StringUtils.isNotBlank(" ") = false
 isNotEmpty
 StringUtils.isNotEmpty(" ") = true
 
+### BeanConvertUtils
+BeanConvertUtils.trimBean(request);
+request.name = " ki l " => request.name = "kil"
+
 # Doc
 ## 数据类型
 基本数据类型
