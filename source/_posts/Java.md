@@ -5,6 +5,21 @@ tags: Java
 ---
 
 # Base
+## 执行命令
+文件名要与类名一致，区分大小写
+```java
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+    }
+}
+```
+``` zsh
+# c compiler 编译器
+$ javac HelloWorld.java 
+$ java HelloWorld
+Hello World
+```
 ## 权限修饰符
 |           |  private |  default(默认权限，不写)  | protected | public |
 | :-------- | :--------:| :--: | :--: | :--: |
@@ -28,6 +43,16 @@ StringUtils.isNotEmpty(" ") = true
 ### BeanConvertUtils
 BeanConvertUtils.trimBean(request);
 request.name = " ki l " => request.name = "kil"
+
+## 引入包
+在 项目的 service 目录下 的 pom.xml 插入配置文件，点击刷新
+``` xml
+<dependency>
+    <groupId>cn.eth.framework</groupId>
+    <artifactId>framework-jwt</artifactId>
+    <version>1.1.3.RELEASE</version>
+</dependency>
+```
 
 # Doc
 ## 数据类型
