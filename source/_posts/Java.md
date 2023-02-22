@@ -72,6 +72,15 @@ private Long id;
 private String mobile;
 ```
 
+## 数据库事务
+Transaction
+由若干个SQL语句构成的一个操作序列，数据库系统保证在一个事务中的所有SQL要么全部执行成功，要么全部不执行，具有ACID特性：
+- Atomicity：原子性
+- Consistency：一致性
+- Isolation：隔离性
+- Durability：持久性
+
+
 # Example
 ## mapper
 ``` xml
