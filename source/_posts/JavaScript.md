@@ -1607,6 +1607,19 @@ Unhandled Promise Rejection: SyntaxError: JSON Parse error: Unexpected identifie
 Most probably your response is already a JavaScript object and it not required to be parsed.
 Remove the line var json = JSON.parse(response); and your code should work.
 
+## 解构赋值 BUG
+```js
+let {
+  interactiveId,
+  interactiveName,
+} = res.data;
+// 页面卡死，interactiveId 为 null
+this.nextOptions = [{id: interactiveId, name: interactiveName}];
+this.dialogForm.interactive = {id: interactiveId, label: interactiveName};
+
+//判断一下interactiveId
+```
+
 # 性能优化
 ## 调试
 chrome -> performance
