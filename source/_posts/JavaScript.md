@@ -1618,6 +1618,14 @@ this.nextOptions = [{id: interactiveId, name: interactiveName}];
 this.dialogForm.interactive = {id: interactiveId, label: interactiveName};
 
 //判断一下interactiveId
+// 其他：解构赋值默认值
+const { a = '1', b = '2', c = '3', d = '4', e = '5' } = let object = { a: 'a', b: null, c: undefined, d: false, e: '' }
+// output:
+// a = 'a'
+// b = null
+// c = '3'
+// d = false
+// d = ''
 ```
 
 # 性能优化

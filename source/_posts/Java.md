@@ -187,3 +187,7 @@ command + r
 
 ## 多光标同时编辑
 shift + alt + 鼠标左键
+
+# Maven
+创建项目
+mvn archetype:generate -DgroupId=com.example -DartifactId=myproject -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
