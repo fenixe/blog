@@ -11,10 +11,24 @@ tags:
 查看运行容器：docker ps
 容器列表：docker ps -a
 
+### 创建镜像
+docker-compose build
+docker images
+停止然后删除容器和网络
+docker-compose down
+docker-compose up
+
 ## 创建容器
 ```
 $ sudo docker run --name nginxvuemd -v /Users/niekaifa/test/vuem_data.conf:/etc/nginx/conf.d/default.conf -v /Users/niekaifa/ikyu/KilFront/vue-project/dist:/data -d -p 8072:8072 nginx
 ```
+
+## 删除容器
+docker rm 容器的名称或者 ID 
+
+## 删除镜像
+docker rmi {image-id}
+
 
 ## 获取容器/镜像
 ```
