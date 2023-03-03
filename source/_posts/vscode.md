@@ -448,6 +448,10 @@ component: WechatComponent  // 倒入模块的时候 ，输入：wech  无法自
 文件 > 首选项 > 键盘快捷键方式
 ctrl + shift + backspace (删除)
 
+### 光标行尾
+文件 > 首选项 > 键盘快捷键方式
+ctrl + j
+
 ### tab缩进
 文件 > 首选项 > 设置
 Tab Size：2
