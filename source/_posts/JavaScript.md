@@ -156,6 +156,9 @@ this.lastReport = Array.from({length: 5},(item,index)=>item = {
     skuName: "消息推送tst",
     taskId: 98
 })
+
+// 1-12
+Array(12).fill(1).map((v,k)=>k+1)
 ```
 
 ## 点击事件

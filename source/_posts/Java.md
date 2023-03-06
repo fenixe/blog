@@ -195,3 +195,9 @@ Appearance & Beahvior -> System Settings -> HTTP Proxy
 # Maven
 创建项目
 mvn archetype:generate -DgroupId=com.example -DartifactId=myproject -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+# Issues
+## Java implements Serializable 什么意思
+Java中的Serializable接口是一个标记接口，用于指示一个类的对象可以被序列化为字节流并在网络上传输或存储在磁盘上。一个类只需要实现Serializable接口，就可以使它的对象可序列化。
+当一个类实现了Serializable接口，编写的Java代码可以使用对象输出流(ObjectOutputStream)将对象序列化为字节流，而对象输入流(ObjectInputStream)可以将字节流反序列化为原始对象。这个过程允许Java应用程序在网络上传输对象，或将对象永久存储在磁盘上以备将来使用。
+需要注意的是，实现Serializable接口的类可能会存在安全风险，因为它们允许对象在网络上传输或在磁盘上存储。因此，开发人员需要小心谨慎地处理序列化和反序列化的过程，以防止对程序的安全造成潜在的威胁。
