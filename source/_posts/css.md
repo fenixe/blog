@@ -248,6 +248,10 @@ https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-size
 p:nth-child(odd){} //奇数行
 p:nth-child(even){} //偶数行
 
+## 区域事件失效
+pointer-events: none;
+
+
 ## css 盒子模型
 IE怪异盒子  和 标准盒子
 box-sizing：
