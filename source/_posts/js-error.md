@@ -27,3 +27,7 @@ Uncaught SyntaxError: Missing initializer in const declaration
 4.toString(2);
 Uncaught Syntax Error: Invalid or unexpected token
 ```
+
+## 端口被占用
+Error: listen EADDRIUNSE :::5000
+eaddrinuse 给定的地址已经被使用
