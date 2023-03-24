@@ -8,6 +8,9 @@ tags:
 ## 查看系统版本
 python -c "import platform;print(platform.architecture()[0]);print(platform.machine())"
 
+## 在线
+colab.research.google.com
+
 ## CLI
 pip install aliyun-python-sdk-core==2.13.3
 pip uninstall aliyun-python-sdk-core
