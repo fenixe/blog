@@ -603,6 +603,11 @@ fi
 export NODE_HOME=/home/kil/.npm-global
 export PATH=$NODE_HOME/bin:$PATH
 
+## 命令行科学上网测试
+curl ip.gs
+当前 IP：xxxx 来自： xxx
+
+
 # 知识
 Shell是Linux/Unix的一个外壳，你理解成衣服也行。它负责外界与Linux内核的交互，接收用户或其他应用程序的命令，然后把这些命令转化成内核能理解的语言，传给内核，内核是真正干活的，干完之后再把结果返回用户或应用程序。
 

@@ -175,6 +175,23 @@ $ python3 -i 2.py
 Hello world!
 ```
 
+# 创建项目
+- 创建项目目录
+- 创建虚拟环境
+  python -m venv venv
+- 激活虚拟环境
+  source venv/bin/activate
+- 创建 requirements.txt 文件
+  pip freeze > requirements.txt
+- 创建主程序文件，main.py
+- 编写代码，Hello World; print("Hello, World!")
+- 运行项目
+  python main.py
+
+## 添加服务
+- pip install fastapi
+
+
 # 语法
 ## 目录
 ```py

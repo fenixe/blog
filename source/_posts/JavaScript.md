@@ -924,6 +924,16 @@ UMD先判断是否支持Node.js的模块（exports）是否存在，存在则使
 
 rxjs：debounceTime(200), 舍弃掉在两次输出之间小于指定时间的发出值
 
+# 新特性
+## ??
+双问号（??）是ES2020（ECMAScript 2020）引入的新特性，因此在一些较老的浏览器和手机上可能不被支持。以下是一些常用浏览器和手机对双问号的兼容性情况：
+
+Chrome：Chrome 80及以后版本支持双问号；
+Firefox：Firefox 72及以后版本支持双问号；
+Safari：Safari 14及以后版本支持双问号；
+Edge：Edge 80及以后版本支持双问号；
+iOS Safari：iOS Safari 14及以后版本支持双问号；
+Android：Android 11及以后版本支持双问号。
 
 # work
 ## 顶级域名 一级域名

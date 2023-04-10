@@ -284,3 +284,11 @@ ProductName:    macOS
 ProductVersion: 12.2 # 操作系统的版本
 BuildVersion:   21D49
 ```
+
+# BI
+商业智能 Business Intelligence
+- 数据仓库技术
+- 线上分析处理技术（OLAP）
+- 数据挖掘
+- 数据展现技术
+- 数据分析，供角色者实现商业价值
