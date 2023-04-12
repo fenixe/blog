@@ -188,8 +188,36 @@ Hello world!
 - 运行项目
   python main.py
 
+- 启一个服务，pip install uvicorn
+  uvicorn main:app --reload
+
+
 ## 添加服务
 - pip install fastapi
+
+## 连接数据库
+```py
+if __name__ == '__main__':
+ # 连接到 MySQL 数据库
+    connect = pymysql.connect(user='dev', password='xx',
+                                    host='xx',
+                                    database='niekaifa')
+    cursor = connect.cursor()
+
+    # 执行 SQL 查询语句
+    sql = "SELECT * FROM t_convert"
+    cursor.execute(sql)
+
+    # 获取所有结果
+    results = cursor.fetchall()
+    columns = [column[0] for column in cursor.description] # 获取列名
+    row_dict = [dict(zip(columns, row)) for row in results]
+    print(row_dict)
+
+    # 关闭游标和数据库连接
+    cursor.close()
+    connect.close()
+```
 
 
 # 语法
