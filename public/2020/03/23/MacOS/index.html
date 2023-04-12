@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":false,"scrollpercent":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Base工作区设置鼠标大屏幕，鼠标跟踪速度调高一点。系统偏好设置 》 鼠标 》跟踪速度 滚动修改滚动方向，跟windows操作习惯一样。系统偏好设置 》 鼠标 》滚动方向：自然（不勾选） 指令打开某软件open QQ 在xcode中打开open platforms&#x2F;ios&#x2F;UpdateDemo.xcodeproj 查看端口占用 lsof -i:8070 系统更新  brewHomebrew是一款自">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OS">
+<meta property="og:url" content="http://example.com/2020/03/23/MacOS/index.html">
+<meta property="og:site_name" content="Kil Notes">
+<meta property="og:description" content="Base工作区设置鼠标大屏幕，鼠标跟踪速度调高一点。系统偏好设置 》 鼠标 》跟踪速度 滚动修改滚动方向，跟windows操作习惯一样。系统偏好设置 》 鼠标 》滚动方向：自然（不勾选） 指令打开某软件open QQ 在xcode中打开open platforms&#x2F;ios&#x2F;UpdateDemo.xcodeproj 查看端口占用 lsof -i:8070 系统更新  brewHomebrew是一款自">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/2020/03/23/MacOS/mac_os.jpeg">
+<meta property="og:image" content="http://example.com/2020/03/23/MacOS/software.jpg">
+<meta property="article:published_time" content="2020-03-23T01:33:26.000Z">
+<meta property="article:modified_time" content="2022-12-07T06:55:43.884Z">
+<meta property="article:author" content="kil">
+<meta property="article:tag" content="MacOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/03/23/MacOS/mac_os.jpeg">
+
+<link rel="canonical" href="http://example.com/2020/03/23/MacOS/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>OS | Kil Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Kil Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Quick notes</p>
+      <a>
+        <img class="custom-logo-image" src="[object Object]" alt="Kil Notes">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/03/23/MacOS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="kil">
+      <meta itemprop="description" content="心如止水，潜心修行">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kil Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OS
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-23 09:33:26" itemprop="dateCreated datePublished" datetime="2020-03-23T09:33:26+08:00">2020-03-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MacOS/" itemprop="url" rel="index"><span itemprop="name">MacOS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Base"><a href="#Base" class="headerlink" title="Base"></a>Base</h1><h2 id="工作区设置"><a href="#工作区设置" class="headerlink" title="工作区设置"></a>工作区设置</h2><h3 id="鼠标"><a href="#鼠标" class="headerlink" title="鼠标"></a>鼠标</h3><p>大屏幕，鼠标跟踪速度调高一点。<br>系统偏好设置 》 鼠标 》跟踪速度</p>
+<h3 id="滚动"><a href="#滚动" class="headerlink" title="滚动"></a>滚动</h3><p>修改滚动方向，跟windows操作习惯一样。<br>系统偏好设置 》 鼠标 》滚动方向：自然（不勾选）</p>
+<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><h2 id="打开某软件"><a href="#打开某软件" class="headerlink" title="打开某软件"></a>打开某软件</h2><p>open <em>QQ</em></p>
+<h3 id="在xcode中打开"><a href="#在xcode中打开" class="headerlink" title="在xcode中打开"></a>在xcode中打开</h3><p>open platforms/ios/UpdateDemo.xcodeproj</p>
+<h3 id="查看端口占用"><a href="#查看端口占用" class="headerlink" title="查看端口占用"></a>查看端口占用</h3><p> lsof -i:8070</p>
+<h1 id="系统更新"><a href="#系统更新" class="headerlink" title="系统更新"></a>系统更新</h1><img src="/2020/03/23/MacOS/mac_os.jpeg" class="">
+
+<h1 id="brew"><a href="#brew" class="headerlink" title="brew"></a>brew</h1><p><a target="_blank" rel="noopener" href="https://github.com/Homebrew/brew">Homebrew</a>是一款自由及开放源代码的软件包管理系统，用以简化macOS系统上的软件安装过程</p>
+<p>brew 是从下载源码解压然后 ./configure &amp;&amp; make install ，同时会包含相关依存库。并自动配置好各种环境变量，而且易于卸载。<br>这个对程序员来说简直是福音，简单的指令，就能快速安装和升级本地的各种开发环境。</p>
+<p>而 brew cask 是 已经编译好了的应用包 （.dmg/.pkg），仅仅是下载解压，放在统一的目录中（/opt/homebrew-cask/Caskroom），省掉了自己去下载、解压、拖拽（安装）等蛋疼步骤，同样，卸载相当容易与干净。这个对一般用户来说会比较方便，包含很多在 AppStore 里没有的常用软件。</p>
+<p>install</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;</span><br></pre></td></tr></table></figure>
+
+<p>版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ brew -v</span><br><span class="line">Homebrew 3.6.12</span><br><span class="line">Homebrew/homebrew-core (git revision 250e2930521; last commit 2022-11-29)</span><br></pre></td></tr></table></figure>
+
+<p>更新自己</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew update</span><br></pre></td></tr></table></figure>
+
+<p>更新某个包时，查看更新信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew upgrade -d yarn</span><br></pre></td></tr></table></figure>
+
+<p>两种方式安装包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew install yarn </span><br><span class="line">curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.13.0</span><br></pre></td></tr></table></figure>
+
+<p>apps path</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /Applications</span><br></pre></td></tr></table></figure>
+
+<p>安装java</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask install --verbose --debug java</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h2><p>brew install ffmpeg<br>brew install wget</p>
+<h2 id="卸载软件"><a href="#卸载软件" class="headerlink" title="卸载软件"></a>卸载软件</h2><p>brew uninstall wget</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><h3 id="Updating-Homebrew…"><a href="#Updating-Homebrew…" class="headerlink" title="Updating Homebrew…"></a>Updating Homebrew…</h3><p>解决办法</p>
+<h4 id="关闭自动更新"><a href="#关闭自动更新" class="headerlink" title="关闭自动更新"></a>关闭自动更新</h4><p>在.zshrc文件中加入下方命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export HOMEBREW_NO_AUTO_UPDATE=true</span><br></pre></td></tr></table></figure>
+
+<h4 id="替换镜像源加速"><a href="#替换镜像源加速" class="headerlink" title="替换镜像源加速"></a>替换镜像源加速</h4><p>我们平时执行brew命令安装软件的时候，跟这三个仓库有关：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.brew.git</span><br><span class="line">2.homebrew-core.git</span><br><span class="line">3.homebrew-bottles</span><br></pre></td></tr></table></figure>
+
+<p>使用阿里的Homebrew镜像源代替可以进行加速</p>
+<h5 id="替换brew-git"><a href="#替换brew-git" class="headerlink" title="替换brew.git"></a>替换brew.git</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &quot;$(brew --repo)&quot;</span><br><span class="line">git remote set-url origin https://mirrors.aliyun.com/homebrew/brew.git</span><br></pre></td></tr></table></figure>
+
+<p>还原：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &quot;$(brew --repo)&quot;</span><br><span class="line">git remote set-url origin https://github.com/Homebrew/brew.git</span><br></pre></td></tr></table></figure>
+
+<h5 id="替换homebrew-core-git"><a href="#替换homebrew-core-git" class="headerlink" title="替换homebrew-core.git"></a>替换homebrew-core.git</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &quot;$(brew --repo)/Library/Taps/homebrew/homebrew-core&quot;</span><br><span class="line">git remote set-url origin https://mirrors.aliyun.com/homebrew/homebrew-core.git</span><br></pre></td></tr></table></figure>
+
+<p>还原：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &quot;$(brew --repo)/Library/Taps/homebrew/homebrew-core&quot;</span><br><span class="line">git remote set-url origin https://github.com/Homebrew/homebrew-core.git</span><br></pre></td></tr></table></figure>
+
+<h5 id="替换homebrew-bottles访问地址"><a href="#替换homebrew-bottles访问地址" class="headerlink" title="替换homebrew-bottles访问地址"></a>替换homebrew-bottles访问地址</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles&#x27; &gt;&gt; ~/.zshrc</span><br><span class="line">source ~/.zshrc</span><br></pre></td></tr></table></figure>
+
+<p>还原的话就是删除HOMEBREW_BOTTLE_DOMAIN，上面的是zsh的命令，如果是bash的话请写在.bash_profile文件中。</p>
+<p>更新后成功：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ brew upgrade yarn</span><br><span class="line">Updating Homebrew...</span><br><span class="line">==&gt; Auto-updated Homebrew!</span><br><span class="line">Updated 1 tap (homebrew/cask).</span><br><span class="line">==&gt; Updated Casks</span><br><span class="line">karabiner-elements ✔               hex-fiend                          qownnotes</span><br><span class="line">115browser </span><br></pre></td></tr></table></figure>
+
+<h3 id="instail慢"><a href="#instail慢" class="headerlink" title="instail慢"></a>instail慢</h3><h4 id="替换代理"><a href="#替换代理" class="headerlink" title="替换代理"></a>替换代理</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># niekaifa @ niekaifadeMacBook-Pro in ~ [14:40:01] C:130</span><br><span class="line">$ brew cask install adoptopenjdk8 --debug</span><br><span class="line">==&gt; Downloading https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u265-b01/OpenJDK8U-jdk_x64_mac_hotspot_8u265b01.pkg</span><br><span class="line">==&gt; Downloading from https://github-production-release-asset-2e65be.s3.amazonaws.com/140418865/6444de00-d246-11ea-8be7-50169d929f88?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F2</span><br><span class="line">##################                                                        25.7%^C</span><br><span class="line"></span><br><span class="line"># niekaifa @ niekaifadeMacBook-Pro in ~ [14:54:50] C:130</span><br><span class="line">$ export ALL_PROXY=127.0.0.1:1087 【注意：该设置仅在当前zsh有效】</span><br><span class="line"></span><br><span class="line"># niekaifa @ niekaifadeMacBook-Pro in ~ [14:55:55]</span><br><span class="line">$ brew cask install adoptopenjdk8 --debug</span><br><span class="line">==&gt; Downloading https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u265-b01/OpenJDK8U-jdk_x64_mac_hotspot_8u265b01.pkg</span><br><span class="line">==&gt; Downloading from https://github-production-release-asset-2e65be.s3.amazonaws.com/140418865/6444de00-d246-11ea-8be7-50169d929f88?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20200810%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20200810T065610Z&amp;X-Amz-Expires=300&amp;X-</span><br><span class="line">######################################################################## 100.0%</span><br><span class="line">==&gt; Verifying SHA-256 checksum for Cask &#x27;adoptopenjdk8&#x27;.</span><br><span class="line">==&gt; Installing Cask adoptopenjdk8</span><br><span class="line">==&gt; Running installer for adoptopenjdk8; your password may be necessary.</span><br><span class="line">==&gt; Package installers may write to any location; options such as --appdir are ignored.</span><br><span class="line">Password:</span><br><span class="line">installer: Package name is AdoptOpenJDK</span><br><span class="line">installer: Installing at base path /</span><br><span class="line">installer: The install was successful.</span><br><span class="line">package-id: net.adoptopenjdk.8.jdk</span><br><span class="line">version: 1.8.0_265-b01</span><br><span class="line">volume: /</span><br><span class="line">location: Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk</span><br><span class="line">install-time: 1597042784</span><br><span class="line">🍺  adoptopenjdk8 was successfully installed!</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装gradle"><a href="#安装gradle" class="headerlink" title="安装gradle"></a>安装gradle</h2><p>brew install gradle     一直失败</p>
+<p>该用二进制文件安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">❯ mkdir /opt/gradle</span><br><span class="line">❯ unzip -d /opt/gradle gradle-6.6-bin.zip</span><br><span class="line">❯ ls /opt/gradle/gradle-6.6</span><br><span class="line">LICENSE  NOTICE  bin  README  init.d  lib  media</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="hosts系统文件"><a href="#hosts系统文件" class="headerlink" title="hosts系统文件"></a>hosts系统文件</h1><p>Hosts是一个没有扩展名的系统文件，可以用记事本等工具打开，其作用就是将一些常用的网址域名与其对应的IP地址建立一个关联“数据库”，当用户在浏览器中输入一个需要登录的网址时，系统会首先自动从Hosts文件中寻找对应的IP地址，一旦找到，系统会立即打开对应网页，如果没有找到，则系统会再将网址提交DNS域名解析服务器进行IP地址的解析。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/hosts</span><br><span class="line"></span><br><span class="line">127.0.0.1	www.163.com</span><br></pre></td></tr></table></figure>
+
+<h1 id="清理内存"><a href="#清理内存" class="headerlink" title="清理内存"></a>清理内存</h1><p>sudo purge</p>
+<h1 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h1><h2 id="显示隐藏文件"><a href="#显示隐藏文件" class="headerlink" title="显示隐藏文件"></a>显示隐藏文件</h2><p>shift + command + .</p>
+<h2 id="截图"><a href="#截图" class="headerlink" title="截图"></a>截图</h2><p>截全屏并保存到剪贴板：Shift + Cmmand  + 3  ++ Control<br>截取选择区域并保存到剪贴板：Shift + Cmmand  + 4  ++ Control</p>
+<h1 id="清理mac"><a href="#清理mac" class="headerlink" title="清理mac"></a>清理mac</h1><p>Finder&gt;前往&gt;资源库（按alt显示）</p>
+<p>~/Library/Caches</p>
+<h1 id="Xcode"><a href="#Xcode" class="headerlink" title="Xcode"></a>Xcode</h1><h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><h2 id="iPhone-is-not-available-Please-reconnect-the-device"><a href="#iPhone-is-not-available-Please-reconnect-the-device" class="headerlink" title="iPhone is not available. Please reconnect the device"></a>iPhone is not available. Please reconnect the device</h2><p>Before you debug with iPhone, follow this mapping table about the version of Xcode and iOS：</p>
+<p>Xcode 12.2 → iOS 14.2</p>
+<p>Xcode 12.1 → iOS 14.1</p>
+<p>Xcode 12 → iOS 14</p>
+<p>Xcode 11.7 → iOS 13.7</p>
+<p>Xcode 11.6 → iOS 13.6</p>
+<p>Xcode 11.5 → iOS 13.5</p>
+<p>Xcode 11.4 → iOS 13.4</p>
+<p>Download at <a target="_blank" rel="noopener" href="https://developer.apple.com/download/more/">https://developer.apple.com/download/more/</a>.</p>
+<h1 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"># niekaifa @ niekaifadeMacBook-Pro in ~ [16:07:33]</span><br><span class="line">$ printenv</span><br><span class="line">TERM_SESSION_ID=w0t0p0:B9D213B1-A345-4B37-B004-59FF4A1C2236</span><br><span class="line">SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.HQ60wnWS6K/Listeners</span><br><span class="line">LC_TERMINAL_VERSION=3.4.4</span><br><span class="line">COLORFGBG=7;0</span><br><span class="line">ITERM_PROFILE=Default</span><br><span class="line">XPC_FLAGS=0x0</span><br><span class="line">LANG=zh_CN.UTF-8</span><br><span class="line">PWD=/Users/niekaifa</span><br><span class="line">SHELL=/bin/zsh</span><br><span class="line">SECURITYSESSIONID=186a7</span><br><span class="line">TERM_PROGRAM_VERSION=3.4.4</span><br><span class="line">TERM_PROGRAM=iTerm.app</span><br><span class="line">PATH=/usr/local/sbin:/usr/local/bin:/Users/niekaifa/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/niekaifa/.oh-my-zsh/custom/plugins/nali:/Users/niekaifa/Library/Android/sdk/tools:/Users/niekaifa/Library/Android/sdk/platform-tools:/bin:/opt/gradle/gradle-6.6/bin</span><br><span class="line">LC_TERMINAL=iTerm2</span><br><span class="line">COLORTERM=truecolor</span><br><span class="line">COMMAND_MODE=unix2003</span><br><span class="line">TERM=xterm-256color</span><br><span class="line">HOME=/Users/niekaifa</span><br><span class="line">TMPDIR=/var/folders/2y/w_dvhyrj543fn4qjvglt4gxh0000gn/T/</span><br><span class="line">USER=niekaifa</span><br><span class="line">XPC_SERVICE_NAME=0</span><br><span class="line">LOGNAME=niekaifa</span><br><span class="line">LaunchInstanceID=41F6AEA0-4EDD-45B6-83B1-CC77E675EB94</span><br><span class="line">__CF_USER_TEXT_ENCODING=0x0:25:52</span><br><span class="line">ITERM_SESSION_ID=w0t0p0:B9D213B1-A345-4B37-B004-59FF4A1C2236</span><br><span class="line">SHLVL=1</span><br><span class="line">OLDPWD=/Users/niekaifa/ikyu/code/cordova-hot-code-push</span><br><span class="line">ZSH=/Users/niekaifa/.oh-my-zsh</span><br><span class="line">PAGER=less</span><br><span class="line">LESS=-R</span><br><span class="line">LC_CTYPE=zh_CN.UTF-8</span><br><span class="line">LSCOLORS=Gxfxcxdxbxegedabagacad</span><br><span class="line">HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles</span><br><span class="line">http_proxy=http://127.0.0.1:1080</span><br><span class="line">https_proxy=http://127.0.0.1:1080</span><br><span class="line">_=/usr/bin/printenv</span><br></pre></td></tr></table></figure>
+
+<p>查看terminal 使用的那个</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;zsh loaded&quot;</span><br></pre></td></tr></table></figure>
+
+<h1 id="制作可引导盘"><a href="#制作可引导盘" class="headerlink" title="制作可引导盘"></a>制作可引导盘</h1><p>sudo /Applications/Install\ macOS\ Big\ Sur.app/Contents/Resources/createinstallmedia –volume /Volumes/Samsung_T5</p>
+<h1 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">brew -v</span><br><span class="line">brew update</span><br><span class="line">brew install nginx</span><br><span class="line"></span><br><span class="line"> /usr/local/etc/nginx/nginx.conf</span><br></pre></td></tr></table></figure>
+
+<p>查看nginx的配置信息<br>brew info nginx</p>
+<p>安装目录：/usr/local/Cellar/nginx/1.21.6 (26 files, 2.2MB) *<br>根目录：Docroot is: /usr/local/var/www<br>配置文件及默认端口：The default port has been set in /usr/local/etc/nginx/nginx.conf to 8080 so that</p>
+<p>nginx将在servers目录下加载所有文件，可以在此目录下启动nginx服务：<br>nginx will load all files in /usr/local/etc/nginx/servers/.</p>
+<p>To restart nginx after an upgrade:<br>  brew services restart nginx<br>Or, if you don’t want/need a background service you can just run:<br>  /usr/local/opt/nginx/bin/nginx -g daemon off;</p>
+<p>查看nginx安装目录<br>open /usr/local/etc/nginx/</p>
+<p>nginx安装到了哪里？<br>open /usr/local/Cellar/nginx</p>
+<p>work address<br>/opt/homebrew/etc/nginx/servers/</p>
+<p>home address<br>/usr/local/etc/nginx/servers</p>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>brew services start nginx // 重启的命令是: brew services restart nginx</p>
+<p>brew services reload nginx</p>
+<p><a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080/</a><br>Welcome to nginx! </p>
+<h2 id="issues"><a href="#issues" class="headerlink" title="issues"></a>issues</h2><h3 id="MacBook-M1-brew安装其他软件遇到问题（Error-Cannot-install-in-Homebrew-on-ARM-processor-in-Intel-default-prefix-usr-local-）的处理方法"><a href="#MacBook-M1-brew安装其他软件遇到问题（Error-Cannot-install-in-Homebrew-on-ARM-processor-in-Intel-default-prefix-usr-local-）的处理方法" class="headerlink" title="MacBook M1 brew安装其他软件遇到问题（Error: Cannot install in Homebrew on ARM processor in Intel default prefix (/usr/local)!）的处理方法"></a>MacBook M1 brew安装其他软件遇到问题（Error: Cannot install in Homebrew on ARM processor in Intel default prefix (/usr/local)!）的处理方法</h3><p>打开Finder-&gt; 打开应用程序-&gt;打开实用工具-&gt;终端<br>找到终端.app(找到自己用的终端，或者iTerm)，显示简介，把使用 Rosetta打开勾选上，然后重启终端，再运行brew install ，</p>
+<p>最后装好了别忘了去掉勾</p>
+<p>“departmentId”: 9,<br>“departmentName”: “普通内科”,<br>“doctorEthNo”: “8623777”,<br>“doctorName”: “AAA”,<br>“doctorTitle”: “高级”,<br>“doctorTitleId”: 3,<br>“hospitalId”: 225471,<br>“hospitalName”: “上海乐静门诊部”,<br>“imgs”: [{“url”: “<a target="_blank" rel="noopener" href="https://dev-digilink-cdn.oss-cn-shanghai.aliyuncs.com/2022-05-11/6ce51e1b-b361-4983-942b-05922ab72b72&quot;%7D]">https://dev-digilink-cdn.oss-cn-shanghai.aliyuncs.com/2022-05-11/6ce51e1b-b361-4983-942b-05922ab72b72&quot;}]</a>,<br>“msgMobile”: null,<br>“status”: “NoSubmit”</p>
+<h3 id="打不开xxx-因为Apple无法检查其是否包含恶意软件"><a href="#打不开xxx-因为Apple无法检查其是否包含恶意软件" class="headerlink" title="打不开xxx,因为Apple无法检查其是否包含恶意软件"></a>打不开xxx,因为Apple无法检查其是否包含恶意软件</h3><img src="/2020/03/23/MacOS/software.jpg" class="">
+
+<p>安全性与隐私 -&gt; 允许从以下位置下载的应用 -&gt; 任何来源<br>如果 “任何来源”被隐藏，输入指令：<br>sudo spctl –master-disable</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MacOS/" rel="tag"># MacOS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/22/JavaScript/" rel="prev" title="JavaScript">
+      <i class="fa fa-chevron-left"></i> JavaScript
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/23/HHKB/" rel="next" title="HHKB">
+      HHKB <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Base"><span class="nav-number">1.</span> <span class="nav-text">Base</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E5%8C%BA%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.1.</span> <span class="nav-text">工作区设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BC%A0%E6%A0%87"><span class="nav-number">1.1.1.</span> <span class="nav-text">鼠标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BB%9A%E5%8A%A8"><span class="nav-number">1.1.2.</span> <span class="nav-text">滚动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4"><span class="nav-number">1.2.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80%E6%9F%90%E8%BD%AF%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">打开某软件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8xcode%E4%B8%AD%E6%89%93%E5%BC%80"><span class="nav-number">1.3.1.</span> <span class="nav-text">在xcode中打开</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8"><span class="nav-number">1.3.2.</span> <span class="nav-text">查看端口占用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%9B%B4%E6%96%B0"><span class="nav-number">2.</span> <span class="nav-text">系统更新</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#brew"><span class="nav-number">3.</span> <span class="nav-text">brew</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6"><span class="nav-number">3.1.</span> <span class="nav-text">安装软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%B8%E8%BD%BD%E8%BD%AF%E4%BB%B6"><span class="nav-number">3.2.</span> <span class="nav-text">卸载软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">3.3.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Updating-Homebrew%E2%80%A6"><span class="nav-number">3.3.1.</span> <span class="nav-text">Updating Homebrew…</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">关闭自动更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%BF%E6%8D%A2%E9%95%9C%E5%83%8F%E6%BA%90%E5%8A%A0%E9%80%9F"><span class="nav-number">3.3.1.2.</span> <span class="nav-text">替换镜像源加速</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9B%BF%E6%8D%A2brew-git"><span class="nav-number">3.3.1.2.1.</span> <span class="nav-text">替换brew.git</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9B%BF%E6%8D%A2homebrew-core-git"><span class="nav-number">3.3.1.2.2.</span> <span class="nav-text">替换homebrew-core.git</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9B%BF%E6%8D%A2homebrew-bottles%E8%AE%BF%E9%97%AE%E5%9C%B0%E5%9D%80"><span class="nav-number">3.3.1.2.3.</span> <span class="nav-text">替换homebrew-bottles访问地址</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#instail%E6%85%A2"><span class="nav-number">3.3.2.</span> <span class="nav-text">instail慢</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%BF%E6%8D%A2%E4%BB%A3%E7%90%86"><span class="nav-number">3.3.2.1.</span> <span class="nav-text">替换代理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85gradle"><span class="nav-number">3.4.</span> <span class="nav-text">安装gradle</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hosts%E7%B3%BB%E7%BB%9F%E6%96%87%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">hosts系统文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B8%85%E7%90%86%E5%86%85%E5%AD%98"><span class="nav-number">5.</span> <span class="nav-text">清理内存</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">6.</span> <span class="nav-text">快捷键</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6"><span class="nav-number">6.1.</span> <span class="nav-text">显示隐藏文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%AA%E5%9B%BE"><span class="nav-number">6.2.</span> <span class="nav-text">截图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B8%85%E7%90%86mac"><span class="nav-number">7.</span> <span class="nav-text">清理mac</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Xcode"><span class="nav-number">8.</span> <span class="nav-text">Xcode</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98-1"><span class="nav-number">8.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iPhone-is-not-available-Please-reconnect-the-device"><span class="nav-number">8.2.</span> <span class="nav-text">iPhone is not available. Please reconnect the device</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">9.</span> <span class="nav-text">环境变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%B6%E4%BD%9C%E5%8F%AF%E5%BC%95%E5%AF%BC%E7%9B%98"><span class="nav-number">10.</span> <span class="nav-text">制作可引导盘</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nginx"><span class="nav-number">11.</span> <span class="nav-text">nginx</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8"><span class="nav-number">11.1.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#issues"><span class="nav-number">11.2.</span> <span class="nav-text">issues</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MacBook-M1-brew%E5%AE%89%E8%A3%85%E5%85%B6%E4%BB%96%E8%BD%AF%E4%BB%B6%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%EF%BC%88Error-Cannot-install-in-Homebrew-on-ARM-processor-in-Intel-default-prefix-usr-local-%EF%BC%89%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95"><span class="nav-number">11.2.1.</span> <span class="nav-text">MacBook M1 brew安装其他软件遇到问题（Error: Cannot install in Homebrew on ARM processor in Intel default prefix (&#x2F;usr&#x2F;local)!）的处理方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E4%B8%8D%E5%BC%80xxx-%E5%9B%A0%E4%B8%BAApple%E6%97%A0%E6%B3%95%E6%A3%80%E6%9F%A5%E5%85%B6%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6"><span class="nav-number">11.2.2.</span> <span class="nav-text">打不开xxx,因为Apple无法检查其是否包含恶意软件</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">kil</p>
+  <div class="site-description" itemprop="description">心如止水，潜心修行</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kilfront" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kilfront" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kaifaweb@163.com" title="E-Mail → mailto:kaifaweb@163.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kil</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

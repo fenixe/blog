@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":false,"scrollpercent":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="基础heperText Markup Language 超文本标记语言WEB的结构 DOM浏览器会把HTML解析成DOM。DOM是一个树形结构。操作一个DOM节点实际上就是这么几个操作： 更新：更新该DOM节点的内容，相当于更新了该DOM节点表示的HTML的内容；遍历：遍历该DOM节点下的子节点，以便进行进一步操作；添加：在该DOM节点下新增一个子节点，相当于动态增加了一个HTML节点；删除：将该">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML">
+<meta property="og:url" content="http://example.com/2020/04/20/HTML/index.html">
+<meta property="og:site_name" content="Kil Notes">
+<meta property="og:description" content="基础heperText Markup Language 超文本标记语言WEB的结构 DOM浏览器会把HTML解析成DOM。DOM是一个树形结构。操作一个DOM节点实际上就是这么几个操作： 更新：更新该DOM节点的内容，相当于更新了该DOM节点表示的HTML的内容；遍历：遍历该DOM节点下的子节点，以便进行进一步操作；添加：在该DOM节点下新增一个子节点，相当于动态增加了一个HTML节点；删除：将该">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-04-20T06:33:13.000Z">
+<meta property="article:modified_time" content="2023-01-31T09:43:13.848Z">
+<meta property="article:author" content="kil">
+<meta property="article:tag" content="HTML">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/04/20/HTML/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>HTML | Kil Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Kil Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Quick notes</p>
+      <a>
+        <img class="custom-logo-image" src="[object Object]" alt="Kil Notes">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/04/20/HTML/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="kil">
+      <meta itemprop="description" content="心如止水，潜心修行">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kil Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HTML
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-20 14:33:13" itemprop="dateCreated datePublished" datetime="2020-04-20T14:33:13+08:00">2020-04-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HTML/" itemprop="url" rel="index"><span itemprop="name">HTML</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><p>heperText Markup Language 超文本标记语言<br>WEB的结构</p>
+<h2 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h2><p>浏览器会把HTML解析成DOM。<br>DOM是一个树形结构。<br>操作一个DOM节点实际上就是这么几个操作：</p>
+<p>更新：更新该DOM节点的内容，相当于更新了该DOM节点表示的HTML的内容；<br>遍历：遍历该DOM节点下的子节点，以便进行进一步操作；<br>添加：在该DOM节点下新增一个子节点，相当于动态增加了一个HTML节点；<br>删除：将该节点从HTML中删除，相当于删掉了该DOM节点的内容以及它包含的所有子节点。</p>
+<p>在操作一个DOM节点前，我们需要通过各种方式先拿到这个DOM节点。最常用的方法是document.getElementById()</p>
+<h2 id="lang"><a href="#lang" class="headerlink" title="lang"></a>lang</h2><p>// TODO: Y<br>zh-cmn-Hans</p>
+<h2 id="a"><a href="#a" class="headerlink" title="a"></a>a</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;pref.html&quot;</span> <span class="attr">target</span>=<span class="string">&quot;view_window&quot;</span>&gt;</span>Preface<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line">新窗口打开</span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://www.baidu.com&quot;</span> <span class="attr">target</span>=<span class="string">&quot;_blank&quot;</span>&gt;</span>1<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line">当前页面加载</span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://www.baidu.com&quot;</span> <span class="attr">target</span>=<span class="string">&quot;_self&quot;</span>&gt;</span>1<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>href属性告诉浏览器链接的目标文件<br>view_window、view_frame、_blank、_self、_parent、_top</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;mailto:&#123;email&#125;?subject=&#123;subject&#125;&amp;body=&#123;content&#125;&quot;</span>&gt;</span></span><br><span class="line">    Send us an email</span><br><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;tel:&#123;phone&#125;&quot;</span>&gt;</span></span><br><span class="line">    Call us</span><br><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;sms:&#123;phone&#125;?body=&#123;content&#125;&quot;</span>&gt;</span></span><br><span class="line">    Send us a message</span><br><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span>   </span><br></pre></td></tr></table></figure>
+
+<h2 id="favico缓存破坏"><a href="#favico缓存破坏" class="headerlink" title="favico缓存破坏"></a>favico缓存破坏</h2><link rel="icon" href="/favicon.ico?v=2" />    
+
+<h2 id="label"><a href="#label" class="headerlink" title="label"></a>label</h2><p>HTML <label> 元素（标签）表示用户界面中某个元素的说明。</p>
+<h2 id="文字"><a href="#文字" class="headerlink" title="文字"></a>文字</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;b&gt;字体加粗&lt;/b&gt;</span><br><span class="line">&lt;i&gt;斜体字体&lt;/i&gt;</span><br><span class="line">&lt;u&gt;下划线&lt;/u&gt;</span><br><span class="line">要为文本加下划线，您应该应用包含CSS text-decoration属性设置为 underline 的样式。</span><br><span class="line"></span><br><span class="line">&lt;s&gt;删除线（不在相关）&lt;/s&gt;</span><br><span class="line">&lt;del&gt;已删除&lt;/del&gt;</span><br><span class="line"></span><br><span class="line">上标：X&lt;sup&gt;2&lt;/sup&gt;</span><br><span class="line">下标：Y&lt;sub&gt;3&lt;/sub&gt;</span><br><span class="line"></span><br><span class="line">块级引用</span><br><span class="line">&lt;blockquote&gt;Words can be like X-rays, if you use them properly—they’ll go through anything. You read and you’re pierced.&lt;/blockquote&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="DOM-中-Property-和-Attribute-的区别"><a href="#DOM-中-Property-和-Attribute-的区别" class="headerlink" title="DOM 中 Property 和 Attribute 的区别"></a>DOM 中 Property 和 Attribute 的区别</h2><p>property是DOM中的属性，是JavaScript里的对象；<br>attribute是HTML标签上的特性，它的值只能够是字符串；</p>
+<h2 id="form"><a href="#form" class="headerlink" title="form"></a>form</h2><h3 id="多选"><a href="#多选" class="headerlink" title="多选"></a>多选</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;checkbox&quot; name=&quot;love&quot; value=&quot;&quot; checked=&quot;checked&quot; \&gt;唱歌</span><br><span class="line">&lt;input type=&quot;checkbox&quot; name=&quot;love&quot; value=&quot;&quot;  \&gt;跳舞</span><br></pre></td></tr></table></figure>
+
+<h2 id="frame"><a href="#frame" class="headerlink" title="frame"></a>frame</h2><p>frameset 弃用<br>frame  弃用</p>
+<p>现在使用  iframe<br>HTML内联框架元素 (<iframe>) 表示嵌套的browsing context。它能够将另一个HTML页面嵌入到当前页面</p>
+<h2 id="手风琴"><a href="#手风琴" class="headerlink" title="手风琴"></a>手风琴</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;wrapper&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">details</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">summary</span>&gt;</span></span><br><span class="line">            Click me to see more details</span><br><span class="line">        <span class="tag">&lt;/<span class="name">summary</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut eum perferendis eius. Adipisci velit et similique earum quas illo odio rerum optio, quis, expedita assumenda enim dicta aliquam porro maxime minima sed a ullam, aspernatur corporis.</span><br><span class="line">        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">details</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="mark高亮"><a href="#mark高亮" class="headerlink" title="mark高亮"></a>mark高亮</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="symbol">&amp;lt;</span>mark<span class="symbol">&amp;gt;</span> 元素用于 <span class="tag">&lt;<span class="name">mark</span>&gt;</span>高亮<span class="tag">&lt;/<span class="name">mark</span>&gt;</span> 文本<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="video"><a href="#video" class="headerlink" title="video"></a>video</h2><p>poster 属性指定在视频下载时或在用户点击播放按钮之前显示的图像。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">video</span> <span class="attr">controls</span> <span class="attr">poster</span>=<span class="string">&quot;https://img-blog.csdnimg.cn/20190301125102646.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTAxMDE5OA==,size_16,color_FFFFFF,t_70&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">type</span>=<span class="string">&quot;video/mp4&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>controls 和 autoplay属性是“布尔属性” 没有值。例如：如果有controls属性，视频控件就会出现<br>controls：播放器会提供一些控件，可以控制视频和音频的播放<br>autoplay：一旦页面加载视频就会开始播放<br>width height</p>
+<p>不同格式：</p>
+<source .mp4>
+<source .webm>
+
+<h2 id="文件拖入"><a href="#文件拖入" class="headerlink" title="文件拖入"></a>文件拖入</h2><div (drop)="onDropPart($event)"></div>
+const f0 = e.dataTransfer.files[0];
+
+<h1 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h1><h2 id="：文档根-URL-元素"><a href="#：文档根-URL-元素" class="headerlink" title="：文档根 URL 元素"></a><base>：文档根 URL 元素</h2><p>HTML <code>&lt;base&gt;</code> 元素 指定用于一个文档中包含的所有相对 URL 的根 URL。一份中只能有一个 <code>&lt;base&gt;</code> 元素。</p>
+<h2 id="相对路径"><a href="#相对路径" class="headerlink" title="相对路径"></a>相对路径</h2><p>..\windows\system32\cmd.exe</p>
+<p>./ 当前目录<br>../ 父级目录<br>/ 根目录</p>
+<p>项目用相对路径是常识</p>
+<h2 id="绝对路径"><a href="#绝对路径" class="headerlink" title="绝对路径"></a>绝对路径</h2><p>C:\windows\system32\cmd.exe</p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>js/a.js  当前路径  ./js/a.js</p>
+<h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><p>js文件的相对路径是以引用该js文件的页面为基准<br>css文件的相对路径是以自身的位置为基准</p>
+<h1 id="历程"><a href="#历程" class="headerlink" title="历程"></a>历程</h1><h2 id="what-is-it"><a href="#what-is-it" class="headerlink" title="what is it?"></a>what is it?</h2><p>html是一种网页标记语言，叫超文本标记语言，我们平时上网所看到的所有网页均来自于html，英文全称Hyper Text（超文本） Markup（标记） Language（语言）。<br>但严格讲，它并不算编程语言而是属于标记语言（标记标签 markup tag）。所以，不论你是否是程序员，这个语言最好掌握。</p>
+<h2 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h2><ul>
+<li>html1.0 - 2.0（1991-1995）<br>18个元素，支持超文本</li>
+<li>html3.2（1997.1）<br>3.0期初设计主要用来兼容2.0的，且过于复杂如表格，文字绕排和复杂数学元素的显示，浏览器厂商也根本不鸟，最后挂了。<br>html的标准就很不规范，加之浏览器之间的竞争，会产生只有自家浏览器支持的特性，也正因如此，那时候的浏览器对html页面中的错误都很宽容，这反而加重了页面的不标准性，很多web从业者写了更多的不标准页面。<br>谁能统治浏览器，谁就能统治宇宙！浏览器为了保持领先，不停地增加自己的专用扩展包。战争的受害者永远都是百姓，这害得很多web开发者甚至要写两个单独的页面来做兼容，有的兼容差的，搞得浏览器还得想想怎么去显示。开发人员会经常会对着浏览器大骂：“他妈的支持个标准真有这么难吗?!”</li>
+<li>html4.0（1997.12）<br>战争总有结束的时候，这个救世主就是W3C万维网协会（world Wide Web Consortium）！他们看不下去了，认为这是互联网最基础的问题，应该得以解决，若这样战下去，是没有希望的，没有标准何来统一？于是，他们想制定出一个“标准”，将html分割成两种语言，一个负责表现，一个负责结构，这样岂不是更好？于是最初的html+css分离的html4.0标准诞生了，要求浏览器厂商也遵从这些标准，这确实解决了很多问题，但仍然有不完美，这就是后话了，起码世界安静了，能让开发人员睡个好觉了。</li>
+<li>html4.01（1999.12）<br>4.01闪亮登场，这个版本成了未来10年的经典款。相对于4.0只是做了稍许改变，做了些修补。正当大家各自安好便是晴天的时候，xhtml1.0来了。</li>
+<li>xhtml1.0（2001）<br>这个期间诞生了一个新事物，xml，可扩展标记语言，它被设计用来传输和存储数据。语法严谨，对比html简直就是别人家的孩子，于是他们在了解接触中杂交出了xhtml1.0。xhtml承诺，因为它严格，又是90后，新方法多。只要遵从它的标准，天下即可统一。可问题是，80后和70后们，根本看不惯90后的做法，因为他们对4.01已经非常钟情，只需要完善4.01即可，根本不想要也不想懂xhtml的新方法。因为4.01比较灵活，而xhtml语法确实太过严谨。<br>标签必须都小写<br>非空标签必须成对出现<br>标签顺序必须正确<br>所有属性必须使用双引号<br>不允许属性最简化或省略<br>这是违反鲁棒性原则（对自己输出要严格， 对他人的输入要灵活）的，因为xhtml并没有增加新的tag，它只是要求按照XML的规范来要求HTML，并定义了一个新的MIME type，application/xhtml+xml。W3C的初衷是想让浏览器强行检查错误，如果页面有HTML错误，浏览器就要显示错误信息。而实际情况是大家已经用4.01的标准做了大量不符合要求的网页了，你这么一搞，那就是啪啪打脸啊，自然不被大家认可，这也不符合浏览器向后兼容的原则。后来，W3C不得已，就在xhtml 1.0的标准之后加了一个附录C，允许开发者自己选择是使用XHTML语法或是旧的MIME type，来分发页面。因为旧的MIME type不会触发浏览器的强错误检查。也就是说，很多网站虽然宣称自己符合xhtml1.0标准，但并不能保证完全无错。主要要看web服务器使用的是那种mime type来分发的。但是，W3C仍不死心啊！又在XHTML 1.1中取消了附录C，还是让大家全部使用新的MIME type来分发，并要求大家把文档标记成xml。结果很显然，然并卵！W3C锲而不舍啊，在后来流产的XHTML 2.0身上，还是非要强行错误检查，强行检查错误就是如果你页面有错误，网页显示就是黄屏，哪怕只有一个小错误，你丫别想看这个网页了！这要是不失败难道还等着程序员给它送上神坛么？而且这个情况正好解释了乱战期间的先实现后标准的现象存在的合理性。因为，先有标准再来实现是行不通的。</li>
+<li>html5（2014.10）<br>上面的教训也为后来制定下一代标准，即html5的时候交了学费。所以，在html5诞生初期，带着鲁棒性原则的思想主线，向后兼容就成了h5最重要的原则。h5不但兼容4.01的大部分特性，还引入了许多新特性，甚至可以直接将旧网页的第一行改成<!doctype html>，让它变成一个HTML5页面，照样都会生成相同的DOM树，在浏览器里也会正常解析。老的已经运行了十几年，开发者确实已经需要更多特性来满足日益发展的需求了。h5正好满足了这个需求，不但支持博客、视频、图形功能，还有一大堆用来构建web应用的功能，所以，h5的成功就不难理解了。现在h5已经不单只一个技术或标准了，它已成为了一个技术合集的简称，在移动端的表现更像是一批黑马。但是，要注意的是，HTML5并不是直接由W3C制定的，w3c好像经历太多后累觉不爱了，觉得4.01可以作为最后一个版本了，html就这样吧。但总有一些另外的声音，Opera的伊恩-克森这时就提出来再改进下html的建议，但W3C的投票结果是NO，他们认为HTML已死，xHTML2才是未来，真是打不死的小强，死心不改啊！于是，Opera，Apple等浏览器厂商脱离W3C成立了WHATWG。接下来WHATWG的工作效率非常高，因为他们的工作组成员就是浏览器厂商，他们不仅可以说加就加，还可以实现，大家不断地提出一些好点子并且逐一做到了浏览器中，并且在短时间得出了一些成果。反观W3C的xHTML2没有什么实质性的进展，特别是从实现的角度来看，用原地踏步形容都不足为过。2006年蒂姆-伯纳斯-李（这个人也是牛的一逼，最好google下）写博文承认因为想法太不切实际了，导致失败，并建议重建HTML工作组。于是，2007年W3C组建了HTML5工作组并投票通过在WHATWG工作组的既有成果上开始工作而非从头开始。于是有了两个工作组并行的现象：一个专治，一个民主。但这都不重要了，重要的是只要他们的设计原则是统一的，对吗！</li>
+</ul>
+<h1 id="语义化"><a href="#语义化" class="headerlink" title="语义化"></a>语义化</h1><h2 id="为什么需要语义化"><a href="#为什么需要语义化" class="headerlink" title="为什么需要语义化"></a>为什么需要语义化</h2><ul>
+<li>易修改、易维护。</li>
+<li>无障碍阅读支持。</li>
+<li>搜索引擎友好，利于 SEO。</li>
+<li>面向未来的 HTML，浏览器在未来可能提供更丰富的支持。</li>
+</ul>
+<h2 id="结构语义化"><a href="#结构语义化" class="headerlink" title="结构语义化"></a>结构语义化</h2><p>语义元素均有一个共同特点——他们均不做任何事情。换句话说，语义元素仅仅是页面结构的规范化，并不会对内容有本质的影响。</p>
+<h2 id="头部"><a href="#头部" class="headerlink" title="头部"></a>头部</h2><header>元素有两种用法，第一是标注内容的标题，第二是标注网页的页眉
+
+<h2 id="尾部"><a href="#尾部" class="headerlink" title="尾部"></a>尾部</h2><p>footer</p>
+<h2 id="导航栏"><a href="#导航栏" class="headerlink" title="导航栏"></a>导航栏</h2><p>导航栏使用<nav>看起来是理所当然的，进一步，它也用于一组文章的链接。一个页面可以包含多个<nav>元素，但通常仅仅在页面的主要导航部分使用它。</p>
+<h2 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h2><main>标签来标识主体内容
+
+<h2 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h2><article>表示一个完整的、自成一体的内容块。如文章或新闻报道。<article>应包含完整的标题、文章署名、发布时间、正文。当语义与表现发生冲突，例如有时需要将文章分多个页面显示，那么需要把每个页面的文章区域都用<article>标记。
+
+<p>文章中包含插图时，使用新的语义元素<figure>标签。</p>
+<h2 id="侧边栏"><a href="#侧边栏" class="headerlink" title="侧边栏"></a>侧边栏</h2><p>aside</p>
+<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>多级别的目录<br>hgroup<br>  h1<br>  h2</p>
+<h2 id="缩写"><a href="#缩写" class="headerlink" title="缩写"></a>缩写</h2><p>abbr</p>
+<h2 id="加粗，强调"><a href="#加粗，强调" class="headerlink" title="加粗，强调"></a>加粗，强调</h2><p>strong : 这个词在整个文章中的重要性</p>
+<p>em : 这个词在这个句子里面的重音是什么</p>
+<h2 id="图片-详情"><a href="#图片-详情" class="headerlink" title="图片+详情"></a>图片+详情</h2><p>figure<br>  img<br>  figcaption</p>
+<p>loading=lazy 属性 来推迟图像的加载，直到用户滚动到它们为止。(现在支持的浏览器还不全面)</p>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>ol 有序列表<br>ul 无序列表</p>
+<p>分为：<br>   有序列表:<ol></ol><br>   &amp;<br>   无序列表:<ul></ul></p>
+<p>1）有序列表： 用于显示具有统一特征的有序数据</p>
+<ol type="i" start="3">
+  <li>新闻1</li>
+  <li>新闻2</li>
+  <li>新闻3</li>
+  <li>新闻4</li>
+</ol>
+
+<p>属性   值              描述<br>type   1 数字(默认)    排序<br>       a 字母<br>       A 大写字母A<br>       i 小写罗马<br>       I 大写罗马<br>start  数字           起始数字</p>
+<p>2）无序列表：用于显示同一特征的无限数据</p>
+<ul type="circle">
+  <li>...</li>
+  <li>...</li>
+  <li>...</li>
+</ul>
+
+<p>属性   值<br>type   disc 实心圆(默认)<br>       circle  空心圆<br>       square 实心矩形<br>       none  无</p>
+<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><p>dfn</p>
+<h2 id="预定义格式文本"><a href="#预定义格式文本" class="headerlink" title="预定义格式文本"></a>预定义格式文本</h2><p>pre</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>samp</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>code</p>
+<h1 id="H5"><a href="#H5" class="headerlink" title="H5"></a>H5</h1><p>先科普一下，HTML5并不是一项技术，而是一个标准。<br>标准的意思就是：学生准则手册。你可以按照准则做，甚至可以超出准则更加严格的要求自己，也可以不按照准则来，但是会被老师训斥小伙伴讨厌，别人都不找你玩，就像IE6一样。</p>
+<p>那HTML5这些标准浏览器厂商到底姿持不姿持呢？这要看他们各自的尿性了。像chrome这种不仅在很多标准上支持的非常好，还积极上进很多地方超出了标准，支持一些标准中还是草案的部分。</p>
+<p>所以其实要么我们是作为理论派讨论HTML5标准，要么是作为实践派讨论HTML5标准在某浏览器的应用。但是实际上我们在说到H5的时候，并不是指标准，也不是指标准的应用，而是一个硬生生造出来的奇怪概念合集，所以我是旗帜鲜明的反对这个称呼的。</p>
+<p>最近一年的时间，我主要靠这个东西养家（并没有家）糊口。所以我是懂得甲方打电话过来询问，“你是不是会做H5开发？”的时候，我知道他们要的是那种可以在朋友圈分享的，看起来很酷炫的小页面，他们实际要的东西拆开来看大概包括以下技术点;</p>
+<ol>
+<li>页面素材预加载技术，可以使用createJS之中的preloadJS。我没有看preloadJS的源码，不过预加载并不是HTML5标准中更新的方法。</li>
+<li>音乐加载播放技术，createJS中同样有soundJS可以实现，而且这部分说起来确实是HTML5标准支持的内容，在上个时代并没有audio这样的标签。</li>
+<li>可以滑动的页面，大多数是用了swiper.js这个Jquery插件，也有一些是手写的swipe，比较拙劣的手写版页面是不会跟手滑动的，其中touchstart等四个touch系列的事件是HTML5标准中的事件</li>
+<li>可以涂抹擦除，多半是canvas叠加层，canvas是HTML5标准里面的标签，是代表了先进生产力的标签。</li>
+<li>有动态的文字和图片，常见的是使用了css3或者直接使用js动画。很多时候提到HTML5多半还会带上CSS3，而CSS的分级又是另外的一个问题了，在不同的项目标准上，CSS会独立定级，以后应该不会有CSS4这个东西，所以大家也不用担心在H5以后又冒出来了C4（不过真是想用C4炸死那些每天把H5挂在嘴上的人）</li>
+<li>可以填表报名，这是最基本的表单，是有网页以来就有的东西。</li>
+<li>可以支持分享自定义的文案和图片，这个是用到了微信的jssdk，和HTML标准半毛钱关系都没有。</li>
+<li>还有其他我想起来再补充的。</li>
+</ol>
+<p>所以我们在谈论H5的时候，实际上是一个解决方案，一个看起来酷炫的移动端onepage网站的解决方案。而这个解决方案不仅包含了HTML5新增的audio标签，canvas，拖拽特性，本地存储，websocket通信，同时也包括了盒模型，包括绝对定位，包括一切前端的基本知识。</p>
+<p>有学弟来问我说，学长我想学H5，应该从哪里开始？<br>我说HTML5新增特性在W3C上都可以查得到的。<br>学弟说，不，我想学的是H5，想做H5的页面。<br>于是我猜测他所指的就是上面论述的这种酷炫小页面，我就说，那你要先学习HTML，包括HTML5的新标准和之前的全部标准，然后学CSS以及CSS3，了解它们在浏览器的实现情况，原生JS了解一点就可以，大多的操作可以用Jquery，了解常用的几个Jquery插件的用法，应该就差不多了。如果想要做更酷炫的的，学一下egret或者cocos2d更好。如果要优化加载速度，还要学一下grunt一类的自动化工具。微信的sdk有很多坑，至少nodejs或者php一类的后端语言要会一点。</p>
+<p>学弟说，那这不就是前端了么？我只是想学H5啊。</p>
+<p>所以你看，当我们对一个概念的内涵无法统一的时候，我们根本不知道彼此之间在谈论的是什么。</p>
+<p>”H5“本应是一个技术合集，却被意会成了一项技术，变成可以在质上而不是量上描述的概念。</p>
+<p>对于营销来说，我们只要讲我们可以做H5或者不能做，这种定性的描述就够了。但是对于技术上，这是定量的事情，只能在具体某个技术项上是否，无法对这个本不存在的概念说是否。</p>
+<p>就比如我遇到过有甲方说，我们之前找了一个人做H5，做的还不错，但是这个case他又说做不了，我也搞不懂H5和H5之间也有那么大差别吗？我只能笑笑和他说，世界这么大，各种各样的H5都是有的。</p>
+<p>这就是为什么我反对H5，因为这个名词和它表示的内涵是严重不符的，这让我们难以沟通，让营销人和技术人之间产生误解，让浑水摸鱼的培训师们赚的盆满钵满，让技术新人不踏踏实实的学习技术。</p>
+<h1 id="interview"><a href="#interview" class="headerlink" title="interview"></a>interview</h1><p>什么是&lt;!DOCTYPE&gt;？<br>百科：<br>中文名：文档类型标签<br>外文名：DOCument TYPE<br>外语缩写：DOCTYPE<br>定义：标准通用标记语言的文档类型声明<br>&lt;!DOCTYPE&gt; 声明位于文档中的最前面的位置，处于 <html> 标签之前。<br>&lt;!DOCTYPE&gt; 声明不是一个 HTML 标签；它是用来告知 Web 浏览器页面使用了哪种 HTML 版本。<br>HTML 4.01 规定了三种不同的 &lt;!DOCTYPE&gt; 声明，分别是：Strict、Transitional 和 Frameset。 HTML5 中仅规定了一种：<!DOCTYPE html><br>文档解析类型：<br>BackCompat：怪异模式，浏览器使用自己的怪异模式解析渲染页面。（如果没有声明DOCTYPE，默认就是这个模式）<br>CSS1Compat：标准模式，浏览器使用W3C的标准解析渲染页面。</p>
+<h1 id="other"><a href="#other" class="headerlink" title="other"></a>other</h1><h2 id="use-sass"><a href="#use-sass" class="headerlink" title="use sass"></a>use sass</h2><p>1.vscode安装两个插件：</p>
+<ul>
+<li>Live Sass Compiler</li>
+<li>Live Server</li>
+</ul>
+<p>2.写好scss后，点击<br>vscode footer Watch Sass</p>
+<p>3.直接引入转好的css文件就可以了</p>
+<h1 id="《Head-First-HTML-与-CSS》"><a href="#《Head-First-HTML-与-CSS》" class="headerlink" title="《Head First HTML 与 CSS》"></a>《Head First HTML 与 CSS》</h1><h1 id="组件库"><a href="#组件库" class="headerlink" title="组件库"></a>组件库</h1><h2 id="Element"><a href="#Element" class="headerlink" title="Element"></a>Element</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-date-picker</span> <span class="attr">:disabled</span>=<span class="string">&quot;dialogForm.syncProjCycle==1?true:false&quot;</span> @<span class="attr">change</span>=<span class="string">&quot;onDetailChange&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">v-model</span>=<span class="string">&quot;dialogForm.periodTime&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">range-separator</span>=<span class="string">&quot;至&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">start-placeholder</span>=<span class="string">&quot;开始&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">end-placeholder</span>=<span class="string">&quot;结束&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">type</span>=<span class="string">&quot;datetimerange&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">placeholder</span>=<span class="string">&quot;请选择时间&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">value-format</span>=<span class="string">&quot;YYYY-MM-DD HH:mm:ss&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">placement</span>=<span class="string">&quot;top&quot;</span> </span></span><br><span class="line"><span class="tag">/&gt;</span></span><br><span class="line">top: 官方文档上没有此属性</span><br><span class="line">Popover 与 Tooltip 基于Vue-popper</span><br><span class="line"></span><br><span class="line">placement</span><br><span class="line">出现位置</span><br><span class="line">String</span><br><span class="line">top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end</span><br><span class="line">bottom</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1693100">https://cloud.tencent.com/developer/article/1693100</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/HTML/" rel="tag"># HTML</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/15/vue/" rel="prev" title="vue">
+      <i class="fa fa-chevron-left"></i> vue
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/18/word/" rel="next" title="word">
+      word <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM"><span class="nav-number">1.1.</span> <span class="nav-text">DOM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lang"><span class="nav-number">1.2.</span> <span class="nav-text">lang</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#a"><span class="nav-number">1.3.</span> <span class="nav-text">a</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#favico%E7%BC%93%E5%AD%98%E7%A0%B4%E5%9D%8F"><span class="nav-number">1.4.</span> <span class="nav-text">favico缓存破坏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#label"><span class="nav-number">1.5.</span> <span class="nav-text">label</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E5%AD%97"><span class="nav-number">1.6.</span> <span class="nav-text">文字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM-%E4%B8%AD-Property-%E5%92%8C-Attribute-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.7.</span> <span class="nav-text">DOM 中 Property 和 Attribute 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#form"><span class="nav-number">1.8.</span> <span class="nav-text">form</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E9%80%89"><span class="nav-number">1.8.1.</span> <span class="nav-text">多选</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#frame"><span class="nav-number">1.9.</span> <span class="nav-text">frame</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%8B%E9%A3%8E%E7%90%B4"><span class="nav-number">1.10.</span> <span class="nav-text">手风琴</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mark%E9%AB%98%E4%BA%AE"><span class="nav-number">1.11.</span> <span class="nav-text">mark高亮</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#video"><span class="nav-number">1.12.</span> <span class="nav-text">video</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%8B%96%E5%85%A5"><span class="nav-number">1.13.</span> <span class="nav-text">文件拖入</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84"><span class="nav-number">2.</span> <span class="nav-text">路径</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%9A%E6%96%87%E6%A1%A3%E6%A0%B9-URL-%E5%85%83%E7%B4%A0"><span class="nav-number">2.1.</span> <span class="nav-text">：文档根 URL 元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="nav-number">2.2.</span> <span class="nav-text">相对路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="nav-number">2.3.</span> <span class="nav-text">绝对路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E7%94%A8"><span class="nav-number">2.4.</span> <span class="nav-text">引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF"><span class="nav-number">2.5.</span> <span class="nav-text">前端</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%86%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">历程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#what-is-it"><span class="nav-number">3.1.</span> <span class="nav-text">what is it?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%86%E5%8F%B2"><span class="nav-number">3.2.</span> <span class="nav-text">历史</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%AD%E4%B9%89%E5%8C%96"><span class="nav-number">4.</span> <span class="nav-text">语义化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E8%AF%AD%E4%B9%89%E5%8C%96"><span class="nav-number">4.1.</span> <span class="nav-text">为什么需要语义化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E8%AF%AD%E4%B9%89%E5%8C%96"><span class="nav-number">4.2.</span> <span class="nav-text">结构语义化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%B4%E9%83%A8"><span class="nav-number">4.3.</span> <span class="nav-text">头部</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%BE%E9%83%A8"><span class="nav-number">4.4.</span> <span class="nav-text">尾部</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E8%88%AA%E6%A0%8F"><span class="nav-number">4.5.</span> <span class="nav-text">导航栏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E5%86%85%E5%AE%B9"><span class="nav-number">4.6.</span> <span class="nav-text">主要内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E7%AB%A0"><span class="nav-number">4.7.</span> <span class="nav-text">文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%A7%E8%BE%B9%E6%A0%8F"><span class="nav-number">4.8.</span> <span class="nav-text">侧边栏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E9%A2%98"><span class="nav-number">4.9.</span> <span class="nav-text">标题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%A9%E5%86%99"><span class="nav-number">4.10.</span> <span class="nav-text">缩写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E7%B2%97%EF%BC%8C%E5%BC%BA%E8%B0%83"><span class="nav-number">4.11.</span> <span class="nav-text">加粗，强调</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%89%87-%E8%AF%A6%E6%83%85"><span class="nav-number">4.12.</span> <span class="nav-text">图片+详情</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%97%E8%A1%A8"><span class="nav-number">4.13.</span> <span class="nav-text">列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AF%E8%AF%AD"><span class="nav-number">4.14.</span> <span class="nav-text">术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E5%AE%9A%E4%B9%89%E6%A0%BC%E5%BC%8F%E6%96%87%E6%9C%AC"><span class="nav-number">4.15.</span> <span class="nav-text">预定义格式文本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">4.16.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">4.17.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#H5"><span class="nav-number">5.</span> <span class="nav-text">H5</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#interview"><span class="nav-number">6.</span> <span class="nav-text">interview</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#other"><span class="nav-number">7.</span> <span class="nav-text">other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#use-sass"><span class="nav-number">7.1.</span> <span class="nav-text">use sass</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E3%80%8AHead-First-HTML-%E4%B8%8E-CSS%E3%80%8B"><span class="nav-number">8.</span> <span class="nav-text">《Head First HTML 与 CSS》</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E5%BA%93"><span class="nav-number">9.</span> <span class="nav-text">组件库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Element"><span class="nav-number">9.1.</span> <span class="nav-text">Element</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">kil</p>
+  <div class="site-description" itemprop="description">心如止水，潜心修行</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kilfront" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kilfront" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kaifaweb@163.com" title="E-Mail → mailto:kaifaweb@163.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kil</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

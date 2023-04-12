@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":false,"scrollpercent":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="UTF8 编码方法一string -&gt; utf8character -&gt; unicode编码：str.codePointAt(); unicode -&gt; binaryunicode.toString(2); 二进制补位 12345678910110xxxxxxx110xxxxx 10xxxxxx1110xxxx 10xxxxxx 10xxxxxx11110xxx 10xxxxxx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="advanced-exercise">
+<meta property="og:url" content="http://example.com/2020/07/30/advanced-exercise/index.html">
+<meta property="og:site_name" content="Kil Notes">
+<meta property="og:description" content="UTF8 编码方法一string -&gt; utf8character -&gt; unicode编码：str.codePointAt(); unicode -&gt; binaryunicode.toString(2); 二进制补位 12345678910110xxxxxxx110xxxxx 10xxxxxx1110xxxx 10xxxxxx 10xxxxxx11110xxx 10xxxxxx">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-07-30T14:58:37.000Z">
+<meta property="article:modified_time" content="2022-09-01T11:24:44.976Z">
+<meta property="article:author" content="kil">
+<meta property="article:tag" content="Front-End">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/07/30/advanced-exercise/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>advanced-exercise | Kil Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Kil Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Quick notes</p>
+      <a>
+        <img class="custom-logo-image" src="[object Object]" alt="Kil Notes">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/07/30/advanced-exercise/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="kil">
+      <meta itemprop="description" content="心如止水，潜心修行">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kil Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          advanced-exercise
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-07-30 22:58:37" itemprop="dateCreated datePublished" datetime="2020-07-30T22:58:37+08:00">2020-07-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Front-End/" itemprop="url" rel="index"><span itemprop="name">Front-End</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="UTF8-编码"><a href="#UTF8-编码" class="headerlink" title="UTF8 编码"></a>UTF8 编码</h1><h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>string -&gt; utf8<br>character -&gt; unicode编码：<br>str.codePointAt();</p>
+<p>unicode -&gt; binary<br>unicode.toString(2);</p>
+<p>二进制补位</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">0xxxxxxx</span><br><span class="line"></span><br><span class="line">110xxxxx 10xxxxxx</span><br><span class="line"></span><br><span class="line">1110xxxx 10xxxxxx 10xxxxxx</span><br><span class="line"></span><br><span class="line">11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</span><br><span class="line"></span><br><span class="line">111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx</span><br><span class="line"></span><br><span class="line">1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx</span><br></pre></td></tr></table></figure>
+
+<p>我们先举个简单的例子。把英文字母”A”转为UTF8编码。<br>1、“A”的charCode为65<br>2、65位于0-127的区间，所以“A”占一个字节<br>3、UTF8中一个字节的补位为0xxxxxxx，x表示的是空位，是用来补位的。<br>4、将65转为二进制得到1000001<br>5、将1000001按照从前到后的顺序，依次补到1xxxxxxx的空位中，得到01000001<br>6、将11000001转为字符串，得到”A”<br>7、最终，”A”为UTF8编码之后“A”</p>
+<p>通过这个小例子，我们是否再次验证了UTF-8是Unicode的超集！</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// &quot;中&quot;的charCode为20013</span></span><br><span class="line"><span class="keyword">var</span> code = <span class="number">20013</span>;</span><br><span class="line">code.<span class="title function_">toString</span>(<span class="number">2</span>); </span><br><span class="line"><span class="comment">// =&gt; 100111000101101 等同于 01001110 00101101</span></span><br></pre></td></tr></table></figure>
+<p>然后，我们按照上面“A”补位的方法，来给”中”补位。<br>将01001110 00101101按照从前到后的顺序依此补位到1110xxxx 10xxxxxx 10xxxxxx上.得到11100100 10111000 10101101.</p>
+<p>通过上面的步骤，我们得到了”中”的三个UTF8字节，11100100 10111000 10101101。<br>我们将每个字节转为16进制，得到0xE4 0xB8 0xAD;<br>那么这个0xE4 0xB8 0xAD就是我们最终得到的UTF8编码了。</p>
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><p>我们使用nodejs的buffer来验证一下是否正确。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> buffer = <span class="keyword">new</span> <span class="title class_">Buffer</span>(<span class="string">&#x27;中&#x27;</span>); </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(buffer.<span class="property">length</span>); <span class="comment">// =&gt; 3</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(buffer); <span class="comment">// =&gt; &lt;Buffer e4 b8 ad&gt;</span></span><br><span class="line"><span class="comment">// 最终得到三个字节 0xe4 0xb8 0xad</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><span class="label yellow">只会转义非英文字符</span>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">&#x27;中&#x27;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">var</span> code = <span class="built_in">encodeURI</span>(str);</span><br><span class="line"> </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(code); <span class="comment">// =&gt; %E4%B8%AD</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 下面我们将%E4%B8%AD转为一个number数组。</span></span><br><span class="line"><span class="keyword">var</span> codeList = code.<span class="title function_">split</span>(<span class="string">&#x27;%&#x27;</span>);</span><br><span class="line"> </span><br><span class="line">codeList = codeList.<span class="title function_">map</span>(<span class="function"><span class="params">item</span> =&gt;</span> <span class="built_in">parseInt</span>(item,<span class="number">16</span>));</span><br><span class="line"> </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(codeList); <span class="comment">// =&gt; [228, 184, 173]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="二进制转换十六进制"><a href="#二进制转换十六进制" class="headerlink" title="二进制转换十六进制"></a>二进制转换十六进制</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="string">&#x27;11100100&#x27;</span>;</span><br><span class="line">x = <span class="built_in">parseInt</span>(x, <span class="number">2</span>); <span class="comment">//2进制转10进制</span></span><br><span class="line">x = x.<span class="title function_">toString</span>(<span class="number">16</span>); <span class="comment">//10进制转16进制</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="十进制转2进制"><a href="#十进制转2进制" class="headerlink" title="十进制转2进制"></a>十进制转2进制</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> b = <span class="number">4</span>;</span><br><span class="line">b.<span class="title function_">toString</span>(<span class="number">2</span>);</span><br><span class="line"><span class="string">&quot;100&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="解析回来"><a href="#解析回来" class="headerlink" title="解析回来"></a>解析回来</h2><p>用decodeURI/decodeURIComponent就可以了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> codeList = [<span class="number">228</span>, <span class="number">184</span>, <span class="number">173</span>];</span><br><span class="line"> </span><br><span class="line"><span class="keyword">var</span> code = codeList.<span class="title function_">map</span>(<span class="function"><span class="params">item</span> =&gt;</span> <span class="string">&#x27;%&#x27;</span>+item.<span class="title function_">toString</span>(<span class="number">16</span>)).<span class="title function_">join</span>(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line"> </span><br><span class="line"><span class="built_in">decodeURI</span>(code); <span class="comment">// =&gt; 中</span></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/themagickeyjianan/article/details/80725606">参考链接</a></p>
+<h1 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h1><h2 id="不准使用正则表达式，纯粹用-JavaScript-的逻辑实现：在一个字符串中，找到字符“ab”"><a href="#不准使用正则表达式，纯粹用-JavaScript-的逻辑实现：在一个字符串中，找到字符“ab”" class="headerlink" title="不准使用正则表达式，纯粹用 JavaScript 的逻辑实现：在一个字符串中，找到字符“ab”"></a>不准使用正则表达式，纯粹用 JavaScript 的逻辑实现：在一个字符串中，找到字符“ab”</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">findAB</span>(<span class="params">str</span>) &#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; str.<span class="property">length</span>; i++)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;i&#x27;</span>, i, str[i]);</span><br><span class="line">    <span class="keyword">if</span> (str[i] === <span class="string">&#x27;a&#x27;</span> &amp;&amp; str[i + <span class="number">1</span>] === <span class="string">&#x27;b&#x27;</span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;ab&#x27;</span>, str[i] + str[i + <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">findAB</span>(<span class="string">&#x27;sdsdab&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<span class="label yellow">注意，作业错误，此处应为：str.length - 1</span>
+<p>助教点评：<br>最后一个字符就是i = 4<br>str[i + 1]取得是什么？</p>
+<h3 id="优秀作业"><a href="#优秀作业" class="headerlink" title="优秀作业"></a>优秀作业</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">find</span>(<span class="params">str</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> step = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> c <span class="keyword">of</span> str) &#123; <span class="comment">// of 作用在str上就是把每个字符取出来</span></span><br><span class="line">    <span class="keyword">if</span> (c=== <span class="string">&#x27;a&#x27;</span>) &#123;</span><br><span class="line">      step = <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (step === <span class="number">1</span> &amp;&amp; c === <span class="string">&#x27;b&#x27;</span>)&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      step = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="状态机查找abcabx"><a href="#状态机查找abcabx" class="headerlink" title="状态机查找abcabx"></a>状态机查找abcabx</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> status = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foundB</span>(<span class="params">c</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (c === <span class="string">&#x27;c&#x27;</span> &amp;&amp; !status) &#123;</span><br><span class="line">      status = <span class="literal">true</span>;</span><br><span class="line">      <span class="keyword">return</span> foundC;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (c === <span class="string">&#x27;x&#x27;</span> &amp;&amp; status) &#123;</span><br><span class="line">      <span class="keyword">return</span> end</span><br><span class="line">  &#125; <span class="keyword">else</span></span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">start</span>(c)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>助教点评：不正确 不符合状态机没有副作用的特性<br>状态机不应该用全局变量<br>只能用输入参数<br>Q：程序不是 最好不要重复写相同的方法嘛<br>A：这就是状态机 你可能需要再理解和感受一下</p>
+<h1 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h1><h2 id="子节点翻转"><a href="#子节点翻转" class="headerlink" title="子节点翻转"></a>子节点翻转</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">reversalChildren</span>(<span class="params">nodeEle</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> children = <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">slice</span>.<span class="title function_">call</span>(nodeEle.<span class="property">childNodes</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// for(let child of children) &#123;</span></span><br><span class="line">  <span class="comment">//   nodeEle.removeChild(child);</span></span><br><span class="line">  <span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">  nodeEle.<span class="property">innerHTML</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;nodeEle&#x27;</span>, nodeEle);</span><br><span class="line">  </span><br><span class="line">  children.<span class="title function_">reverse</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> child <span class="keyword">of</span> children) &#123;</span><br><span class="line">    nodeEle.<span class="title function_">appendChild</span>(child);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 三次重排</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">reversalChildren2</span>(<span class="params">nodeEle</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> l = nodeEle.<span class="property">childNodes</span>.<span class="property">length</span>;</span><br><span class="line">  <span class="keyword">while</span>(l-- &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    nodeEle.<span class="title function_">appendChild</span>(nodeEle.<span class="property">childNodes</span>[l]);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 两次重排 框架使用次方法</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">reversalChildren3</span>(<span class="params">nodeEle</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> range = <span class="keyword">new</span> <span class="title class_">Range</span>();</span><br><span class="line">  range.<span class="title function_">selectNodeContents</span>(nodeEle);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> fragment = range.<span class="title function_">extractContents</span>();</span><br><span class="line">  <span class="keyword">let</span> l = fragment.<span class="property">childNodes</span>.<span class="property">length</span>;</span><br><span class="line">  <span class="keyword">while</span>(l-- &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    fragment.<span class="title function_">appendChild</span>(fragment.<span class="property">childNodes</span>[l]);</span><br><span class="line">  &#125;</span><br><span class="line">  nodeEle.<span class="title function_">appendChild</span>(fragment);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Front-End/" rel="tag"># Front-End</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/10/advanced/" rel="prev" title="advanced">
+      <i class="fa fa-chevron-left"></i> advanced
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/05/editor/" rel="next" title="editor">
+      editor <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UTF8-%E7%BC%96%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">UTF8 编码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80"><span class="nav-number">1.1.</span> <span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81"><span class="nav-number">1.2.</span> <span class="nav-text">验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C"><span class="nav-number">1.3.</span> <span class="nav-text">方法二</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6"><span class="nav-number">1.4.</span> <span class="nav-text">二进制转换十六进制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E8%BF%9B%E5%88%B6%E8%BD%AC2%E8%BF%9B%E5%88%B6"><span class="nav-number">1.5.</span> <span class="nav-text">十进制转2进制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90%E5%9B%9E%E6%9D%A5"><span class="nav-number">1.6.</span> <span class="nav-text">解析回来</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">浏览器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%87%86%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%8C%E7%BA%AF%E7%B2%B9%E7%94%A8-JavaScript-%E7%9A%84%E9%80%BB%E8%BE%91%E5%AE%9E%E7%8E%B0%EF%BC%9A%E5%9C%A8%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%EF%BC%8C%E6%89%BE%E5%88%B0%E5%AD%97%E7%AC%A6%E2%80%9Cab%E2%80%9D"><span class="nav-number">2.1.</span> <span class="nav-text">不准使用正则表达式，纯粹用 JavaScript 的逻辑实现：在一个字符串中，找到字符“ab”</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%A7%80%E4%BD%9C%E4%B8%9A"><span class="nav-number">2.1.1.</span> <span class="nav-text">优秀作业</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E6%9C%BA%E6%9F%A5%E6%89%BEabcabx"><span class="nav-number">2.2.</span> <span class="nav-text">状态机查找abcabx</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML"><span class="nav-number">3.</span> <span class="nav-text">HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%90%E8%8A%82%E7%82%B9%E7%BF%BB%E8%BD%AC"><span class="nav-number">3.1.</span> <span class="nav-text">子节点翻转</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">kil</p>
+  <div class="site-description" itemprop="description">心如止水，潜心修行</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kilfront" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kilfront" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kaifaweb@163.com" title="E-Mail → mailto:kaifaweb@163.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kil</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

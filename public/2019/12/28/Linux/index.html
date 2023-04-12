@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":false,"scrollpercent":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="base不应该在 home 目录建文件l: 太过分了，啥权限都不应该在home目录下建目录啊 12ubuntu@gitlab-runner:&#x2F;home$ lsgitlab-runner  temp  ubuntu 如果是只是临时文件  建议使用&#x2F;tmp&#x2F;目录 这个目录应该所有用户都有写权限的没必要另外创建文件夹 ubuntu查看所有用户cat &#x2F;etc&#x2F;shadow 切换用户切换用户的命令su u">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux">
+<meta property="og:url" content="http://example.com/2019/12/28/Linux/index.html">
+<meta property="og:site_name" content="Kil Notes">
+<meta property="og:description" content="base不应该在 home 目录建文件l: 太过分了，啥权限都不应该在home目录下建目录啊 12ubuntu@gitlab-runner:&#x2F;home$ lsgitlab-runner  temp  ubuntu 如果是只是临时文件  建议使用&#x2F;tmp&#x2F;目录 这个目录应该所有用户都有写权限的没必要另外创建文件夹 ubuntu查看所有用户cat &#x2F;etc&#x2F;shadow 切换用户切换用户的命令su u">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/2019/12/28/Linux/ssh-key.png">
+<meta property="article:published_time" content="2019-12-28T05:54:02.000Z">
+<meta property="article:modified_time" content="2023-04-10T05:33:07.092Z">
+<meta property="article:author" content="kil">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2019/12/28/Linux/ssh-key.png">
+
+<link rel="canonical" href="http://example.com/2019/12/28/Linux/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Linux | Kil Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Kil Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Quick notes</p>
+      <a>
+        <img class="custom-logo-image" src="[object Object]" alt="Kil Notes">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/12/28/Linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="kil">
+      <meta itemprop="description" content="心如止水，潜心修行">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kil Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-12-28 13:54:02" itemprop="dateCreated datePublished" datetime="2019-12-28T13:54:02+08:00">2019-12-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="base"><a href="#base" class="headerlink" title="base"></a>base</h1><h2 id="不应该在-home-目录建文件"><a href="#不应该在-home-目录建文件" class="headerlink" title="不应该在 home 目录建文件"></a>不应该在 home 目录建文件</h2><p>l: 太过分了，啥权限都不应该在home目录下建目录啊</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@gitlab-runner:/home$ ls</span><br><span class="line">gitlab-runner  temp  ubuntu</span><br></pre></td></tr></table></figure>
+<p>如果是只是临时文件  建议使用/tmp/目录 这个目录应该所有用户都有写权限的<br>没必要另外创建文件夹</p>
+<h2 id="ubuntu"><a href="#ubuntu" class="headerlink" title="ubuntu"></a>ubuntu</h2><p>查看所有用户<br>cat /etc/shadow</p>
+<p>切换用户<br>切换用户的命令<br>su username<br>从普通用户切换到root用户，还可以使用命令<br>sudo su</p>
+<h3 id="vim-tab缩进-4个空格"><a href="#vim-tab缩进-4个空格" class="headerlink" title="vim tab缩进 4个空格"></a>vim tab缩进 4个空格</h3><p>变量名           缩写        含义<br>(no)smartindent si          基于autoindent的一些改进<br>tabstop=X       ts          编辑时一个TAB字符占多少个空格的位置。<br>shiftwidth=X    sw          使用每层缩进的空格数。<br>(no)expandtab   (no)et      是否将输入的TAB自动展开成空格。开启后要输入TAB，需要Ctrl-V<TAB><br>softtabstop=X   sts         方便在开启了et后使用退格（backspace）键，每次退格将删除X个空格 </p>
+<p>set smartindent<br>set tabstop=4<br>set shiftwidth=4<br>set expandtab<br>set softtabstop=4  </p>
+<p>放在 ~/.vimrc中仅对自己生效<br>放在/etc/vimrc中对所有用户生效</p>
+<h2 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h2><h3 id="update"><a href="#update" class="headerlink" title="update"></a>update</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt update</span><br></pre></td></tr></table></figure>
+
+<p>如果比较慢，换国内源</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">$ sudo <span class="built_in">ls</span> /etc/apt/sources.list</span><br><span class="line">  /etc/apt/sources.list</span><br><span class="line"></span><br><span class="line">$ sudo <span class="built_in">mv</span> /etc/apt/sources.list /etc/apt/sources.list.bak</span><br><span class="line"></span><br><span class="line">$ sudo vim /etc/apt/sources.list</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">$ sudo apt update</span><br></pre></td></tr></table></figure>
+
+<h3 id="install"><a href="#install" class="headerlink" title="install"></a>install</h3><p>gcc编译c文件，g++编译cpp文件，make自动化编译工具</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt install gcc g++ make -y</span><br></pre></td></tr></table></figure>
+
+<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><p>发行版本信息<br>lsb_release -a</p>
+<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><p>创建文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">touch</span> test.text</span><br></pre></td></tr></table></figure>
+
+<p>创建文件夹</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">mkdir</span> usr</span><br></pre></td></tr></table></figure>
+
+<p>移动文件 ｜ 重命名文件：mv 文件名 修改后的文件名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">mv</span> node-v12.16.1-linux-x64 /usr/app</span><br></pre></td></tr></table></figure>
+
+<p>强制保存 （write and quite）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ wq!</span><br></pre></td></tr></table></figure>
+
+<p>查找历史指令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">history</span> |grep curl</span><br><span class="line"></span><br><span class="line">pm2 logs | grep -i <span class="string">&quot;KEYWORD&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>查看文件安装路径</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whereis oracle</span><br></pre></td></tr></table></figure>
+
+<p>查看运行文件所在路径</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">which oracle</span><br></pre></td></tr></table></figure>
+
+<p>PS E:\software\genymotion\Genymotion\tools&gt; netstat -aon|findstr “5037”<br>  TCP    127.0.0.1:5037         0.0.0.0:0              LISTENING       19856<br>  TCP    127.0.0.1:5037         127.0.0.1:56022        ESTABLISHED     19856<br>  TCP    127.0.0.1:5037         127.0.0.1:56032        ESTABLISHED     19856<br>  TCP    127.0.0.1:56022        127.0.0.1:5037         ESTABLISHED     13504<br>  TCP    127.0.0.1:56032        127.0.0.1:5037         ESTABLISHED     20616<br>PS E:\software\genymotion\Genymotion\tools&gt; taskkill /pid 19856 /f<br>成功: 已终止 PID 为 19856 的进程。</p>
+<p>显示磁盘空间统计信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">df</span> -h</span><br><span class="line"></span><br><span class="line">sudo <span class="built_in">du</span> -h --max-depth=1 /var/</span><br></pre></td></tr></table></figure>
+
+
+<p>查询可用内存</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -m</span><br></pre></td></tr></table></figure>
+
+<p>显示终端下所有用户的程序</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps axu|grep nginx</span><br></pre></td></tr></table></figure>
+
+<p>当前目录下（包括子目录）的文件名中包含 luoluo 的文件过滤出来<br>find | grep luoluo</p>
+<p>查看包安装在那</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> nginx</span><br></pre></td></tr></table></figure>
+
+<p>查看文件下所有文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ll -la ~/</span><br></pre></td></tr></table></figure>
+
+<p>查看当前shell 用的那个</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># niekaifa @ niekaifadeMacBook-Pro in /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core on git:master o [10:20:06]</span><br><span class="line">$ echo $SHELL</span><br><span class="line">/bin/zsh</span><br></pre></td></tr></table></figure>
+
+<p>.zshrc<br>echo “loaded”</p>
+<p>查看文件大小<br>当前目录所有文件大小<br>ls -lht</p>
+<p>当前文件夹下所有文件（或某个文件）对应大小<br>du -sh *</p>
+<p>反向列示文件内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@pixelpai-devel:/var/log/filebeat$ tac web_combined.log | grep &#x27;test00&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>删除文件下所有<br>rm ./*</p>
+<p>删除除某个文件之外的所有文件<br>[root@localhost abc]# ls<br>a  b  c<br>[root@localhost abc]# ls |grep -v a |xargs rm -f<br>[root@localhost abc]# ls<br>a</p>
+<p>打开当前文件<br>open .</p>
+<p>显示所有文件（包含隐藏文件）<br>ls -all</p>
+<p>查看端口<br>lsof -i:1080</p>
+<p>tar命令之–exclude参数 排除指定的文件或目录</p>
+<p>查看文件大小</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ du -h dist</span><br><span class="line">7.8M    dist/js</span><br><span class="line">1.5M    dist/img</span><br><span class="line">8.1M    dist/fonts</span><br><span class="line">17M     dist</span><br></pre></td></tr></table></figure>
+
+<p>按文件大小排序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ ll -Sh</span><br><span class="line">total 2240</span><br><span class="line">-rw-rw-r--@ 1 niekaifa  staff   564K  4 22 18:18 bg_intro.jpeg</span><br><span class="line">-rw-rw-r--@ 1 niekaifa  staff   285K  4 22 19:07 img_intro.png</span><br><span class="line">-rw-rw-r--@ 1 niekaifa  staff   152K  4 22 18:18 img_tales.png</span><br><span class="line">-rw-rw-r--@ 1 niekaifa  staff    86K  4 21 09:51 bg_character.png</span><br><span class="line">-rw-rw-r--@ 1 niekaifa  staff    14K  4 19 19:35 ico_guardian.png</span><br><span class="line">-rw-rw-r--@ 1 niekaifa  staff   7.9K  4 19 19:40 bg_dim2.png</span><br><span class="line">-rw-rw-r--@ 1 niekaifa  staff   1.4K  4 22 18:19 logo_guardian.png</span><br></pre></td></tr></table></figure>
+
+<p>生成一个指定大小的文件<br>root@VM-0-4-ubuntu:/home/remote# dd if=/dev/zero of=tmp.5M bs=1M count=5<br>5+0 records in<br>5+0 records out<br>5242880 bytes (5.2 MB, 5.0 MiB) copied, 0.00419139 s, 1.3 GB/s</p>
+<p>if=FILE      : 指定输入文件，若不指定则从标注输入读取。这里指定为/dev/zero是Linux的一个伪文件，它可以产生连续不断的null流（二进制的0）<br>of=FILE      : 指定输出文件，若不指定则输出到标准输出<br>bs=BYTES     : 每次读写的字节数，可以使用单位K、M、G等等。另外输入输出可以分别用ibs、obs指定，若使用bs，则表示是ibs和obs都是用该参数<br>count=BLOCKS : 读取的block数，block的大小由ibs指定（只针对输入参数）</p>
+<p>mac os</p>
+<p>copy 文件<br>cp -r vue-project/dist/ www</p>
+<p>制文件夹内所有文件到另一个文件夹<br>cp -Rf /home/user1/* /root/temp/<br>将 /home/user1目录下的所有东西拷到/root/temp/下而不拷贝user1目录本身。</p>
+<p>cordova-hot-update<br>deploy:Alpha:<br>  stage: build<br>  only:<br>    - /^build_batchupdate-.<em>/<br>  tags:<br>    - tooqing-cordova-batchupdate<br>  script:<br>    - pwd<br>    - sh update-tooqing-webapp.sh<br>    - ‘[ -d www ] &amp;&amp; echo “www/ exists” || mkdir www’<br>    - ‘[ -d release ] &amp;&amp; echo “release/ exists” || mkdir release’<br>    - yarn<br>    - yarn hotbuild<br>    - rsync -Pav –chmod=a+rwx -e “ssh -o StrictHostKeyChecking=no” –exclude “win-ia32-unpacked/</em>“ www/* <a href="mailto:&#117;&#98;&#117;&#110;&#116;&#x75;&#64;&#49;&#x39;&#x32;&#x2e;&#49;&#x36;&#x38;&#x2e;&#x31;&#48;&#x33;&#46;&#49;&#x30;&#49;">&#117;&#98;&#117;&#110;&#116;&#x75;&#64;&#49;&#x39;&#x32;&#x2e;&#49;&#x36;&#x38;&#x2e;&#x31;&#48;&#x33;&#46;&#49;&#x30;&#49;</a>:/var/www/a.tooqing.com/download/tooqing-cordova/www/</p>
+<p>上传到服务器<br>scp -r dist/* <a href="mailto:&#x72;&#111;&#x6f;&#116;&#64;&#x31;&#x32;&#x32;&#46;&#x35;&#x31;&#46;&#49;&#48;&#49;&#46;&#49;&#x31;&#x33;">&#x72;&#111;&#x6f;&#116;&#64;&#x31;&#x32;&#x32;&#46;&#x35;&#x31;&#46;&#49;&#48;&#49;&#46;&#49;&#x31;&#x33;</a>:/home/remote/test/<br>scp -r www/* <a href="mailto:&#x72;&#x6f;&#x6f;&#x74;&#x40;&#x31;&#x32;&#x32;&#46;&#53;&#x31;&#46;&#x31;&#48;&#x31;&#x2e;&#x31;&#x31;&#x33;">&#x72;&#x6f;&#x6f;&#x74;&#x40;&#x31;&#x32;&#x32;&#46;&#53;&#x31;&#46;&#x31;&#48;&#x31;&#x2e;&#x31;&#x31;&#x33;</a>:/home/remote/pkt/dist/www/<br>scp -r public/* <a href="mailto:&#x72;&#x6f;&#111;&#116;&#64;&#x31;&#x32;&#50;&#46;&#53;&#49;&#x2e;&#x31;&#48;&#49;&#46;&#49;&#49;&#x33;">&#x72;&#x6f;&#111;&#116;&#64;&#x31;&#x32;&#50;&#46;&#53;&#49;&#x2e;&#x31;&#48;&#49;&#46;&#49;&#49;&#x33;</a>:/home/kil-blog/dist/</p>
+<p>过滤某文件夹<br>rsync -avp –exclude=playbooks/ apowo-gdk <a href="mailto:&#114;&#111;&#x6f;&#116;&#64;&#49;&#x32;&#50;&#46;&#53;&#x31;&#46;&#x31;&#48;&#x31;&#46;&#x31;&#49;&#x33;">&#114;&#111;&#x6f;&#116;&#64;&#49;&#x32;&#50;&#46;&#53;&#x31;&#46;&#x31;&#48;&#x31;&#46;&#x31;&#49;&#x33;</a>:/home/remote/pkt/dist/</p>
+<p>// TODO:dig<br>dig test.kaifaweb.com<br>curl <a target="_blank" rel="noopener" href="http://test.kaifaweb.com/index.html">http://test.kaifaweb.com/index.html</a> -v<br>netstat -tlp<br>curl <a target="_blank" rel="noopener" href="http://test.kaifaweb.com/index.html">http://test.kaifaweb.com/index.html</a> -H “Host:127.0.0.1” -v</p>
+<p>删除当前目录下的文件<br>rm -f *</p>
+<p>下载文件<br>curl <a target="_blank" rel="noopener" href="https://osd.picatown.world/app/batchupdate/v0.0.29/index.html">https://osd.picatown.world/app/batchupdate/v0.0.29/index.html</a> -o index.html</p>
+<p>MD5文件<br>md5 index.html</p>
+<p>方式二：通过查询系统环境有没有使用代理（成功）<br>env|grep -I proxy</p>
+<p>全局配置<br>printenv</p>
+<p>dig kaifaweb.com<br>curl -v <a target="_blank" rel="noopener" href="https://api.kaifaweb.com/">https://api.kaifaweb.com</a></p>
+<p>查看端口占用<br>mac<br>netstat -anvp tcp |grep 4000<br>Linux<br>netstat -tunlp | grep 4000</p>
+<h1 id="niekaifa-niekaifadeMacBook-Pro-in-workspace-apowo-tooqing-cordova-tooqing-webapp-src-assets-imgs-on-git-c91647c-o-14-40-47"><a href="#niekaifa-niekaifadeMacBook-Pro-in-workspace-apowo-tooqing-cordova-tooqing-webapp-src-assets-imgs-on-git-c91647c-o-14-40-47" class="headerlink" title="niekaifa @ niekaifadeMacBook-Pro in ~/workspace/apowo/tooqing-cordova/tooqing-webapp/src/assets/imgs on git:c91647c o [14:40:47]"></a>niekaifa @ niekaifadeMacBook-Pro in ~/workspace/apowo/tooqing-cordova/tooqing-webapp/src/assets/imgs on git:c91647c o [14:40:47]</h1><p>$ dd if=/dev/zero of=tmp.png bs=1M count=50<br>dd: bs: illegal numeric value</p>
+<h1 id="niekaifa-niekaifadeMacBook-Pro-in-workspace-apowo-tooqing-cordova-tooqing-webapp-src-assets-imgs-on-git-c91647c-o-14-40-50-C-1"><a href="#niekaifa-niekaifadeMacBook-Pro-in-workspace-apowo-tooqing-cordova-tooqing-webapp-src-assets-imgs-on-git-c91647c-o-14-40-50-C-1" class="headerlink" title="niekaifa @ niekaifadeMacBook-Pro in ~/workspace/apowo/tooqing-cordova/tooqing-webapp/src/assets/imgs on git:c91647c o [14:40:50] C:1"></a>niekaifa @ niekaifadeMacBook-Pro in ~/workspace/apowo/tooqing-cordova/tooqing-webapp/src/assets/imgs on git:c91647c o [14:40:50] C:1</h1><p>$ dd if=/dev/zero of=tmp.png bs=1m count=20<br>20+0 records in<br>20+0 records out<br>20971520 bytes transferred in 0.044836 secs (467737962 bytes/sec)</p>
+<p>vim 光标跳转<br>1.跳到文本的最后一行：按“G”,即“shift+g”<br>2.跳到最后一行的最后一个字符 ： 先重复1的操作即按“G”，之后按“$”键，即“shift+4”。</p>
+<h3 id="文件同步"><a href="#文件同步" class="headerlink" title="文件同步"></a>文件同步</h3><p>rsync 是一个常用的 Linux 应用程序，用于文件同步。<br>它可以在本地计算机与远程计算机之间，或者两个本地目录之间同步文件（但不支持两台远程计算机之间的同步）。它也可以当作文件复制工具，替代cp和mv命令。<br>-e参数指定使用 SSH 协议传输数据。<br>-P参数是–progress和–partial这两个参数的结合。</p>
+<p>–partial参数允许恢复中断的传输。不使用该参数时，rsync会删除传输到一半被打断的文件；使用该参数后，传输到一半的文件也会同步到目标目录，下次同步时再恢复中断的传输。一般需要与–append或–append-verify配合使用。</p>
+<p>–partial-dir参数指定将传输到一半的文件保存到一个临时目录，比如–partial-dir=.rsync-partial。一般需要与–append或–append-verify配合使用。</p>
+<p>–progress参数表示显示进展。</p>
+<h3 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h3><p>Linux chmod（英文全拼：change mode）命令是控制用户对文件的权限的命令<br>chmod a+r file    给file的所有用户增加读权限<br>chmod a-x file    删除file的所有用户的执行权限<br>chmod a+rw file    给file的所有用户增加读写权限<br>chmod +rwx file    给file的所有用户增加读写执行权限</p>
+<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>wget <a target="_blank" rel="noopener" href="https://devtools.qiniu.com/qshell-v2.6.2-linux-amd64.tar.gz">https://devtools.qiniu.com/qshell-v2.6.2-linux-amd64.tar.gz</a></p>
+<p>curl -O <a target="_blank" rel="noopener" href="https://osd.tooqing.com/sickytree/game/5e217ab725d9451113986374/assets/1579402117.png">https://osd.tooqing.com/sickytree/game/5e217ab725d9451113986374/assets/1579402117.png</a></p>
+<p>重命名<br>curl -o test.png <a target="_blank" rel="noopener" href="https://osd.tooqing.com/sickytree/game/5e217ab725d9451113986374/assets/1579402117.png">https://osd.tooqing.com/sickytree/game/5e217ab725d9451113986374/assets/1579402117.png</a></p>
+<h4 id="下载走代理"><a href="#下载走代理" class="headerlink" title="下载走代理"></a>下载走代理</h4><p>sudo curl -x 127.0.0.1:1080 –output /usr/local/bin/gitlab-runner “<a target="_blank" rel="noopener" href="https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-darwin-amd64&quot;">https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-darwin-amd64&quot;</a></p>
+<h3 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h3><h4 id="gz"><a href="#gz" class="headerlink" title="gz"></a>gz</h4><p>gzip -d test.gz</p>
+<h4 id="tar-gz"><a href="#tar-gz" class="headerlink" title="tar.gz"></a>tar.gz</h4><p>tar -zxvf qshell-v2.6.2-linux-amd64.tar.gz</p>
+<h3 id="iterm2"><a href="#iterm2" class="headerlink" title="iterm2"></a>iterm2</h3><p>iterm2以及mac自带的terminal都是终端模拟器</p>
+<h3 id="设置代理"><a href="#设置代理" class="headerlink" title="设置代理"></a>设置代理</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 打开配置文件</span><br><span class="line">vim ~/.bash_profile</span><br><span class="line"># 如果用了`oh-my-zsh` 那么修改`~/.zshrc`</span><br><span class="line"># 在后面新增配置</span><br><span class="line">export http_proxy=http://127.0.0.1:1087</span><br><span class="line">export https_proxy=$http_proxy</span><br><span class="line"># 同理，可能执行` source ~/.zshrc`</span><br><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure>
+
+<h4 id="测试代理"><a href="#测试代理" class="headerlink" title="测试代理"></a>测试代理</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># 方式2：通过google测试，有结果，说明Ok</span><br><span class="line">curl -i https://google.com</span><br><span class="line"></span><br><span class="line">失败：</span><br><span class="line">$ curl -i https://google.com</span><br><span class="line">curl: (7) Failed to connect to google.com port 443: Operation timed out</span><br><span class="line"></span><br><span class="line">成功：</span><br><span class="line">$ curl -i https://google.com</span><br><span class="line">HTTP/1.1 200 Connection established</span><br><span class="line"></span><br><span class="line">HTTP/2 301</span><br><span class="line">location: https://www.google.com/</span><br><span class="line">content-type: text/html; charset=UTF-8</span><br><span class="line">date: Fri, 22 Jan 2021 07:25:03 GMT</span><br><span class="line">expires: Sun, 21 Feb 2021 07:25:03 GMT</span><br><span class="line">cache-control: public, max-age=2592000</span><br><span class="line">server: gws</span><br><span class="line">content-length: 220</span><br><span class="line">x-xss-protection: 0</span><br><span class="line">x-frame-options: SAMEORIGIN</span><br><span class="line">alt-svc: h3-29=&quot;:443&quot;; ma=2592000,h3-T051=&quot;:443&quot;; ma=2592000,h3-Q050=&quot;:443&quot;; ma=2592000,h3-Q046=&quot;:443&quot;; ma=2592000,h3-Q043=&quot;:443&quot;; ma=2592000,quic=&quot;:443&quot;; ma=2592000; v=&quot;46,43&quot;</span><br><span class="line"></span><br><span class="line">&lt;HTML&gt;&lt;HEAD&gt;&lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html;charset=utf-8&quot;&gt;</span><br><span class="line">&lt;TITLE&gt;301 Moved&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;</span><br><span class="line">&lt;H1&gt;301 Moved&lt;/H1&gt;</span><br><span class="line">The document has moved</span><br><span class="line">&lt;A HREF=&quot;https://www.google.com/&quot;&gt;here&lt;/A&gt;.</span><br><span class="line">&lt;/BODY&gt;&lt;/HTML&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="色彩皮肤"><a href="#色彩皮肤" class="headerlink" title="色彩皮肤"></a>色彩皮肤</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.zshrc</span><br><span class="line">plugins=(</span><br><span class="line">  git</span><br><span class="line">  nali</span><br><span class="line">)</span><br><span class="line">.oh-my-zsh</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ls source</span><br><span class="line">CNAME      _data      _posts     categories img        kil        tags</span><br><span class="line"></span><br><span class="line">$ ls -l source | grep kil</span><br><span class="line">drwxr-xr-x    3 niekaifa  staff    96  3  2 12:57 kil</span><br></pre></td></tr></table></figure>
+
+<h3 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h3><p>gg        ： 跳转到文件头</p>
+<p>Shift+g   ： 跳转到文件末尾</p>
+<p>o         :  新建一行<br>dd        :  删除一行</p>
+<h3 id="域名操作"><a href="#域名操作" class="headerlink" title="域名操作"></a>域名操作</h3><h4 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h4><p>curl 是常用的命令行工具，用来请求 Web 服务器。它的名字就是客户端（client）的 URL 工具的意思。<br>它的功能非常强大，命令行参数多达几十种。如果熟练的话，完全可以取代 Postman 这一类的图形界面工具。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">curl</span><br><span class="line">返回</span><br><span class="line">* Connected to kaifa.in (209.141.38.71) port 80 (#0)</span><br><span class="line">&gt; GET / HTTP/1.1</span><br><span class="line">&gt; Host: kaifa.in</span><br><span class="line">&gt; User-Agent: curl/7.54.0</span><br><span class="line">&gt; Accept: */*</span><br><span class="line">&gt;</span><br><span class="line">&lt; HTTP/1.1 301 Moved Permanently</span><br><span class="line">&lt; Server: nginx</span><br><span class="line">&lt; Date: Mon, 30 Dec 2019 09:27:00 GMT</span><br><span class="line">&lt; Content-Type: text/html</span><br><span class="line">&lt; Content-Length: 178</span><br><span class="line">&lt; Connection: keep-alive</span><br><span class="line">&lt; Location: http://www.kaifa.in/</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl http://gitlab.kaifa.in:9999 -v</span><br></pre></td></tr></table></figure>
+
+<h4 id="etc-hosts"><a href="#etc-hosts" class="headerlink" title="etc/hosts"></a>etc/hosts</h4><p>hosts文件是linux系统中负责ip地址与域名快速解析的文件</p>
+<p>Hosts是一个没有扩展名的系统文件，可以用记事本等工具打开，其作用就是将一些常用的网址域名与其对应的IP地址建立一个关联“数据库”，当用户在浏览器中输入一个需要登录的网址时，系统会首先自动从Hosts文件中寻找对应的IP地址，一旦找到，系统会立即打开对应网页，如果没有找到，则系统会再将网址提交DNS域名解析服务器进行IP地址的解析。Hosts 的请求级别比 DNS 高。</p>
+<h4 id="dig"><a href="#dig" class="headerlink" title="dig"></a>dig</h4><p>dig命令是常用的域名查询工具，可以用来测试域名系统工作是否正常。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dig kaifa.in</span><br><span class="line">返回</span><br><span class="line">;; ANSWER SECTION:</span><br><span class="line">kaifa.in.		16478	IN	A	209.141.38.71</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除所有文件，保留指定文件"><a href="#删除所有文件，保留指定文件" class="headerlink" title="删除所有文件，保留指定文件"></a>删除所有文件，保留指定文件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># rm dist/img/ useless img</span><br><span class="line">cd dist/img</span><br><span class="line">ls |grep -v update.png |grep -v game-bg.png |xargs rm -f</span><br><span class="line">cd ..</span><br><span class="line">cd ..</span><br></pre></td></tr></table></figure>
+
+<h2 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h2><h3 id="key-密钥"><a href="#key-密钥" class="headerlink" title="key 密钥"></a>key 密钥</h3><p>查看是否有key</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/.ssh &amp;&amp; <span class="built_in">ls</span></span><br><span class="line">id_rsa  id_rsa.pub  known_hosts</span><br></pre></td></tr></table></figure>
+<p>生成key</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">&quot;your_email@example.com&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="解决Enter-passphrase-for-key-‘-Users-xxx-ssh-id-rsa‘"><a href="#解决Enter-passphrase-for-key-‘-Users-xxx-ssh-id-rsa‘" class="headerlink" title="解决Enter passphrase for key ‘/Users/xxx/.ssh/id_rsa‘"></a>解决Enter passphrase for key ‘/Users/xxx/.ssh/id_rsa‘</h4><p>现象：每次git pull git fetch  git push 等等命令的时候都会提示输入密码，<br>苦思冥想为什么总让输密码呢？<br>终于想到可能是之前生成key的时候输入了密码。这个密码应该是git服务器需要进行校验，为了数据安全，所以才提示我们输入密码。<br>如果不想每次都输入密码的话，在第一次生成key的时候不要输入密码，直接回车就好了。<br>像我这种之前手残设置了密码的，只要把密码去掉就好了，解法：<br>通过这个命令重新设置密码，直接回车设置为空，以后就不用再输入了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -p</span><br></pre></td></tr></table></figure>
+<img src="/2019/12/28/Linux/ssh-key.png" class="">
+<p>在重设密码的时候，需要输入一次之前的密码old passphrase用来验证，正常输就行了，<br>然后接下来就是需要输入两次new passphrase，此时什么都不输，直接回车即可</p>
+<h3 id="快捷登录设置"><a href="#快捷登录设置" class="headerlink" title="快捷登录设置"></a>快捷登录设置</h3><p>客户端配置文件 ～/.ssh/config</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Host hk1</span><br><span class="line">  HostName 47.56.157.52</span><br><span class="line">  User root</span><br></pre></td></tr></table></figure>
+<p>服务端配置文件 ～/.ssh/authorized_keys</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#k</span></span><br><span class="line">ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDTzGvV166P2ST3VEyxC/wsAViF7kg0X5Fsn6ucyeIhvEfbObp/L68LxjE+UXmQnk0tIaXsK7Cch9c4LMAppFE+6pUZykTA5lsKUWyOPR9tRiHsYwoeS2AM9+tmo3GwYjDtFKsEPRhSvVPYUfH2sC6c+w2gQ6v6LtKEw2/iKb+3upOY3bkhP3YcNXD+QwEkJFLG0KsbXqLlSfDQpdpPG8obgtoPfOWQxOWh4OmxQdJlJIAU7IDNZBLHVyZh112Z5B7LiVm26FIOb66mpVUwf2YsjS5zwoahGoaGa9H4I5vDJmNT0NpaEBFvHQMefdn2NtFo+LZgHWttj</span><br></pre></td></tr></table></figure>
+
+<h3 id="快捷root登录"><a href="#快捷root登录" class="headerlink" title="快捷root登录"></a>快捷root登录</h3><p>1、允许root登录<br>sudo vi /etc/ssh/sshd_config<br>PermitRootLogin yes #允许root登录</p>
+<p>2、root用户添加公钥<br>ubuntu@VM-0-4-ubuntu:<del>$ sudo -i<br>root@VM-0-4-ubuntu:</del>/.ssh# vim authorized_keys</p>
+<p>3、配置登录<br>Host tx1<br>    HostName 122.51.101.113<br>    User root</p>
+<h3 id="登录设置"><a href="#登录设置" class="headerlink" title="登录设置"></a>登录设置</h3><p>用OpenSSH的人都知ssh会把你每个你访问过计算机的公钥(public key)都记录在~/.ssh/known_hosts。当下次访问相同计算机时，OpenSSH会核对公钥。如果公钥不同，OpenSSH会发出警告， 避免你受到DNS Hijack之类的攻击。<br>SSH对主机的public_key的检查等级是根据StrictHostKeyChecking变量来配置的。默认情况下，StrictHostKeyChecking=ask。简单所下它的三种配置值：<br>1.StrictHostKeyChecking=no<br>#最不安全的级别，当然也没有那么多烦人的提示了，相对安全的内网测试时建议使用。如果连接server的key在本地不存在，那么就自动添加到文件中（默认是known_hosts），并且给出一个警告。<br>2.StrictHostKeyChecking=ask  #默认的级别，就是出现刚才的提示了。如果连接和key不匹配，给出提示，并拒绝登录。<br>3.StrictHostKeyChecking=yes  #最安全的级别，如果连接与key不匹配，就拒绝连接，不会提示详细信息。</p>
+<h3 id="connect-to-host-github-com-port-22-Connection-refused"><a href="#connect-to-host-github-com-port-22-Connection-refused" class="headerlink" title="connect to host github.com port 22: Connection refused"></a>connect to host github.com port 22: Connection refused</h3><p>我最近也遇到了，可能是梯子的服务器做了什么修改禁止了 22 端口。根据 <a target="_blank" rel="noopener" href="https://docs.github.com/cn/authentication/troubleshooting-ssh/using-ssh-over-the-https-port">https://docs.github.com/cn/authentication/troubleshooting-ssh/using-ssh-over-the-https-port</a> 的配置改成 443 端口就可以了。<br>我的配置：<br>Host github.com<br>hostName ssh.github.com<br>User git<br>Port 443<br>ProxyCommand nc -v -x 127.0.0.1:7890 %h %p</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -T -p 443 git@ssh.github.com</span><br><span class="line">&gt; Hi username! You&#x27;ve successfully authenticated, but GitHub does not</span><br><span class="line">&gt; provide shell access.</span><br></pre></td></tr></table></figure>
+
+<h3 id="ssh-agent"><a href="#ssh-agent" class="headerlink" title="ssh-agent"></a>ssh-agent</h3><p>私钥管理者ssh-agent<br>ssh认证的过程其实是客户端(ssh命令端)读取自己的私钥并推导出指纹发送给服务端(sshd端)，服务端也使用自己保存的公钥推导出指纹进行对比，如果指纹相同说明服务端的公钥和客户端的私钥是配对的。</p>
+<h2 id="注"><a href="#注" class="headerlink" title="注"></a>注</h2><p>~ 表示：当前登录用户的用户目录<br>~ 代表的就是 /home/kil/</p>
+<h1 id="and-Bourne-compatible-shells-bash-1-ksh-1-ash-1-…"><a href="#and-Bourne-compatible-shells-bash-1-ksh-1-ash-1-…" class="headerlink" title="and Bourne compatible shells (bash(1), ksh(1), ash(1), …)."></a>and Bourne compatible shells (bash(1), ksh(1), ash(1), …).</h1><p>if [ “${PS1-}” ]; then<br>  if [ “${BASH-}” ] &amp;&amp; [ “$BASH” != “/bin/sh” ]; then<br>    # The file bash.bashrc already sets the default PS1.<br>    # PS1=’\h:\w$ ‘<br>    if [ -f /etc/bash.bashrc ]; then<br>      . /etc/bash.bashrc<br>    fi<br>  else<br>    if [ “<code>id -u</code>“ -eq 0 ]; then<br>      PS1=’# ‘<br>    else<br>      PS1=’$ ‘<br>    fi<br>  fi<br>fi</p>
+<p>if [ -d /etc/profile.d ]; then<br>  for i in /etc/profile.d/*.sh; do<br>    if [ -r $i ]; then<br>      . $i<br>    fi<br>  done<br>  unset i<br>fi</p>
+<p>#export NODE_HOME=/usr/app/node-v12.16.1-linux-x64<br>#export PATH=$PATH:$NODE_HOME/bin</p>
+<p>export NODE_HOME=/home/kil/.npm-global<br>export PATH=$NODE_HOME/bin:$PATH</p>
+<h2 id="命令行科学上网测试"><a href="#命令行科学上网测试" class="headerlink" title="命令行科学上网测试"></a>命令行科学上网测试</h2><p>curl ip.gs<br>当前 IP：xxxx 来自： xxx</p>
+<h1 id="知识"><a href="#知识" class="headerlink" title="知识"></a>知识</h1><p>Shell是Linux/Unix的一个外壳，你理解成衣服也行。它负责外界与Linux内核的交互，接收用户或其他应用程序的命令，然后把这些命令转化成内核能理解的语言，传给内核，内核是真正干活的，干完之后再把结果返回用户或应用程序。</p>
+<p>Linux/Unix提供了很多种Shell，为毛要这么多Shell？难道用来炒着吃么？那我问你，你同类型的衣服怎么有那么多件？花色，质地还不一样。写程序比买衣服复杂多了，而且程序员往往负责把复杂的事情搞简单，简单的事情搞复杂。牛程序员看到不爽的Shell，就会自己重新写一套，慢慢形成了一些标准，常用的Shell有这么几种，sh、bash、csh等，想知道你的系统有几种shell，可以通过以下命令查看：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/shells</span><br></pre></td></tr></table></figure>
+
+<p>zsh: 终极Shell</p>
+<p>$HOME是当前用户主目录，它有个别名 “~”</p>
+<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p>.zshenv  不需要登录<br>.zshrc   需要登录</p>
+<h3 id="环境变量设置"><a href="#环境变量设置" class="headerlink" title="环境变量设置"></a>环境变量设置</h3><p>$ vi .bash_profile     //使用vi编辑器编辑 .bash_profile</p>
+<p>粘贴这行代码     export ANDROID_HOME=~/Library/Android/sdk</p>
+<p>$ source ~/.bash_profile    //使其立即生效</p>
+<p>$ echo $ANDROID_HOME检查此变量是否已正确设置。</p>
+<h2 id="文件目录"><a href="#文件目录" class="headerlink" title="文件目录"></a>文件目录</h2><p>/ ;linux系统的根目录，是系统的最顶层。 </p>
+<p>/bin ;里面是系统最基本的二进制命令文件如ls cp rm ln等等。</p>
+<p>/sbin ;s就是super的意思，里面都是超级用户用于管理系统的命令，如mkfs.ext3 等。 </p>
+<p>/boot ;里面是开机程序，lilo或grub，还有linux 内核文件vmlinuz ,初始化系统的initrd.img文件。</p>
+<p> /dev ; 就是device的意思，代表计算机的所有硬件设备。如IDE盘：/dev/hdx ；串口：/dev/ttyx.；scsi盘用sdx表示。注意，一般情况下usb盘，s-ata硬盘也模拟成scsi来驱动。</p>
+<p>/lib ; 系统核心的动态模块和连接库文件，各种可动态加载的硬件驱动程序。nvidia的驱动程序就是安装在这里面。 </p>
+<p>/etc ;里面绝大部分都是文本文件，用于设置系统的，作用相当于windows的注册表。注意，其中有一个/etc/shadow文件里面保存着用户的登录密码。 </p>
+<p>/root 超级用户的工作目录。 </p>
+<p>/mnt ;外接文件系统的挂载点，u盘、cdrom、windows分区都应挂到这里面。 </p>
+<p>/proc ;里面的文件不再硬盘上，而是在内存里，都是系统内核的运行信息。 </p>
+<p>/var ;包含在正常操作中被改变的文件：假脱机文件、记录文件、加锁文件、临时文件和页格式化文件等。 默认情况下，http，ftp等服务的主文件夹也在这里面。 </p>
+<p>/tmp ;各用户程序产生的临时文件的存放场所，临时文件会被自动清除掉。 </p>
+<p>/home;一般用户的主文件夹所在的地方。</p>
+<p>/usr;规模非常庞大的文件夹，里面是各个应用程序的文件，相当于windows的 program files 文件夹。</p>
+<p>/usr下有几个重要的子文件夹。 </p>
+<p>/usr/bin ;应用程序的可执行文件部分。相当于windows的*.exe文件。 </p>
+<p>/usr/lib;应用程序的共享动态连接库部分，都是一些*.so的文件，linux下各个应用程序的库文件都是可共享的。所以都存放在一个文件夹中。 /usr/X11R6;xwindow 系统的所属文件。 </p>
+<p>/usr/share;存放的是应用程序需要的字体、图片、文档等资源文件。 </p>
+<p>/usr/src; linux的源代码就放在这里。 </p>
+<p>/usr/games;游戏软件的存放区域，可惜现在linux大游戏还不太多。 </p>
+<p>/usr/include;Linux下开发和编译应用程序需要的头文件，爱好编程的朋友可要仔细研究这里呦。 </p>
+<p>/opt ; 非开源的商业程序一般都装到这里面。 可以谷歌到更多的！</p>
+<h2 id="修改时间"><a href="#修改时间" class="headerlink" title="修改时间"></a>修改时间</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">root@ci-runner:~# tzselect</span><br><span class="line">Please identify a location so that time zone rules can be set correctly.</span><br><span class="line">Please select a continent, ocean, &quot;coord&quot;, or &quot;TZ&quot;.</span><br><span class="line"> 1) Africa</span><br><span class="line"> 2) Americas</span><br><span class="line"> 3) Antarctica</span><br><span class="line"> 4) Asia</span><br><span class="line"> 5) Atlantic Ocean</span><br><span class="line"> 6) Australia</span><br><span class="line"> 7) Europe</span><br><span class="line"> 8) Indian Ocean</span><br><span class="line"> 9) Pacific Ocean</span><br><span class="line">10) coord - I want to use geographical coordinates.</span><br><span class="line">11) TZ - I want to specify the time zone using the Posix TZ format.</span><br><span class="line">#? 4</span><br><span class="line">Please select a country whose clocks agree with yours.</span><br><span class="line"> 1) Afghanistan		  18) Israel		    35) Palestine</span><br><span class="line"> 2) Armenia		  19) Japan		    36) Philippines</span><br><span class="line"> 3) Azerbaijan		  20) Jordan		    37) Qatar</span><br><span class="line"> 4) Bahrain		  21) Kazakhstan	    38) Russia</span><br><span class="line"> 5) Bangladesh		  22) Korea (North)	    39) Saudi Arabia</span><br><span class="line"> 6) Bhutan		  23) Korea (South)	    40) Singapore</span><br><span class="line"> 7) Brunei		  24) Kuwait		    41) Sri Lanka</span><br><span class="line"> 8) Cambodia		  25) Kyrgyzstan	    42) Syria</span><br><span class="line"> 9) China		  26) Laos		    43) Taiwan</span><br><span class="line">10) Cyprus		  27) Lebanon		    44) Tajikistan</span><br><span class="line">11) East Timor		  28) Macau		    45) Thailand</span><br><span class="line">12) Georgia		  29) Malaysia		    46) Turkmenistan</span><br><span class="line">13) Hong Kong		  30) Mongolia		    47) United Arab Emirates</span><br><span class="line">14) India		  31) Myanmar (Burma)	    48) Uzbekistan</span><br><span class="line">15) Indonesia		  32) Nepal		    49) Vietnam</span><br><span class="line">16) Iran		  33) Oman		    50) Yemen</span><br><span class="line">17) Iraq		  34) Pakistan</span><br><span class="line">#? 9</span><br><span class="line">Please select one of the following time zone regions.</span><br><span class="line">1) Beijing Time</span><br><span class="line">2) Xinjiang Time</span><br><span class="line">#? 1</span><br><span class="line"></span><br><span class="line">The following information has been given:</span><br><span class="line"></span><br><span class="line">	China</span><br><span class="line">	Beijing Time</span><br><span class="line"></span><br><span class="line">Therefore TZ=&#x27;Asia/Shanghai&#x27; will be used.</span><br><span class="line">Selected time is now:	Sat May  8 18:27:19 CST 2021.</span><br><span class="line">Universal Time is now:	Sat May  8 10:27:19 UTC 2021.</span><br><span class="line">Is the above information OK?</span><br><span class="line">1) Yes</span><br><span class="line">2) No</span><br><span class="line">#? 1</span><br><span class="line"></span><br><span class="line">You can make this change permanent for yourself by appending the line</span><br><span class="line">	TZ=&#x27;Asia/Shanghai&#x27;; export TZ</span><br><span class="line">to the file &#x27;.profile&#x27; in your home directory; then log out and log in again.</span><br><span class="line"></span><br><span class="line">Here is that TZ value again, this time on standard output so that you</span><br><span class="line">can use the /usr/bin/tzselect command in shell scripts:</span><br><span class="line">Asia/Shanghai</span><br><span class="line">root@ci-runner:~# cp /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime</span><br><span class="line">root@ci-runner:~# date -R</span><br><span class="line">Sat, 08 May 2021 18:27:43 +0800</span><br></pre></td></tr></table></figure>
+
+<p>获取东八区时间</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> timezone = <span class="number">8</span>; <span class="comment">//目标时区时间，东八区</span></span><br><span class="line"><span class="keyword">var</span> offset_GMT = <span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">getTimezoneOffset</span>(); <span class="comment">// 本地时间和格林威治的时间差，单位为分钟</span></span><br><span class="line"><span class="keyword">var</span> nowDate = <span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">getTime</span>(); <span class="comment">// 本地时间距 1970 年 1 月 1 日午夜（GMT 时间）之间的毫秒数</span></span><br><span class="line"><span class="keyword">var</span> targetDate = <span class="keyword">new</span> <span class="title class_">Date</span>(nowDate + offset_GMT * <span class="number">60</span> * <span class="number">1000</span> + timezone * <span class="number">60</span> * <span class="number">60</span> * <span class="number">1000</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;东8区现在是：&quot;</span> + targetDate);</span><br></pre></td></tr></table></figure>
+
+<h1 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h1><p>telnet 指令<br>ansible 自动化运维工具</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/11/05/Observable/" rel="prev" title="Observable(可观察对象)">
+      <i class="fa fa-chevron-left"></i> Observable(可观察对象)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/01/04/%E5%B7%A5%E5%85%B7%E8%AE%BE%E7%BD%AE/" rel="next" title="工具设置">
+      工具设置 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#base"><span class="nav-number">1.</span> <span class="nav-text">base</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%BA%94%E8%AF%A5%E5%9C%A8-home-%E7%9B%AE%E5%BD%95%E5%BB%BA%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">不应该在 home 目录建文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ubuntu"><span class="nav-number">1.2.</span> <span class="nav-text">ubuntu</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vim-tab%E7%BC%A9%E8%BF%9B-4%E4%B8%AA%E7%A9%BA%E6%A0%BC"><span class="nav-number">1.2.1.</span> <span class="nav-text">vim tab缩进 4个空格</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5"><span class="nav-number">1.3.</span> <span class="nav-text">第一步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#update"><span class="nav-number">1.3.1.</span> <span class="nav-text">update</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#install"><span class="nav-number">1.3.2.</span> <span class="nav-text">install</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4"><span class="nav-number">1.4.</span> <span class="nav-text">指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80"><span class="nav-number">1.4.1.</span> <span class="nav-text">基础</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#niekaifa-niekaifadeMacBook-Pro-in-workspace-apowo-tooqing-cordova-tooqing-webapp-src-assets-imgs-on-git-c91647c-o-14-40-47"><span class="nav-number">2.</span> <span class="nav-text">niekaifa @ niekaifadeMacBook-Pro in ~&#x2F;workspace&#x2F;apowo&#x2F;tooqing-cordova&#x2F;tooqing-webapp&#x2F;src&#x2F;assets&#x2F;imgs on git:c91647c o [14:40:47]</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#niekaifa-niekaifadeMacBook-Pro-in-workspace-apowo-tooqing-cordova-tooqing-webapp-src-assets-imgs-on-git-c91647c-o-14-40-50-C-1"><span class="nav-number">3.</span> <span class="nav-text">niekaifa @ niekaifadeMacBook-Pro in ~&#x2F;workspace&#x2F;apowo&#x2F;tooqing-cordova&#x2F;tooqing-webapp&#x2F;src&#x2F;assets&#x2F;imgs on git:c91647c o [14:40:50] C:1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5"><span class="nav-number">3.0.1.</span> <span class="nav-text">文件同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chmod"><span class="nav-number">3.0.2.</span> <span class="nav-text">chmod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD"><span class="nav-number">3.0.3.</span> <span class="nav-text">下载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E8%B5%B0%E4%BB%A3%E7%90%86"><span class="nav-number">3.0.3.1.</span> <span class="nav-text">下载走代理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B"><span class="nav-number">3.0.4.</span> <span class="nav-text">解压</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#gz"><span class="nav-number">3.0.4.1.</span> <span class="nav-text">gz</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tar-gz"><span class="nav-number">3.0.4.2.</span> <span class="nav-text">tar.gz</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iterm2"><span class="nav-number">3.0.5.</span> <span class="nav-text">iterm2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86"><span class="nav-number">3.0.6.</span> <span class="nav-text">设置代理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%90%86"><span class="nav-number">3.0.6.1.</span> <span class="nav-text">测试代理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%89%B2%E5%BD%A9%E7%9A%AE%E8%82%A4"><span class="nav-number">3.0.7.</span> <span class="nav-text">色彩皮肤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vim"><span class="nav-number">3.0.8.</span> <span class="nav-text">vim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%9F%E5%90%8D%E6%93%8D%E4%BD%9C"><span class="nav-number">3.0.9.</span> <span class="nav-text">域名操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#curl"><span class="nav-number">3.0.9.1.</span> <span class="nav-text">curl</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#etc-hosts"><span class="nav-number">3.0.9.2.</span> <span class="nav-text">etc&#x2F;hosts</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dig"><span class="nav-number">3.0.9.3.</span> <span class="nav-text">dig</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%EF%BC%8C%E4%BF%9D%E7%95%99%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6"><span class="nav-number">3.1.</span> <span class="nav-text">删除所有文件，保留指定文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH"><span class="nav-number">3.2.</span> <span class="nav-text">SSH</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#key-%E5%AF%86%E9%92%A5"><span class="nav-number">3.2.1.</span> <span class="nav-text">key 密钥</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3Enter-passphrase-for-key-%E2%80%98-Users-xxx-ssh-id-rsa%E2%80%98"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">解决Enter passphrase for key ‘&#x2F;Users&#x2F;xxx&#x2F;.ssh&#x2F;id_rsa‘</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E6%8D%B7%E7%99%BB%E5%BD%95%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.2.2.</span> <span class="nav-text">快捷登录设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E6%8D%B7root%E7%99%BB%E5%BD%95"><span class="nav-number">3.2.3.</span> <span class="nav-text">快捷root登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%99%BB%E5%BD%95%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.2.4.</span> <span class="nav-text">登录设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#connect-to-host-github-com-port-22-Connection-refused"><span class="nav-number">3.2.5.</span> <span class="nav-text">connect to host github.com port 22: Connection refused</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh-agent"><span class="nav-number">3.2.6.</span> <span class="nav-text">ssh-agent</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8"><span class="nav-number">3.3.</span> <span class="nav-text">注</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#and-Bourne-compatible-shells-bash-1-ksh-1-ash-1-%E2%80%A6"><span class="nav-number">4.</span> <span class="nav-text">and Bourne compatible shells (bash(1), ksh(1), ash(1), …).</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E6%B5%8B%E8%AF%95"><span class="nav-number">4.1.</span> <span class="nav-text">命令行科学上网测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86"><span class="nav-number">5.</span> <span class="nav-text">知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">5.1.</span> <span class="nav-text">环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%AE%BE%E7%BD%AE"><span class="nav-number">5.1.1.</span> <span class="nav-text">环境变量设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="nav-number">5.2.</span> <span class="nav-text">文件目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%97%B6%E9%97%B4"><span class="nav-number">5.3.</span> <span class="nav-text">修改时间</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%87%E6%B3%A8"><span class="nav-number">6.</span> <span class="nav-text">备注</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">kil</p>
+  <div class="site-description" itemprop="description">心如止水，潜心修行</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kilfront" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kilfront" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kaifaweb@163.com" title="E-Mail → mailto:kaifaweb@163.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kil</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

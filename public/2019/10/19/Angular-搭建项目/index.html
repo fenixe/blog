@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":false,"scrollpercent":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="不使用angular-cli搭建项目 初始化12$ mkdir angular_website &amp;&amp; cd angular_website$ yarn init 得到package.json 文件 123456&amp;#123;  &quot;name&quot;: &quot;angulectron&quot;,  &quot;version&quot;: &quot;1.0.0&amp;qu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建Angular项目">
+<meta property="og:url" content="http://example.com/2019/10/19/Angular-%E6%90%AD%E5%BB%BA%E9%A1%B9%E7%9B%AE/index.html">
+<meta property="og:site_name" content="Kil Notes">
+<meta property="og:description" content="不使用angular-cli搭建项目 初始化12$ mkdir angular_website &amp;&amp; cd angular_website$ yarn init 得到package.json 文件 123456&amp;#123;  &quot;name&quot;: &quot;angulectron&quot;,  &quot;version&quot;: &quot;1.0.0&amp;qu">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-10-19T05:27:02.000Z">
+<meta property="article:modified_time" content="2022-04-21T12:04:18.602Z">
+<meta property="article:author" content="kil">
+<meta property="article:tag" content="Angular">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2019/10/19/Angular-%E6%90%AD%E5%BB%BA%E9%A1%B9%E7%9B%AE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>搭建Angular项目 | Kil Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Kil Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Quick notes</p>
+      <a>
+        <img class="custom-logo-image" src="[object Object]" alt="Kil Notes">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/10/19/Angular-%E6%90%AD%E5%BB%BA%E9%A1%B9%E7%9B%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="kil">
+      <meta itemprop="description" content="心如止水，潜心修行">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kil Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          搭建Angular项目
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-10-19 13:27:02" itemprop="dateCreated datePublished" datetime="2019-10-19T13:27:02+08:00">2019-10-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Angular/" itemprop="url" rel="index"><span itemprop="name">Angular</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/8c09f26251a9">不使用angular-cli搭建项目</a></p>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">mkdir</span> angular_website &amp;&amp; <span class="built_in">cd</span> angular_website</span><br><span class="line">$ yarn init</span><br></pre></td></tr></table></figure>
+<p>得到package.json 文件</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;angulectron&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;main&quot;</span><span class="punctuation">:</span> <span class="string">&quot;index.js&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;license&quot;</span><span class="punctuation">:</span> <span class="string">&quot;MIT&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="添加基础依赖"><a href="#添加基础依赖" class="headerlink" title="添加基础依赖"></a>添加基础依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add @angular/core @angular/common @angular/platform-browser @angular/platform-browser-dynamic @angular/compiler</span><br></pre></td></tr></table></figure>
+<a href="/2019/10/21/Angular%E4%BE%9D%E8%B5%96%E5%8C%85/" title="依赖包详情">依赖包详情</a>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add --dev @angular/cli</span><br></pre></td></tr></table></figure>
+<p>使用ng 指令(快速构建项目)；首次使用需要配置 angular.json 文件</p>
+<h4 id="手动添加-angular-json-配置"><a href="#手动添加-angular-json-配置" class="headerlink" title="手动添加 angular.json 配置"></a>手动添加 angular.json 配置</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;$schema&quot;</span><span class="punctuation">:</span> <span class="string">&quot;./node_modules/@angular/cli/lib/config/schema.json&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="number">1</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;newProjectRoot&quot;</span><span class="punctuation">:</span> <span class="string">&quot;projects&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;projects&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;pkt-homepage&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;projectType&quot;</span><span class="punctuation">:</span> <span class="string">&quot;application&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;schematics&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;@schematics/angular:component&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;style&quot;</span><span class="punctuation">:</span> <span class="string">&quot;scss&quot;</span>  <span class="comment">// ng g c  自动生成.scss 文件，不需要修改css文件名了</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;root&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;sourceRoot&quot;</span><span class="punctuation">:</span> <span class="string">&quot;src&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;prefix&quot;</span><span class="punctuation">:</span> <span class="string">&quot;app&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;architect&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;builder&quot;</span><span class="punctuation">:</span> <span class="string">&quot;@angular-devkit/build-angular:browser&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;outputPath&quot;</span><span class="punctuation">:</span> <span class="string">&quot;dist/pkt-homepage&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;index&quot;</span><span class="punctuation">:</span> <span class="string">&quot;src/index.html&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;main&quot;</span><span class="punctuation">:</span> <span class="string">&quot;src/main.ts&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;polyfills&quot;</span><span class="punctuation">:</span> <span class="string">&quot;src/polyfills.ts&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;tsConfig&quot;</span><span class="punctuation">:</span> <span class="string">&quot;tsconfig.app.json&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;aot&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;assets&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">              <span class="string">&quot;src/favicon.ico&quot;</span><span class="punctuation">,</span></span><br><span class="line">              <span class="string">&quot;src/assets&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;styles&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">              <span class="string">&quot;src/styles.scss&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span></span><br><span class="line">          <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;configurations&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;production&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">              <span class="attr">&quot;fileReplacements&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="punctuation">&#123;</span></span><br><span class="line">                  <span class="attr">&quot;replace&quot;</span><span class="punctuation">:</span> <span class="string">&quot;src/environments/environment.ts&quot;</span><span class="punctuation">,</span></span><br><span class="line">                  <span class="attr">&quot;with&quot;</span><span class="punctuation">:</span> <span class="string">&quot;src/environments/environment.prod.ts&quot;</span></span><br><span class="line">                <span class="punctuation">&#125;</span></span><br><span class="line">              <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">              <span class="attr">&quot;optimization&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br><span class="line">              <span class="attr">&quot;outputHashing&quot;</span><span class="punctuation">:</span> <span class="string">&quot;all&quot;</span><span class="punctuation">,</span></span><br><span class="line">              <span class="attr">&quot;sourceMap&quot;</span><span class="punctuation">:</span> <span class="keyword">false</span><span class="punctuation">,</span></span><br><span class="line">              <span class="attr">&quot;extractCss&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br><span class="line">              <span class="attr">&quot;namedChunks&quot;</span><span class="punctuation">:</span> <span class="keyword">false</span><span class="punctuation">,</span></span><br><span class="line">              <span class="attr">&quot;extractLicenses&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br><span class="line">              <span class="attr">&quot;vendorChunk&quot;</span><span class="punctuation">:</span> <span class="keyword">false</span><span class="punctuation">,</span></span><br><span class="line">              <span class="attr">&quot;buildOptimizer&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br><span class="line">              <span class="attr">&quot;budgets&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="punctuation">&#123;</span></span><br><span class="line">                  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;initial&quot;</span><span class="punctuation">,</span></span><br><span class="line">                  <span class="attr">&quot;maximumWarning&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2mb&quot;</span><span class="punctuation">,</span></span><br><span class="line">                  <span class="attr">&quot;maximumError&quot;</span><span class="punctuation">:</span> <span class="string">&quot;5mb&quot;</span></span><br><span class="line">                <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="punctuation">&#123;</span></span><br><span class="line">                  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;anyComponentStyle&quot;</span><span class="punctuation">,</span></span><br><span class="line">                  <span class="attr">&quot;maximumWarning&quot;</span><span class="punctuation">:</span> <span class="string">&quot;6kb&quot;</span><span class="punctuation">,</span></span><br><span class="line">                  <span class="attr">&quot;maximumError&quot;</span><span class="punctuation">:</span> <span class="string">&quot;10kb&quot;</span></span><br><span class="line">                <span class="punctuation">&#125;</span></span><br><span class="line">              <span class="punctuation">]</span></span><br><span class="line">            <span class="punctuation">&#125;</span></span><br><span class="line">          <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;serve&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;builder&quot;</span><span class="punctuation">:</span> <span class="string">&quot;@angular-devkit/build-angular:dev-server&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;browserTarget&quot;</span><span class="punctuation">:</span> <span class="string">&quot;pkt-homepage:build&quot;</span></span><br><span class="line">          <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;configurations&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;production&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">              <span class="attr">&quot;browserTarget&quot;</span><span class="punctuation">:</span> <span class="string">&quot;pkt-homepage:build:production&quot;</span></span><br><span class="line">            <span class="punctuation">&#125;</span></span><br><span class="line">          <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;extract-i18n&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;builder&quot;</span><span class="punctuation">:</span> <span class="string">&quot;@angular-devkit/build-angular:extract-i18n&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;browserTarget&quot;</span><span class="punctuation">:</span> <span class="string">&quot;pkt-homepage:build&quot;</span></span><br><span class="line">          <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;test&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;builder&quot;</span><span class="punctuation">:</span> <span class="string">&quot;@angular-devkit/build-angular:karma&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;main&quot;</span><span class="punctuation">:</span> <span class="string">&quot;src/test.ts&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;polyfills&quot;</span><span class="punctuation">:</span> <span class="string">&quot;src/polyfills.ts&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;tsConfig&quot;</span><span class="punctuation">:</span> <span class="string">&quot;tsconfig.spec.json&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;karmaConfig&quot;</span><span class="punctuation">:</span> <span class="string">&quot;karma.conf.js&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;assets&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">              <span class="string">&quot;src/favicon.ico&quot;</span><span class="punctuation">,</span></span><br><span class="line">              <span class="string">&quot;src/assets&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;styles&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">              <span class="string">&quot;src/styles.scss&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span></span><br><span class="line">          <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;lint&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;builder&quot;</span><span class="punctuation">:</span> <span class="string">&quot;@angular-devkit/build-angular:tslint&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;tsConfig&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">              <span class="string">&quot;tsconfig.app.json&quot;</span><span class="punctuation">,</span></span><br><span class="line">              <span class="string">&quot;tsconfig.spec.json&quot;</span><span class="punctuation">,</span></span><br><span class="line">              <span class="string">&quot;e2e/tsconfig.json&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;exclude&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">              <span class="string">&quot;**/node_modules/**&quot;</span></span><br><span class="line">            <span class="punctuation">]</span></span><br><span class="line">          <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;e2e&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;builder&quot;</span><span class="punctuation">:</span> <span class="string">&quot;@angular-devkit/build-angular:protractor&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;protractorConfig&quot;</span><span class="punctuation">:</span> <span class="string">&quot;e2e/protractor.conf.js&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;devServerTarget&quot;</span><span class="punctuation">:</span> <span class="string">&quot;pkt-homepage:serve&quot;</span></span><br><span class="line">          <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;configurations&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;production&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">              <span class="attr">&quot;devServerTarget&quot;</span><span class="punctuation">:</span> <span class="string">&quot;pkt-homepage:serve:production&quot;</span></span><br><span class="line">            <span class="punctuation">&#125;</span></span><br><span class="line">          <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;defaultProject&quot;</span><span class="punctuation">:</span> <span class="string">&quot;pkt-homepage&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="添加基础文件"><a href="#添加基础文件" class="headerlink" title="添加基础文件"></a>添加基础文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">mkdir</span> src/app</span><br><span class="line">$ ng g m app --flat &amp;&amp; ng g c app --flat</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>polyfills.ts文件 [浏览器支持]</li>
+</ul>
+<h3 id="seven-webpack-打包-angular-安装的依赖包"><a href="#seven-webpack-打包-angular-安装的依赖包" class="headerlink" title="seven webpack 打包 angular 安装的依赖包"></a>seven webpack 打包 angular 安装的依赖包</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add webpack@^4.25.1 webpack-cli@^3.1.2 webpack-dev-server@^3.1.10 copy-webpack-plugin@^4.6.0 --dev</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add @ngtools/webpack@^7.1.3 --dev</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add awesome-typescript-loader@^5.2.1 angular2-template-loader@^0.6.2 --dev</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add html-loader@^0.5.5 to-string-loader@^1.1.5 sass-loader@^7.1.0 --dev</span><br></pre></td></tr></table></figure>
+
+<h3 id="import-HeaderModule-not-resolve"><a href="#import-HeaderModule-not-resolve" class="headerlink" title="import HeaderModule not resolve"></a>import HeaderModule not resolve</h3><p><font color="#FF0000"> Module not found: Error: Can’t resolve ‘@common/header/header.module’ in ‘/Users/niekaifa/workspace/htyy/htyy_website/src/app/page/home’ </font></p>
+<p>原因：编译后 path 路径 不对，没有解析到<br>解决：<br>tsconfig.json 添加paths 配置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;paths&quot;</span>: &#123;</span><br><span class="line">  <span class="string">&quot;@common/*&quot;</span>: [</span><br><span class="line">    <span class="string">&quot;src/app/common/*&quot;</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>home.component.ts 路径</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">HeaderModule</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;src/app/common/header/header.module&#x27;</span>;</span><br><span class="line">update</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">HeaderModule</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;@common/header/header.module&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="remove-nghost-sfi-c0"><a href="#remove-nghost-sfi-c0" class="headerlink" title="remove _nghost-sfi-c0"></a>remove _nghost-sfi-c0</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@<span class="title class_">Component</span>(&#123;</span><br><span class="line">  <span class="attr">selector</span>: <span class="string">&#x27;app-root&#x27;</span>,</span><br><span class="line">  <span class="attr">templateUrl</span>: <span class="string">&#x27;./app.component.html&#x27;</span>,</span><br><span class="line">  <span class="attr">styleUrls</span>: [<span class="string">&#x27;./app.component.scss&#x27;</span>],</span><br><span class="line">  <span class="attr">encapsulation</span>: <span class="title class_">ViewEncapsulation</span>.<span class="property">None</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="资源的相对路径-与-绝对路径"><a href="#资源的相对路径-与-绝对路径" class="headerlink" title="资源的相对路径 与 绝对路径"></a>资源的相对路径 与 绝对路径</h3><p>tsconfig.js 设置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;compileOnSave&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="string">&quot;compilerOptions&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;baseUrl&quot;</span>: <span class="string">&quot;src&quot;</span>,</span><br><span class="line">    <span class="string">&quot;outDir&quot;</span>: <span class="string">&quot;./dist/out-tsc&quot;</span>,</span><br><span class="line">    <span class="string">&quot;sourceMap&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;declaration&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">&quot;module&quot;</span>: <span class="string">&quot;es2015&quot;</span>,</span><br><span class="line">    <span class="string">&quot;moduleResolution&quot;</span>: <span class="string">&quot;node&quot;</span>,</span><br><span class="line">    <span class="string">&quot;emitDecoratorMetadata&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;experimentalDecorators&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;importHelpers&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;target&quot;</span>: <span class="string">&quot;es5&quot;</span>,</span><br><span class="line">    <span class="string">&quot;typeRoots&quot;</span>: [</span><br><span class="line">      <span class="string">&quot;node_modules/@types&quot;</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">&quot;lib&quot;</span>: [</span><br><span class="line">      <span class="string">&quot;es2018&quot;</span>,</span><br><span class="line">      <span class="string">&quot;dom&quot;</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">&quot;paths&quot;</span>: &#123;</span><br><span class="line">      <span class="string">&quot;@common/*&quot;</span>: [</span><br><span class="line">        <span class="string">&quot;app/common/*&quot;</span></span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="优化点"><a href="#优化点" class="headerlink" title="优化点"></a>优化点</h1><ul>
+<li><app-game> to <game>   angular.json: “prefix”: “app”,</li>
+</ul>
+<h1 id="css-to-scss"><a href="#css-to-scss" class="headerlink" title="css to scss"></a>css to scss</h1><h3 id="组件-把CSS预编译改成SASS"><a href="#组件-把CSS预编译改成SASS" class="headerlink" title="[组件]把CSS预编译改成SASS"></a>[组件]把CSS预编译改成SASS</h3><p>方式一<br>创建项目时指定 scss</p>
+<p>方式二</p>
+<ul>
+<li>angular-cli.json 里面的 styleExt 改成 scss</li>
+<li>angular-cli.json 里面的 styles.css 后缀改成 .scss</li>
+<li>src 下面 style.css 改成 style.scss</li>
+<li>app.component.scss</li>
+<li>app.component.ts 里面对应修改</li>
+</ul>
+<h3 id="第二中方法"><a href="#第二中方法" class="headerlink" title="第二中方法"></a>第二中方法</h3><h4 id="将默认样式扩展名更改为-scss"><a href="#将默认样式扩展名更改为-scss" class="headerlink" title="将默认样式扩展名更改为 scss"></a>将默认样式扩展名更改为 scss</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ng config defaults.styleExt=scss</span><br></pre></td></tr></table></figure>
+<p>如果出现错误：请Value cannot be found.使用以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ng config schematics.@schematics/angular:component.styleext scss</span><br></pre></td></tr></table></figure>
+
+<p>或手动 添加到 angular.json</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;schematics&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;@schematics/angular:component&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;styleext&quot;</span><span class="punctuation">:</span> <span class="string">&quot;scss&quot;</span>       </span><br><span class="line">    <span class="punctuation">&#125;</span> </span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="将-css-文件重命名-scss"><a href="#将-css-文件重命名-scss" class="headerlink" title="将 .css 文件重命名 .scss"></a>将 .css 文件重命名 .scss</h4><p>app  &amp;&amp; webpack</p>
+<h4 id="创建项目时设置"><a href="#创建项目时设置" class="headerlink" title="创建项目时设置"></a>创建项目时设置</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ng new your-project-name --style=scss</span><br></pre></td></tr></table></figure>
+
+<p>如果要为以后创建的所有项目设置默认值，执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ng config --global defaults.styleExt=scss</span><br></pre></td></tr></table></figure>
+
+<h1 id="版本升级"><a href="#版本升级" class="headerlink" title="版本升级"></a>版本升级</h1><p>error @angular-devkit/<a href="mailto:&#97;&#x72;&#99;&#104;&#x69;&#x74;&#x65;&#99;&#116;&#x40;&#48;&#x2e;&#x39;&#x30;&#x30;&#x2e;&#48;">&#97;&#x72;&#99;&#104;&#x69;&#x74;&#x65;&#99;&#116;&#x40;&#48;&#x2e;&#x39;&#x30;&#x30;&#x2e;&#48;</a>: The engine “yarn” is incompatible with this module. Expected version “&gt;= 1.13.0”. Got “1.12.3”<br>error Found incompatible module</p>
+<p>brew upgrade yarn</p>
+<h2 id="ng"><a href="#ng" class="headerlink" title="ng"></a>ng</h2><p>ng update @angular/cli@8 @angular/core@8</p>
+<p>ng update @angular/core –next –force (更新了angular相关依赖 到8.0)</p>
+<p>cms 更新<br>ng update @angular/core@^9.1.0 –force</p>
+<h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><p>ViewChild =&gt; @ViewChild(‘foo’, {static: false}) foo !: ElementRef;</p>
+<h2 id="重新安装"><a href="#重新安装" class="headerlink" title="重新安装"></a>重新安装</h2><p>node-sass</p>
+<h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><p>@angular/<a href="mailto:&#x63;&#100;&#107;&#x40;&#x38;&#x2e;&#48;&#x2e;&#x30;">&#x63;&#100;&#107;&#x40;&#x38;&#x2e;&#48;&#x2e;&#x30;</a></p>
+<h2 id="升级到10"><a href="#升级到10" class="headerlink" title="升级到10"></a>升级到10</h2><p>yarn remove @angular/cli<br>yarn add @angular/<a href="mailto:&#99;&#108;&#x69;&#64;&#49;&#x30;&#46;&#x30;&#x2e;&#x32;">&#99;&#108;&#x69;&#64;&#49;&#x30;&#46;&#x30;&#x2e;&#x32;</a> –dev</p>
+<p><a target="_blank" rel="noopener" href="https://update.angular.io/#8.0:10.0">https://update.angular.io/#8.0:10.0</a></p>
+<h2 id="2020-10-21-升级方法"><a href="#2020-10-21-升级方法" class="headerlink" title="2020.10.21 升级方法"></a>2020.10.21 升级方法</h2><h3 id="7-0-gt-9-1"><a href="#7-0-gt-9-1" class="headerlink" title="7.0 -&gt; 9.1"></a>7.0 -&gt; 9.1</h3><p>yarn remove @angular/animations @angular/common @angular/compiler @angular/core @angular/forms @angular/platform-browser @angular/platform-browser-dynamic @angular/router</p>
+<p>yarn add @angular/<a href="mailto:&#97;&#x6e;&#105;&#109;&#x61;&#x74;&#x69;&#x6f;&#x6e;&#x73;&#x40;&#x39;&#46;&#49;">&#97;&#x6e;&#105;&#109;&#x61;&#x74;&#x69;&#x6f;&#x6e;&#x73;&#x40;&#x39;&#46;&#49;</a> @angular/<a href="mailto:&#99;&#x6f;&#109;&#109;&#111;&#110;&#64;&#57;&#x2e;&#x31;">&#99;&#x6f;&#109;&#109;&#111;&#110;&#64;&#57;&#x2e;&#x31;</a> @angular/<a href="mailto:&#99;&#x6f;&#109;&#x70;&#x69;&#x6c;&#x65;&#x72;&#64;&#57;&#x2e;&#49;">&#99;&#x6f;&#109;&#x70;&#x69;&#x6c;&#x65;&#x72;&#64;&#57;&#x2e;&#49;</a> @angular/<a href="mailto:&#99;&#x6f;&#114;&#101;&#64;&#x39;&#46;&#49;">&#99;&#x6f;&#114;&#101;&#64;&#x39;&#46;&#49;</a> @angular/<a href="mailto:&#x66;&#x6f;&#x72;&#x6d;&#115;&#64;&#x39;&#46;&#49;">&#x66;&#x6f;&#x72;&#x6d;&#115;&#64;&#x39;&#46;&#49;</a> @angular/<a href="mailto:&#x70;&#x6c;&#x61;&#116;&#102;&#x6f;&#x72;&#x6d;&#x2d;&#x62;&#114;&#x6f;&#x77;&#115;&#x65;&#x72;&#x40;&#57;&#x2e;&#49;">&#x70;&#x6c;&#x61;&#116;&#102;&#x6f;&#x72;&#x6d;&#x2d;&#x62;&#114;&#x6f;&#x77;&#115;&#x65;&#x72;&#x40;&#57;&#x2e;&#49;</a> @angular/<a href="mailto:&#x70;&#x6c;&#97;&#116;&#102;&#x6f;&#x72;&#x6d;&#45;&#98;&#114;&#111;&#119;&#x73;&#x65;&#114;&#45;&#100;&#121;&#x6e;&#x61;&#109;&#105;&#x63;&#64;&#x39;&#46;&#x31;">&#x70;&#x6c;&#97;&#116;&#102;&#x6f;&#x72;&#x6d;&#45;&#98;&#114;&#111;&#119;&#x73;&#x65;&#114;&#45;&#100;&#121;&#x6e;&#x61;&#109;&#105;&#x63;&#64;&#x39;&#46;&#x31;</a> @angular/<a href="mailto:&#x72;&#x6f;&#x75;&#x74;&#101;&#x72;&#64;&#57;&#46;&#49;">&#x72;&#x6f;&#x75;&#x74;&#101;&#x72;&#64;&#57;&#46;&#49;</a></p>
+<p>yarn remove @angular/compiler-cli @angular/language-service</p>
+<p>yarn add  @angular/<a href="mailto:&#x63;&#111;&#x6d;&#112;&#105;&#x6c;&#101;&#114;&#45;&#99;&#x6c;&#105;&#64;&#x39;&#x2e;&#x31;">&#x63;&#111;&#x6d;&#112;&#105;&#x6c;&#101;&#114;&#45;&#99;&#x6c;&#105;&#64;&#x39;&#x2e;&#x31;</a> @angular/<a href="mailto:&#108;&#x61;&#110;&#103;&#117;&#97;&#x67;&#101;&#45;&#x73;&#x65;&#114;&#x76;&#x69;&#99;&#101;&#x40;&#x39;&#46;&#x31;">&#108;&#x61;&#110;&#103;&#117;&#97;&#x67;&#101;&#45;&#x73;&#x65;&#114;&#x76;&#x69;&#99;&#101;&#x40;&#x39;&#46;&#x31;</a> –dev</p>
+<p>yarn remove typescript</p>
+<p>yarn add <a href="mailto:&#x74;&#121;&#x70;&#101;&#115;&#x63;&#114;&#x69;&#x70;&#x74;&#x40;&#x33;&#x2e;&#56;&#x2e;&#48;">&#x74;&#121;&#x70;&#101;&#115;&#x63;&#114;&#x69;&#x70;&#x74;&#x40;&#x33;&#x2e;&#56;&#x2e;&#48;</a> –save</p>
+<h1 id="游戏编辑器"><a href="#游戏编辑器" class="headerlink" title="游戏编辑器"></a>游戏编辑器</h1><h2 id="layout"><a href="#layout" class="headerlink" title="layout"></a>layout</h2><h3 id="router"><a href="#router" class="headerlink" title="router"></a>router</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">path</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">  <span class="attr">redirectTo</span>: <span class="string">&quot;/home&quot;</span>,</span><br><span class="line">  <span class="attr">pathMatch</span>: <span class="string">&quot;full&quot;</span></span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">path</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">  <span class="attr">component</span>: <span class="title class_">LoginLayoutComponent</span>,</span><br><span class="line">  <span class="attr">children</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">path</span>: <span class="string">&quot;login&quot;</span>,</span><br><span class="line">      <span class="attr">loadChildren</span>: <span class="string">&quot;./pages/login/login.module#LoginModule&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">path</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">  <span class="attr">component</span>: <span class="title class_">AppLayoutComponent</span>,</span><br><span class="line">  <span class="attr">children</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">path</span>: <span class="string">&quot;home&quot;</span>,</span><br><span class="line">      <span class="attr">canActivate</span>: [<span class="title class_">AuthGuardService</span>],</span><br><span class="line">      <span class="attr">loadChildren</span>: <span class="string">&quot;./pages/home/home.module#HomeModule&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="bare"><a href="#bare" class="headerlink" title="bare"></a>bare</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">router-outlet</span>&gt;</span><span class="tag">&lt;/<span class="name">router-outlet</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="full"><a href="#full" class="headerlink" title="full"></a>full</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">app-header</span>&gt;</span><span class="tag">&lt;/<span class="name">app-header</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-outlet</span>&gt;</span><span class="tag">&lt;/<span class="name">router-outlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">app-footer</span>&gt;</span><span class="tag">&lt;/<span class="name">app-footer</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="primeNG"><a href="#primeNG" class="headerlink" title="primeNG"></a>primeNG</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install primeng --save</span><br><span class="line">npm install primeicons --save</span><br></pre></td></tr></table></figure>
+
+<p>angular.json</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;node_modules/primeng/resources/themes/saga-blue/theme.css&quot;,</span><br><span class="line">&quot;node_modules/primeng/resources/primeng.min.css&quot;,</span><br><span class="line">&quot;node_modules/primeicons/primeicons.css&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="button"><a href="#button" class="headerlink" title="button"></a>button</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p-button</span> <span class="attr">label</span>=<span class="string">&quot;Submit&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">p-button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>app.module.ts</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">imports</span>: [</span><br><span class="line">  <span class="title class_">BrowserModule</span>,</span><br><span class="line">  <span class="title class_">AppRoutingModule</span>,</span><br><span class="line">  <span class="title class_">ButtonModule</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h3 id="overlay"><a href="#overlay" class="headerlink" title="overlay"></a>overlay</h3><h4 id="overlayPanel"><a href="#overlayPanel" class="headerlink" title="overlayPanel"></a>overlayPanel</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p-overlayPanel</span> #<span class="attr">op</span>&gt;</span></span><br><span class="line">  sdsds</span><br><span class="line"><span class="tag">&lt;/<span class="name">p-overlayPanel</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="form"><a href="#form" class="headerlink" title="form"></a>form</h3><h4 id="listbox"><a href="#listbox" class="headerlink" title="listbox"></a>listbox</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p-listbox</span> [<span class="attr">options</span>]=<span class="string">&quot;cities&quot;</span> <span class="attr">optionLabel</span>=<span class="string">&quot;name&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">p-listbox</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="icon"><a href="#icon" class="headerlink" title="icon"></a>icon</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;pi pi-check&quot;</span> <span class="attr">style</span>=<span class="string">&quot;font-size: 2rem&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="scss"><a href="#scss" class="headerlink" title="scss"></a>scss</h2><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#home</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: calc(<span class="number">100%</span> - #&#123;<span class="variable">$TQ-app-header-height</span>&#125; - #&#123;<span class="variable">$TQ-app-footer-height</span>&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="html"><a href="#html" class="headerlink" title="html"></a>html</h2><h3 id="ng-container"><a href="#ng-container" class="headerlink" title="ng-container"></a>ng-container</h3><p>ng-container 最后不现实，省了一层div</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">main</span> <span class="attr">id</span>=<span class="string">&quot;main&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ng-container</span> *<span class="attr">ngIf</span>=<span class="string">&quot;selectedMenuId !== &#x27;Suit&#x27;; else elementSuit&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p-tabView</span> <span class="attr">styleClass</span>=<span class="string">&quot;TQ-tabview&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>&lt; ng-container &gt;是一个逻辑容器,可用于组节点但不呈现DOM树中的一个节点。</p>
+<h2 id="router-1"><a href="#router-1" class="headerlink" title="router"></a>router</h2><h3 id="params"><a href="#params" class="headerlink" title="params"></a>params</h3><h1 id="CMS"><a href="#CMS" class="headerlink" title="CMS"></a>CMS</h1><h2 id="dialog"><a href="#dialog" class="headerlink" title="dialog"></a>dialog</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">nz-modal</span> [(<span class="attr">nzVisible</span>)]=<span class="string">&quot;banIsVisible&quot;</span> <span class="attr">nzTitle</span>=<span class="string">&quot;The first Modal&quot;</span> (<span class="attr">nzOnCancel</span>)=<span class="string">&quot;handleCancel()&quot;</span></span></span><br><span class="line"><span class="tag">  (<span class="attr">nzOnOk</span>)=<span class="string">&quot;handleOk()&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>Content one<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>Content two<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>Content three<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>Content three<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">nz-modal</span>&gt;</span></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Angular/" rel="tag"># Angular</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/10/18/Hexo/" rel="prev" title="Hexo">
+      <i class="fa fa-chevron-left"></i> Hexo
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/10/19/Markdown%E8%AF%AD%E6%B3%95/" rel="next" title="Markdown语法">
+      Markdown语法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%9F%BA%E7%A1%80%E4%BE%9D%E8%B5%96"><span class="nav-number">2.</span> <span class="nav-text">添加基础依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%8B%E5%8A%A8%E6%B7%BB%E5%8A%A0-angular-json-%E9%85%8D%E7%BD%AE"><span class="nav-number">2.1.</span> <span class="nav-text">手动添加 angular.json 配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%9F%BA%E7%A1%80%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">添加基础文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#seven-webpack-%E6%89%93%E5%8C%85-angular-%E5%AE%89%E8%A3%85%E7%9A%84%E4%BE%9D%E8%B5%96%E5%8C%85"><span class="nav-number">4.</span> <span class="nav-text">seven webpack 打包 angular 安装的依赖包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import-HeaderModule-not-resolve"><span class="nav-number">5.</span> <span class="nav-text">import HeaderModule not resolve</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#remove-nghost-sfi-c0"><span class="nav-number">6.</span> <span class="nav-text">remove _nghost-sfi-c0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E7%9A%84%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84-%E4%B8%8E-%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="nav-number">7.</span> <span class="nav-text">资源的相对路径 与 绝对路径</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E7%82%B9"><span class="nav-number"></span> <span class="nav-text">优化点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#css-to-scss"><span class="nav-number"></span> <span class="nav-text">css to scss</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6-%E6%8A%8ACSS%E9%A2%84%E7%BC%96%E8%AF%91%E6%94%B9%E6%88%90SASS"><span class="nav-number">1.</span> <span class="nav-text">[组件]把CSS预编译改成SASS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E4%B8%AD%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">第二中方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%86%E9%BB%98%E8%AE%A4%E6%A0%B7%E5%BC%8F%E6%89%A9%E5%B1%95%E5%90%8D%E6%9B%B4%E6%94%B9%E4%B8%BA-scss"><span class="nav-number">2.1.</span> <span class="nav-text">将默认样式扩展名更改为 scss</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%86-css-%E6%96%87%E4%BB%B6%E9%87%8D%E5%91%BD%E5%90%8D-scss"><span class="nav-number">2.2.</span> <span class="nav-text">将 .css 文件重命名 .scss</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%97%B6%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.3.</span> <span class="nav-text">创建项目时设置</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E5%8D%87%E7%BA%A7"><span class="nav-number"></span> <span class="nav-text">版本升级</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ng"><span class="nav-number"></span> <span class="nav-text">ng</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9"><span class="nav-number"></span> <span class="nav-text">修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E6%96%B0%E5%AE%89%E8%A3%85"><span class="nav-number"></span> <span class="nav-text">重新安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%B8%E8%BD%BD"><span class="nav-number"></span> <span class="nav-text">卸载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%87%E7%BA%A7%E5%88%B010"><span class="nav-number"></span> <span class="nav-text">升级到10</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2020-10-21-%E5%8D%87%E7%BA%A7%E6%96%B9%E6%B3%95"><span class="nav-number"></span> <span class="nav-text">2020.10.21 升级方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-0-gt-9-1"><span class="nav-number">1.</span> <span class="nav-text">7.0 -&gt; 9.1</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E7%BC%96%E8%BE%91%E5%99%A8"><span class="nav-number"></span> <span class="nav-text">游戏编辑器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#layout"><span class="nav-number"></span> <span class="nav-text">layout</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#router"><span class="nav-number">1.</span> <span class="nav-text">router</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bare"><span class="nav-number">2.</span> <span class="nav-text">bare</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#full"><span class="nav-number">3.</span> <span class="nav-text">full</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#primeNG"><span class="nav-number"></span> <span class="nav-text">primeNG</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#button"><span class="nav-number">1.</span> <span class="nav-text">button</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#overlay"><span class="nav-number">2.</span> <span class="nav-text">overlay</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#overlayPanel"><span class="nav-number">2.1.</span> <span class="nav-text">overlayPanel</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#form"><span class="nav-number">3.</span> <span class="nav-text">form</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#listbox"><span class="nav-number">3.1.</span> <span class="nav-text">listbox</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#icon"><span class="nav-number">4.</span> <span class="nav-text">icon</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scss"><span class="nav-number"></span> <span class="nav-text">scss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#html"><span class="nav-number"></span> <span class="nav-text">html</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ng-container"><span class="nav-number">1.</span> <span class="nav-text">ng-container</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#router-1"><span class="nav-number"></span> <span class="nav-text">router</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#params"><span class="nav-number">1.</span> <span class="nav-text">params</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CMS"><span class="nav-number"></span> <span class="nav-text">CMS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dialog"><span class="nav-number"></span> <span class="nav-text">dialog</span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">kil</p>
+  <div class="site-description" itemprop="description">心如止水，潜心修行</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kilfront" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kilfront" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kaifaweb@163.com" title="E-Mail → mailto:kaifaweb@163.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kil</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

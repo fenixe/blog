@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":false,"scrollpercent":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="ng-book2-angular8 前言第一个应用npm 版本大于等于 6.9.0 1$ npm -v  typescript 版本大于等于 2.1 1$ tsc --version  @angular&#x2F;cli 版本 1$ ng --version  文件目录结构1$ tree ├─categories├─img│  ├─avatar│  ├─js│  └─tool├─kil├─tags├─_da">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ng-book">
+<meta property="og:url" content="http://example.com/2020/02/21/ng-book/index.html">
+<meta property="og:site_name" content="Kil Notes">
+<meta property="og:description" content="ng-book2-angular8 前言第一个应用npm 版本大于等于 6.9.0 1$ npm -v  typescript 版本大于等于 2.1 1$ tsc --version  @angular&#x2F;cli 版本 1$ ng --version  文件目录结构1$ tree ├─categories├─img│  ├─avatar│  ├─js│  └─tool├─kil├─tags├─_da">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-02-21T15:58:50.000Z">
+<meta property="article:modified_time" content="2022-04-21T12:04:18.703Z">
+<meta property="article:author" content="kil">
+<meta property="article:tag" content="Angular">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/02/21/ng-book/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>ng-book | Kil Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Kil Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Quick notes</p>
+      <a>
+        <img class="custom-logo-image" src="[object Object]" alt="Kil Notes">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/02/21/ng-book/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="kil">
+      <meta itemprop="description" content="心如止水，潜心修行">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kil Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ng-book
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-21 23:58:50" itemprop="dateCreated datePublished" datetime="2020-02-21T23:58:50+08:00">2020-02-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Angular/" itemprop="url" rel="index"><span itemprop="name">Angular</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><strong>ng-book2-angular8</strong></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h3 id="第一个应用"><a href="#第一个应用" class="headerlink" title="第一个应用"></a>第一个应用</h3><p>npm 版本大于等于 6.9.0</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm -v</span><br></pre></td></tr></table></figure>
+
+<p>typescript 版本大于等于 2.1</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tsc --version</span><br></pre></td></tr></table></figure>
+
+<p>@angular/cli 版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ng --version</span><br></pre></td></tr></table></figure>
+
+<h3 id="文件目录结构"><a href="#文件目录结构" class="headerlink" title="文件目录结构"></a>文件目录结构</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tree</span><br></pre></td></tr></table></figure>
+<p>├─categories<br>├─img<br>│  ├─avatar<br>│  ├─js<br>│  └─tool<br>├─kil<br>├─tags<br>├─_data<br>└─_posts</p>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>Angular背后的一个重要概念是组件的概念。</p>
+<h2 id="Angular-解读"><a href="#Angular-解读" class="headerlink" title="Angular 解读"></a>Angular 解读</h2><h3 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h3><p>|– README.md    // a useful README<br>|– angular.json     // angular-cli configuration file<br>|– e2e/     // end-to-end tests<br>|– node_modules/   // installed dependencies<br>|– package-lock.json    // npm dependencies lockfile<br>|– package.json    // npm configuration<br>|– src/     // our application’s code<br>|– tsconfig.json   // typescript config<br>|– tslint.json    // linting config</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">app-root</span>&gt;</span><span class="tag">&lt;/<span class="name">app-root</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>app 根标记<br>此标签由angular 定义；我们也可以自己定义标签</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Component</span>, <span class="title class_">OnInit</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;@angular/core&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>*.component.ts 文件下<br>解构赋值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@<span class="title class_">Component</span>(&#123;</span><br><span class="line">  <span class="attr">selector</span>: <span class="string">&#x27;app-hello-world&#x27;</span>,</span><br><span class="line">  <span class="attr">templateUrl</span>: <span class="string">&#x27;./hello-world.component.html&#x27;</span>,</span><br><span class="line">  <span class="attr">styleUrls</span>: [<span class="string">&#x27;./hello-world.component.scss&#x27;</span>]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>装饰器</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;Felipe&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>构造函数<br><span class="custom_red">constructor</span>应该是ES6中明确使用<span class="custom_red">constructor</span>来表示构造函数的，构造函数使用在<span class="custom_red">class</span>中，用来做初始化操作。当包含<span class="custom_red">constructor</span>的类被实例化时，构造函数将被调用。<br>可以看出，<span class="custom_red">constructor</span>的执行是在先的。<br>那么既然ngOnchanges是输入属性值变化的时候调用，并且ngOnInit是在ngOnchanges执行完之后才调用，而<span class="custom_red">constructor</span>是在组件就实例化的时候就已经调用了，这也就是说，在<span class="custom_red">constructor</span>中我们是取不到输入属性的值的。<br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/af1d8f597b29">ngOnInit 和 constructor 使用场景</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@<span class="title class_">NgModule</span>(&#123;</span><br><span class="line">    <span class="attr">declarations</span>: [</span><br><span class="line">        <span class="comment">// 声明模块里有什么东西 只能声明：组件/指令/管道</span></span><br><span class="line">        <span class="title class_">AppComponent</span>,</span><br><span class="line">        <span class="title class_">HeroesComponent</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="comment">// 声明该模块所依赖的模块</span></span><br><span class="line">    <span class="attr">imports</span>: [</span><br><span class="line">        <span class="title class_">BrowserModule</span>,</span><br><span class="line">        <span class="title class_">AppRoutingModule</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="comment">// 服务提供者，默认情况下是空的 </span></span><br><span class="line">    <span class="attr">providers</span>: [],</span><br><span class="line">    <span class="comment">// 声明模块的主组件是什么</span></span><br><span class="line">    <span class="attr">bootstrap</span>: [<span class="title class_">AppComponent</span>]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">AppModule</span> &#123; &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>declarations</strong><br>declarations specifies the components that are defined in this module. This is an<br>important idea in Angular:<br>You have to declare components in a NgModule before you can use them in your<br>templates.<br>You can think of an NgModule a bit like a “package” and declarations states what<br>components are “owned by” this module.<br>You may have noticed that when we used ng generate, the tool automatically added<br>our components to this declarations list! The idea is that when we generated a new<br>component, the ng tool assumed we wanted it to belong to the current NgModule.</p>
+<p><strong>imports</strong><br>imports describes which dependencies this module has. We’re creating a browser<br>app, so we want to import the BrowserModule.<br>If your module depends on other modules, you list them here.</p>
+<p><strong>providers</strong><br>providers is used for dependency injection. So to make a service available to be<br>injected throughout our application, we will add it here.<br>提供程序用于依赖项注入。所以让一项服务<br>在整个应用程序中注入，我们将在此处添加它。</p>
+<p><strong>bootstrap</strong><br>bootstrap tells Angular that when this module is used to bootstrap an app, we need<br>to load the AppComponent component as the top-level component.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; name &#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>模板标记</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="title class_">Input</span>() <span class="attr">name</span>: string;</span><br></pre></td></tr></table></figure>
+<p>从父模板传入一个值</p>
+<h3 id="如何定义一个新组件"><a href="#如何定义一个新组件" class="headerlink" title="如何定义一个新组件"></a>如何定义一个新组件</h3><p>1、组件装饰器 A Component decorator<br>2、组件定义类 A component definition class</p>
+<p><strong>两种方法定义模板</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@<span class="title class_">Component</span>(&#123;</span><br><span class="line">  <span class="attr">selector</span>: <span class="string">&#x27;app-hello-world&#x27;</span>,</span><br><span class="line">  <span class="comment">// templateUrl: &#x27;./hello-world.component.html&#x27;,</span></span><br><span class="line">  <span class="attr">template</span>: <span class="string">`&lt;p&gt; </span></span><br><span class="line"><span class="string">              hello-world works inline!</span></span><br><span class="line"><span class="string">             &lt;/p&gt;`</span>,</span><br><span class="line">  <span class="attr">styleUrls</span>: [<span class="string">&#x27;./hello-world.component.scss&#x27;</span>]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>如何找到组件</strong><br>ng will look at the file angular.json to find the entry point to our app. Let’s trace<br>how ng finds the components we just built.<br>At a high level, it looks like this:<br>• angular.json specifies a “main” file, which in this case is main.ts<br>• main.ts is the entry-point for our app and it bootstraps our application<br>• The bootstrap process boots an Angular module – we haven’t talked about<br>modules yet, but we will in a minute<br>• We use the AppModule to bootstrap the app. AppModule is specified in src/ap<br>p/app.module.ts<br>• AppModule specifies which component to use as the top-level component. In this<br>case it is AppComponent<br>• AppComponent has <code>&lt;app-user-list&gt;</code> tags in the template and this renders our<br>list of users.</p>
+<h2 id="TypeScript"><a href="#TypeScript" class="headerlink" title="TypeScript"></a>TypeScript</h2><h3 id="TypeScript对ES5的五大改进"><a href="#TypeScript对ES5的五大改进" class="headerlink" title="TypeScript对ES5的五大改进"></a>TypeScript对ES5的五大改进</h3><ul>
+<li>type</li>
+<li>classes</li>
+<li>decorators</li>
+<li>imports</li>
+<li>language utilities (eg: destructuring)</li>
+</ul>
+<p>TypeScript/ES6中还有许多其他特性<br>• Interfaces<br>• Generics<br>• Importing and Exporting Modules<br>• Decorators<br>• Destructuring</p>
+<h3 id="type"><a href="#type" class="headerlink" title="type"></a>type</h3><p>类型检查好处</p>
+<ul>
+<li>有助于编写代码，编译时防止错误</li>
+<li>有助于阅读代码，澄清了作者的意图</li>
+</ul>
+<h4 id="函数声明"><a href="#函数声明" class="headerlink" title="函数声明"></a>函数声明</h4><p>在声明函数时，可以使用类型作为参数和返回值：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">greetText</span>(<span class="params">name: string</span>): string &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&quot;Hello&quot;</span> + name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="数组声明"><a href="#数组声明" class="headerlink" title="数组声明"></a>数组声明</h4><p>数组是用数组类型声明的。但是，因为数组是一个集合，我们还需要指定数组中对象的类型。</p>
+<ul>
+<li><code>array&lt;type&gt;</code></li>
+<li>type[]<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">private <span class="attr">jobs</span>: <span class="title class_">Array</span>&lt;string&gt; = [<span class="string">&#x27;IBM&#x27;</span>, <span class="string">&#x27;Google&#x27;</span>];</span><br><span class="line">private <span class="attr">jobss</span>: string[] = [<span class="string">&#x27;Apple&#x27;</span>, <span class="string">&#x27;Dell&#x27;</span>];</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="枚举类型"><a href="#枚举类型" class="headerlink" title="枚举类型"></a>枚举类型</h4><p>“枚举”的类型。在“枚举”类型的定义中列举出所有可能的取值，被说明为该“枚举”类型的变量取值不能超过定义的范围。应该说明的是，枚举类型是一种基本数据类型<br>枚举通过命名数值来工作</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">Role</span> &#123;<span class="title class_">Employee</span>, <span class="title class_">Manager</span> = <span class="number">3</span>, <span class="title class_">Admin</span>&#125;;</span><br><span class="line"><span class="keyword">private</span> <span class="attr">role</span>: <span class="title class_">Role</span> = <span class="title class_">Role</span>.<span class="property">Employee</span>; <span class="comment">// 枚举的默认初始值为0</span></span><br><span class="line"><span class="keyword">private</span> <span class="attr">role2</span>: <span class="title class_">Role</span> = <span class="title class_">Role</span>.<span class="property">Manager</span>; <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+<p>enum Role {Employee = 3, Manager, Admin};<br>枚举的值从那里开始递增，这意味着Manager是4，Admin是5</p>
+<h4 id="Any"><a href="#Any" class="headerlink" title="Any"></a>Any</h4><p>如果忽略给定变量的类型，则any是默认类型。变量为any允许它接收任何类型的值</p>
+<h4 id="Void"><a href="#Void" class="headerlink" title="Void"></a>Void</h4><p>使用void意味着不需要类型。这通常在函数中没有返回值：</p>
+<h4 id="Classes"><a href="#Classes" class="headerlink" title="Classes"></a>Classes</h4><p>ES5 使用protype<br>ES6 new class</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Vehicle</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>类可以有属性、方法和构造函数。</p>
+<h5 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h5><p>属性定义附加到类实例的数据。<br>例如，一个名为人可能有名字、姓氏和年龄等属性。<br>类中的每个属性都可以有一个类型。</p>
+<h5 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h5><p>方法是在对象上下文中运行的函数。<br>要对对象调用方法，我们首先要有一个对象的实例。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="attr">p</span>: <span class="title class_">Person</span>  = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line">p.<span class="property">first_name</span> = <span class="string">&#x27;Felipe&#x27;</span>;</span><br><span class="line">p.<span class="title function_">greet</span>();</span><br></pre></td></tr></table></figure>
+
+<h5 id="构造函数-constructor"><a href="#构造函数-constructor" class="headerlink" title="构造函数 constructor"></a>构造函数 constructor</h5><p>构造函数是一种特殊的方法，当类的新实例正在创建。<br>通常，构造函数是执行新的对象。<br>构造函数方法必须命名为构造函数。<br>它们可以有选择地接受参数，但不能返回任何值，因为当类是正在实例化（即正在创建类的实例，没有其他值可以返回）。</p>
+<p>实例化一个类:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">ClassName</span>()</span><br></pre></td></tr></table></figure>
+
+<p>在TypeScript中，每个类只能有一个构造函数。<br>这与ES6不同，ES6允许一个类有多个构造函数，只要它们有不同数量的参数。</p>
+<p>当我们想要参数化我们的新实例时，构造函数可以接受参数创造。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">  <span class="attr">first_name</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">last_name</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">age</span>: <span class="built_in">number</span>;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">first_name: <span class="built_in">string</span>, last_name: <span class="built_in">string</span>, age: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">first_name</span> = first_name;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">last_name</span> = last_name;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在创建对象时为我们设置人员的姓名和年龄</span></span><br><span class="line"><span class="keyword">var</span> <span class="attr">p</span>: <span class="title class_">Person</span> = <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&#x27;Felipe&#x27;</span>, <span class="string">&#x27;Coury&#x27;</span>, <span class="number">36</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="继承-Inheritance"><a href="#继承-Inheritance" class="headerlink" title="继承 Inheritance"></a>继承 Inheritance</h5><p>面向对象编程的另一个重要方面是继承。<br>继承表示类从父类接收行为的方法。<br>那我们可以重写、修改或扩展新类上的这些行为。</p>
+<p>重用Report类向用户显示数据的方式:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Report</span> &#123;</span><br><span class="line">  <span class="attr">data</span>: <span class="title class_">Array</span>&lt;<span class="built_in">string</span>&gt;;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">data: <span class="built_in">Array</span>&lt;<span class="built_in">string</span>&gt;</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">data</span> = data;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">run</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">data</span>.<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">line</span>) &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(line); &#125;);</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TabbedReport</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Report</span> &#123;</span><br><span class="line">  <span class="attr">headers</span>: <span class="title class_">Array</span>&lt;<span class="built_in">string</span>&gt;;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">headers: <span class="built_in">string</span>[], values: <span class="built_in">string</span>[]</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(values)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">headers</span> = headers;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">run</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">headers</span>);</span><br><span class="line">    <span class="variable language_">super</span>.<span class="title function_">run</span>();</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="公用程序-Utilities"><a href="#公用程序-Utilities" class="headerlink" title="公用程序 Utilities"></a>公用程序 Utilities</h5><p>ES6和扩展TypeScript提供了许多语法特性，使编程真的很有趣。<br>两个重要体现：</p>
+<ul>
+<li>箭头函数</li>
+<li>模板字符串</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ES5</span></span><br><span class="line"><span class="keyword">var</span> data = [<span class="string">&#x27;Alice Green&#x27;</span>, <span class="string">&#x27;Paul Pfifer&#x27;</span>, <span class="string">&#x27;Louis Blakenship&#x27;</span>];</span><br><span class="line">data.<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">line</span>) &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(line); &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Typescript</span></span><br><span class="line">data.<span class="title function_">forEach</span>( <span class="function">(<span class="params">line</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(line) );</span><br></pre></td></tr></table></figure>
+
+<p>只有一个参数时，括号是可选的。可以使用=&gt;语法作为一种表达：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> evens = [<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">8</span>];</span><br><span class="line"><span class="keyword">var</span> odds = evens.<span class="title function_">map</span>(<span class="function"><span class="params">v</span> =&gt;</span> v + <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p>模板字符串特点：<br>1.字符串中的变量（不强制与+连接）<br>2.多行字符串</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 写在反勾号里面</span></span><br><span class="line"><span class="keyword">var</span> greeting = <span class="string">`Hello <span class="subst">$&#123;firstName&#125;</span> <span class="subst">$&#123;lastName&#125;</span>`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> template = <span class="string">`</span></span><br><span class="line"><span class="string"> &lt;div&gt;  </span></span><br><span class="line"><span class="string">   &lt;h1&gt;Hello&lt;/h1&gt;</span></span><br><span class="line"><span class="string">   &lt;p&gt;This is a great website&lt;/p&gt;</span></span><br><span class="line"><span class="string"> &lt;/div&gt;</span></span><br><span class="line"><span class="string"> `</span></span><br></pre></td></tr></table></figure>
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Angular/" rel="tag"># Angular</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/01/13/Angular-doc/" rel="prev" title="Angular-doc">
+      <i class="fa fa-chevron-left"></i> Angular-doc
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/23/%E5%AE%89%E8%A3%85%E5%A4%A7%E5%85%A8/" rel="next" title="安装大全">
+      安装大全 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">第一个应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">文件目录结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F"><span class="nav-number">1.3.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Angular-%E8%A7%A3%E8%AF%BB"><span class="nav-number">2.</span> <span class="nav-text">Angular 解读</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text">文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">2.2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E6%96%B0%E7%BB%84%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">如何定义一个新组件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TypeScript"><span class="nav-number">3.</span> <span class="nav-text">TypeScript</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TypeScript%E5%AF%B9ES5%E7%9A%84%E4%BA%94%E5%A4%A7%E6%94%B9%E8%BF%9B"><span class="nav-number">3.1.</span> <span class="nav-text">TypeScript对ES5的五大改进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#type"><span class="nav-number">3.2.</span> <span class="nav-text">type</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E"><span class="nav-number">3.2.1.</span> <span class="nav-text">函数声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E5%A3%B0%E6%98%8E"><span class="nav-number">3.2.2.</span> <span class="nav-text">数组声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.2.3.</span> <span class="nav-text">枚举类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Any"><span class="nav-number">3.2.4.</span> <span class="nav-text">Any</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Void"><span class="nav-number">3.2.5.</span> <span class="nav-text">Void</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Classes"><span class="nav-number">3.2.6.</span> <span class="nav-text">Classes</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7"><span class="nav-number">3.2.6.1.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">3.2.6.2.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0-constructor"><span class="nav-number">3.2.6.3.</span> <span class="nav-text">构造函数 constructor</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF-Inheritance"><span class="nav-number">3.2.6.4.</span> <span class="nav-text">继承 Inheritance</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%AC%E7%94%A8%E7%A8%8B%E5%BA%8F-Utilities"><span class="nav-number">3.2.6.5.</span> <span class="nav-text">公用程序 Utilities</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">kil</p>
+  <div class="site-description" itemprop="description">心如止水，潜心修行</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kilfront" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kilfront" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kaifaweb@163.com" title="E-Mail → mailto:kaifaweb@163.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kil</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

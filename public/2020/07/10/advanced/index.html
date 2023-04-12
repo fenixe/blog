@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":false,"scrollpercent":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="跳转到本文HTML跳转到本文CSS跳转到本文编程与算法训练跳转到本文组件化跳转到本文工具链跳转到本文发布系统 JS语言通识      乔姆斯基谱系乔姆斯基谱系：是计算机科学中刻画形式文法表达能力的一个分类谱系，是由诺姆·乔姆斯基于 1956 年提出的。它包括四个层次：0- 型文法（无限制文法或短语结构文法）包括所有的文法。1- 型文法（上下文相关文法）生成上下文相关语言。2- 型文法（上下文无关文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="advanced">
+<meta property="og:url" content="http://example.com/2020/07/10/advanced/index.html">
+<meta property="og:site_name" content="Kil Notes">
+<meta property="og:description" content="跳转到本文HTML跳转到本文CSS跳转到本文编程与算法训练跳转到本文组件化跳转到本文工具链跳转到本文发布系统 JS语言通识      乔姆斯基谱系乔姆斯基谱系：是计算机科学中刻画形式文法表达能力的一个分类谱系，是由诺姆·乔姆斯基于 1956 年提出的。它包括四个层次：0- 型文法（无限制文法或短语结构文法）包括所有的文法。1- 型文法（上下文相关文法）生成上下文相关语言。2- 型文法（上下文无关文">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/2020/07/10/advanced/language.png">
+<meta property="og:image" content="http://example.com/2020/07/10/advanced/type.png">
+<meta property="og:image" content="http://example.com/2020/07/10/advanced/js01.png">
+<meta property="og:image" content="http://example.com/2020/07/10/advanced/bnf.png">
+<meta property="og:image" content="http://example.com/2020/07/10/advanced/bnf02.png">
+<meta property="og:image" content="http://example.com/2020/07/10/advanced/code.png">
+<meta property="og:image" content="http://example.com/2020/07/10/advanced/utf.png">
+<meta property="og:image" content="http://example.com/2020/07/10/advanced/browser.png">
+<meta property="og:image" content="http://example.com/2020/07/10/advanced/state.png">
+<meta property="og:image" content="http://example.com/2020/07/10/advanced/state02.png">
+<meta property="og:image" content="http://example.com/2020/07/10/advanced/http.jpg">
+<meta property="og:image" content="http://example.com/2020/07/10/advanced/request.png">
+<meta property="og:image" content="http://example.com/2020/07/10/advanced/response.png">
+<meta property="og:image" content="http://example.com/2020/07/10/advanced/css.png">
+<meta property="og:image" content="http://example.com/2020/07/10/advanced/css01.png">
+<meta property="og:image" content="http://example.com/2020/07/10/advanced/css02.png">
+<meta property="og:image" content="http://example.com/2020/07/10/advanced/css03.png">
+<meta property="og:image" content="http://example.com/2020/07/10/advanced/css04.png">
+<meta property="og:image" content="http://example.com/2020/07/10/advanced/css05.png">
+<meta property="og:image" content="http://example.com/2020/07/10/advanced/css06.png">
+<meta property="og:image" content="http://example.com/2020/07/10/advanced/css07.png">
+<meta property="og:image" content="http://example.com/2020/07/10/advanced/css08.png">
+<meta property="og:image" content="http://example.com/2020/07/10/advanced/css09.png">
+<meta property="og:image" content="http://example.com/2020/07/10/advanced/css10.png">
+<meta property="article:published_time" content="2020-07-10T10:18:35.000Z">
+<meta property="article:modified_time" content="2022-08-31T07:46:23.389Z">
+<meta property="article:author" content="kil">
+<meta property="article:tag" content="Front-End">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/07/10/advanced/language.png">
+
+<link rel="canonical" href="http://example.com/2020/07/10/advanced/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>advanced | Kil Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Kil Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Quick notes</p>
+      <a>
+        <img class="custom-logo-image" src="[object Object]" alt="Kil Notes">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/07/10/advanced/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="kil">
+      <meta itemprop="description" content="心如止水，潜心修行">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kil Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          advanced
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-07-10 18:18:35" itemprop="dateCreated datePublished" datetime="2020-07-10T18:18:35+08:00">2020-07-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Front-End/" itemprop="url" rel="index"><span itemprop="name">Front-End</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="#HTML">跳转到本文HTML</a><br><a href="#CSS">跳转到本文CSS</a><br><a href="#%E7%BC%96%E7%A8%8B%E4%B8%8E%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83">跳转到本文编程与算法训练</a><br><a href="#%E7%BB%84%E4%BB%B6%E5%8C%96">跳转到本文组件化</a><br><a href="#%E5%B7%A5%E5%85%B7%E9%93%BE">跳转到本文工具链</a><br><a href="#%E5%8F%91%E5%B8%83%E7%B3%BB%E7%BB%9F">跳转到本文发布系统</a></p>
+<h1 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h1><h2 id="语言通识"><a href="#语言通识" class="headerlink" title="语言通识"></a>语言通识</h2><img src="/2020/07/10/advanced/language.png" class="">
+
+<img src="/2020/07/10/advanced/type.png" class="">
+
+<img src="/2020/07/10/advanced/js01.png" class="">
+
+<h2 id="乔姆斯基谱系"><a href="#乔姆斯基谱系" class="headerlink" title="乔姆斯基谱系"></a>乔姆斯基谱系</h2><p>乔姆斯基谱系：是计算机科学中刻画形式文法表达能力的一个分类谱系，是由诺姆·乔姆斯基于 1956 年提出的。它包括四个层次：<br>0- 型文法（无限制文法或短语结构文法）包括所有的文法。<br>1- 型文法（上下文相关文法）生成上下文相关语言。<br>2- 型文法（上下文无关文法）生成上下文无关语言。<br>3- 型文法（正规文法）生成正则语言。</p>
+<h2 id="BNF"><a href="#BNF" class="headerlink" title="BNF"></a>BNF</h2><p>巴科斯范式 Backus Normal Form</p>
+<p>是一种用于表示上下文无关文法的语言，上下文无关文法描述了一类形式语言。它是由约翰·巴科斯（John Backus）和彼得·诺尔（Peter Naur）首先引入的用来描述计算机语言语法的符号集。</p>
+<img src="/2020/07/10/advanced/bnf.png" class="">
+<img src="/2020/07/10/advanced/bnf02.png" class="">
+
+<h3 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/huiyenashen/p/4445676.html">链接</a><br>BNF 规定是推导规则(产生式)的集合，写为：</p>
+<p>&lt;符号&gt; ::= &lt;使用符号的表达式&gt;<br>这里的 &lt;符号&gt; 是非终结符，而表达式由一个符号序列，或用指示选择的竖杠’|’ 分隔的多个符号序列构成，每个符号序列整体都是左端的符号的一种可能的替代。从未在左端出现的符号叫做终结符。</p>
+<p>基本原理<br>      BNF类似一种数学游戏：从一个符号开始（叫做起始标志，实例中常用S表示），然后给出替换前面符号的规则。BNF语法定义的语言只不过是一个字符串集合，你可以按照下述规则书写，这些规则叫做书写规范（生产式规则），形式如下：<br>      symbol := alternative1 | alternative2 …<br>      每条规则申明:=左侧的符号必须被右侧的某一个可选项代替。替换项用“|”分割（有时用“::=”替换“:=”，但意思是一样的）。替换项通常有两个符号和终结符构成。之所以叫做终结符是因为没有针对他们的书写规范，他们是书写过程的终止（符号通常被叫做非终止符，也有人叫非终端）。</p>
+<pre><code>   BNF就是巴科特·瑙尔式的缩写， 在计算机的史前时代（1950s)，曾有一位大师，他奠定了现代计算机的基础，在他老人家的诸多成就之中，包括了对形式语言的研究，和发明了高级语言：FORTRAN。 为了纪念他老人家，我们把他提出的一套描述语言的方法叫做BNF。它以递归方式描述语言中的各种成分，凡遵守其规则的程序就可保证语法上的正确性。BNF由于其简洁、明了、科学而被广泛接受，成为描述各种程序设计语言的最常用的工具。
+   其实BNF很简单，::=表示定义     |表示或    尖括号(&lt;&gt;)括起来的是非终结符 
+</code></pre>
+<p>　　所谓非终结符就是语言中某些抽象的概念不能直接出现在语言中的符号，终结符就是可以直接出现在语言中的符号。<br>　　比如：C语言的声明语句可以用BNF这样描述：<br>　　&lt;声明语句&gt; ::= &lt;类型&gt;&lt;标识符&gt;; | &lt;类型&gt;&lt;标识符&gt;[&lt;数字&gt;];<br>　　这一句中&lt;声明语句&gt;这个非终结符被定义成了两种形式（上面用|隔开的两部分），同时在这里引入了三个终结符: 分号; 左方括号[，右方括号 ]。<br>　　&lt;类型&gt; ::= &lt;简单类型&gt; | &lt;指针类型&gt; | &lt;自定义类型&gt;<br>　　&lt;指针类型&gt; ::= &lt;简单类型&gt; * | &lt;自定义类型&gt; *<br>　　&lt;简单类型&gt; ::= int|char|double|float|long|short|void<br>　　&lt;自定义类型&gt; ::= enum&lt;标识符&gt;|struct&lt;标识符&gt;|union&lt;标识符&gt;|&lt;标识符&gt;<br>　　到这里就基本上把&lt;类型&gt;定义清楚了。</p>
+<p>　　&lt;数字&gt; ::= 0x&lt;十六进制数字串&gt; | 0&lt;八进制数字串&gt; | &lt;十进制数字串&gt;<br>　　&lt;十六进制数字串&gt; ::= &lt;十六进制数字&gt; | &lt;十六进制数字串&gt;&lt;十六进制数字&gt;<br>　　&lt;八进制数字串&gt; ::= &lt;八进制数字&gt; | &lt;八进制数字串&gt;&lt;八进制数字&gt;<br>　　&lt;十进制数字串&gt; ::= &lt;十进制数字&gt; | &lt;十进制数字串&gt;&lt;十进制数字&gt;<br>　　&lt;十六进制数字&gt; ::= &lt;十进制数字&gt; | A | B | C | D | E | F<br>　　&lt;十进制数字&gt; ::= &lt;八进制数字&gt; | 8 | 9<br>　　&lt;八进制数字&gt; ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7<br>　　到这里就把&lt;数字&gt;定义清楚了 </p>
+<p>　　&lt;标识符&gt; ::= &lt;字母&gt; | &lt;标识符&gt; &lt;字母数字串&gt;<br>　　&lt;字母数字串&gt; ::= &lt;字母&gt;|&lt;十进制数字&gt;|&lt;字母数字串&gt;&lt;字母&gt;|&lt;字母数字串&gt;&lt;十进制数字&gt;<br>　　&lt;字母&gt; ::= _ | &lt;大写字母&gt; | &lt;小写字母&gt;<br>　　&lt;小写字母&gt; ::= a|b|c|d|e|f|g|h|i|j ……<br>　　&lt;大写字母&gt; ::= A|B|C|D|E|F|G|H|I|J ……<br>　　到此为止整个声明语句就定义完了（就是说已经没有非终结符了）。</p>
+<pre><code>     虽然看起来很繁，但前面定义的各种非终结符都可以很容易的在别的地方重用。比如，函数声明可以定义成下面的样子： 
+</code></pre>
+<p>　　&lt;函数声明语句&gt; ::= &lt;类型&gt;&lt;标识符&gt;(&lt;形参表&gt;);<br>　　&lt;形参表&gt; ::= &lt;类型&gt;&lt;标识符&gt; | &lt;形参表&gt;,&lt;形参表&gt;<br>　　只用两句就描述完了，所以BNF实际上比用自然语言要简练得多（整个C语言只用一二百句就可以描述清楚），而且相当的精确，不会有自然语言中那种模棱两可的表达。如果你对BNF比较敏感的话，会发现C里面的标识符不能由数字开头，而且在C里面下划线是被当做字母看待的（也就是说能用字母的地方都可以用下划线）。</p>
+<h2 id="产生式"><a href="#产生式" class="headerlink" title="产生式"></a>产生式</h2><p> 在计算机中指 Tiger 编译器将源程序经过词法分析（Lexical Analysis）和语法分析（Syntax Analysis）后得到的一系列符合文法规则（Backus-Naur Form，BNF）的语句</p>
+<p>几种结构的组合产生一个新的结构，叫语法定义也叫语法产生式。</p>
+<h2 id="终结符"><a href="#终结符" class="headerlink" title="终结符"></a>终结符</h2><p>终结符： 最终在代码中出现的字符（ <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/">https://zh.wikipedia.org/wiki/</a> 終結符與非終結符)</p>
+<p>不是代码终止的意思</p>
+<h1 id="JS类型"><a href="#JS类型" class="headerlink" title="JS类型"></a>JS类型</h1><h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><img src="/2020/07/10/advanced/code.png" class="">
+<p>ASCII 0-127个字符 ；出来的较早，计算机的基础<br>Unicode 世界编码集<br>GB 国标里的字符码点跟Unicode码点不一致</p>
+<p>UTF8<br>8个比特位，1个字节，默认用一个字节表示一个字符</p>
+<p>UTF16<br>16个比特位，2个字节表示一个字符</p>
+<img src="/2020/07/10/advanced/utf.png" class="">
+
+<p>控制位</p>
+
+
+
+<h1 id="浏览器工作原理"><a href="#浏览器工作原理" class="headerlink" title="浏览器工作原理"></a>浏览器工作原理</h1><h2 id="浏览器总论"><a href="#浏览器总论" class="headerlink" title="浏览器总论"></a>浏览器总论</h2><img src="/2020/07/10/advanced/browser.png" class="">
+<p>最后显示在计算机上的是图片的形式 Bitmap，最后传给显卡驱动设备，转换成人眼可识别的光信号。</p>
+<p>浏览器目标：<br>从URL -&gt; Bitmap （过程是浏览器渲染的基础流程）</p>
+<h2 id="状态机"><a href="#状态机" class="headerlink" title="状态机"></a>状态机</h2><p>有限状态机<strong>处理字符串</strong></p>
+<img src="/2020/07/10/advanced/state.png" class="">
+
+<p>意义：在各个状态加入自己的逻辑，处理业务</p>
+<p>debug 添加监视</p>
+<img src="/2020/07/10/advanced/state02.png" class="">
+
+<h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><p>浏览器的第一步：http状态解析</p>
+<ul>
+<li>http状态</li>
+<li>header</li>
+</ul>
+<h3 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h3><img src="/2020/07/10/advanced/http.jpg" class="">
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Request</span>(&#123;</span><br><span class="line">  <span class="attr">method</span>: <span class="string">&quot;POST&quot;</span>,     <span class="comment">// TCP 层</span></span><br><span class="line">  <span class="attr">host</span>: <span class="string">&quot;127.0.0.1&quot;</span>,  <span class="comment">// IP 层</span></span><br><span class="line">  <span class="attr">post</span>: <span class="string">&quot;8088&quot;</span>        <span class="comment">// TCP 层</span></span><br><span class="line">  <span class="attr">path</span>: <span class="string">&quot;/&quot;</span>        <span class="comment">// method 和 path 都是HTTP协议要求的</span></span><br><span class="line">  <span class="attr">headers</span>: &#123;</span><br><span class="line">    [<span class="string">&quot;X-Foo2&quot;</span>]: <span class="string">&quot;customed&quot;</span>  <span class="comment">// HTTP协议要求</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="TCP与IP的一些基础知识"><a href="#TCP与IP的一些基础知识" class="headerlink" title="TCP与IP的一些基础知识"></a>TCP与IP的一些基础知识</h3><ul>
+<li><p>流</p>
+</li>
+<li><p>端口<br>每一个软件都会从网卡去拿数据，哪一个数据是分配给哪一个软件的，需要用到端口概念</p>
+</li>
+<li><p>node 对应 require(‘net’)</p>
+</li>
+<li><p>包<br>TCP 传输的就是一个一个数据包的概念</p>
+</li>
+<li><p>IP 地址<br>数据包 从那到那</p>
+</li>
+<li><p>node没有，node 调用C++ 库。libnet/libpcap<br>libnet: 负责构造IP包并且发送<br>libpcap: 负责从网卡抓所有的流经你的网卡的IP包</p>
+</li>
+</ul>
+<h3 id="HTTP-1"><a href="#HTTP-1" class="headerlink" title="HTTP"></a>HTTP</h3><ul>
+<li>request</li>
+<li>response</li>
+</ul>
+<p>必须先由客户端发起一个 request，服务端发送一个 response</p>
+<p>HTTP 协议是文本型的协议，所有内容都是字符串</p>
+<p>method: GET/POST</p>
+<h4 id="http协议-request"><a href="#http协议-request" class="headerlink" title="http协议 request"></a>http协议 request</h4><img src="/2020/07/10/advanced/request.png" class="">
+
+<p>第一步HTTP请求总结</p>
+<ul>
+<li>设计一个HTTP请求的类</li>
+<li>content type是一个必要的字段，要有默认值</li>
+<li>body是kv格式</li>
+<li>不同的content-type影响body的格式</li>
+<li>content length</li>
+</ul>
+<p>第二步send函数编写</p>
+<ul>
+<li>在Request的构造器中收集必要的信息</li>
+<li>设计一个send函数，把请求真实发送到服务器</li>
+<li>send函数应该是异步的，所以返回Promise</li>
+</ul>
+<p>response 格式</p>
+<img src="/2020/07/10/advanced/response.png" class="">
+
+<p>第三步发送请求到服务端（重要）</p>
+<ul>
+<li>设计支持已有的connection或者自己新建connection</li>
+<li>收到数据传给parser</li>
+<li>根据parser的状态resolve Promise</li>
+</ul>
+<p>第四步response解析（重要）</p>
+<ul>
+<li>Response必须分段构造，所以我们要用一个 ResponseParser来 “装配”</li>
+<li>ResponseParser分配处理ResponseText，我们用状态机来分析文本的结构</li>
+</ul>
+<p>最后一步response body解析</p>
+<ul>
+<li>Resonse的body可能根据Content-Type有不同的结构，因此我们会采用子Parser的结构来解决问题</li>
+<li>以TrunkBodyParser为例，我们同样用状态机来处理body的格式</li>
+</ul>
+<h4 id="HTML解析"><a href="#HTML解析" class="headerlink" title="HTML解析"></a>HTML解析</h4><p>第一步 Parse模块的文件拆分</p>
+<ul>
+<li>为了方便文件管理，把parser单独拆到文件中</li>
+<li>parser接受HTML文本作为参数，返回一颗DOM树</li>
+</ul>
+<p>第二步 用FSM实现HTML的分析</p>
+<ul>
+<li>用FSM来实现HTML的分析</li>
+<li>在HTML标准中，已经规定了HTML的状态 <a target="_blank" rel="noopener" href="https://html.spec.whatwg.org/multipage/parsing.html#tokenization">whatwg</a></li>
+<li>Toy-Browser只挑选其中一部分状态，完成一个最简版本</li>
+</ul>
+<p>第三步 解析标签<br>三种tag：</p>
+<ul>
+<li>开始标签</li>
+<li>结束标签</li>
+<li>自封闭标签</li>
+</ul>
+<p>总结：</p>
+<ul>
+<li>主要的标签有：开始标签，结束标签和自封闭标签</li>
+<li>在这一步我们暂时忽略属性</li>
+</ul>
+<p>第四步 创建元素</p>
+<ul>
+<li>在状态机中，除了状态迁移，我们还会要加入业务逻辑</li>
+<li>我们在标签结束状态提交标签token</li>
+</ul>
+<p>第五步 处理属性</p>
+<ul>
+<li>属性值分为单引号、双引号、无引号三种写法，因此需要较多状态处理</li>
+<li>处理属性的方式跟标签类似</li>
+<li>属性结束时，把属性加到标签Token上</li>
+</ul>
+<p>第六步 用token构建DOM树<br>Tree construction 第一步</p>
+<ul>
+<li>从标签构建DOM树的基本技巧是使用栈</li>
+<li>遇到开始标签时创建元素并入栈，遇到结束标签时出栈</li>
+<li>自封闭节点可视为入栈后立即出栈</li>
+<li>任何元素的父元素是它入栈前的栈顶</li>
+</ul>
+<p>第七步 将文本节点加到DOM树</p>
+<ul>
+<li>文本节点与自封闭标签处理类似</li>
+<li>多个文本节点需要合并</li>
+</ul>
+<h4 id="CSS计算"><a href="#CSS计算" class="headerlink" title="CSS计算"></a>CSS计算</h4><p>环境准备：<br>npm install css (css == css parser, 把css的代码变成 AST抽象语法树)<br>根据这颗抽象语法树，抽出各种CSS规则，应用到HTML元素上</p>
+<p>第一步 收集CSS规则</p>
+<ul>
+<li>遇到style标签时，我们把CSS规则保存起来</li>
+<li>这里我们调用CSS Parser来分析CSS规则</li>
+<li>仔细研究此库分析CSS规则的格式</li>
+</ul>
+<p>第二步 添加调用<br>计算CSS时机</p>
+<ul>
+<li>创建一个元素后，立即计算CSS</li>
+<li>理论上，当我们分析一个元素时，所有CSS规则已经收集完毕</li>
+<li>在真实浏览器中，可能遇到写在body的style标签，需要重新CSS计算的情况，这里我们忽略</li>
+</ul>
+<p>第三步 获取父元素序列</p>
+<ul>
+<li>在computeCSS函数中，我们必须知道元素的所有父元素才能判断元素与规则是否匹配</li>
+<li>我们从上一步骤的stack，可以获取本元素所有的父元素</li>
+<li>因此我们首先获取的是 ”当前元素“，所以我们获取得和计算父元素匹配的顺序是从内向外</li>
+</ul>
+<p>第四步 选择器与元素的匹配</p>
+<ul>
+<li>选择器也要从当前元素向外排列</li>
+<li>复杂选择器拆成针对单个元素的选择器，用循环匹配父元素队列</li>
+</ul>
+<p>第五步 计算选择器与元素匹配</p>
+<ul>
+<li>根据选择器的类型和元素属性，计算是否与当前元素匹配</li>
+<li>这里仅仅实现了三种基本选择器，实际的浏览器中要处理复合选择器</li>
+<li>可选：实现复合选择器，实现支持空格的Class选择器</li>
+</ul>
+<p>第六步 生成computed属性</p>
+<ul>
+<li>一旦选择匹配，就应用选择器到元素上，形成computedStyle</li>
+</ul>
+<h1 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h1><h2 id="总论"><a href="#总论" class="headerlink" title="总论"></a>总论</h2><p>第一步：找到一条好的线索，建立一个基础知识的骨架结构<br>线索：学习一门语言，先从语法入手</p>
+<p>语法<br>• <a target="_blank" rel="noopener" href="https://www.w3.org/TR/CSS21/grammar.html#q25.0">css2.1</a><br>• <a target="_blank" rel="noopener" href="https://www.w3.org/TR/css-syntax-3">https://www.w3.org/TR/css-syntax-3</a></p>
+<h2 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h2><p>普通规则和@规则</p>
+<img src="/2020/07/10/advanced/css.png" class="">
+<h3 id="At-rules"><a href="#At-rules" class="headerlink" title="At-rules"></a>At-rules</h3><p>• @charset : <a target="_blank" rel="noopener" href="https://www.w3.org/TR/css-syntax-3/">https://www.w3.org/TR/css-syntax-3/</a><br>• @import :<a target="_blank" rel="noopener" href="https://www.w3.org/TR/css-cascade-4/">https://www.w3.org/TR/css-cascade-4/</a><br>• @media :<a target="_blank" rel="noopener" href="https://www.w3.org/TR/css3-conditional/">https://www.w3.org/TR/css3-conditional/</a> 【重要】<br>• @page : <a target="_blank" rel="noopener" href="https://www.w3.org/TR/css-page-3/">https://www.w3.org/TR/css-page-3/</a><br>• @counter-style :<a target="_blank" rel="noopener" href="https://www.w3.org/TR/css-counter-styles-3">https://www.w3.org/TR/css-counter-styles-3</a><br>• @keyframes :<a target="_blank" rel="noopener" href="https://www.w3.org/TR/css-animations-1/">https://www.w3.org/TR/css-animations-1/</a> 【重要】<br>• @fontface :<a target="_blank" rel="noopener" href="https://www.w3.org/TR/css-fonts-3/">https://www.w3.org/TR/css-fonts-3/</a> 【重要】<br>• @supports :<a target="_blank" rel="noopener" href="https://www.w3.org/TR/css3-conditional/">https://www.w3.org/TR/css3-conditional/</a><br>• @namespace :<a target="_blank" rel="noopener" href="https://www.w3.org/TR/css-namespaces-3/">https://www.w3.org/TR/css-namespaces-3/</a></p>
+<h3 id="css-rule"><a href="#css-rule" class="headerlink" title="css-rule"></a>css-rule</h3><img src="/2020/07/10/advanced/css01.png" class="">
+
+<ul>
+<li>Selector<ul>
+<li><a target="_blank" rel="noopener" href="https://www.w3.org/TR/selectors-3/">https://www.w3.org/TR/selectors-3/</a> </li>
+<li><a target="_blank" rel="noopener" href="https://www.w3.org/TR/selectors-4/">https://www.w3.org/TR/selectors-4/</a> 制定中</li>
+</ul>
+</li>
+<li>Key<ul>
+<li>Properties</li>
+<li>Variables: <a target="_blank" rel="noopener" href="https://www.w3.org/TR/css-variables/">https://www.w3.org/TR/css-variables/</a></li>
+</ul>
+</li>
+<li>Value<ul>
+<li><a target="_blank" rel="noopener" href="https://www.w3.org/TR/css-values-4/">https://www.w3.org/TR/css-values-4/</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="完整的标准列表"><a href="#完整的标准列表" class="headerlink" title="完整的标准列表"></a>完整的标准列表</h3><h4 id="收集标准"><a href="#收集标准" class="headerlink" title="收集标准"></a>收集标准</h4><p>爬虫抓取w3c网站上的内容<br><a target="_blank" rel="noopener" href="https://www.w3c.org/TR/">w3c所有的标准和草稿</a><br><a target="_blank" rel="noopener" href="https://www.w3c.org/TR/?tag=css">w3c css标准</a></p>
+<h4 id="标题和url提取出来"><a href="#标题和url提取出来" class="headerlink" title="标题和url提取出来"></a>标题和url提取出来</h4><p>控制台中输入：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">slice</span>.<span class="title function_">call</span>(<span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#container&#x27;</span>).<span class="property">children</span>).<span class="title function_">filter</span>(<span class="function"><span class="params">e</span> =&gt;</span> </span><br><span class="line">  e.<span class="title function_">getAttribute</span>(<span class="string">&#x27;data-tag&#x27;</span>).<span class="title function_">match</span>(<span class="regexp">/css/</span>)).<span class="title function_">map</span>(<span class="function"><span class="params">e</span> =&gt;</span></span><br><span class="line">  (&#123;<span class="attr">name</span>: e.<span class="property">children</span>[<span class="number">1</span>].<span class="property">innerText</span>, <span class="attr">url</span>: e.<span class="property">children</span>[<span class="number">1</span>].<span class="property">children</span>[<span class="number">0</span>].<span class="property">href</span>&#125;)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>JSON.stringify() 一下</p>
+<h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><p>爬取w3c css的一些内容，并且做一些过滤<br>推荐学习方法：面对大量的信息的时候，用一些自动化的手段（程序员的老本行），帮助我们做一些枯燥的收集工作</p>
+<h2 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><h4 id="简单选择器"><a href="#简单选择器" class="headerlink" title="简单选择器"></a>简单选择器</h4><ul>
+<li><ul>
+<li>（通用选择器，可以选中任何的元素，相当于没有选择器）</li>
+</ul>
+</li>
+<li>div svg|a （div 叫做type selector 类型选择器，选择的是元素的tagName属性）</li>
+<li>.class （可以用空白做分隔符，指定多个class，只要匹配一个就可以）</li>
+<li>#id （严格匹配）</li>
+<li>[attr=value] （属性选择器，等号前面加浪线，就表示像class一样，可以支持拿空格分隔的值的序列，如果前面加单竖线表示这个属性以这个值开头即可，属性选择器强大，如果对优先级没有考虑可以代替class id</li>
+<li>:hover （伪类选择器，元素的特殊状态，跟HTML属性也没有关系，多半来自于交互；带函数的伪类选择器）</li>
+<li>::before (伪元素选择器，选中一些原本不存在的元素，如果不选就不存在一个元素)</li>
+</ul>
+<p>注：<br>HTML命名空间</p>
+<ul>
+<li>HTML</li>
+<li>SVG</li>
+<li>MathML<br>如果想选SVG里面的特定元素或MathML里面特定的元素，必须要用到单竖线（命名空间分隔符）<br>HTML命名空间分隔符是冒号<br>SVG 标签里面有一个跟HTML重名的a标签</li>
+</ul>
+<h4 id="复合选择器"><a href="#复合选择器" class="headerlink" title="复合选择器"></a>复合选择器</h4><ul>
+<li>&lt;简单选择器&gt;&lt;简单选择器&gt;&lt;简单选择器&gt;</li>
+<li><ul>
+<li>或者 div 必须写在最前面</li>
+</ul>
+</li>
+</ul>
+<h4 id="复杂选择器"><a href="#复杂选择器" class="headerlink" title="复杂选择器"></a>复杂选择器</h4><ul>
+<li>&lt;复合选择器&gt; <sp> &lt;复合选择器&gt;</li>
+<li>&lt;复合选择器&gt; “ &gt; “ &lt;复合选择器&gt;</li>
+<li>&lt;复合选择器&gt; “ ~ “ &lt;复合选择器&gt;</li>
+<li>&lt;复合选择器&gt; “ + “ &lt;复合选择器&gt;</li>
+<li>&lt;复合选择器&gt; “ || “ &lt;复合选择器&gt;</li>
+</ul>
+<h3 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h3><img src="/2020/07/10/advanced/css02.png" class="">
+
+<h3 id="伪类"><a href="#伪类" class="headerlink" title="伪类"></a>伪类</h3><p>链接/行为</p>
+<ul>
+<li>:any-link</li>
+<li>:link :visited</li>
+<li>:hover</li>
+<li>:active</li>
+<li>:focus</li>
+<li>:target</li>
+</ul>
+<p>树结构</p>
+<ul>
+<li>:empty</li>
+<li>:nth-child()</li>
+<li>:nth-last-child()</li>
+<li>:first-child :last-child :only-child</li>
+</ul>
+<p>逻辑型</p>
+<ul>
+<li>:not伪类</li>
+<li>:where :has</li>
+</ul>
+<p>选择器写的复杂，意味HTML结构写的不合理</p>
+<h3 id="伪元素"><a href="#伪元素" class="headerlink" title="伪元素"></a>伪元素</h3><p>给页面添加修饰性的内容</p>
+<ul>
+<li>::before</li>
+<li>::after</li>
+<li>::first-line</li>
+<li>::first-letter</li>
+</ul>
+<img src="/2020/07/10/advanced/css03.png" class="">
+<img src="/2020/07/10/advanced/css04.png" class="">
+
+<h2 id="CSS排版"><a href="#CSS排版" class="headerlink" title="CSS排版"></a>CSS排版</h2><h3 id="盒-box"><a href="#盒-box" class="headerlink" title="盒(box)"></a>盒(box)</h3><img src="/2020/07/10/advanced/css05.png" class="">
+
+<h3 id="正常流"><a href="#正常流" class="headerlink" title="正常流"></a>正常流</h3><p>Normal Flow</p>
+<p>正常流排版</p>
+<ul>
+<li>收集盒进行</li>
+<li>计算盒在行中的排版</li>
+<li>计算行的排布</li>
+</ul>
+<p>BFC IFC</p>
+<img src="/2020/07/10/advanced/css06.png" class="">
+<p>正常流里面有两种 Formatting Context</p>
+<ul>
+<li>块格式化上下文（Block Formatting Context，BFC）</li>
+<li>行级格式化上下文（Inline Formatting Context，IFC）</li>
+</ul>
+<p>文字只能放IFC里</p>
+<h4 id="行级排布"><a href="#行级排布" class="headerlink" title="行级排布"></a>行级排布</h4><p>基线对齐</p>
+<img src="/2020/07/10/advanced/css07.png" class="">
+
+<h5 id="文字在字体里面的定义"><a href="#文字在字体里面的定义" class="headerlink" title="文字在字体里面的定义"></a>文字在字体里面的定义</h5><p>文字有宽和高，加上基线</p>
+<img src="/2020/07/10/advanced/css08.png" class="">
+<p>origin 就是基线<br>yMin 就是基线到低缘的距离<br>bearingX 决定了一个默认的字间距<br>advance  整个占的空间</p>
+<h5 id="行模型"><a href="#行模型" class="headerlink" title="行模型"></a>行模型</h5><p>line-top<br>text-top<br>base-line    以英文为主，用来对齐的线<br>text-bottom   top,bottom 只要字体大小不变，它们就不变；如果使用多种字体混排，top和bottom是由fontSize最大的一个字体决定的; 文字的上缘下缘是两条固定的线<br>line-bottom   如果行高是大于文字的高度的时候；如果和盒混排会涉及line-top,bottom偏移的问题；盒的先后顺序和盒的尺寸都会影响line-top,bottom这个位置，盒不影响text-top,bottom</p>
+<p>第一个特别注意的问题<br>行内盒 inline-block 它的基线是随着自己里面的文字去变化的；不建议给行内盒使用基线对齐的；使用vertical-align</p>
+<h4 id="块级排布"><a href="#块级排布" class="headerlink" title="块级排布"></a>块级排布</h4><h5 id="float与clear"><a href="#float与clear" class="headerlink" title="float与clear"></a>float与clear</h5><p>clear：找一块干净的空间，浮动</p>
+<p>老一辈用float clear排版<br>重排行为</p>
+<h4 id="margin折叠"><a href="#margin折叠" class="headerlink" title="margin折叠"></a>margin折叠</h4><p>从上往下排，受盒模型影响</p>
+<img src="/2020/07/10/advanced/css09.png" class="">
+<p>叠出来的高度跟最大的margin的高度相等，这个现象叫margin collapse, 也叫留白的折叠现象，也叫边距折叠。<br>古老的印刷行业也是这种排版体系。<br>注意：只会发生在BFC里面</p>
+<p>单看float ，单看边距折叠，单看BFC 都不难。如果三个现象叠加到一起，就是古代前端的最大难题。现在面试BFC也是在这里面</p>
+<h4 id="BFC合并"><a href="#BFC合并" class="headerlink" title="BFC合并"></a>BFC合并</h4><p>正常流最困难的部分</p>
+<h5 id="Block"><a href="#Block" class="headerlink" title="Block"></a>Block</h5><ul>
+<li>Block Container: CSS2.1标准里面定义的；里面有BFC的<ul>
+<li>能容纳正常流的盒，里面就有BFC</li>
+</ul>
+</li>
+<li>Block-level Box：外面有BFC的</li>
+<li>Block Box = Block Container + Block-level Box: 里外都有BFC的<ul>
+<li>这个不能理解，就无法理解BFC合并现象</li>
+</ul>
+</li>
+</ul>
+<h5 id="Block-Container"><a href="#Block-Container" class="headerlink" title="Block Container"></a>Block Container</h5><p>基本上是一些 display 这样的效果</p>
+<ul>
+<li>block</li>
+<li>inline-block</li>
+<li>table-cell (table-row 不是)</li>
+<li>flex item (display: flex, 子元素如果没有特殊的display)</li>
+<li>grid cell</li>
+<li>table-caption (表格的标题)</li>
+</ul>
+<p>所有能够容纳里面不是特殊的display的模式的，它里面默认就是正常流</p>
+<h5 id="Block-level-Box"><a href="#Block-level-Box" class="headerlink" title="Block-level Box"></a>Block-level Box</h5><img src="/2020/07/10/advanced/css10.png" class="">
+
+<h5 id="设立BFC"><a href="#设立BFC" class="headerlink" title="设立BFC"></a>设立BFC</h5><p>什么时候什么样的盒，它会创建BFC呢，Establish BFC</p>
+<ul>
+<li>floats</li>
+<li>absolutely positioned element</li>
+<li>block containers(such as inline-blocks, table-cells, and table-captions)<br>that are not block boxes,<ul>
+<li>flex items</li>
+<li>grid cell</li>
+<li>……</li>
+</ul>
+</li>
+<li>and block boxes with ‘overflow’ other than ‘visible’</li>
+</ul>
+<p>换一个角度记：<br>默认这些能容纳正常流的盒，都认为它会创建 BFC，但是只有一种情况例外，就是 Block Box 里外都是 BFC<br>并且 overflow 是 visible</p>
+<h5 id="BFC合并-1"><a href="#BFC合并-1" class="headerlink" title="BFC合并"></a>BFC合并</h5><ul>
+<li>block box &amp;&amp; overflow: visible<ul>
+<li>BFC合并与float</li>
+<li>BFC合并与边距折叠</li>
+</ul>
+</li>
+</ul>
+<h3 id="Flex排版"><a href="#Flex排版" class="headerlink" title="Flex排版"></a>Flex排版</h3><ul>
+<li>收集盒进行</li>
+<li>计算盒在主轴方向的排布</li>
+<li>计算盒在交叉轴方向的排布</li>
+</ul>
+<h2 id="动画与绘制"><a href="#动画与绘制" class="headerlink" title="动画与绘制"></a>动画与绘制</h2><h3 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h3><p>CSS控制表现</p>
+<ul>
+<li>控制元素的位置和尺寸的信息</li>
+<li>控制绘制和最后实际看到的渲染的信息</li>
+<li>交互与动画的信息</li>
+</ul>
+<h4 id="Animation"><a href="#Animation" class="headerlink" title="Animation"></a>Animation</h4><p>动画</p>
+<ul>
+<li>@keyframes定义</li>
+<li>animation：使用</li>
+</ul>
+<p>animation 六个属性的集合</p>
+<ul>
+<li>animation-name 时间曲线</li>
+<li>animation-duration 动画的时长</li>
+<li>animation-timing-function 动画的时间曲线</li>
+<li>animation-delay 动画开始前的延迟</li>
+<li>animation-iteration-count 动画的播放次数</li>
+<li>animation-direction 动画的方向</li>
+</ul>
+<p>@keyframes</p>
+<ul>
+<li>百分比</li>
+<li>from to  （from大致相等于 0%；to 100%）</li>
+</ul>
+<h4 id="Transition"><a href="#Transition" class="headerlink" title="Transition"></a>Transition</h4><p>属性</p>
+<ul>
+<li>transition-property 要变换的属性</li>
+<li>transition-duration 变换的时长</li>
+<li>transition-timing-function 时间曲线</li>
+<li>transition-delay 延迟</li>
+</ul>
+<h5 id="timing-function"><a href="#timing-function" class="headerlink" title="timing-function"></a>timing-function</h5><p>来自<a target="_blank" rel="noopener" href="https://cubic-bezier.com/#.17,.67,.83,.67">三次贝塞尔曲线</a><br>一次贝塞尔曲线是直线</p>
+<h3 id="颜色"><a href="#颜色" class="headerlink" title="颜色"></a>颜色</h3><h4 id="HSV"><a href="#HSV" class="headerlink" title="HSV"></a>HSV</h4><h3 id="绘制"><a href="#绘制" class="headerlink" title="绘制"></a>绘制</h3><ul>
+<li><p>几何图形</p>
+<ul>
+<li>border</li>
+<li>box-shadow</li>
+<li>border-radius</li>
+</ul>
+</li>
+<li><p>文字</p>
+<ul>
+<li>font</li>
+<li>text-decoration</li>
+</ul>
+</li>
+<li><p>位图</p>
+<ul>
+<li>background-image</li>
+</ul>
+</li>
+</ul>
+<h4 id="应用技巧"><a href="#应用技巧" class="headerlink" title="应用技巧"></a>应用技巧</h4><ul>
+<li>data uri + svg</li>
+<li>data:image/svg+xml,<svg width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg"><ellipse cx="300" cy="150" rx="200" ry="80" style="fill:rgb(200,100,50);
+stroke:rgb(0,0,100);stroke-width:2"/></svg></li>
+</ul>
+<p>svg 专业的矢量图格式<br>svg 支持path</p>
+<p>最后分类：layout和render下一层</p>
+<h1 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h1><p>源流来自：XML 、 SGML（两种语言是HTML的超集）<br>H5以后，变成独立的语言</p>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><h3 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h3><p>DTD：文档类型定义<br><a target="_blank" rel="noopener" href="https://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">https://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd</a></p>
+<h3 id="XHTML"><a href="#XHTML" class="headerlink" title="XHTML"></a>XHTML</h3><p><a target="_blank" rel="noopener" href="https://www.w3.org/1999/xhtml/">https://www.w3.org/1999/xhtml/</a></p>
+<p>HTML严格写法，每个标签都必须严格闭合，可以写XHTML版本的HTML5</p>
+<h3 id="特殊字符-special"><a href="#特殊字符-special" class="headerlink" title="特殊字符 special"></a>特殊字符 special</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="symbol">&amp;#955;</span> <span class="symbol">&amp;#945;</span> <span class="symbol">&amp;#946;</span> <span class="symbol">&amp;#947;</span> <span class="symbol">&amp;#937;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">λ α β γ Ω</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="symbol">&amp;lambda;</span> <span class="symbol">&amp;alpha;</span> <span class="symbol">&amp;beta;</span> <span class="symbol">&amp;gamma;</span> <span class="symbol">&amp;omega;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">λ α β γ ω</span><br></pre></td></tr></table></figure>
+
+<p>必须记住的，如果直接写在html里会报错</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="symbol">&amp;quot;</span> <span class="symbol">&amp;amp;</span> <span class="symbol">&amp;lt;</span> <span class="symbol">&amp;gt;</span> <span class="symbol">&amp;apos;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">&quot; &amp; &lt; &gt; &#x27;</span><br></pre></td></tr></table></figure>
+
+<h2 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h2><h2 id="DOM-API"><a href="#DOM-API" class="headerlink" title="DOM API"></a>DOM API</h2><p>DOM 掌握最高标准：灵活运用 range 和 fragment</p>
+<h3 id="事件API"><a href="#事件API" class="headerlink" title="事件API"></a>事件API</h3><p>Event：冒泡与捕获<br>先捕获后冒泡</p>
+<p>addEventListener 默认监听冒泡事件，false<br>addEventListener 第三个参数 ture，捕获事件</p>
+<h4 id="阻止冒泡"><a href="#阻止冒泡" class="headerlink" title="阻止冒泡"></a>阻止冒泡</h4><p>window.event ? window.event.cancelBubble = true : e.stopPropagation();</p>
+<h3 id="Range"><a href="#Range" class="headerlink" title="Range"></a>Range</h3><p>操作半个节点或批量节点<br>对DOM树操作，万能的API</p>
+<p>range: 范围<br>有起始点和终止点，range是不能跳的</p>
+<h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> range = <span class="keyword">new</span> <span class="title class_">Range</span>();</span><br></pre></td></tr></table></figure>
+
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><p>由于节点换行、缩进，会产生很多空白节点<br>现操作某节点前后</p>
+<ul>
+<li>range.setStart(node, length)</li>
+<li>range.setEnd(node, length)</li>
+<li>range.setStartBefore</li>
+<li>range.setEndBefore</li>
+<li>range.setStartAfter</li>
+<li>range.setEndAfter</li>
+<li>range.selectNode</li>
+<li>range.selectNodeContents</li>
+</ul>
+<p>取出range里面的内容（删）<br>let fragment = range.extractContents()<br>fragment node的子类</p>
+<p>插入新的节点（增）<br>range.insertNode(document.createTextNode(‘aaa’))</p>
+<p>移除半个节点，会自动补上标签</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">&quot;b&quot;</span>&gt;<span class="number">123</span>&lt;span style=<span class="string">&quot;background-color: pink;&quot;</span>&gt;<span class="number">456789</span>&lt;<span class="regexp">/span&gt;0123456789&lt;/</span>div&gt;</span><br><span class="line">range.<span class="title function_">setStart</span>(<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;a&#x27;</span>).<span class="property">childNodes</span>[<span class="number">1</span>].<span class="property">childNodes</span>[<span class="number">0</span>], <span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="编程与算法训练"><a href="#编程与算法训练" class="headerlink" title="编程与算法训练"></a>编程与算法训练</h1><p>包含跟语音特性强相关 和 经典算法题；核心提升编程能力</p>
+<h2 id="TicTacToe"><a href="#TicTacToe" class="headerlink" title="TicTacToe"></a>TicTacToe</h2><p>井字棋，三字旗</p>
+<p>小技巧：问好表达式，多个条件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">innerText =</span><br><span class="line">  pattern[j][i] == <span class="number">2</span> ? <span class="string">&#x27;❌&#x27;</span> : </span><br><span class="line">  pattern[j][i] == <span class="number">1</span> ？ <span class="string">&#x27;⭕️&#x27;</span>: <span class="string">&#x27;&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="clone-棋盘"><a href="#clone-棋盘" class="headerlink" title="clone 棋盘"></a>clone 棋盘</h3><p>二维数组<br>let pattern = [<br>    [0, 0, 0],<br>    [0, 0, 0],<br>    [0, 0, 0]<br>  ]<br>用：<br>function clone(pattern){<br>    return JSON.parse(JSON.stringify(pattern));<br>  }</p>
+<p>一维数组<br>let pattern = [<br>    0, 0, 0,<br>    0, 0, 0,<br>    0, 0, 0<br>]<br>function clone(pattern){<br>  return Object.create(pattern);<br>}</p>
+<h2 id="异步编程"><a href="#异步编程" class="headerlink" title="异步编程"></a>异步编程</h2><h3 id="红绿灯"><a href="#红绿灯" class="headerlink" title="红绿灯"></a>红绿灯</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> dom = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;light&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> time = <span class="title class_">Date</span>.<span class="title function_">parse</span>(<span class="keyword">new</span> <span class="title class_">Date</span>())/<span class="number">1000</span>;</span><br><span class="line"><span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> sty = dom.<span class="property">currentStyle</span> || <span class="variable language_">window</span>.<span class="title function_">getComputedStyle</span>(dom, <span class="literal">null</span>);</span><br><span class="line">  <span class="keyword">if</span> (sty.<span class="property">backgroundColor</span> == <span class="string">&#x27;rgb(255, 0, 0)&#x27;</span> &amp;&amp; time + <span class="number">5</span> == <span class="title class_">Date</span>.<span class="title function_">parse</span>(<span class="keyword">new</span> <span class="title class_">Date</span>())/<span class="number">1000</span>) &#123;</span><br><span class="line">    <span class="title function_">change</span>(<span class="string">&#x27;rgb(0, 128, 0)&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (sty.<span class="property">backgroundColor</span> == <span class="string">&#x27;rgb(255, 255, 0)&#x27;</span> &amp;&amp; time + <span class="number">2</span> == <span class="title class_">Date</span>.<span class="title function_">parse</span>(<span class="keyword">new</span> <span class="title class_">Date</span>())/<span class="number">1000</span>) &#123;</span><br><span class="line">    <span class="title function_">change</span>(<span class="string">&#x27;rgb(255, 0, 0)&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (sty.<span class="property">backgroundColor</span> == <span class="string">&#x27;rgb(0, 128, 0)&#x27;</span> &amp;&amp; time + <span class="number">10</span> == <span class="title class_">Date</span>.<span class="title function_">parse</span>(<span class="keyword">new</span> <span class="title class_">Date</span>())/<span class="number">1000</span>) &#123;</span><br><span class="line">    <span class="title function_">change</span>(<span class="string">&#x27;rgb(255, 255, 0)&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">change</span>(<span class="params">color</span>) &#123;</span><br><span class="line">  time = <span class="title class_">Date</span>.<span class="title function_">parse</span>(<span class="keyword">new</span> <span class="title class_">Date</span>())/<span class="number">1000</span>;</span><br><span class="line">  dom.<span class="property">style</span>.<span class="property">backgroundColor</span> = color;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="base"><a href="#base" class="headerlink" title="base"></a>base</h3><p>js异步机制</p>
+<ul>
+<li>callback</li>
+<li>Promise</li>
+<li>async/await （实际上也是靠Promise管理的）</li>
+</ul>
+<h3 id="winter写法"><a href="#winter写法" class="headerlink" title="winter写法"></a>winter写法</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css"><span class="selector-tag">div</span>&#123;&#125;</span></span><br><span class="line"><span class="language-css"><span class="selector-class">.green</span><span class="selector-class">.light</span> &#123;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">background-color</span>: green;</span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;green&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;yellow&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;red&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="callback"><a href="#callback" class="headerlink" title="callback"></a>callback</h4><p>回调地狱</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">go</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="title function_">green</span>()</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="title function_">yellow</span>()</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">      <span class="title function_">red</span>()</span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="title function_">go</span>()</span><br><span class="line">      &#125;, <span class="number">5000</span>)</span><br><span class="line">    &#125;, <span class="number">2000</span>)</span><br><span class="line">  &#125;, <span class="number">10000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sleep</span>(<span class="params">t</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(resolve, t);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 链式的表达式代替 回调</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">go</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="title function_">green</span>();</span><br><span class="line">  <span class="title function_">sleep</span>(<span class="number">1000</span>).<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">yellow</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">sleep</span>(<span class="number">200</span>);</span><br><span class="line">  &#125;).<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">red</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">sleep</span>(<span class="number">500</span>);</span><br><span class="line">  &#125;).<span class="title function_">then</span>(go);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="async-await"><a href="#async-await" class="headerlink" title="async/await"></a>async/await</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">go</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="title function_">green</span>();</span><br><span class="line">    <span class="keyword">await</span> <span class="title function_">sleep</span>(<span class="number">1000</span>);</span><br><span class="line">    <span class="title function_">yellow</span>();</span><br><span class="line">    <span class="keyword">await</span> <span class="title function_">sleep</span>(<span class="number">300</span>);</span><br><span class="line">    <span class="title function_">red</span>();</span><br><span class="line">    <span class="keyword">await</span> <span class="title function_">sleep</span>(<span class="number">200</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>手动控制(路口道路拥挤，交警需要手动调控)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">happen</span>(<span class="params">element, eventName</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    element.<span class="title function_">addEventListener</span>(eventName, resolve, &#123;<span class="attr">once</span>: <span class="literal">true</span>&#125;);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">go</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="title function_">green</span>();</span><br><span class="line">    <span class="keyword">await</span> <span class="title function_">happen</span>(<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;next&#x27;</span>), <span class="string">&#x27;click&#x27;</span>);</span><br><span class="line">    <span class="title function_">yellow</span>();</span><br><span class="line">    <span class="keyword">await</span> <span class="title function_">happen</span>(<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;next&#x27;</span>), <span class="string">&#x27;click&#x27;</span>);</span><br><span class="line">    <span class="title function_">red</span>();</span><br><span class="line">    <span class="keyword">await</span> <span class="title function_">happen</span>(<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;next&#x27;</span>), <span class="string">&#x27;click&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="generator模拟async-await"><a href="#generator模拟async-await" class="headerlink" title="generator模拟async/await"></a>generator模拟async/await</h4><p>早起人们的智慧</p>
+<h2 id="寻路"><a href="#寻路" class="headerlink" title="寻路"></a>寻路</h2><ul>
+<li>广度优先搜索算法（深度优先搜索）</li>
+<li>有UI部分</li>
+</ul>
+<h3 id="地图编辑器"><a href="#地图编辑器" class="headerlink" title="地图编辑器"></a>地图编辑器</h3><h1 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h1><p>前端架构里面最重要的部分<br>组件化决定了一个前端团队的复用率（提高复用率，写代码的时候少很多心智负担）</p>
+<h2 id="前端架构热门的两个话题"><a href="#前端架构热门的两个话题" class="headerlink" title="前端架构热门的两个话题"></a>前端架构热门的两个话题</h2><h3 id="组件化-1"><a href="#组件化-1" class="headerlink" title="组件化"></a>组件化</h3><p>从扩展html标签，引申出来的前端架构体系，主要目标复用</p>
+<h3 id="架构模式"><a href="#架构模式" class="headerlink" title="架构模式"></a>架构模式</h3><p>MVC MVVM<br>前端跟数据逻辑层之间，如何去交互</p>
+<h4 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h4><p>MVVM（Model–view–viewmodel）是一种软件架构模式。<br>View &lt;-&gt; ViewModel &lt;-&gt; Model<br>视图模型：中介<br>模型：数据中心<br>视图：外观（UI）</p>
+<h2 id="组件的基本概念和基本组成部分"><a href="#组件的基本概念和基本组成部分" class="headerlink" title="组件的基本概念和基本组成部分"></a>组件的基本概念和基本组成部分</h2><h3 id="Attribute"><a href="#Attribute" class="headerlink" title="Attribute"></a>Attribute</h3><p>属性<br>attribute： 强调描述性<br>property:  强调从属关系</p>
+<h2 id="JSX"><a href="#JSX" class="headerlink" title="JSX"></a>JSX</h2><p>react</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>jsx是babel的插件</p>
+<h2 id="parser"><a href="#parser" class="headerlink" title="parser"></a>parser</h2><p>vue</p>
+<h1 id="工具链"><a href="#工具链" class="headerlink" title="工具链"></a>工具链</h1><p>如何为javascript环境制作一套工具链，覆盖前端开发的各个环节<br>所有工具的开端就是脚手架</p>
+<p>generator: 脚手架；（直释：发电机，生产者）</p>
+<h2 id="yeoman"><a href="#yeoman" class="headerlink" title="yeoman"></a>yeoman</h2><p>yeoman.io<br>脚手架的生成器<br>通过命令行去跟用户交互</p>
+<h3 id="命令行交互"><a href="#命令行交互" class="headerlink" title="命令行交互"></a>命令行交互</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> answers = <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="title function_">prompt</span>([</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&quot;input&quot;</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;name&quot;</span>,</span><br><span class="line">    <span class="attr">message</span>: <span class="string">&quot;Your project name&quot;</span>,</span><br><span class="line">    <span class="attr">default</span>: <span class="variable language_">this</span>.<span class="property">appname</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;confirm&#x27;</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;cool&#x27;</span>,</span><br><span class="line">    <span class="attr">message</span>: <span class="string">&#x27;Would you like to enable the Cool Feature?&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">]);</span><br><span class="line"><span class="variable language_">this</span>.<span class="title function_">log</span>(<span class="string">&#x27;app name&#x27;</span>, answers.<span class="property">name</span>);</span><br><span class="line"><span class="variable language_">this</span>.<span class="title function_">log</span>(<span class="string">&#x27;cool feature&#x27;</span>, answers.<span class="property">cool</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">fs</span>.<span class="title function_">copyTpl</span>(</span><br><span class="line">  <span class="variable language_">this</span>.<span class="title function_">templatePath</span>(<span class="string">&#x27;t.html&#x27;</span>),</span><br><span class="line">  <span class="variable language_">this</span>.<span class="title function_">destinationPath</span>(<span class="string">&#x27;public/index.html&#x27;</span>),</span><br><span class="line">  &#123; <span class="attr">title</span>: <span class="string">&#x27;Templating with Yeoman&#x27;</span> &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="initPackage"><a href="#initPackage" class="headerlink" title="initPackage"></a>initPackage</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pkgJson = &#123;</span><br><span class="line">  <span class="attr">devDependencies</span>: &#123;</span><br><span class="line">    <span class="attr">eslint</span>: <span class="string">&#x27;^3.15.0&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">dependencies</span>: &#123;</span><br><span class="line">    <span class="attr">react</span>: <span class="string">&#x27;^16.2.0&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">this</span>.<span class="property">fs</span>.<span class="title function_">extendJSON</span>(<span class="variable language_">this</span>.<span class="title function_">destinationPath</span>(<span class="string">&#x27;package.json&#x27;</span>), pkgJson);</span><br><span class="line"><span class="variable language_">this</span>.<span class="title function_">npmInstall</span>();</span><br></pre></td></tr></table></figure>
+
+<h1 id="发布系统"><a href="#发布系统" class="headerlink" title="发布系统"></a>发布系统</h1><p>包含：<br>线上服务系统（用户使用）<br>程序员发布系统<br>发布工具（命令行工具）</p>
+<h2 id="线上服务器"><a href="#线上服务器" class="headerlink" title="线上服务器"></a>线上服务器</h2><p>编写代码部署到服务器上<br>把一个Express服务器，部署到线上</p>
+<h3 id="初始化一个项目"><a href="#初始化一个项目" class="headerlink" title="初始化一个项目"></a>初始化一个项目</h3><p>npx express-generator</p>
+<h2 id="发布服务"><a href="#发布服务" class="headerlink" title="发布服务"></a>发布服务</h2><p>发布服务器和发布工具构成</p>
+<h3 id="publish-server"><a href="#publish-server" class="headerlink" title="publish-server"></a>publish-server</h3><p>向真实的server，copy自己的文件<br>向</p>
+<h4 id="搭建"><a href="#搭建" class="headerlink" title="搭建"></a>搭建</h4><p>可以使用express和koa框架<br>这里使用http api</p>
+<p>request和response都是流式处理</p>
+<p>把文件通过HTTP的方式，传给我们的发布的服务器<br>publish-tool ——&gt; publish-server</p>
+<h4 id="了解Node里面的流"><a href="#了解Node里面的流" class="headerlink" title="了解Node里面的流"></a>了解Node里面的流</h4><p>第一种方式是可读的流：用nodejs代码可以从流里面获取数据<br><a target="_blank" rel="noopener" href="https://nodejs.org/docs/latest-v13.x/api/stream.html#stream_class_stream_writable">node流</a></p>
+<p>秒级的HTTP请求 与 工具型request传输 几分钟</p>
+<h3 id="publish-tool"><a href="#publish-tool" class="headerlink" title="publish-tool"></a>publish-tool</h3><p>Content-Type: HTTP RFC标准</p>
+<p>以package.json为例，学习流式传输<br><a target="_blank" rel="noopener" href="https://nodejs.org/docs/latest-v13.x/api/stream.html#stream_class_stream_readable">node pipe 流</a></p>
+<h3 id="多文件压缩包传输"><a href="#多文件压缩包传输" class="headerlink" title="多文件压缩包传输"></a>多文件压缩包传输</h3><p>npm包<br>archiver<br>unzipper</p>
+<h2 id="三个项目"><a href="#三个项目" class="headerlink" title="三个项目"></a>三个项目</h2><p>发布工具<br>发布系统<br>线上服务系统</p>
+<h2 id="发布系统部署"><a href="#发布系统部署" class="headerlink" title="发布系统部署"></a>发布系统部署</h2>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Front-End/" rel="tag"># Front-End</a>
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/09/package-manage-tool/" rel="prev" title="yarn">
+      <i class="fa fa-chevron-left"></i> yarn
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/07/30/advanced-exercise/" rel="next" title="advanced-exercise">
+      advanced-exercise <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JS"><span class="nav-number">1.</span> <span class="nav-text">JS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E8%A8%80%E9%80%9A%E8%AF%86"><span class="nav-number">1.1.</span> <span class="nav-text">语言通识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%94%E5%A7%86%E6%96%AF%E5%9F%BA%E8%B0%B1%E7%B3%BB"><span class="nav-number">1.2.</span> <span class="nav-text">乔姆斯基谱系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BNF"><span class="nav-number">1.3.</span> <span class="nav-text">BNF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%90%86%E8%A7%A3"><span class="nav-number">1.3.1.</span> <span class="nav-text">理解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A7%E7%94%9F%E5%BC%8F"><span class="nav-number">1.4.</span> <span class="nav-text">产生式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%88%E7%BB%93%E7%AC%A6"><span class="nav-number">1.5.</span> <span class="nav-text">终结符</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">JS类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">2.1.</span> <span class="nav-text">String</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">浏览器工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%80%BB%E8%AE%BA"><span class="nav-number">3.1.</span> <span class="nav-text">浏览器总论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E6%9C%BA"><span class="nav-number">3.2.</span> <span class="nav-text">状态机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP"><span class="nav-number">3.3.</span> <span class="nav-text">HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.3.1.</span> <span class="nav-text">网络模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E4%B8%8EIP%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">3.3.2.</span> <span class="nav-text">TCP与IP的一些基础知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-1"><span class="nav-number">3.3.3.</span> <span class="nav-text">HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#http%E5%8D%8F%E8%AE%AE-request"><span class="nav-number">3.3.3.1.</span> <span class="nav-text">http协议 request</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML%E8%A7%A3%E6%9E%90"><span class="nav-number">3.3.3.2.</span> <span class="nav-text">HTML解析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS%E8%AE%A1%E7%AE%97"><span class="nav-number">3.3.3.3.</span> <span class="nav-text">CSS计算</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CSS"><span class="nav-number">4.</span> <span class="nav-text">CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E8%AE%BA"><span class="nav-number">4.1.</span> <span class="nav-text">总论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%84%E5%88%99"><span class="nav-number">4.2.</span> <span class="nav-text">规则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#At-rules"><span class="nav-number">4.2.1.</span> <span class="nav-text">At-rules</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#css-rule"><span class="nav-number">4.2.2.</span> <span class="nav-text">css-rule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84%E6%A0%87%E5%87%86%E5%88%97%E8%A1%A8"><span class="nav-number">4.2.3.</span> <span class="nav-text">完整的标准列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%B6%E9%9B%86%E6%A0%87%E5%87%86"><span class="nav-number">4.2.3.1.</span> <span class="nav-text">收集标准</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%87%E9%A2%98%E5%92%8Curl%E6%8F%90%E5%8F%96%E5%87%BA%E6%9D%A5"><span class="nav-number">4.2.3.2.</span> <span class="nav-text">标题和url提取出来</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">4.2.4.</span> <span class="nav-text">实验</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">4.3.</span> <span class="nav-text">选择器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95"><span class="nav-number">4.3.1.</span> <span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">4.3.1.1.</span> <span class="nav-text">简单选择器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%8D%E5%90%88%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">4.3.1.2.</span> <span class="nav-text">复合选择器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">4.3.1.3.</span> <span class="nav-text">复杂选择器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-number">4.3.2.</span> <span class="nav-text">优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%AA%E7%B1%BB"><span class="nav-number">4.3.3.</span> <span class="nav-text">伪类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%AA%E5%85%83%E7%B4%A0"><span class="nav-number">4.3.4.</span> <span class="nav-text">伪元素</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS%E6%8E%92%E7%89%88"><span class="nav-number">4.4.</span> <span class="nav-text">CSS排版</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%92-box"><span class="nav-number">4.4.1.</span> <span class="nav-text">盒(box)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%B8%B8%E6%B5%81"><span class="nav-number">4.4.2.</span> <span class="nav-text">正常流</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%8C%E7%BA%A7%E6%8E%92%E5%B8%83"><span class="nav-number">4.4.2.1.</span> <span class="nav-text">行级排布</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%87%E5%AD%97%E5%9C%A8%E5%AD%97%E4%BD%93%E9%87%8C%E9%9D%A2%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">4.4.2.1.1.</span> <span class="nav-text">文字在字体里面的定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A1%8C%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.4.2.1.2.</span> <span class="nav-text">行模型</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9D%97%E7%BA%A7%E6%8E%92%E5%B8%83"><span class="nav-number">4.4.2.2.</span> <span class="nav-text">块级排布</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#float%E4%B8%8Eclear"><span class="nav-number">4.4.2.2.1.</span> <span class="nav-text">float与clear</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#margin%E6%8A%98%E5%8F%A0"><span class="nav-number">4.4.2.3.</span> <span class="nav-text">margin折叠</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BFC%E5%90%88%E5%B9%B6"><span class="nav-number">4.4.2.4.</span> <span class="nav-text">BFC合并</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Block"><span class="nav-number">4.4.2.4.1.</span> <span class="nav-text">Block</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Block-Container"><span class="nav-number">4.4.2.4.2.</span> <span class="nav-text">Block Container</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Block-level-Box"><span class="nav-number">4.4.2.4.3.</span> <span class="nav-text">Block-level Box</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%AB%8BBFC"><span class="nav-number">4.4.2.4.4.</span> <span class="nav-text">设立BFC</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#BFC%E5%90%88%E5%B9%B6-1"><span class="nav-number">4.4.2.4.5.</span> <span class="nav-text">BFC合并</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Flex%E6%8E%92%E7%89%88"><span class="nav-number">4.4.3.</span> <span class="nav-text">Flex排版</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E7%94%BB%E4%B8%8E%E7%BB%98%E5%88%B6"><span class="nav-number">4.5.</span> <span class="nav-text">动画与绘制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E7%94%BB"><span class="nav-number">4.5.1.</span> <span class="nav-text">动画</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Animation"><span class="nav-number">4.5.1.1.</span> <span class="nav-text">Animation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Transition"><span class="nav-number">4.5.1.2.</span> <span class="nav-text">Transition</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#timing-function"><span class="nav-number">4.5.1.2.1.</span> <span class="nav-text">timing-function</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%9C%E8%89%B2"><span class="nav-number">4.5.2.</span> <span class="nav-text">颜色</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HSV"><span class="nav-number">4.5.2.1.</span> <span class="nav-text">HSV</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6"><span class="nav-number">4.5.3.</span> <span class="nav-text">绘制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E6%8A%80%E5%B7%A7"><span class="nav-number">4.5.3.1.</span> <span class="nav-text">应用技巧</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML"><span class="nav-number">5.</span> <span class="nav-text">HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">5.1.</span> <span class="nav-text">定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XML"><span class="nav-number">5.1.1.</span> <span class="nav-text">XML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XHTML"><span class="nav-number">5.1.2.</span> <span class="nav-text">XHTML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6-special"><span class="nav-number">5.1.3.</span> <span class="nav-text">特殊字符 special</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-1"><span class="nav-number">5.2.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM-API"><span class="nav-number">5.3.</span> <span class="nav-text">DOM API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6API"><span class="nav-number">5.3.1.</span> <span class="nav-text">事件API</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%BB%E6%AD%A2%E5%86%92%E6%B3%A1"><span class="nav-number">5.3.1.1.</span> <span class="nav-text">阻止冒泡</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Range"><span class="nav-number">5.3.2.</span> <span class="nav-text">Range</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA"><span class="nav-number">5.3.3.</span> <span class="nav-text">创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#API"><span class="nav-number">5.3.4.</span> <span class="nav-text">API</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E4%B8%8E%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83"><span class="nav-number">6.</span> <span class="nav-text">编程与算法训练</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TicTacToe"><span class="nav-number">6.1.</span> <span class="nav-text">TicTacToe</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#clone-%E6%A3%8B%E7%9B%98"><span class="nav-number">6.1.1.</span> <span class="nav-text">clone 棋盘</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B"><span class="nav-number">6.2.</span> <span class="nav-text">异步编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%A2%E7%BB%BF%E7%81%AF"><span class="nav-number">6.2.1.</span> <span class="nav-text">红绿灯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#base"><span class="nav-number">6.2.2.</span> <span class="nav-text">base</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#winter%E5%86%99%E6%B3%95"><span class="nav-number">6.2.3.</span> <span class="nav-text">winter写法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#callback"><span class="nav-number">6.2.3.1.</span> <span class="nav-text">callback</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Promise"><span class="nav-number">6.2.3.2.</span> <span class="nav-text">Promise</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#async-await"><span class="nav-number">6.2.3.3.</span> <span class="nav-text">async&#x2F;await</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#generator%E6%A8%A1%E6%8B%9Fasync-await"><span class="nav-number">6.2.3.4.</span> <span class="nav-text">generator模拟async&#x2F;await</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BB%E8%B7%AF"><span class="nav-number">6.3.</span> <span class="nav-text">寻路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%B0%E5%9B%BE%E7%BC%96%E8%BE%91%E5%99%A8"><span class="nav-number">6.3.1.</span> <span class="nav-text">地图编辑器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E5%8C%96"><span class="nav-number">7.</span> <span class="nav-text">组件化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E6%9E%B6%E6%9E%84%E7%83%AD%E9%97%A8%E7%9A%84%E4%B8%A4%E4%B8%AA%E8%AF%9D%E9%A2%98"><span class="nav-number">7.1.</span> <span class="nav-text">前端架构热门的两个话题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E5%8C%96-1"><span class="nav-number">7.1.1.</span> <span class="nav-text">组件化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F"><span class="nav-number">7.1.2.</span> <span class="nav-text">架构模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MVVM"><span class="nav-number">7.1.2.1.</span> <span class="nav-text">MVVM</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="nav-number">7.2.</span> <span class="nav-text">组件的基本概念和基本组成部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Attribute"><span class="nav-number">7.2.1.</span> <span class="nav-text">Attribute</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSX"><span class="nav-number">7.3.</span> <span class="nav-text">JSX</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">7.3.1.</span> <span class="nav-text">安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#parser"><span class="nav-number">7.4.</span> <span class="nav-text">parser</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E9%93%BE"><span class="nav-number">8.</span> <span class="nav-text">工具链</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#yeoman"><span class="nav-number">8.1.</span> <span class="nav-text">yeoman</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BA%A4%E4%BA%92"><span class="nav-number">8.1.1.</span> <span class="nav-text">命令行交互</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6"><span class="nav-number">8.1.2.</span> <span class="nav-text">新建文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#initPackage"><span class="nav-number">8.1.3.</span> <span class="nav-text">initPackage</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%91%E5%B8%83%E7%B3%BB%E7%BB%9F"><span class="nav-number">9.</span> <span class="nav-text">发布系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E4%B8%8A%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">9.1.</span> <span class="nav-text">线上服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE"><span class="nav-number">9.1.1.</span> <span class="nav-text">初始化一个项目</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E5%B8%83%E6%9C%8D%E5%8A%A1"><span class="nav-number">9.2.</span> <span class="nav-text">发布服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#publish-server"><span class="nav-number">9.2.1.</span> <span class="nav-text">publish-server</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA"><span class="nav-number">9.2.1.1.</span> <span class="nav-text">搭建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3Node%E9%87%8C%E9%9D%A2%E7%9A%84%E6%B5%81"><span class="nav-number">9.2.1.2.</span> <span class="nav-text">了解Node里面的流</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#publish-tool"><span class="nav-number">9.2.2.</span> <span class="nav-text">publish-tool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E6%96%87%E4%BB%B6%E5%8E%8B%E7%BC%A9%E5%8C%85%E4%BC%A0%E8%BE%93"><span class="nav-number">9.2.3.</span> <span class="nav-text">多文件压缩包传输</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E4%B8%AA%E9%A1%B9%E7%9B%AE"><span class="nav-number">9.3.</span> <span class="nav-text">三个项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E5%B8%83%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2"><span class="nav-number">9.4.</span> <span class="nav-text">发布系统部署</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">kil</p>
+  <div class="site-description" itemprop="description">心如止水，潜心修行</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kilfront" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kilfront" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kaifaweb@163.com" title="E-Mail → mailto:kaifaweb@163.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kil</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

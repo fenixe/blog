@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":false,"scrollpercent":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="把所有零散的Node工具都集成起来cli 背景在很早的时候，前端是没有好的工具，开发，测试，打包，部署，压缩2009年，出现nodejs，前端Big Bang；以前都是刀耕火种 集成工具 webpack typeScript编译器单元测试 karma jasmine Protractor 自动测试所有路由 material.angular.io ui  最后集成一个angular.json 指令1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular-CLI">
+<meta property="og:url" content="http://example.com/2019/10/21/Angular-CLI/index.html">
+<meta property="og:site_name" content="Kil Notes">
+<meta property="og:description" content="把所有零散的Node工具都集成起来cli 背景在很早的时候，前端是没有好的工具，开发，测试，打包，部署，压缩2009年，出现nodejs，前端Big Bang；以前都是刀耕火种 集成工具 webpack typeScript编译器单元测试 karma jasmine Protractor 自动测试所有路由 material.angular.io ui  最后集成一个angular.json 指令1">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-10-21T13:33:49.000Z">
+<meta property="article:modified_time" content="2022-04-21T12:04:18.583Z">
+<meta property="article:author" content="kil">
+<meta property="article:tag" content="Angular-CLI">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2019/10/21/Angular-CLI/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Angular-CLI | Kil Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Kil Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Quick notes</p>
+      <a>
+        <img class="custom-logo-image" src="[object Object]" alt="Kil Notes">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/10/21/Angular-CLI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="kil">
+      <meta itemprop="description" content="心如止水，潜心修行">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kil Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Angular-CLI
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-10-21 21:33:49" itemprop="dateCreated datePublished" datetime="2019-10-21T21:33:49+08:00">2019-10-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Angular/" itemprop="url" rel="index"><span itemprop="name">Angular</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="把所有零散的Node工具都集成起来"><a href="#把所有零散的Node工具都集成起来" class="headerlink" title="把所有零散的Node工具都集成起来"></a>把所有零散的Node工具都集成起来</h1><h2 id="cli-背景"><a href="#cli-背景" class="headerlink" title="cli 背景"></a>cli 背景</h2><p>在很早的时候，前端是没有好的工具，开发，测试，打包，部署，压缩<br>2009年，出现nodejs，前端Big Bang；以前都是刀耕火种</p>
+<h2 id="集成工具"><a href="#集成工具" class="headerlink" title="集成工具"></a>集成工具</h2><ul>
+<li>webpack</li>
+<li>typeScript编译器<br>单元测试</li>
+<li>karma</li>
+<li>jasmine</li>
+<li>Protractor 自动测试所有路由</li>
+<li>material.angular.io ui</li>
+</ul>
+<p>最后集成一个angular.json</p>
+<h1 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ng version</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ ng g m pages/home --routing</span><br><span class="line">CREATE src/app/pages/home/home-routing.module.ts (247 bytes)</span><br><span class="line">CREATE src/app/pages/home/home.module.ts (272 bytes)</span><br><span class="line"></span><br><span class="line">$ ng g c app</span><br><span class="line">CREATE src/app/app/app.component.ts (257 bytes)</span><br><span class="line">已有app文件，使用此指令依然创建app文件</span><br><span class="line"></span><br><span class="line">$ ng g c ad-banner -t -s</span><br><span class="line">html使用模版, </span><br><span class="line"></span><br><span class="line">ng g c app --flat</span><br><span class="line">CREATE src/app/app.component.ts (257 bytes)</span><br><span class="line">默认不创建文件夹，在已有app文件下</span><br></pre></td></tr></table></figure>
+
+<p>创建指令<br>ng g d ad</p>
+<h3 id="本地版本升级-6-gt-7"><a href="#本地版本升级-6-gt-7" class="headerlink" title="本地版本升级 6 -&gt; 7"></a>本地版本升级 6 -&gt; 7</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm uninstall -g @angular/cli</span><br><span class="line">$ npm install -g @angular/cli@7.x.x</span><br><span class="line">$ ng -v</span><br></pre></td></tr></table></figure>
+
+<h1 id="修改默认4200端口"><a href="#修改默认4200端口" class="headerlink" title="修改默认4200端口"></a>修改默认4200端口</h1><p>It seems things have changed in recent versions of the CLI (I’m using 6.0.1). I was able to change the default port used by ng serve by adding a port option to my project’s <code>angular.json</code>:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;$schema&quot;</span><span class="punctuation">:</span> <span class="string">&quot;./node_modules/@angular/cli/lib/config/schema.json&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;projects&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;my-project&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;architect&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;serve&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                    <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                        <span class="attr">&quot;port&quot;</span><span class="punctuation">:</span> <span class="number">4201</span></span><br><span class="line">                    <span class="punctuation">&#125;</span></span><br><span class="line">                <span class="punctuation">&#125;</span></span><br><span class="line">            <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="angular-json"><a href="#angular-json" class="headerlink" title="angular.json"></a>angular.json</h1><p>Angular CLI 6+<br>angular-cli.json -&gt; angular.json<br>这种变化主要还是因为Angular CLI引入了 monorepo (一个空间管理多个项目) 的开发模式，即使用ng new出来的相当于一个大的工作空间，通过angular.json配置来管理各种ng generate application | library出来的项目或组件库。<br>但是其实大多数人还是一个工作空间维护一个项目，所以这个在这里不那么重要，只是想说json文件的改变是为了新的模式而已。</p>
+<h2 id="schema"><a href="#schema" class="headerlink" title="$schema"></a>$schema</h2><p>指向一个 JSON Schema 文件，这个文件描述了angular.json所有的字段以及约束。<br>其实可以比作一个有“类型提示”功能文件，只要支持了这个功能的 IDE 或编辑器，在书写angular.json文件时便会给出相应的提示。</p>
+<h2 id="projects"><a href="#projects" class="headerlink" title="projects"></a>projects</h2><p>放置所有项目的配置。其中一个项目为一个子项，如xxxx为一个项目，在创建时自动生成。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;projects&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;xxxx&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;root&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;sourceRoot&quot;</span><span class="punctuation">:</span> <span class="string">&quot;src&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;projectType&quot;</span><span class="punctuation">:</span> <span class="string">&quot;application&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;prefix&quot;</span><span class="punctuation">:</span> <span class="string">&quot;app&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;schematics&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;architect&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="root"><a href="#root" class="headerlink" title="root"></a>root</h2><p>代表项目的“根目录”，也就是项目所在的位置，或者说项目源码的父级目录。项目的根目录包含了一些特定的配置。</p>
+<h2 id="sourceRoot"><a href="#sourceRoot" class="headerlink" title="sourceRoot"></a>sourceRoot</h2><p>项目源码所在的目录，通常默认使用src目录。</p>
+<h2 id="prefix"><a href="#prefix" class="headerlink" title="prefix"></a>prefix</h2><p>使用ng generate component | directive生成组件或者指令时默认的selector前缀，通常我们使用命令创建的组件或指令都是app-xxx格式，我们可以手动在这里改动，使整个项目生效。</p>
+<h2 id="architect"><a href="#architect" class="headerlink" title="architect"></a>architect</h2><p>包含几组CLI相关的项目自动化命令配置，比如本地运行、编译、测试等等。默认预设了几组命令配置如build、serve等等：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;architect&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;serve&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;extract-i18n&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;test&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;lint&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="配置属性"><a href="#配置属性" class="headerlink" title="配置属性"></a>配置属性</h3><p>每一个配置项都有 3 个字段属性：builder，options，configurations，例如默认的build命令配置:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;architect&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;builder&quot;</span><span class="punctuation">:</span> <span class="string">&quot;@angular-devkit/build-angular:browser&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;outputPath&quot;</span><span class="punctuation">:</span> <span class="string">&quot;dist/testApp&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;index&quot;</span><span class="punctuation">:</span> <span class="string">&quot;src/index.html&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;main&quot;</span><span class="punctuation">:</span> <span class="string">&quot;src/main.ts&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;polyfills&quot;</span><span class="punctuation">:</span> <span class="string">&quot;src/polyfills.ts&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;tsConfig&quot;</span><span class="punctuation">:</span> <span class="string">&quot;src/tsconfig.app.json&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;assets&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                    <span class="string">&quot;src/favicon.ico&quot;</span><span class="punctuation">,</span></span><br><span class="line">                    <span class="string">&quot;src/assets&quot;</span></span><br><span class="line">                <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;styles&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                    <span class="string">&quot;src/styles.css&quot;</span></span><br><span class="line">                <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span></span><br><span class="line">             <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">             <span class="attr">&quot;configurations&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                 <span class="attr">&quot;production&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                     <span class="attr">&quot;fileReplacements&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                         <span class="punctuation">&#123;</span></span><br><span class="line">                             <span class="attr">&quot;replace&quot;</span><span class="punctuation">:</span> <span class="string">&quot;src/environments/environment.ts&quot;</span><span class="punctuation">,</span></span><br><span class="line">                             <span class="attr">&quot;with&quot;</span><span class="punctuation">:</span> <span class="string">&quot;src/environments/environment.prod.ts&quot;</span></span><br><span class="line">                         <span class="punctuation">&#125;</span></span><br><span class="line">                     <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">                     <span class="attr">&quot;optimization&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br><span class="line">                     <span class="attr">&quot;outputHashing&quot;</span><span class="punctuation">:</span> <span class="string">&quot;all&quot;</span><span class="punctuation">,</span></span><br><span class="line">                     <span class="attr">&quot;sourceMap&quot;</span><span class="punctuation">:</span> <span class="keyword">false</span><span class="punctuation">,</span></span><br><span class="line">                     <span class="attr">&quot;extractCss&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br><span class="line">                     <span class="attr">&quot;namedChunks&quot;</span><span class="punctuation">:</span> <span class="keyword">false</span><span class="punctuation">,</span></span><br><span class="line">                     <span class="attr">&quot;aot&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br><span class="line">                     <span class="attr">&quot;extractLicenses&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br><span class="line">                     <span class="attr">&quot;vendorChunk&quot;</span><span class="punctuation">:</span> <span class="keyword">false</span><span class="punctuation">,</span></span><br><span class="line">                     <span class="attr">&quot;buildOptimizer&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span></span><br><span class="line">                  <span class="punctuation">&#125;</span></span><br><span class="line">              <span class="punctuation">&#125;</span></span><br><span class="line">          <span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>这个是项目默认生成的配置。</p>
+<p>builder代表要执行的内置程序，因为CLI内置了一些自动化工具，architect只是提供了一个facade模式（通俗地讲，就是开发者不需要知道内部的复杂实现）给开发者配置使用，本质上还是调用的内置工具。</p>
+<p>options代表针对当前builder要配置的配置项，调用不同的内置程序，是需要传对应的配置项的，由于配置项很多，这里也不会列出。</p>
+<p>configurations代表这个命令的多种调用模式，在此配置里，我们可以定义不同的别名，然后使用不同的配置（配置的字段还是属于options里的），最后在使用命令时便可以手动选择不同的模式。</p>
+<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>CLI其实内置了几个快捷命令来对应默认生成的配置如ng serve、ng build等等，如果是我们额外自定义的配置，则可以使用ng run <project>:<architect>[:configurations] [其他配置]<br>命令来实现，其中project和architect为必填，configurations为选填。</p>
+<p>比如我们简单额外自定义一个本地运行的服务器命令：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;architect&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;myServe&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;builder&quot;</span><span class="punctuation">:</span> <span class="string">&quot;@angular-devkit/build-angular:dev-server&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;browserTarget&quot;</span><span class="punctuation">:</span> <span class="string">&quot;xxxx:build&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;port&quot;</span><span class="punctuation">:</span> <span class="number">8800</span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;configurations&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;port1&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                    <span class="attr">&quot;port&quot;</span><span class="punctuation">:</span> <span class="number">8801</span></span><br><span class="line">                <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;port2&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                    <span class="attr">&quot;port&quot;</span><span class="punctuation">:</span> <span class="number">880</span></span><br><span class="line">                <span class="punctuation">&#125;</span></span><br><span class="line">            <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>配置使用了内置的运行本地服务器程序，然后使用默认的build配置，加上自定义的运行端口，另外加上两个不同模式，运行不同端口。</p>
+<p>使用ng run xxxx:myServe可以正常运行本地服务器跑项目，端口是8800<br>使用ng run xxxx:myServe:port1端口是8801</p>
+<p>当然，我们还可以直接使用额外的命令行配置直接覆盖已经定义的配置：<br>ng run xxxx:myServe:port1 –port=8808</p>
+<p>这里的例子只是为了简单了解下architect的用法。</p>
+<h3 id="builder"><a href="#builder" class="headerlink" title="builder"></a>builder</h3><p>builder:angular.json:<br>默认的配置是@angular-devkit/build-angular:browser,这个是angular内部的配置,<br>换成@angular-builders/custom-webpack就可以使用自定义的配置,配置只接受browser|server|karma|dev-server这四个选项<br>customWebpackConfig.path:自定义的webpack的路径</p>
+<h2 id="defaultProject"><a href="#defaultProject" class="headerlink" title="defaultProject"></a>defaultProject</h2><p>默认项目，当使用一些CLI命令没有指定项目名称时，默认指向的项目。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Angular-CLI/" rel="tag"># Angular-CLI</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/10/21/Angular%E4%BE%9D%E8%B5%96%E5%8C%85/" rel="prev" title="Angular依赖包">
+      <i class="fa fa-chevron-left"></i> Angular依赖包
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/11/01/Webpack/" rel="next" title="Webpack">
+      Webpack <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%8A%E6%89%80%E6%9C%89%E9%9B%B6%E6%95%A3%E7%9A%84Node%E5%B7%A5%E5%85%B7%E9%83%BD%E9%9B%86%E6%88%90%E8%B5%B7%E6%9D%A5"><span class="nav-number">1.</span> <span class="nav-text">把所有零散的Node工具都集成起来</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cli-%E8%83%8C%E6%99%AF"><span class="nav-number">1.1.</span> <span class="nav-text">cli 背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%86%E6%88%90%E5%B7%A5%E5%85%B7"><span class="nav-number">1.2.</span> <span class="nav-text">集成工具</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E7%89%88%E6%9C%AC%E5%8D%87%E7%BA%A7-6-gt-7"><span class="nav-number">2.0.1.</span> <span class="nav-text">本地版本升级 6 -&gt; 7</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%BB%98%E8%AE%A44200%E7%AB%AF%E5%8F%A3"><span class="nav-number">3.</span> <span class="nav-text">修改默认4200端口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#angular-json"><span class="nav-number">4.</span> <span class="nav-text">angular.json</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#schema"><span class="nav-number">4.1.</span> <span class="nav-text">$schema</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#projects"><span class="nav-number">4.2.</span> <span class="nav-text">projects</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#root"><span class="nav-number">4.3.</span> <span class="nav-text">root</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sourceRoot"><span class="nav-number">4.4.</span> <span class="nav-text">sourceRoot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#prefix"><span class="nav-number">4.5.</span> <span class="nav-text">prefix</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#architect"><span class="nav-number">4.6.</span> <span class="nav-text">architect</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%B1%9E%E6%80%A7"><span class="nav-number">4.6.1.</span> <span class="nav-text">配置属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8"><span class="nav-number">4.6.2.</span> <span class="nav-text">如何使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#builder"><span class="nav-number">4.6.3.</span> <span class="nav-text">builder</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#defaultProject"><span class="nav-number">4.7.</span> <span class="nav-text">defaultProject</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">kil</p>
+  <div class="site-description" itemprop="description">心如止水，潜心修行</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kilfront" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kilfront" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kaifaweb@163.com" title="E-Mail → mailto:kaifaweb@163.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kil</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

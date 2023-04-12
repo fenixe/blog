@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":false,"scrollpercent":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="function复制到粘贴板1234567891011copy() &amp;#123;  const input &#x3D; document.createElement(&amp;#x27;input&amp;#x27;);  document.body.appendChild(input);  input.setAttribute(&amp;#x27;value&amp;#x27;, this.avatar._id);  input.se">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js-function">
+<meta property="og:url" content="http://example.com/2020/12/14/js-function/index.html">
+<meta property="og:site_name" content="Kil Notes">
+<meta property="og:description" content="function复制到粘贴板1234567891011copy() &amp;#123;  const input &#x3D; document.createElement(&amp;#x27;input&amp;#x27;);  document.body.appendChild(input);  input.setAttribute(&amp;#x27;value&amp;#x27;, this.avatar._id);  input.se">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-12-14T02:16:08.000Z">
+<meta property="article:modified_time" content="2023-02-08T03:14:39.635Z">
+<meta property="article:author" content="kil">
+<meta property="article:tag" content="js-function">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/12/14/js-function/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>js-function | Kil Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Kil Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Quick notes</p>
+      <a>
+        <img class="custom-logo-image" src="[object Object]" alt="Kil Notes">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/14/js-function/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="kil">
+      <meta itemprop="description" content="心如止水，潜心修行">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kil Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          js-function
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-12-14 10:16:08" itemprop="dateCreated datePublished" datetime="2020-12-14T10:16:08+08:00">2020-12-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="function"><a href="#function" class="headerlink" title="function"></a>function</h1><h2 id="复制到粘贴板"><a href="#复制到粘贴板" class="headerlink" title="复制到粘贴板"></a>复制到粘贴板</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">copy</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> input = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;input&#x27;</span>);</span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(input);</span><br><span class="line">  input.<span class="title function_">setAttribute</span>(<span class="string">&#x27;value&#x27;</span>, <span class="variable language_">this</span>.<span class="property">avatar</span>.<span class="property">_id</span>);</span><br><span class="line">  input.<span class="title function_">select</span>();</span><br><span class="line">  <span class="keyword">if</span> (<span class="variable language_">document</span>.<span class="title function_">execCommand</span>(<span class="string">&#x27;copy&#x27;</span>)) &#123;</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">execCommand</span>(<span class="string">&quot;copy&quot;</span>);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">toastService</span>.<span class="title function_">success</span>(<span class="string">&quot;成功复制SN到粘贴板！&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">removeChild</span>(input);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="下载图片资源"><a href="#下载图片资源" class="headerlink" title="下载图片资源"></a>下载图片资源</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> <span class="title class_">JSZip</span> <span class="keyword">from</span> <span class="string">&quot;jszip&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> <span class="title class_">FileSaver</span> <span class="keyword">from</span> <span class="string">&quot;file-saver&quot;</span>;</span><br><span class="line"><span class="keyword">async</span> <span class="title function_">getUrlBase64</span>(<span class="params">urlRemote, ext</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> canvas = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;canvas&quot;</span>);</span><br><span class="line">        <span class="keyword">let</span> ctx = canvas.<span class="title function_">getContext</span>(<span class="string">&quot;2d&quot;</span>); <span class="comment">// 方法返回canvas 的上下文</span></span><br><span class="line">        <span class="keyword">let</span> img = <span class="keyword">new</span> <span class="title class_">Image</span>();</span><br><span class="line">        img.<span class="property">crossOrigin</span> = <span class="string">&quot;Anonymous&quot;</span>; <span class="comment">// 跨域</span></span><br><span class="line">        img.<span class="property">src</span> = urlRemote;</span><br><span class="line">        img.<span class="property">onload</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            canvas.<span class="property">width</span> = img.<span class="property">width</span>;</span><br><span class="line">            canvas.<span class="property">height</span> = img.<span class="property">height</span>;</span><br><span class="line">            ctx.<span class="title function_">drawImage</span>(img, <span class="number">0</span>, <span class="number">0</span>); <span class="comment">// 在Canvas上绘制图像。</span></span><br><span class="line">            <span class="keyword">let</span> dataURL = canvas.<span class="title function_">toDataURL</span>(<span class="string">&quot;image/&quot;</span> + ext); <span class="comment">// 返回一个包含图片展示的 data URI 。</span></span><br><span class="line">            <span class="title function_">resolve</span>(dataURL);</span><br><span class="line">            canvas = <span class="literal">null</span>;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">exportZip</span>(<span class="params">urls</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> imgList = urls;</span><br><span class="line">      <span class="keyword">const</span> proList = [];</span><br><span class="line">      <span class="keyword">const</span> zip = <span class="keyword">new</span> <span class="title class_">JSZip</span>();</span><br><span class="line">      <span class="keyword">const</span> cache = &#123;&#125;;</span><br><span class="line">      <span class="keyword">await</span> imgList.<span class="title function_">forEach</span>(<span class="function"><span class="params">item</span> =&gt;</span> &#123; <span class="comment">// 等待所有图片转换完成</span></span><br><span class="line">          <span class="keyword">const</span> pro = <span class="variable language_">this</span>.<span class="title function_">getUrlBase64</span>(item, <span class="string">&quot;.png&quot;</span>).<span class="title function_">then</span>(<span class="function">(<span class="params">base64: any</span>) =&gt;</span> &#123;</span><br><span class="line">              <span class="keyword">const</span> fileName = item.<span class="title function_">replace</span>(<span class="regexp">/(.*\/)*([^.]+)/i</span>, <span class="string">&quot;$2&quot;</span>);</span><br><span class="line">              zip.<span class="title function_">file</span>(fileName, base64.<span class="title function_">substring</span>(base64.<span class="title function_">indexOf</span>(<span class="string">&quot;,&quot;</span>) + <span class="number">1</span>), &#123;</span><br><span class="line">                  <span class="attr">base64</span>: <span class="literal">true</span></span><br><span class="line">              &#125;);</span><br><span class="line">              cache[fileName] = base64;</span><br><span class="line">          &#125;);</span><br><span class="line">          proList.<span class="title function_">push</span>(pro);</span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="title class_">Promise</span>.<span class="title function_">all</span>(proList).<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">          zip.<span class="title function_">generateAsync</span>(&#123;</span><br><span class="line">              <span class="attr">type</span>: <span class="string">&quot;blob&quot;</span></span><br><span class="line">          &#125;).<span class="title function_">then</span>(<span class="function"><span class="params">content</span> =&gt;</span> &#123; <span class="comment">// 生成二进制流</span></span><br><span class="line">            <span class="title class_">FileSaver</span>(content, <span class="string">`<span class="subst">$&#123;<span class="variable language_">this</span>.avatar._id&#125;</span>.zip`</span>); <span class="comment">// 利用file-saver保存文件</span></span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">toastService</span>.<span class="title function_">success</span>(<span class="string">&quot;资源下载成功&quot;</span>);</span><br><span class="line">          &#125;);</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="localDB"><a href="#localDB" class="headerlink" title="localDB"></a>localDB</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> localStore = &#123;</span><br><span class="line">  <span class="attr">set</span>: <span class="function">(<span class="params">key: <span class="built_in">string</span>, obj: <span class="built_in">object</span></span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">localStorage</span>.<span class="title function_">setItem</span>(key, <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(obj));</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  get&lt;T&gt;(<span class="attr">key</span>: <span class="built_in">string</span>): T &#123;</span><br><span class="line">    <span class="keyword">const</span> item = <span class="variable language_">localStorage</span>.<span class="title function_">getItem</span>(key);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!item) &#123;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">JSON</span>.<span class="title function_">parse</span>(item);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="attr">remove</span>: <span class="function">(<span class="params">key: <span class="built_in">string</span></span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">localStorage</span>.<span class="title function_">removeItem</span>(key);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="input-节流"><a href="#input-节流" class="headerlink" title="@input 节流"></a>@input 节流</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">clearTimeout</span>(<span class="variable language_">this</span>.<span class="property">throttleTimer</span>);</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">throttleTimer</span> = <span class="built_in">setTimeout</span>(<span class="variable language_">this</span>.<span class="property">busIdDetail</span>, <span class="number">2000</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Number-转数组"><a href="#Number-转数组" class="headerlink" title="Number 转数组"></a>Number 转数组</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num1 = <span class="number">123</span>;</span><br><span class="line"><span class="keyword">var</span> num2 = num1.<span class="title function_">toString</span>().<span class="title function_">split</span>(<span class="string">&quot;&quot;</span>).<span class="title function_">map</span>(<span class="function"><span class="params">_</span> =&gt;</span> +_);</span><br><span class="line">num2 <span class="comment">//[1,2,3]</span></span><br><span class="line"><span class="comment">// 调用 split 方法后是一个数组，里面的元素是字符串，字符串要转回数字。</span></span><br><span class="line"><span class="comment">// 把_当作是一个遍历后的val,然后再给个加就变成了数字了</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/js-function/" rel="tag"># js-function</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/10/25/jsx/" rel="prev" title="jsx">
+      <i class="fa fa-chevron-left"></i> jsx
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/12/16/ios/" rel="next" title="ios">
+      ios <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#function"><span class="nav-number">1.</span> <span class="nav-text">function</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6%E5%88%B0%E7%B2%98%E8%B4%B4%E6%9D%BF"><span class="nav-number">1.1.</span> <span class="nav-text">复制到粘贴板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90"><span class="nav-number">1.2.</span> <span class="nav-text">下载图片资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#localDB"><span class="nav-number">1.3.</span> <span class="nav-text">localDB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#input-%E8%8A%82%E6%B5%81"><span class="nav-number">1.4.</span> <span class="nav-text">@input 节流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Number-%E8%BD%AC%E6%95%B0%E7%BB%84"><span class="nav-number">1.5.</span> <span class="nav-text">Number 转数组</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">kil</p>
+  <div class="site-description" itemprop="description">心如止水，潜心修行</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kilfront" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kilfront" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kaifaweb@163.com" title="E-Mail → mailto:kaifaweb@163.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kil</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

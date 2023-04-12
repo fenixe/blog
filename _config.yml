@@ -106,6 +106,6 @@ theme: hexo-theme-next
 # tx1
 deploy:
   type: git
-  repo: root@122.51.101.113:/home/git/kil-blog.git
+  repo: root@129.211.209.113:/home/kil/blog.git
   branch: master
 

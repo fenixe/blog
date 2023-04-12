@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":false,"scrollpercent":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="基础  How to change the URI (URL) for a remote Git repository?git remote set-url origin new.git.url&#x2F;here yarn add https:&#x2F;&#x2F;github.com&#x2F;fancyapps&#x2F;fancybox [remote url]yarn add ssh:&#x2F;&#x2F;github.com&#x2F;fancyapps&#x2F;fa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git">
+<meta property="og:url" content="http://example.com/2020/02/23/Git/index.html">
+<meta property="og:site_name" content="Kil Notes">
+<meta property="og:description" content="基础  How to change the URI (URL) for a remote Git repository?git remote set-url origin new.git.url&#x2F;here yarn add https:&#x2F;&#x2F;github.com&#x2F;fancyapps&#x2F;fancybox [remote url]yarn add ssh:&#x2F;&#x2F;github.com&#x2F;fancyapps&#x2F;fa">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/2020/02/23/Git/git1.png">
+<meta property="og:image" content="http://example.com/2020/02/23/Git/register.png">
+<meta property="og:image" content="http://example.com/2020/02/23/Git/register.png">
+<meta property="og:image" content="http://example.com/2020/02/23/Git/runner.png">
+<meta property="og:image" content="http://example.com/2020/02/23/Git/ci.png">
+<meta property="article:published_time" content="2020-02-23T11:07:58.000Z">
+<meta property="article:modified_time" content="2022-09-07T14:42:33.657Z">
+<meta property="article:author" content="kil">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/02/23/Git/git1.png">
+
+<link rel="canonical" href="http://example.com/2020/02/23/Git/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Git | Kil Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Kil Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Quick notes</p>
+      <a>
+        <img class="custom-logo-image" src="[object Object]" alt="Kil Notes">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/02/23/Git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="kil">
+      <meta itemprop="description" content="心如止水，潜心修行">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kil Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Git
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-23 19:07:58" itemprop="dateCreated datePublished" datetime="2020-02-23T19:07:58+08:00">2020-02-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><img src="/2020/02/23/Git/git1.png" class="">
+
+<p>How to change the URI (URL) for a remote Git repository?<br>git remote set-url origin new.git.url/here</p>
+<p>yarn add <a target="_blank" rel="noopener" href="https://github.com/fancyapps/fancybox">https://github.com/fancyapps/fancybox</a> [remote url]<br>yarn add ssh://github.com/fancyapps/fancybox#3.0  [branch]<br>yarn add <a target="_blank" rel="noopener" href="https://github.com/fancyapps/fancybox#5cda5b529ce3fb6c167a55d42ee5a316e921d95f">https://github.com/fancyapps/fancybox#5cda5b529ce3fb6c167a55d42ee5a316e921d95f</a> [commit]</p>
+<h2 id="ubuntu-安装最新版本"><a href="#ubuntu-安装最新版本" class="headerlink" title="ubuntu 安装最新版本"></a>ubuntu 安装最新版本</h2><p><a target="_blank" rel="noopener" href="https://github.com/git/git/releases">gitVersion</a><br>因为 Ubuntu 自带的源中，Git 版本就是这么低，所以需要加入一个源，带有最新 Git 版本的源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:git-core/ppa</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
+
+<h2 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h2><p>cms垒哥没有merge 到 dev<br>seven：merge 本地；本地dev 分支需要拉一下</p>
+<h2 id="查看文件修改内容"><a href="#查看文件修改内容" class="headerlink" title="查看文件修改内容"></a>查看文件修改内容</h2><p>git diff test.text</p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h3 id="ssh-密钥"><a href="#ssh-密钥" class="headerlink" title="ssh 密钥"></a>ssh 密钥</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
+
+<h3 id="github-com代理"><a href="#github-com代理" class="headerlink" title="github.com代理"></a>github.com代理</h3><p>选择 “编辑PAC用户自定规则” 会打开一个简单编辑器。<br>在其中添加自定义的PAC规则，每行一条，规则格式参考 <a target="_blank" rel="noopener" href="https://adblockplus.org/en/filter-cheatsheet">https://adblockplus.org/en/filter-cheatsheet</a></p>
+<p>简单来说 ||a.com 这条规则即可匹配 a.com/xxx x.a.com/xxx xx.x.a.com/xxx 这些url</p>
+<h3 id="全局配置"><a href="#全局配置" class="headerlink" title="全局配置"></a>全局配置</h3><p>用户名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">&quot;name&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>邮箱</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.email <span class="string">&quot;email@gmail.com&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>验证连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br><span class="line">Hi KilFront! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></table></figure>
+
+<h3 id="单项目配置"><a href="#单项目配置" class="headerlink" title="单项目配置"></a>单项目配置</h3><p>git为不同的项目设置不同的用户名</p>
+<p>每个git项目下都会有一个隐藏的.git文件夹</p>
+<p>两种方式<br>open config 命令打开，添加如下配置：<br>[user]<br>    name = XXX(自己的名称英文)<br>    email = XXXX(邮箱)</p>
+<p>命令：<br>git  config  user.name  “xxxxx”</p>
+<h3 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#只对github.com</span></span><br><span class="line">git config --global http.https://github.com.proxy socks5://127.0.0.1:1080</span><br><span class="line"></span><br><span class="line"><span class="comment">#取消代理</span></span><br><span class="line">git config --global --<span class="built_in">unset</span> http.https://github.com.proxy)</span><br></pre></td></tr></table></figure>
+
+<h4 id="仅为-GitHub-设置代理"><a href="#仅为-GitHub-设置代理" class="headerlink" title="仅为 GitHub 设置代理"></a>仅为 GitHub 设置代理</h4><p>git 代理<br>设置 git config –global http.<a target="_blank" rel="noopener" href="https://github.com.proxy/">https://github.com.proxy</a> socks5://127.0.0.1:1086<br>设置完成后, ~/.gitconfig 文件中会增加以下条目:</p>
+<p>[http “<a href="https://github.com&quot;]">https://github.com&quot;]</a><br>    proxy = socks5://127.0.0.1:1086</p>
+<p>ssh 代理<br>修改 ~/.ssh/config 文件</p>
+<p>Host github.com<br>    User git<br>    ProxyCommand nc -v -x 127.0.0.1:1086 %h %p</p>
+<h2 id="token"><a href="#token" class="headerlink" title="token"></a>token</h2><p>gitlab import github   授权</p>
+<img src="/2020/02/23/Git/register.png" class="">
+
+<h1 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h1><p>git配置<br>git config –list</p>
+<h2 id="提交"><a href="#提交" class="headerlink" title="提交"></a>提交</h2><p>git commit -am “some str”<br>git push</p>
+<p>git commit -am ‘str’命令只能提交已经追踪过且修改了的文件，新增文件就必须使用git add . &amp;&amp; git commit -m 命令；</p>
+<h2 id="版本回滚"><a href="#版本回滚" class="headerlink" title="版本回滚"></a>版本回滚</h2><h3 id="revert"><a href="#revert" class="headerlink" title="revert"></a>revert</h3><p>git revert HEAD^</p>
+<h3 id="reset"><a href="#reset" class="headerlink" title="reset"></a>reset</h3><p>注意：回滚前先checkout 一个分支进行保留</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard ff19b5644e7470728d5a10f57f244f9754fb4d58</span><br><span class="line">git add .</span><br><span class="line">git commit -m update</span><br><span class="line">git push origin dev -f</span><br></pre></td></tr></table></figure>
+
+<p>-f : force 暴力</p>
+<p>Pushing to <a href="mailto:&#103;&#105;&#116;&#x40;&#103;&#x69;&#116;&#104;&#x75;&#98;&#x2e;&#x63;&#x6f;&#109;">&#103;&#105;&#116;&#x40;&#103;&#x69;&#116;&#104;&#x75;&#98;&#x2e;&#x63;&#x6f;&#109;</a>:519ebayproject/519ebayproject.git<br>To <a href="mailto:&#x67;&#105;&#116;&#x40;&#x67;&#105;&#x74;&#x68;&#x75;&#x62;&#x2e;&#99;&#x6f;&#109;">&#x67;&#105;&#116;&#x40;&#x67;&#105;&#x74;&#x68;&#x75;&#x62;&#x2e;&#99;&#x6f;&#109;</a>:519ebayproject/519ebayproject.git<br> ! [rejected]        master -&gt; master (non-fast-forward)<br>error: failed to push some refs to ‘<a href="mailto:&#103;&#x69;&#116;&#x40;&#103;&#x69;&#116;&#104;&#x75;&#98;&#46;&#x63;&#x6f;&#x6d;">&#103;&#x69;&#116;&#x40;&#103;&#x69;&#116;&#104;&#x75;&#98;&#46;&#x63;&#x6f;&#x6d;</a>:519ebayproject/519ebayproject.git’<br>hint: Updates were rejected because the tip of your current branch is behind<br>hint: its remote counterpart. Merge the remote changes (e.g. ‘git pull’)<br>hint: before pushing again.<br>hint: See the ‘Note about fast-forwards’ in ‘git push –help’ for details.<br>我遇到造成这个问题的原因，一般是因为执行了git reset命令，版本回退后没有恢复，造成本地仓库的提交版本号落后于远端仓库的提交版本号。<br>可以执行 git push -f命令去强制提交</p>
+<hr>
+<p>git fetch –all<br>git reset –hard origin/master<br>git pull //可以省略</p>
+<h3 id="回滚之后的操作"><a href="#回滚之后的操作" class="headerlink" title="回滚之后的操作"></a>回滚之后的操作</h3><p>git log  找到想退回的版本</p>
+<h3 id="未暂存文件"><a href="#未暂存文件" class="headerlink" title="未暂存文件"></a>未暂存文件</h3><p>git reset 3e5236a</p>
+<h3 id="暂存文件"><a href="#暂存文件" class="headerlink" title="暂存文件"></a>暂存文件</h3><p>git reset –hard 3e5236a</p>
+<h2 id="历史提交记录"><a href="#历史提交记录" class="headerlink" title="历史提交记录"></a>历史提交记录</h2><p>git log</p>
+<h2 id="重置origin"><a href="#重置origin" class="headerlink" title="重置origin"></a>重置origin</h2><p>git remote set-url origin <a href="mailto:&#103;&#x69;&#116;&#64;&#103;&#x69;&#116;&#104;&#x75;&#x62;&#46;&#99;&#111;&#x6d;">&#103;&#x69;&#116;&#64;&#103;&#x69;&#116;&#104;&#x75;&#x62;&#46;&#99;&#111;&#x6d;</a>:ApowoGames/cordova-plugin-keyboard.git</p>
+<h2 id="删除远程已提交的文件"><a href="#删除远程已提交的文件" class="headerlink" title="删除远程已提交的文件"></a>删除远程已提交的文件</h2><p><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/896043488029600/900002180232448">https://www.liaoxuefeng.com/wiki/896043488029600/900002180232448</a><br>首先删除本地 文件<br>git status<br>deleted:    test.txt</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git rm test.txt</span><br><span class="line">rm &#x27;test.txt&#x27;</span><br><span class="line"></span><br><span class="line">$ git commit -m &quot;remove test.txt&quot;</span><br><span class="line">[master d46f35e] remove test.txt</span><br><span class="line"> 1 file changed, 1 deletion(-)</span><br><span class="line"> delete mode 100644 test.txt</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 从上往下，这步可省略</span><br><span class="line">git rm -r --cached 文件/文件夹名称</span><br><span class="line"># 修改本地 .gitignore</span><br><span class="line">git add .</span><br><span class="line">git commit -m &#x27;&#x27;</span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+
+<p>git rm -r –cached xxx.iml　　//-r 是递归的意思   当最后面是文件夹的时候有用</p>
+<h2 id="放弃修改"><a href="#放弃修改" class="headerlink" title="放弃修改"></a>放弃修改</h2><h3 id="文件修改"><a href="#文件修改" class="headerlink" title="文件修改"></a>文件修改</h3><p>单个文件/文件夹</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -- filename</span><br></pre></td></tr></table></figure>
+
+<p>所有文件/文件夹</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout .</span><br></pre></td></tr></table></figure>
+
+<h3 id="新增文件"><a href="#新增文件" class="headerlink" title="新增文件"></a>新增文件</h3><p>单个文件/文件夹</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rm filename / rm dir -rf</span><br></pre></td></tr></table></figure>
+
+<p>所有文件/文件夹</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clean -xdf</span><br></pre></td></tr></table></figure>
+
+<h3 id="本地修改-新增了一堆文件，已经git-add到暂存区，想放弃修改。"><a href="#本地修改-新增了一堆文件，已经git-add到暂存区，想放弃修改。" class="headerlink" title="本地修改/新增了一堆文件，已经git add到暂存区，想放弃修改。"></a>本地修改/新增了一堆文件，已经git add到暂存区，想放弃修改。</h3><p>单个文件/文件夹：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git reset HEAD filename</span><br></pre></td></tr></table></figure>
+
+<p>所有文件/文件夹：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git reset HEAD .</span><br></pre></td></tr></table></figure>
+
+<h3 id="本地通过git-add-amp-git-commit-之后，想要撤销此次commit"><a href="#本地通过git-add-amp-git-commit-之后，想要撤销此次commit" class="headerlink" title="本地通过git add &amp; git commit 之后，想要撤销此次commit"></a>本地通过git add &amp; git commit 之后，想要撤销此次commit</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git reset commit_id</span><br></pre></td></tr></table></figure>
+
+<h2 id="暂存"><a href="#暂存" class="headerlink" title="暂存"></a>暂存</h2><p>我们有时会遇到这样的情况，正在dev分支开发新功能，做到一半时有人过来反馈一个bug，让马上解决，但是新功能做到了一半你又不想提交，这时就可以使用<code>git stash</code>命令先把当前进度保存起来，然后切换到另一个分支去修改bug，修改完提交后，再切回dev分支，使用<code>git stash pop</code>来恢复之前的进度继续开发新功能。</p>
+<h2 id="清除已删除的分支"><a href="#清除已删除的分支" class="headerlink" title="清除已删除的分支"></a>清除已删除的分支</h2><h3 id="git-branch-a"><a href="#git-branch-a" class="headerlink" title="git branch -a"></a>git branch -a</h3><p>命令可以查看所有本地分支和远程分支（git branch -r 可以只查看远程分支）<br>发现很多在远程仓库已经删除的分支在本地依然可以看到。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">git branch -a</span><br><span class="line">  alpha</span><br><span class="line">* dev</span><br><span class="line">feature_ng</span><br><span class="line">  feature_pretty</span><br><span class="line">  master</span><br><span class="line">  test_top</span><br><span class="line">  remotes/origin/alpha</span><br><span class="line">  remotes/origin/alpha_feature_share</span><br><span class="line">  remotes/origin/dev</span><br><span class="line">  remotes/origin/develop</span><br><span class="line">  remotes/origin/learn_pixi</span><br><span class="line">  remotes/origin/master</span><br><span class="line">  remotes/origin/temp_avatar</span><br></pre></td></tr></table></figure>
+
+<h3 id="git-remote-show-origin"><a href="#git-remote-show-origin" class="headerlink" title="git remote show origin"></a>git remote show origin</h3><p>查看remote地址，远程分支，还有本地分支与之相对应关系等信息。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ git remote show origin</span><br><span class="line">* remote origin</span><br><span class="line">  Fetch URL: git@code.apowo.com:PixelPai/platform-client.git</span><br><span class="line">  Push  URL: git@code.apowo.com:PixelPai/platform-client.git</span><br><span class="line">  HEAD branch: master</span><br><span class="line">  Remote branches:</span><br><span class="line">    alpha                                        tracked</span><br><span class="line">    dev                                          tracked</span><br><span class="line">    feature_ng                                   tracked</span><br><span class="line">    feature_pretty                               tracked</span><br><span class="line">    master                                       tracked</span><br><span class="line">    refs/remotes/origin/game-core                stale (use &#x27;git remote prune&#x27; to remove)</span><br><span class="line">    refs/remotes/origin/learn_pixi               stale (use &#x27;git remote prune&#x27; to remove)</span><br><span class="line">    refs/remotes/origin/temp_avatar              stale (use &#x27;git remote prune&#x27; to remove)</span><br><span class="line">  Local refs configured for &#x27;git push&#x27;:</span><br><span class="line">    alpha          pushes to alpha          (up to date)</span><br><span class="line">    dev            pushes to dev            (up to date)</span><br><span class="line">    feature_ng     pushes to feature_ng     (up to date)</span><br><span class="line">    feature_pretty pushes to feature_pretty (up to date)</span><br><span class="line">    master         pushes to master         (local out of date)</span><br></pre></td></tr></table></figure>
+
+<h3 id="git-remote-prune-origin"><a href="#git-remote-prune-origin" class="headerlink" title="git remote prune origin"></a>git remote prune origin</h3><p>prune 删除<br>那些远程仓库已经不存在的分支，根据提示，使用 git remote prune origin 命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git remote prune origin</span><br><span class="line">Pruning origin</span><br><span class="line">URL: git@code.apowo.com:PixelPai/platform-client.git</span><br><span class="line"> * [pruned] origin/alpha_feature_share</span><br><span class="line"> * [pruned] origin/develop</span><br><span class="line"> * [pruned] origin/feature_maker_avatar</span><br><span class="line"> * [pruned] origin/feature_new_game_cover</span><br><span class="line"> * [pruned] origin/temp_avatar</span><br></pre></td></tr></table></figure>
+
+<h2 id="再次添加gitlab分支"><a href="#再次添加gitlab分支" class="headerlink" title="再次添加gitlab分支"></a>再次添加gitlab分支</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># niekaifa @ niekaifadeMacBook-Pro in ~/workspace/apowo/cordova-plugin-android-keyboard on git:master o [16:56:02] </span><br><span class="line">$ git remote -v</span><br><span class="line">origin  git@github.com:ApowoGames/cordova-plugin-android-keyboard.git (fetch)</span><br><span class="line">origin  git@github.com:ApowoGames/cordova-plugin-android-keyboard.git (push)</span><br><span class="line"></span><br><span class="line"># niekaifa @ niekaifadeMacBook-Pro in ~/workspace/apowo/cordova-plugin-android-keyboard on git:master o [16:56:07] </span><br><span class="line">$ git remote add gitlab git@code.apowo.com:opensource/cordova-plugin-android-keyboard.git</span><br><span class="line"></span><br><span class="line"># niekaifa @ niekaifadeMacBook-Pro in ~/workspace/apowo/cordova-plugin-android-keyboard on git:master o [16:56:33] </span><br><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">nothing to commit, working tree clean</span><br><span class="line"></span><br><span class="line"># niekaifa @ niekaifadeMacBook-Pro in ~/workspace/apowo/cordova-plugin-android-keyboard on git:master o [16:56:36] </span><br><span class="line">$ git push gitlab master</span><br><span class="line">Enumerating objects: 5, done.</span><br><span class="line">Counting objects: 100% (5/5), done.</span><br><span class="line">Delta compression using up to 4 threads</span><br><span class="line">Compressing objects: 100% (3/3), done.</span><br><span class="line">Writing objects: 100% (3/3), 323 bytes | 323.00 KiB/s, done.</span><br><span class="line">Total 3 (delta 2), reused 0 (delta 0)</span><br><span class="line">To code.apowo.com:opensource/cordova-plugin-android-keyboard.git</span><br><span class="line">   bab51cf..2d1bf8f  master -&gt; master</span><br></pre></td></tr></table></figure>
+
+<h2 id="gitlab-添加插件"><a href="#gitlab-添加插件" class="headerlink" title="gitlab 添加插件"></a>gitlab 添加插件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cordova plugin add git+https://code.apowo.com/opensource/cordova-plugin-android-keyboard </span><br><span class="line">Installing &quot;cordova-plugin-android-keyboard&quot; for android</span><br><span class="line">Adding cordova-plugin-android-keyboard to package.json</span><br></pre></td></tr></table></figure>
+
+<h2 id="依赖gitlab项目"><a href="#依赖gitlab项目" class="headerlink" title="依赖gitlab项目"></a>依赖gitlab项目</h2><p>yarn add git+<a target="_blank" rel="noopener" href="https://code.apowo.com/PixelPai/gamecore_pkt.git">https://code.apowo.com/PixelPai/gamecore_pkt.git</a></p>
+<p>yarn add git+ssh://<a href="mailto:&#103;&#x69;&#116;&#x40;&#x63;&#111;&#100;&#x65;&#x2e;&#97;&#x70;&#111;&#x77;&#111;&#46;&#x63;&#111;&#109;">&#103;&#x69;&#116;&#x40;&#x63;&#111;&#100;&#x65;&#x2e;&#97;&#x70;&#111;&#x77;&#111;&#46;&#x63;&#111;&#109;</a>:PixelPai/gamecore_pkt.git<br>ci 里面加的是ssh的key 来通过gitlab的验证的 你请求的是<a target="_blank" rel="noopener" href="https://code.apwo.com/">https://code.apwo.com</a>  如果是你本地 会在命令行中弹出 输入账号密码的提示 来通过http的验证<br>那么问题来了 你要通过http来请求嘛 如果需要 你去研究一下 怎么通过gitlab 的access-token拉取代码 然后改下ci<br>如果不需要 就改成通过git请求的；git+ssh</p>
+<h1 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h1><h3 id="index-lock"><a href="#index-lock" class="headerlink" title="index.lock"></a>index.lock</h3><p>error:<br>Another git process seems to be running in this repository, e.g.<br>an editor opened by ‘git commit’. Please make sure all processes<br>are terminated then try again. If it still fails, a git process<br>may have crashed in this repository earlier:<br>remove the file manually to continue.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd .git</span><br><span class="line">rm index.lock</span><br></pre></td></tr></table></figure>
+<p>应该是windows对进程的管理有个上锁机制，正常情况下，会上锁，进程结束，然后解锁进程。但是由于我强制关闭了运行中的git,导致git崩溃，已经上锁的index.lock没有来得及解锁而仍然存在。当我再用git add的时候，git发现已经存在了index.lock这个文件，导致报错。</p>
+<h3 id="vscode-使用git"><a href="#vscode-使用git" class="headerlink" title="vscode 使用git"></a>vscode 使用git</h3><p>error：<br>git push –set-upstream origin master<br>执行一下就行</p>
+<p>error：<br>Host key verification failed.<br>fatal: Could not read from remote repository.</p>
+<p>Please make sure you have the correct access rights<br>and the repository exists.</p>
+<p>wsl 和 windows 的混淆<br>我不是在wsl code . 启动的vscode<br>wsl 中的密钥 无法在windows中使用<br>在windows 生成密钥；命令行提交验证一次，就可以了</p>
+<h3 id="gitignore文件"><a href="#gitignore文件" class="headerlink" title="gitignore文件"></a>gitignore文件</h3><p>$ git add .<br>warning: adding embedded git repository: tooqing-webapp<br>hint: You’ve added another git repository inside your current repository.<br>hint: Clones of the outer repository will not contain the contents of<br>hint: the embedded repository and will not know how to obtain it.<br>hint: If you meant to add a submodule, use:<br>hint:<br>hint:   git submodule add <url> tooqing-webapp<br>hint:<br>hint: If you added this path by mistake, you can remove it from the<br>hint: index with:<br>hint:<br>hint:   git rm –cached tooqing-webapp<br>hint:<br>hint: See “git help submodule” for more information.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git rm --cached tooqing-webapp</span><br><span class="line">git submodule add git@code.apowo.com:PixelPai/tooqing-webapp.git tooqing-webapp</span><br><span class="line">git add .</span><br><span class="line">git commit -m &#x27;cache&#x27;</span><br><span class="line">git pull origin dev</span><br></pre></td></tr></table></figure>
+
+<h1 id="vscoed-中应用"><a href="#vscoed-中应用" class="headerlink" title="vscoed 中应用"></a>vscoed 中应用</h1><h3 id="push"><a href="#push" class="headerlink" title="push"></a>push</h3><h4 id="暂存所有更改"><a href="#暂存所有更改" class="headerlink" title="暂存所有更改"></a>暂存所有更改</h4><p>更改处 ‘+’</p>
+<h4 id="提交已暂存文件"><a href="#提交已暂存文件" class="headerlink" title="提交已暂存文件"></a>提交已暂存文件</h4><p>更多操作… &gt; 提交已暂存文件<br>输入本次提交内容 描述文字</p>
+<h4 id="推送-push"><a href="#推送-push" class="headerlink" title="推送 push"></a>推送 push</h4><p>更多操作… &gt; 推送</p>
+<h3 id="pull"><a href="#pull" class="headerlink" title="pull"></a>pull</h3><p>更多操作… &gt; 拉取</p>
+<h1 id="gitignore"><a href="#gitignore" class="headerlink" title="gitignore"></a>gitignore</h1><p>忽略所有 .a 结尾的文件<br>*.a</p>
+<p>但 lib.a 除外<br>!lib.a</p>
+<p>仅仅忽略项目根目录下的 TODO 文件，不包括 subdir/TODO<br>/TODO</p>
+<p>忽略 build/ 目录下的所有文件<br>build/</p>
+<p>会忽略 doc/notes.txt 但不包括 doc/server/notes.txt<br>doc/notes.txt</p>
+<h1 id="依赖git上的库"><a href="#依赖git上的库" class="headerlink" title="依赖git上的库"></a>依赖git上的库</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add git+ssh://git@code.apowo.com:PixelPai/game-core.git#dev</span><br></pre></td></tr></table></figure>
+
+<h1 id="子模块"><a href="#子模块" class="headerlink" title="子模块"></a>子模块</h1><h2 id="自模块冲突"><a href="#自模块冲突" class="headerlink" title="自模块冲突"></a>自模块冲突</h2><p>git submodule foreach git checkout master //所有子工程切换到master分支<br>git submodule foreach git pull          //所有子工程更新代码<br>git add 所有子工程目录<br>git commit -m “update submodule”      //这里的提交应该是更新commit id<br>//使其保持最新，与master相同</p>
+<h2 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git submodule add https://github.com/maonx/vimwiki-assets.git</span><br></pre></td></tr></table></figure>
+
+<h3 id="指定分支"><a href="#指定分支" class="headerlink" title="指定分支"></a>指定分支</h3><p>git submodule add -b rpc <a href="mailto:&#103;&#105;&#x74;&#x40;&#x63;&#x6f;&#100;&#101;&#46;&#x61;&#112;&#111;&#119;&#x6f;&#x2e;&#x63;&#x6f;&#x6d;">&#103;&#105;&#x74;&#x40;&#x63;&#x6f;&#100;&#101;&#46;&#x61;&#112;&#111;&#119;&#x6f;&#x2e;&#x63;&#x6f;&#x6d;</a>:PixelPai/game-core.git src/game-core</p>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git submodule update --init</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>1、Delete the relevant section from the .gitmodules file.<br>2、Stage the .gitmodules changes:<br>   git add .gitmodules<br>3、Delete the relevant section from .git/config.<br>4、Remove the submodule files from the working tree and index:<br>   git rm –cached path_to_submodule (no trailing slash).<br>5、Remove the submodule’s .git directory:<br>   rm -rf .git/modules/path_to_submodule<br>6、Commit the changes:<br>   git commit -m “Removed submodule <name>“<br>7、Delete the now untracked submodule files:<br>   rm -rf path_to_submodule</p>
+<p>逆初始化模块，其中{MOD_NAME}为模块目录，执行后可发现模块目录被清空<br>git submodule deinit {MOD_NAME}<br>删除.gitmodules中记录的模块信息（–cached选项清除.git/modules中的缓存）<br>git rm –cached {MOD_NAME}<br>提交更改到代码库，可观察到’.gitmodules’内容发生变更<br>git commit -am “Remove a submodule.” </p>
+<p>删除子模块<br>有时子模块的项目维护地址发生了变化，或者需要替换子模块，就需要删除原有的子模块。</p>
+<p>删除子模块较复杂，步骤如下：</p>
+<p>rm -rf 子模块目录 删除子模块目录及源码<br>vi .gitmodules 删除项目目录下.gitmodules文件中子模块相关条目<br>vi .git/config 删除配置项中子模块相关条目<br>rm .git/module/* 删除模块下的子模块目录，每个子模块对应一个目录，注意只删除对应的子模块目录即可<br>执行完成后，再执行添加子模块命令即可，如果仍然报错，执行如下：</p>
+<p>git rm –cached 子模块名称</p>
+<p>完成删除后，提交到仓库即可。</p>
+<h2 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h2><p>git submodule set-branch –branch feature_apk tooqing-webapp</p>
+<h2 id="子模块中的子模块"><a href="#子模块中的子模块" class="headerlink" title="子模块中的子模块"></a>子模块中的子模块</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"># niekaifa @ niekaifadeMacBook-Pro in ~/workspace/apowo/tooqing-cordova/tooqing-webapp on git:feature_ipad x [16:48:11] </span><br><span class="line">$ cd public/gdk </span><br><span class="line"></span><br><span class="line"># niekaifa @ niekaifadeMacBook-Pro in ~/workspace/apowo/tooqing-cordova/tooqing-webapp/public/gdk on git:571cb30 o [16:48:19] </span><br><span class="line">$ git remote -v</span><br><span class="line">origin  https://code.apowo.com/PixelPai/apowo-jssdk (fetch)</span><br><span class="line">origin  https://code.apowo.com/PixelPai/apowo-jssdk (push)</span><br><span class="line"></span><br><span class="line"># niekaifa @ niekaifadeMacBook-Pro in ~/workspace/apowo/tooqing-cordova/tooqing-webapp/public/gdk on git:571cb30 o [16:48:22] </span><br><span class="line">$ git remote set url git@code.apowo.com:PixelPai/apowo-jssdk.git</span><br><span class="line">error: Unknown subcommand: set</span><br><span class="line">usage: git remote [-v | --verbose]</span><br><span class="line">   or: git remote add [-t &lt;branch&gt;] [-m &lt;master&gt;] [-f] [--tags | --no-tags] [--mirror=&lt;fetch|push&gt;] &lt;name&gt; &lt;url&gt;</span><br><span class="line">   or: git remote rename &lt;old&gt; &lt;new&gt;</span><br><span class="line">   or: git remote remove &lt;name&gt;</span><br><span class="line">   or: git remote set-head &lt;name&gt; (-a | --auto | -d | --delete | &lt;branch&gt;)</span><br><span class="line">   or: git remote [-v | --verbose] show [-n] &lt;name&gt;</span><br><span class="line">   or: git remote prune [-n | --dry-run] &lt;name&gt;</span><br><span class="line">   or: git remote [-v | --verbose] update [-p | --prune] [(&lt;group&gt; | &lt;remote&gt;)...]</span><br><span class="line">   or: git remote set-branches [--add] &lt;name&gt; &lt;branch&gt;...</span><br><span class="line">   or: git remote get-url [--push] [--all] &lt;name&gt;</span><br><span class="line">   or: git remote set-url [--push] &lt;name&gt; &lt;newurl&gt; [&lt;oldurl&gt;]</span><br><span class="line">   or: git remote set-url --add &lt;name&gt; &lt;newurl&gt;</span><br><span class="line">   or: git remote set-url --delete &lt;name&gt; &lt;url&gt;</span><br><span class="line"></span><br><span class="line">    -v, --verbose         be verbose; must be placed before a subcommand</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># niekaifa @ niekaifadeMacBook-Pro in ~/workspace/apowo/tooqing-cordova/tooqing-webapp/public/gdk on git:571cb30 o [16:50:02] C:129</span><br><span class="line">$ git remote set-url origin git@code.apowo.com:PixelPai/apowo-jssdk.git</span><br><span class="line"></span><br><span class="line"># niekaifa @ niekaifadeMacBook-Pro in ~/workspace/apowo/tooqing-cordova/tooqing-webapp/public/gdk on git:571cb30 o [16:50:23] </span><br><span class="line">$ git remote -v</span><br><span class="line">origin  git@code.apowo.com:PixelPai/apowo-jssdk.git (fetch)</span><br><span class="line">origin  git@code.apowo.com:PixelPai/apowo-jssdk.git (push)</span><br></pre></td></tr></table></figure>
+
+<h1 id="runner"><a href="#runner" class="headerlink" title="runner"></a>runner</h1><h2 id="update"><a href="#update" class="headerlink" title="update"></a>update</h2><p>Ubuntu上默认直接安装了gitlab-runner，但其实安装的版本为10.5.0</p>
+<p>问题：ci成功，但是没有记录<br>This job does not have a trace.</p>
+<p>原因：版本太低，需要升级</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># For Debian/Ubuntu/Mint</span><br><span class="line">curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh | sudo bash</span><br><span class="line"></span><br><span class="line"># For RHEL/CentOS/Fedora</span><br><span class="line">curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh | sudo bash</span><br></pre></td></tr></table></figure>
+<p>再安装最近版本的gitlab-runner:<br>apt install gitlab-runner</p>
+<h2 id="commond"><a href="#commond" class="headerlink" title="commond"></a>commond</h2><p>gitlab-runner list<br>ubuntu@gitlab-runner:~$ sudo gitlab-runner list<br>Runtime platform                                    arch=amd64 os=linux pid=5248 revision=775dd39d version=13.8.0<br>Listing configured runners                          ConfigFile=/etc/gitlab-runner/config.toml<br>office-docker-runner                                Executor=docker Token=ab4ebb4e3471ff403c3ea1660db90b URL=<a target="_blank" rel="noopener" href="https://code.apowo.com/">https://code.apowo.com/</a><br>office internal gitlab-runner on PVE                Executor=shell Token=xtpd6UJrwhKWGi9MXyNa URL=<a target="_blank" rel="noopener" href="https://code.apowo.com/">https://code.apowo.com/</a><br>pve-ubuntu-test-runner                              Executor=shell Token=dBbekMdeG8nDHLaK1KQU URL=<a target="_blank" rel="noopener" href="https://code.apowo.com/">https://code.apowo.com</a><br>meshtalk-ci                                         Executor=docker Token=32xMwemzbdqgmENUxePD URL=<a target="_blank" rel="noopener" href="https://code.apowo.com/">https://code.apowo.com/</a><br>only for android app build                          Executor=docker Token=uHD7nWC4NB12we3AGb5q URL=<a target="_blank" rel="noopener" href="https://code.apowo.com/">https://code.apowo.com/</a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>sudo curl –output /usr/local/bin/gitlab-runner “<a target="_blank" rel="noopener" href="https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-darwin-amd64&quot;">https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-darwin-amd64&quot;</a><br>给权限<br>sudo chmod +x /usr/local/bin/gitlab-runner</p>
+<h2 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h2><p>gitlab-runner register</p>
+<img src="/2020/02/23/Git/register.png" class="">
+
+<p>Enter the GitLab instance URL (for example, <a target="_blank" rel="noopener" href="https://gitlab.com/">https://gitlab.com/</a>):<br><a target="_blank" rel="noopener" href="https://code.apowo.com/">https://code.apowo.com/</a><br>Enter the registration token:<br>zwE8ePU2N8Ngcwanszgq<br>Enter a description for the runner:<br>[niekaifadeMacBook-Pro.local]: test<br>Enter tags for the runner (comma-separated):<br>test<br>Registering runner… succeeded                     runner=zwE8ePU2<br>Enter an executor: virtualbox, docker-ssh+machine, kubernetes, custom, docker-ssh, ssh, docker+machine, docker, parallels, shell:<br>shell<br>Runner registered successfully. Feel free to start it, but if it’s running already the config should be automatically reloaded! </p>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>gitlab-runner install<br>gitlab-runner start</p>
+<h2 id="start-runner"><a href="#start-runner" class="headerlink" title="start runner"></a>start runner</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">test-job1:</span></span><br><span class="line">  <span class="attr">tags:</span> </span><br><span class="line">    <span class="bullet">-</span> <span class="string">custom01</span>   <span class="string">//一定要指定</span> <span class="string">tags</span> <span class="string">，runner注册的时候填的tags</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">echo</span> <span class="string">&quot;This job tests something&quot;</span></span><br></pre></td></tr></table></figure>
+<img src="/2020/02/23/Git/runner.png" class="">
+
+<h2 id="unregister"><a href="#unregister" class="headerlink" title="unregister"></a>unregister</h2><p>gitlab-runner unregister –name test-runner</p>
+<h2 id="verify"><a href="#verify" class="headerlink" title="verify"></a>verify</h2><p>gitlab-runner verify</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Verifying runner... is alive                        runner=fee9938e</span><br><span class="line">Verifying runner... is alive                        runner=0db52b31</span><br><span class="line">Verifying runner... is alive                        runner=826f687f</span><br><span class="line">Verifying runner... is alive                        runner=32773c0f</span><br></pre></td></tr></table></figure>
+
+<h3 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@ci-runner:~$ gitlab-runner verify --delete</span><br><span class="line">Runtime platform                                    arch=amd64 os=linux pid=10756 revision=54944146 version=13.10.0</span><br><span class="line">WARNING: Running in user-mode.</span><br><span class="line">WARNING: The user-mode requires you to manually start builds processing:</span><br><span class="line">WARNING: $ gitlab-runner run</span><br><span class="line">WARNING: Use sudo for system-mode:</span><br><span class="line">WARNING: $ sudo gitlab-runner...</span><br><span class="line"></span><br><span class="line">ERROR: Verifying runner... is removed               runner=Sf9cFJ7R</span><br><span class="line">Verifying runner... is alive                        runner=UmV1JciW</span><br><span class="line">Updated /home/ubuntu/.gitlab-runner/config.toml</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="yml-语法"><a href="#yml-语法" class="headerlink" title="yml 语法"></a>yml 语法</h2><p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000010442764">https://segmentfault.com/a/1190000010442764</a></p>
+<h2 id="CI-CD"><a href="#CI-CD" class="headerlink" title="CI/CD"></a>CI/CD</h2><p>CI：Continuous Integration<br>CD：Continuous Delivery<br>CD：Continuous Deployment </p>
+<h2 id="Basic-CI-CD-workflow"><a href="#Basic-CI-CD-workflow" class="headerlink" title="Basic CI/CD workflow"></a>Basic CI/CD workflow</h2><img src="/2020/02/23/Git/ci.png" class="">
+
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">stages:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">build_compiler</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">build</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">build_dev</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">merge_build_test</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">deploy</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="attr">before_script:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">echo</span> <span class="string">&quot;before_scipt&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="attr">test:</span></span><br><span class="line">  <span class="attr">stage:</span></span><br><span class="line">    <span class="string">build_compiler</span></span><br><span class="line">  <span class="attr">tags:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">test</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">echo</span> <span class="string">&quot;test&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="本地执行"><a href="#本地执行" class="headerlink" title="本地执行"></a>本地执行</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$  gitlab-runner exec shell test</span><br><span class="line">Runtime platform                                    arch=amd64 os=darwin pid=58199 revision=775dd39d version=13.8.0</span><br><span class="line">Running with gitlab-runner 13.8.0 (775dd39d)</span><br><span class="line">Preparing the &quot;shell&quot; executor</span><br><span class="line">Using Shell executor...</span><br><span class="line">executor not supported                              job=1 project=0 referee=metrics</span><br><span class="line">Preparing environment</span><br><span class="line">Running on niekaifadeMacBook-Pro.local...</span><br><span class="line">Getting source from Git repository</span><br><span class="line">Fetching changes...</span><br><span class="line">Initialized empty Git repository in /Users/niekaifa/workspace/apowo/ci-test/builds/0/project-0/.git/</span><br><span class="line">Created fresh repository.</span><br><span class="line">Checking out bd79ba14 as master...</span><br><span class="line">Skipping Git submodules setup</span><br><span class="line">Executing &quot;step_script&quot; stage of the job script</span><br><span class="line">$ echo &quot;before_scipt&quot;</span><br><span class="line">before_scipt</span><br><span class="line">$ echo &quot;test&quot;</span><br><span class="line">test</span><br><span class="line">Job succeeded</span><br></pre></td></tr></table></figure>
+
+<h2 id="线上打tag"><a href="#线上打tag" class="headerlink" title="线上打tag"></a>线上打tag</h2><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><h3 id="gitlab-Runner-is-offline-last-contact-was-about-some-hours-ago"><a href="#gitlab-Runner-is-offline-last-contact-was-about-some-hours-ago" class="headerlink" title="gitlab: Runner is offline, last contact was about some hours ago"></a>gitlab: Runner is offline, last contact was about some hours ago</h3><p>解决：<br>gitlab-runner restart</p>
+<h3 id="注册后"><a href="#注册后" class="headerlink" title="注册后"></a>注册后</h3><h1 id="git-flow"><a href="#git-flow" class="headerlink" title="git-flow"></a>git-flow</h1><p>brew install git-flow-avh</p>
+<p>git flow version</p>
+<p>初始化：<br>git flow init</p>
+<p>Initialized empty Git repository in /Users/savokiss/demos/gitflow/.git/<br>No branches exist yet. Base branches must be created now.<br>Branch name for production releases: [master]<br>Branch name for “next release” development: [develop]</p>
+<p>How to name your supporting branch prefixes?<br>Feature branches? [feature/]<br>Bugfix branches? [bugfix/]<br>Release branches? [release/]<br>Hotfix branches? [hotfix/]<br>Support branches? [support/]<br>Version tag prefix? [] v<br>Hooks and filters directory? [/Users/savokiss/demos/gitflow/.git/hooks]</p>
+<p>开始新的功能分支<br>git flow feature start auth</p>
+<p>一般都是先提交分支，测试通过后才finish</p>
+<p>提交信息规范</p>
+<p>提交信息应该描述 “做了什么” 和 “这么做的原因”，主要由 header， body，footer组成。<br>header的格式：<type>: <subject></p>
+<p>type 用于说明提交的类型：<br>feature： 新功能<br>fix: 问题修复<br>docs: 文档<br>style: 调整格式（不影响代码运行）<br>refactor: 重构<br>test: 增加测试<br>chore: 构建过程或辅助工具的变动<br>revert: 撤销以前的提交<br>scope 用于说明提交的影响范围，内容根据具体项目而定。</p>
+<p>完成feature/auth分支<br>$ git flow feature finish auth<br>Switched to branch ‘develop’<br>Updating e69b22c..f7f48e2<br>Fast-forward</p>
+<h1 id="gitflow-0"><a href="#gitflow-0" class="headerlink" title="gitflow | 0"></a>gitflow | 0</h1><p> README.md | 4 ++++<br> 2 files changed, 4 insertions(+)<br> create mode 100644 # gitflow<br> create mode 100644 README.md<br>Deleted branch feature/auth (was f7f48e2).</p>
+<p>Summary of actions:</p>
+<ul>
+<li>The feature branch ‘feature/auth’ was merged into ‘develop’</li>
+<li>Feature branch ‘feature/auth’ has been locally deleted</li>
+<li>You are now on branch ‘develop’</li>
+</ul>
+<h2 id="提交信息规范"><a href="#提交信息规范" class="headerlink" title="提交信息规范"></a>提交信息规范</h2><p>提交信息应该描述 “做了什么” 和 “这么做的原因”，主要由 header， body，footer组成。<br>header的格式：<type>: <subject></p>
+<p>type 用于说明提交的类型：</p>
+<ol>
+<li>feature： 新功能</li>
+<li>fix: 问题修复</li>
+<li>docs: 文档</li>
+<li>style: 调整格式（不影响代码运行）</li>
+<li>refactor: 重构</li>
+<li>test: 增加测试</li>
+<li>chore: 构建过程或辅助工具的变动</li>
+<li>revert: 撤销以前的提交</li>
+<li>scope 用于说明提交的影响范围，内容根据具体项目而定。</li>
+</ol>
+<h1 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h1><h2 id="提交代码，但github上的绿格子没有变绿"><a href="#提交代码，但github上的绿格子没有变绿" class="headerlink" title="提交代码，但github上的绿格子没有变绿"></a>提交代码，但github上的绿格子没有变绿</h2><ul>
+<li>检查下在本仓库上的帐号与github上是否一致</li>
+<li>master分支<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># niekaifa @ Mac-mini in ~/ikyu/KilFront/vue-project on git:master o [15:58:05] </span><br><span class="line">$ git config user.email                      </span><br><span class="line">kaifawebb@gmail.com</span><br><span class="line"></span><br><span class="line"># niekaifa @ Mac-mini in ~/ikyu/KilFront/vue-project on git:master o [15:58:02] C:130</span><br><span class="line">$ git config user.email &quot;kaifawebb@gmail.com&quot;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="警告"><a href="#警告" class="headerlink" title="警告"></a>警告</h2><p>We found a potential security vulnerability in one of your dependencies<br>github上删除 package-lock.json</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Git/" rel="tag"># Git</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/23/Nodejs/" rel="prev" title="Nodejs">
+      <i class="fa fa-chevron-left"></i> Nodejs
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/23/WSL/" rel="next" title="WSL">
+      WSL <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ubuntu-%E5%AE%89%E8%A3%85%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC"><span class="nav-number">1.1.</span> <span class="nav-text">ubuntu 安装最新版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#merge"><span class="nav-number">1.2.</span> <span class="nav-text">merge</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9%E5%86%85%E5%AE%B9"><span class="nav-number">1.3.</span> <span class="nav-text">查看文件修改内容</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh-%E5%AF%86%E9%92%A5"><span class="nav-number">2.0.1.</span> <span class="nav-text">ssh 密钥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#github-com%E4%BB%A3%E7%90%86"><span class="nav-number">2.0.2.</span> <span class="nav-text">github.com代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE"><span class="nav-number">2.0.3.</span> <span class="nav-text">全局配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE"><span class="nav-number">2.0.4.</span> <span class="nav-text">单项目配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%90%86"><span class="nav-number">2.0.5.</span> <span class="nav-text">代理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%85%E4%B8%BA-GitHub-%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86"><span class="nav-number">2.0.5.1.</span> <span class="nav-text">仅为 GitHub 设置代理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#token"><span class="nav-number">2.1.</span> <span class="nav-text">token</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">指令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4"><span class="nav-number">3.1.</span> <span class="nav-text">提交</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E5%9B%9E%E6%BB%9A"><span class="nav-number">3.2.</span> <span class="nav-text">版本回滚</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#revert"><span class="nav-number">3.2.1.</span> <span class="nav-text">revert</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reset"><span class="nav-number">3.2.2.</span> <span class="nav-text">reset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E6%BB%9A%E4%B9%8B%E5%90%8E%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">3.2.3.</span> <span class="nav-text">回滚之后的操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AA%E6%9A%82%E5%AD%98%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.4.</span> <span class="nav-text">未暂存文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9A%82%E5%AD%98%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.5.</span> <span class="nav-text">暂存文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%86%E5%8F%B2%E6%8F%90%E4%BA%A4%E8%AE%B0%E5%BD%95"><span class="nav-number">3.3.</span> <span class="nav-text">历史提交记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E7%BD%AEorigin"><span class="nav-number">3.4.</span> <span class="nav-text">重置origin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E8%BF%9C%E7%A8%8B%E5%B7%B2%E6%8F%90%E4%BA%A4%E7%9A%84%E6%96%87%E4%BB%B6"><span class="nav-number">3.5.</span> <span class="nav-text">删除远程已提交的文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%BE%E5%BC%83%E4%BF%AE%E6%94%B9"><span class="nav-number">3.6.</span> <span class="nav-text">放弃修改</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9"><span class="nav-number">3.6.1.</span> <span class="nav-text">文件修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E6%96%87%E4%BB%B6"><span class="nav-number">3.6.2.</span> <span class="nav-text">新增文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E4%BF%AE%E6%94%B9-%E6%96%B0%E5%A2%9E%E4%BA%86%E4%B8%80%E5%A0%86%E6%96%87%E4%BB%B6%EF%BC%8C%E5%B7%B2%E7%BB%8Fgit-add%E5%88%B0%E6%9A%82%E5%AD%98%E5%8C%BA%EF%BC%8C%E6%83%B3%E6%94%BE%E5%BC%83%E4%BF%AE%E6%94%B9%E3%80%82"><span class="nav-number">3.6.3.</span> <span class="nav-text">本地修改&#x2F;新增了一堆文件，已经git add到暂存区，想放弃修改。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E9%80%9A%E8%BF%87git-add-amp-git-commit-%E4%B9%8B%E5%90%8E%EF%BC%8C%E6%83%B3%E8%A6%81%E6%92%A4%E9%94%80%E6%AD%A4%E6%AC%A1commit"><span class="nav-number">3.6.4.</span> <span class="nav-text">本地通过git add &amp; git commit 之后，想要撤销此次commit</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9A%82%E5%AD%98"><span class="nav-number">3.7.</span> <span class="nav-text">暂存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%85%E9%99%A4%E5%B7%B2%E5%88%A0%E9%99%A4%E7%9A%84%E5%88%86%E6%94%AF"><span class="nav-number">3.8.</span> <span class="nav-text">清除已删除的分支</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git-branch-a"><span class="nav-number">3.8.1.</span> <span class="nav-text">git branch -a</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-remote-show-origin"><span class="nav-number">3.8.2.</span> <span class="nav-text">git remote show origin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-remote-prune-origin"><span class="nav-number">3.8.3.</span> <span class="nav-text">git remote prune origin</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%8D%E6%AC%A1%E6%B7%BB%E5%8A%A0gitlab%E5%88%86%E6%94%AF"><span class="nav-number">3.9.</span> <span class="nav-text">再次添加gitlab分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gitlab-%E6%B7%BB%E5%8A%A0%E6%8F%92%E4%BB%B6"><span class="nav-number">3.10.</span> <span class="nav-text">gitlab 添加插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96gitlab%E9%A1%B9%E7%9B%AE"><span class="nav-number">3.11.</span> <span class="nav-text">依赖gitlab项目</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%94%99%E8%AF%AF"><span class="nav-number">4.</span> <span class="nav-text">错误</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#index-lock"><span class="nav-number">4.0.1.</span> <span class="nav-text">index.lock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vscode-%E4%BD%BF%E7%94%A8git"><span class="nav-number">4.0.2.</span> <span class="nav-text">vscode 使用git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gitignore%E6%96%87%E4%BB%B6"><span class="nav-number">4.0.3.</span> <span class="nav-text">gitignore文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vscoed-%E4%B8%AD%E5%BA%94%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">vscoed 中应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#push"><span class="nav-number">5.0.1.</span> <span class="nav-text">push</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9A%82%E5%AD%98%E6%89%80%E6%9C%89%E6%9B%B4%E6%94%B9"><span class="nav-number">5.0.1.1.</span> <span class="nav-text">暂存所有更改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E5%B7%B2%E6%9A%82%E5%AD%98%E6%96%87%E4%BB%B6"><span class="nav-number">5.0.1.2.</span> <span class="nav-text">提交已暂存文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A8%E9%80%81-push"><span class="nav-number">5.0.1.3.</span> <span class="nav-text">推送 push</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pull"><span class="nav-number">5.0.2.</span> <span class="nav-text">pull</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gitignore"><span class="nav-number">6.</span> <span class="nav-text">gitignore</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96git%E4%B8%8A%E7%9A%84%E5%BA%93"><span class="nav-number">7.</span> <span class="nav-text">依赖git上的库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%90%E6%A8%A1%E5%9D%97"><span class="nav-number">8.</span> <span class="nav-text">子模块</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E6%A8%A1%E5%9D%97%E5%86%B2%E7%AA%81"><span class="nav-number">8.1.</span> <span class="nav-text">自模块冲突</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0"><span class="nav-number">8.2.</span> <span class="nav-text">添加</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E5%88%86%E6%94%AF"><span class="nav-number">8.2.1.</span> <span class="nav-text">指定分支</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">8.3.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4"><span class="nav-number">8.4.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E5%88%86%E6%94%AF"><span class="nav-number">8.5.</span> <span class="nav-text">切换分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%90%E6%A8%A1%E5%9D%97%E4%B8%AD%E7%9A%84%E5%AD%90%E6%A8%A1%E5%9D%97"><span class="nav-number">8.6.</span> <span class="nav-text">子模块中的子模块</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#runner"><span class="nav-number">9.</span> <span class="nav-text">runner</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#update"><span class="nav-number">9.1.</span> <span class="nav-text">update</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#commond"><span class="nav-number">9.2.</span> <span class="nav-text">commond</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">9.3.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C"><span class="nav-number">9.4.</span> <span class="nav-text">注册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8"><span class="nav-number">9.5.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#start-runner"><span class="nav-number">9.6.</span> <span class="nav-text">start runner</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unregister"><span class="nav-number">9.7.</span> <span class="nav-text">unregister</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#verify"><span class="nav-number">9.8.</span> <span class="nav-text">verify</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#delete"><span class="nav-number">9.8.1.</span> <span class="nav-text">delete</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#yml-%E8%AF%AD%E6%B3%95"><span class="nav-number">9.9.</span> <span class="nav-text">yml 语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CI-CD"><span class="nav-number">9.10.</span> <span class="nav-text">CI&#x2F;CD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-CI-CD-workflow"><span class="nav-number">9.11.</span> <span class="nav-text">Basic CI&#x2F;CD workflow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E6%89%A7%E8%A1%8C"><span class="nav-number">9.12.</span> <span class="nav-text">本地执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E4%B8%8A%E6%89%93tag"><span class="nav-number">9.13.</span> <span class="nav-text">线上打tag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">9.14.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gitlab-Runner-is-offline-last-contact-was-about-some-hours-ago"><span class="nav-number">9.14.1.</span> <span class="nav-text">gitlab: Runner is offline, last contact was about some hours ago</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C%E5%90%8E"><span class="nav-number">9.14.2.</span> <span class="nav-text">注册后</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-flow"><span class="nav-number">10.</span> <span class="nav-text">git-flow</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gitflow-0"><span class="nav-number">11.</span> <span class="nav-text">gitflow | 0</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E4%BF%A1%E6%81%AF%E8%A7%84%E8%8C%83"><span class="nav-number">11.1.</span> <span class="nav-text">提交信息规范</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98-1"><span class="nav-number">12.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%EF%BC%8C%E4%BD%86github%E4%B8%8A%E7%9A%84%E7%BB%BF%E6%A0%BC%E5%AD%90%E6%B2%A1%E6%9C%89%E5%8F%98%E7%BB%BF"><span class="nav-number">12.1.</span> <span class="nav-text">提交代码，但github上的绿格子没有变绿</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AD%A6%E5%91%8A"><span class="nav-number">12.2.</span> <span class="nav-text">警告</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">kil</p>
+  <div class="site-description" itemprop="description">心如止水，潜心修行</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kilfront" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kilfront" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kaifaweb@163.com" title="E-Mail → mailto:kaifaweb@163.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kil</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

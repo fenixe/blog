@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":false,"scrollpercent":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="basic1234567891011npm i -g cordovaupdatanpm i -g cordovacordova create MyApp可以创建的平台cordova platformcordova run android  cordova build  cordova clean android 环境设置error 123456$ cordova run androidChecki">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cordova">
+<meta property="og:url" content="http://example.com/2020/08/08/cordova/index.html">
+<meta property="og:site_name" content="Kil Notes">
+<meta property="og:description" content="basic1234567891011npm i -g cordovaupdatanpm i -g cordovacordova create MyApp可以创建的平台cordova platformcordova run android  cordova build  cordova clean android 环境设置error 123456$ cordova run androidChecki">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/2020/08/08/cordova/android_v.png">
+<meta property="og:image" content="http://example.com/2020/08/08/cordova/android_v1.png">
+<meta property="og:image" content="http://example.com/2020/08/08/cordova/cache.png">
+<meta property="og:image" content="http://example.com/2020/08/08/cordova/workflow.png">
+<meta property="og:image" content="http://example.com/2020/08/08/cordova/cordova-hot-code-push.png">
+<meta property="article:published_time" content="2020-08-08T06:01:46.000Z">
+<meta property="article:modified_time" content="2022-08-31T07:46:23.389Z">
+<meta property="article:author" content="kil">
+<meta property="article:tag" content="Cordova">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/08/08/cordova/android_v.png">
+
+<link rel="canonical" href="http://example.com/2020/08/08/cordova/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>cordova | Kil Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Kil Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Quick notes</p>
+      <a>
+        <img class="custom-logo-image" src="[object Object]" alt="Kil Notes">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/08/08/cordova/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="kil">
+      <meta itemprop="description" content="心如止水，潜心修行">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kil Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          cordova
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-08 14:01:46" itemprop="dateCreated datePublished" datetime="2020-08-08T14:01:46+08:00">2020-08-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hybrid/" itemprop="url" rel="index"><span itemprop="name">Hybrid</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="basic"><a href="#basic" class="headerlink" title="basic"></a>basic</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">npm i -g cordova</span><br><span class="line"></span><br><span class="line">updata</span><br><span class="line">npm i -g cordova</span><br><span class="line"></span><br><span class="line">cordova create MyApp</span><br><span class="line"></span><br><span class="line">可以创建的平台</span><br><span class="line">cordova platform</span><br><span class="line"></span><br><span class="line">cordova run android</span><br></pre></td></tr></table></figure>
+
+<p>cordova build </p>
+<p>cordova clean android</p>
+<h2 id="环境设置"><a href="#环境设置" class="headerlink" title="环境设置"></a>环境设置</h2><p>error</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ cordova run android</span><br><span class="line">Checking Java JDK and Android SDK versions</span><br><span class="line">ANDROID_SDK_ROOT=undefined (recommended setting)</span><br><span class="line">ANDROID_HOME=undefined (DEPRECATED)</span><br><span class="line">Failed to find <span class="string">&#x27;ANDROID_SDK_ROOT&#x27;</span> environment variable. Try setting it manually.</span><br><span class="line">Failed to find <span class="string">&#x27;android&#x27;</span> <span class="built_in">command</span> <span class="keyword">in</span> your <span class="string">&#x27;PATH&#x27;</span>. Try update your <span class="string">&#x27;PATH&#x27;</span> to include path to valid SDK directory.</span><br></pre></td></tr></table></figure>
+
+<p>.zshrc</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">export ANDROID_SDK_ROOT=&quot;/Applications/Android Studio.app/android-sdk-macosx&quot;</span><br><span class="line">export PATH=$&#123;PATH&#125;:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools</span><br><span class="line">``</span><br><span class="line"></span><br><span class="line"># android</span><br><span class="line">``` zsh</span><br><span class="line">$ cordova run android</span><br><span class="line">Current working directory is not a Cordova-based project.</span><br><span class="line"></span><br><span class="line">mkdir www</span><br></pre></td></tr></table></figure>
+
+<h2 id="run"><a href="#run" class="headerlink" title="run"></a>run</h2><p>手机插上电脑usb，执行：cordova run android</p>
+<h2 id="钩子"><a href="#钩子" class="headerlink" title="钩子"></a>钩子</h2><hook src="hooks/before_prepare.js" type="before_prepare"/>
+<platform name="android">
+  <hook src="hooks/android/after_compile.js" type="after_compile"/>
+
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Could not resolve all files for configuration &#x27;:app:debugRuntimeClasspath&#x27;</span><br><span class="line">&gt; Could not get resource &#x27;https://dl.google.com/dl/android/maven2/com/android/support/support-v4/maven-metadata.xml&#x27;.</span><br><span class="line">    &gt; Could not GET &#x27;https://dl.google.com/dl/android/maven2/com/android/support/support-v4/maven-metadata.xml&#x27;.</span><br><span class="line">        &gt; Connect to 127.0.0.1:1086 [/127.0.0.1] failed: Connection refused (Connection refused)</span><br></pre></td></tr></table></figure>
+<p>思路：<br>curl <a target="_blank" rel="noopener" href="https://dl.google.com/dl/android/maven2/com/android/support/support-v4/maven-metadata.xml">https://dl.google.com/dl/android/maven2/com/android/support/support-v4/maven-metadata.xml</a><br>没有问题</p>
+<p>把zsh，git，</p>
+<h2 id="清除PhoneGap缓存"><a href="#清除PhoneGap缓存" class="headerlink" title="清除PhoneGap缓存"></a>清除PhoneGap缓存</h2><p>在Xcode，cmd + shift + k中清理项目</p>
+<h1 id="niekaifa-niekaifadeMacBook-Pro-in-gradle-20-36-42"><a href="#niekaifa-niekaifadeMacBook-Pro-in-gradle-20-36-42" class="headerlink" title="niekaifa @ niekaifadeMacBook-Pro in ~/.gradle [20:36:42]"></a>niekaifa @ niekaifadeMacBook-Pro in ~/.gradle [20:36:42]</h1><p>$ vim gradle.properties<br>代理 ，关闭。就可以了</p>
+<h1 id="plugin"><a href="#plugin" class="headerlink" title="plugin"></a>plugin</h1><h2 id="add-plugin"><a href="#add-plugin" class="headerlink" title="add plugin"></a>add plugin</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cordova plugin add &lt;path to plugin folder&gt;</span><br><span class="line"></span><br><span class="line">添加本地插件</span><br><span class="line">cordova plugin add /Users/niekaifa/workspace/apowo/cordova-hot-code-push</span><br></pre></td></tr></table></figure>
+
+<h2 id="remove-plugin"><a href="#remove-plugin" class="headerlink" title="remove plugin"></a>remove plugin</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cordova plugin rm cordova-plugin-dispaly-cutout</span><br></pre></td></tr></table></figure>
+
+<h2 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h2><p><a target="_blank" rel="noopener" href="https://github.com/dpa99c/cordova-diagnostic-plugin#readme">https://github.com/dpa99c/cordova-diagnostic-plugin#readme</a></p>
+<h2 id="退出"><a href="#退出" class="headerlink" title="退出"></a>退出</h2><p>cordova-plugin-exit</p>
+<h2 id="键盘高度"><a href="#键盘高度" class="headerlink" title="键盘高度"></a>键盘高度</h2><h2 id="支付"><a href="#支付" class="headerlink" title="支付"></a>支付</h2><p><a target="_blank" rel="noopener" href="https://github.com/j3k0/cordova-plugin-purchase/blob/master/doc/api.md">https://github.com/j3k0/cordova-plugin-purchase/blob/master/doc/api.md</a></p>
+<h3 id="Philosophy"><a href="#Philosophy" class="headerlink" title="Philosophy"></a>Philosophy</h3><p>以事件为基础，关注注册的产品<br>监听机制的核心：<code>when()</code> 方法</p>
+<h3 id="注册产品"><a href="#注册产品" class="headerlink" title="注册产品"></a>注册产品</h3><p>Use store.register() before your first call to store.refresh().<br>在第一次呼叫B之前使用A。</p>
+<h3 id="购买"><a href="#购买" class="headerlink" title="购买"></a>购买</h3><p>使用：store.order()<br>三个事件</p>
+<ul>
+<li>with an <code>approved</code> event. The product enters the APPROVED state. 【产品进入批准状态】</li>
+<li>with a <code>cancelled</code> event. The product gets back to the VALID state.</li>
+<li>with an <code>error</code> event. The product gets back to the VALID state.</li>
+</ul>
+<h4 id="简单的例子"><a href="#简单的例子" class="headerlink" title="简单的例子"></a>简单的例子</h4><p>you don’t want to implement receipt validation ;<br>不实现收据认证<br>store.when(“product”).approved(function(p) {<br>    p.finish();<br>});</p>
+<h3 id="收到验证-Receipt-validation"><a href="#收到验证-Receipt-validation" class="headerlink" title="收到验证 Receipt validation"></a>收到验证 Receipt validation</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">store.<span class="property">validator</span> = <span class="keyword">function</span>(<span class="params">product, callback</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;store.validator&#x27;</span>, product);</span><br><span class="line">  <span class="keyword">const</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">  xhr.<span class="title function_">open</span>(<span class="string">&#x27;POST&#x27;</span>, process.<span class="property">env</span>.<span class="property">VUE_APP_API_URL</span> + <span class="string">`order/check_purchase?token=<span class="subst">$&#123;token&#125;</span>`</span>);</span><br><span class="line">  xhr.<span class="property">responseType</span> = <span class="string">&#x27;json&#x27;</span>;</span><br><span class="line">  xhr.<span class="title function_">setRequestHeader</span>(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;application/json&#x27;</span>);</span><br><span class="line">  xhr.<span class="title function_">setRequestHeader</span>(<span class="string">&#x27;Accept&#x27;</span>, <span class="string">&#x27;application/json&#x27;</span>);</span><br><span class="line">  xhr.<span class="title function_">send</span>();</span><br><span class="line">  xhr.<span class="property">onreadystatechange</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">readyState</span> === <span class="number">2</span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;--------&gt; order/check_purchase&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">readyState</span> === <span class="number">4</span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;order/check_purchase &lt;---------&#x27;</span>);</span><br><span class="line">      <span class="keyword">var</span> responseData = xhr.<span class="property">response</span>;</span><br><span class="line">      <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">status</span> &gt;= <span class="number">200</span> &amp;&amp; <span class="variable language_">this</span>.<span class="property">status</span> &lt; <span class="number">300</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;response success: &#x27;</span>, responseData);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;response error: &#x27;</span>, responseData);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="android"><a href="#android" class="headerlink" title="android"></a>android</h3><p>cordova plugin add cordova-plugin-purchase –variable BILLING_KEY=”MIIBI</p>
+<h2 id="facebook"><a href="#facebook" class="headerlink" title="facebook"></a>facebook</h2><p><a target="_blank" rel="noopener" href="https://github.com/cordova-plugin-facebook-connect/cordova-plugin-facebook-connect">https://github.com/cordova-plugin-facebook-connect/cordova-plugin-facebook-connect</a></p>
+<p>需要安装<br>sudo gem install cocoapods</p>
+<h2 id="ios隐藏状态栏"><a href="#ios隐藏状态栏" class="headerlink" title="ios隐藏状态栏"></a>ios隐藏状态栏</h2><p><a target="_blank" rel="noopener" href="https://github.com/katzer/cordova-plugin-hidden-statusbar-overlay/tree/aef5a90d2161dd9d363242523883757a51d0fad0#phonegap-build">https://github.com/katzer/cordova-plugin-hidden-statusbar-overlay/tree/aef5a90d2161dd9d363242523883757a51d0fad0#phonegap-build</a><br>cordova-plugin-hidden-statusbar-overlay</p>
+<h2 id="The-number-of-method-references-in-a-dex-file-cannot-exceed-64K"><a href="#The-number-of-method-references-in-a-dex-file-cannot-exceed-64K" class="headerlink" title="The number of method references in a .dex file cannot exceed 64K."></a>The number of method references in a .dex file cannot exceed 64K.</h2><p>cordova plugin add cordova-plugin-enable-multidex</p>
+<h2 id="自定义插件开发"><a href="#自定义插件开发" class="headerlink" title="自定义插件开发"></a>自定义插件开发</h2><h3 id="全局安装插件工具plugman"><a href="#全局安装插件工具plugman" class="headerlink" title="全局安装插件工具plugman"></a>全局安装插件工具plugman</h3><p>plugman是用于Apache Cordova项目的插件的安装和卸载等命令行工具。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g plugman</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建插件"><a href="#创建插件" class="headerlink" title="创建插件"></a>创建插件</h3><p>定义一个最简单的Toast插件</p>
+<h4 id="插件创建"><a href="#插件创建" class="headerlink" title="插件创建"></a>插件创建</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plugman create --name [插件名] --plugin_id [插件id] --plugin_version [插件版本]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd plugins</span><br><span class="line"># niekaifa @ niekaifadeMacBook-Pro in ~/ikyu/code/cordova-plugin/plugins [15:18:17] </span><br><span class="line">$ plugman create --name ToastDemo --plugin_id cordova-plugin-toastdemo --plugin_version 1.0.0</span><br></pre></td></tr></table></figure>
+
+<h4 id="插件配置"><a href="#插件配置" class="headerlink" title="插件配置"></a>插件配置</h4><p>进入插件目录，添加插件支持的平台环境</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd ToastDemo</span><br><span class="line">$ plugman platform add --platform_name android</span><br><span class="line">$ plugman platform add --platform_name ios</span><br></pre></td></tr></table></figure>
+<p>添加之后将在ToastDemo目录下产生android和ios两个目录，此处只定义android环境的ToastDemo<br>生成的文件内容如图所示</p>
+<p>修改plugin.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&#x27;1.0&#x27; encoding=&#x27;utf-8&#x27;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plugin</span> <span class="attr">id</span>=<span class="string">&quot;cordova-plugin-toastdemo&quot;</span> <span class="attr">version</span>=<span class="string">&quot;1.0.0&quot;</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://apache.org/cordova/ns/plugins/1.0&quot;</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>ToastDemo<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- js调用模块；src为调用插件的js文件路径 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">js-module</span> <span class="attr">name</span>=<span class="string">&quot;ToastDemo&quot;</span> <span class="attr">src</span>=<span class="string">&quot;www/ToastDemo.js&quot;</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- target 为插件安装后的调用前缀，如：cordova.plugins.ToastDemo.[插件方法名] --&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- &lt;clobbers target=&quot;cordova.plugins.ToastDemo&quot; --&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 可以自定义，调用时；ToastDemo.[插件方法名] --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">clobbers</span> <span class="attr">target</span>=<span class="string">&quot;ToastDemo&quot;</span> /&gt;</span><span class="tag">&lt;/<span class="name">js-module</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- android 环境配置项 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">platform</span> <span class="attr">name</span>=<span class="string">&quot;android&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 插件配置，target为插件安装时，Cordova项目android环境配置文件的位置 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 插件安装时会将config-file 标签中的内容添加到 res/xml/config.xml 文件中 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">config-file</span> <span class="attr">parent</span>=<span class="string">&quot;/*&quot;</span> <span class="attr">target</span>=<span class="string">&quot;res/xml/config.xml&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- name 为对应 www/Toast.js 文件中的调用名称 --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">feature</span> <span class="attr">name</span>=<span class="string">&quot;ToastDemo&quot;</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- value 为插件安装到项目后 ToastDemo.java 文件路径，即包路径 --&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- 此处修改一下，将其改为通用Cordova插件的安装目录 --&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- &lt;param name=&quot;android-package&quot; value=&quot;cordova-plugin-toast.ToastDemo&quot; /&gt; --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">&quot;android-package&quot;</span> <span class="attr">value</span>=<span class="string">&quot;org.apache.cordova.toastdemo.ToastDemo&quot;</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">feature</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">config-file</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">config-file</span> <span class="attr">parent</span>=<span class="string">&quot;/*&quot;</span> <span class="attr">target</span>=<span class="string">&quot;AndroidManifest.xml&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">config-file</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- src 为插件目录中java源文件路径，target-dir 为插件安装项目中后源文件路径 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 此处将 target-dir 修改为与包路径一致 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- &lt;source-file src=&quot;src/android/ToastDemo.java&quot; target-dir=&quot;src/cordova-plugin-toastdemo/ToastDemo&quot; /&gt; --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source-file</span> <span class="attr">src</span>=<span class="string">&quot;src/android/ToastDemo.java&quot;</span> <span class="attr">target-dir</span>=<span class="string">&quot;src/org/apache/cordova/toastdemo&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">platform</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>修改ToastDemo.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> exec = <span class="built_in">require</span>(<span class="string">&#x27;cordova/exec&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// export.showToast 的 showToast 为插件安装后js调用的方法名，其中传递的参数可以为任意多个（arg0，arg1， arg2.., success, error)</span></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">showToast</span> = <span class="keyword">function</span> (<span class="params">arg0, success, error</span>) &#123;</span><br><span class="line">    <span class="comment">// success error 为成功 失败回调</span></span><br><span class="line">    <span class="comment">// ToastDemo 为 plugin.xml 中配置的 feature 的name名</span></span><br><span class="line">    <span class="comment">// 参数中的&#x27;showToast&#x27;为给 ToastDemo.java 判断的 action 参数</span></span><br><span class="line">    <span class="title function_">exec</span>(success, error, <span class="string">&#x27;ToastDemo&#x27;</span>, <span class="string">&#x27;showToast&#x27;</span>, [arg0]);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>修改ToastDemo.java 文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.apache.cordova.toastdemo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.cordova.CordovaPlugin;</span><br><span class="line"><span class="keyword">import</span> org.apache.cordova.CallbackContext;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.json.JSONArray;</span><br><span class="line"><span class="keyword">import</span> org.json.JSONException;</span><br><span class="line"><span class="keyword">import</span> org.json.JSONObject;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.widget.Toast;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This class echoes a string called from JavaScript.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ToastDemo</span> <span class="keyword">extends</span> <span class="title class_">CordovaPlugin</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">execute</span><span class="params">(String action, JSONArray args, CallbackContext callbackContext)</span> <span class="keyword">throws</span> JSONException &#123;</span><br><span class="line">        <span class="keyword">if</span> (action.equals(<span class="string">&quot;showToast&quot;</span>)) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> args.getString(<span class="number">0</span>);</span><br><span class="line">            <span class="built_in">this</span>.showToast(message, callbackContext);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">showToast</span><span class="params">(String message, CallbackContext callbackContext)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (message != <span class="literal">null</span> &amp;&amp; message.length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            Toast.makeText(cordova.getContext(), message, Toast.LENGTH_SHORT).show(); <span class="comment">// 调用android原生Toast</span></span><br><span class="line">            callbackContext.success(message); <span class="comment">// 设置成功回调信息</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            callbackContext.error(<span class="string">&quot;Expected one non-empty string argument.&quot;</span>); <span class="comment">// 设置失败回调信息</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="初始化插件"><a href="#初始化插件" class="headerlink" title="初始化插件"></a>初始化插件</h4><p>进入插件目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># niekaifa @ niekaifadeMacBook-Pro in ~/ikyu/code/cordova-plugin/plugins/ToastDemo [15:19:21] </span><br><span class="line">$ npm init</span><br></pre></td></tr></table></figure>
+<p>提示的时候可以直接回车，使用默认值直到结束，将创建一个 package.json 文件</p>
+<h3 id="插件使用"><a href="#插件使用" class="headerlink" title="插件使用"></a>插件使用</h3><p>安装插件</p>
+<p>cordova plugin add git+ssh://<a href="mailto:&#x67;&#105;&#116;&#x40;&#121;&#111;&#117;&#x72;&#x2e;&#x67;&#105;&#116;&#x2e;&#x73;&#101;&#114;&#118;&#101;&#114;&#x2e;&#x63;&#111;&#109;">&#x67;&#105;&#116;&#x40;&#121;&#111;&#117;&#x72;&#x2e;&#x67;&#105;&#116;&#x2e;&#x73;&#101;&#114;&#118;&#101;&#114;&#x2e;&#x63;&#111;&#109;</a>/path/to/plugin/repo.git</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># niekaifa @ niekaifadeMacBook-Pro in ~/ikyu/code/cordova-plugin [15:56:03] </span><br><span class="line">$ cordova plugin add /Users/niekaifa/ikyu/code/cordova-plugin/plugins/ToastDemo</span><br><span class="line">Installing &quot;cordova-plugin-toastdemo&quot; for android</span><br><span class="line">Adding cordova-plugin-toastdemo to package.json</span><br></pre></td></tr></table></figure>
+
+<p>js调用插件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">ToastDemo</span>.<span class="title function_">showToast</span>(“这是<span class="title class_">Toast</span>内容”);</span><br></pre></td></tr></table></figure>
+
+<h2 id="ios-plugin-防止左右滑"><a href="#ios-plugin-防止左右滑" class="headerlink" title="ios plugin 防止左右滑"></a>ios plugin 防止左右滑</h2><p><a target="_blank" rel="noopener" href="https://github.com/apache/cordova-plugin-wkwebview-engine">https://github.com/apache/cordova-plugin-wkwebview-engine</a></p>
+<h1 id="android-1"><a href="#android-1" class="headerlink" title="android"></a>android</h1><h2 id="sdk-version"><a href="#sdk-version" class="headerlink" title="sdk version"></a>sdk version</h2><img src="/2020/08/08/cordova/android_v.png" class="">
+<img src="/2020/08/08/cordova/android_v1.png" class="">
+
+<h2 id="debug"><a href="#debug" class="headerlink" title="debug"></a>debug</h2><h3 id="chrome-not-inspect"><a href="#chrome-not-inspect" class="headerlink" title="chrome not inspect"></a>chrome not inspect</h3><p>platforms &gt; android &gt; app &gt; src &gt; main &gt; AndroidManifest.xml<br><application android:debuggable="true" ></p>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><h3 id="cordova-plugin-statusbar"><a href="#cordova-plugin-statusbar" class="headerlink" title="cordova-plugin-statusbar"></a>cordova-plugin-statusbar</h3><p>状态栏不显示</p>
+<p><preference name="StatusBarOverlaysWebView" value="true"/></p>
+<h3 id="apk下载"><a href="#apk下载" class="headerlink" title="apk下载"></a>apk下载</h3><pre><code>&quot;cordova-plugin-file-opener2&quot;: &quot;^3.0.5&quot;,
+&quot;cordova-plugin-file-transfer&quot;: &quot;git+https://code.apowo.com/opensource/cordova-plugin-file-transfer&quot;,
+cordova-plugin-file
+</code></pre>
+<h2 id="plugin打印log"><a href="#plugin打印log" class="headerlink" title="plugin打印log"></a>plugin打印log</h2><p>java中添加<br>webView.loadUrl(“javascript:console.log(‘log’);”);</p>
+<p>LogDemo.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This class echoes a string called from JavaScript.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LogDemo</span> <span class="keyword">extends</span> <span class="title class_">CordovaPlugin</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">execute</span><span class="params">(String action, JSONArray args, CallbackContext callbackContext)</span> <span class="keyword">throws</span> JSONException &#123;</span><br><span class="line">        <span class="keyword">if</span> (action.equals(<span class="string">&quot;printLog&quot;</span>)) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> args.getString(<span class="number">0</span>);</span><br><span class="line">            <span class="built_in">this</span>.printLog(message, callbackContext);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">printLog</span><span class="params">(String message, CallbackContext callbackContext)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (message != <span class="literal">null</span> &amp;&amp; message.length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            Log.v(<span class="string">&quot;Log&quot;</span>,<span class="string">&quot;Log-v&quot;</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">info</span> <span class="operator">=</span> Integer.toString(<span class="number">999</span>);</span><br><span class="line">            <span class="type">float</span> <span class="variable">f</span> <span class="operator">=</span> Float.parseFloat(<span class="string">&quot;25&quot;</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> Float.toString(<span class="number">25.0f</span>);</span><br><span class="line">            Log.v(<span class="string">&quot;Log&quot;</span>, info);</span><br><span class="line">            Log.v(<span class="string">&quot;Log&quot;</span>,<span class="string">&quot;Log-end&quot;</span>);</span><br><span class="line">            Log.v(<span class="string">&quot;Log&quot;</span>, message);</span><br><span class="line">            callbackContext.success(message);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            callbackContext.error(<span class="string">&quot;Expected one non-empty string argument.&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">V/Log: Log-v</span><br><span class="line">    999</span><br><span class="line">    Log-end</span><br></pre></td></tr></table></figure>
+
+<h3 id="index-html中调用"><a href="#index-html中调用" class="headerlink" title="index.html中调用"></a>index.html中调用</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">onDeviceReady</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// Cordova is now initialized. Have fun!</span></span><br><span class="line"></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Running cordova-&#x27;</span> + cordova.<span class="property">platformId</span> + <span class="string">&#x27;@&#x27;</span> + cordova.<span class="property">version</span>);</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;deviceready&#x27;</span>).<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;ready&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="title class_">LogDemo</span>.<span class="title function_">printLog</span>(<span class="string">&quot;test&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">V/Log: Log-v</span><br><span class="line">    999</span><br><span class="line">    Log-end</span><br><span class="line">    test</span><br></pre></td></tr></table></figure>
+
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><h3 id="Could-not-find-tools-jar-Please-check-that-Library-Internet-Plug-Ins-JavaAppletPlugin-plugin-Contents-Home-contains-a-valid-JDK-installation"><a href="#Could-not-find-tools-jar-Please-check-that-Library-Internet-Plug-Ins-JavaAppletPlugin-plugin-Contents-Home-contains-a-valid-JDK-installation" class="headerlink" title="Could not find tools.jar. Please check that /Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home contains a valid JDK installation"></a>Could not find tools.jar. Please check that /Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home contains a valid JDK installation</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ /usr/libexec/java_home -V | grep jdk</span><br><span class="line">Matching Java Virtual Machines (1):</span><br><span class="line">1.8.0_272 (x86_64) &quot;AdoptOpenJDK&quot; - &quot;AdoptOpenJDK 8&quot; /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home</span><br><span class="line">/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home</span><br><span class="line"></span><br><span class="line">vim ~/.zshrc</span><br><span class="line">109 export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home</span><br><span class="line">110 export PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line"></span><br><span class="line">source ~/.zshrc</span><br></pre></td></tr></table></figure>
+
+<h3 id="v4-This-project-uses-AndroidX-dependencies-but-the-‘android-useAndroidX’-property-is-not-enabled-Set-this-property-to-true-in-the-gradle-properties-file-and-retry"><a href="#v4-This-project-uses-AndroidX-dependencies-but-the-‘android-useAndroidX’-property-is-not-enabled-Set-this-property-to-true-in-the-gradle-properties-file-and-retry" class="headerlink" title="v4|This project uses AndroidX dependencies, but the ‘android.useAndroidX’ property is not enabled. Set this property to true in the gradle.properties file and retry."></a>v4|This project uses AndroidX dependencies, but the ‘android.useAndroidX’ property is not enabled. Set this property to true in the gradle.properties file and retry.</h3><p><preference name="AndroidXEnabled" value="true"/><br>android.support.v4.content.FileProvider not found 解决办法<br>import android.support.v4.content.FileProvider;<br>替换为：<br>import androidx.core.content.FileProvider;</p>
+<p>android.support.v4.content.FileProvider<br>替换为：<br>androidx.core.content.FileProvider</p>
+<p>解决办法<br>cordova plugin add cordova-plugin-androidx-adapter</p>
+<p>cordova-plugin-androidx-adapter: EXCEPTION: Failed to load dependencies: Error: Cannot find module ‘recursive-readdir’<br>yarn add recursive-readdir -D</p>
+<h1 id="ios"><a href="#ios" class="headerlink" title="ios"></a>ios</h1><h2 id="发版本"><a href="#发版本" class="headerlink" title="发版本"></a>发版本</h2><p>Product &gt; Archive &gt; Distribute App</p>
+<h2 id="run-1"><a href="#run-1" class="headerlink" title="run"></a>run</h2><p>vue dist : serve</p>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><img src="/2020/08/08/cordova/cache.png" class="">
+
+<h2 id="刘海"><a href="#刘海" class="headerlink" title="刘海"></a>刘海</h2><p>简单操作</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">padding-top</span>: <span class="built_in">env</span>(safe-area-inset-top);</span><br><span class="line"><span class="attribute">padding-bottom</span>: <span class="built_in">env</span>(safe-area-inset-bottom);</span><br></pre></td></tr></table></figure>
+
+<h2 id="隐藏状态栏"><a href="#隐藏状态栏" class="headerlink" title="隐藏状态栏"></a>隐藏状态栏</h2><p>Hiding at startup<br>During runtime you can use the StatusBar.hide function below, but if you want the StatusBar to be hidden at app startup on iOS, you must modify your app’s Info.plist file.</p>
+<p>Add/edit these two attributes if not present. Set “Status bar is initially hidden” to “YES” and set “View controller-based status bar appearance” to “NO”. If you edit it manually without Xcode, the keys and values are:</p>
+<p><key>UIStatusBarHidden</key><br><true/><br><key>UIViewControllerBasedStatusBarAppearance</key><br><false/></p>
+<h2 id="纵屏，不允许翻转"><a href="#纵屏，不允许翻转" class="headerlink" title="纵屏，不允许翻转"></a>纵屏，不允许翻转</h2><p>在config.xml中有这么一条</p>
+<p><preference name="Orientation" value="portrait" /></p>
+<p>Orientation有三个值可取，分别是 default、portrait、landscape</p>
+<p>default:意思是app可以在四个方向随意旋转。<br>portrait：纵向<br>landscape：横向</p>
+<h2 id="全屏"><a href="#全屏" class="headerlink" title="全屏"></a>全屏</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">platform</span> <span class="attr">name</span>=<span class="string">&quot;ios&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">allow-intent</span> <span class="attr">href</span>=<span class="string">&quot;itms:*&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">allow-intent</span> <span class="attr">href</span>=<span class="string">&quot;itms-apps:*&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">preference</span> <span class="attr">name</span>=<span class="string">&quot;AutoHideSplashScreen&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">edit-config</span> <span class="attr">file</span>=<span class="string">&quot;*-Info.plist&quot;</span> <span class="attr">mode</span>=<span class="string">&quot;merge&quot;</span> <span class="attr">target</span>=<span class="string">&quot;UIStatusBarHidden&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">edit-config</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">edit-config</span> <span class="attr">file</span>=<span class="string">&quot;*-Info.plist&quot;</span> <span class="attr">mode</span>=<span class="string">&quot;merge&quot;</span> <span class="attr">target</span>=<span class="string">&quot;UIViewControllerBasedStatusBarAppearance&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">false</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">edit-config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="build"><a href="#build" class="headerlink" title="build"></a>build</h2><h3 id="本机测试"><a href="#本机测试" class="headerlink" title="本机测试"></a>本机测试</h3><p>问题：<br> “iPhone Developer” in the build settings editor</p>
+<p>解决：<br>Xcode &gt; preference &gt; Accounts signing 证书<br>project &gt; Build Settings &gt; Signin &gt; Code Signing Identity &gt; debug &gt; iOS Developer</p>
+<h3 id="build-ipa包"><a href="#build-ipa包" class="headerlink" title="build ipa包"></a>build ipa包</h3><p>问题：<br>xcode archive 一直是灰色的</p>
+<p>解决：<br>把配置选择为device才能选build and archive的，模拟器的肯定不能build and archive</p>
+<h2 id="UIWebView-审核失败"><a href="#UIWebView-审核失败" class="headerlink" title="UIWebView 审核失败"></a>UIWebView 审核失败</h2><p>打开终端，cd到项目根目录。<br>执行以下命令，就能看到哪些文件内还在有UIWebview的踪迹。</p>
+<p>grep -r UIWebView .</p>
+<h3 id="use-WKWebView"><a href="#use-WKWebView" class="headerlink" title="use WKWebView"></a>use WKWebView</h3><h2 id="cordova-plugin-wkwebview-engine-出错"><a href="#cordova-plugin-wkwebview-engine-出错" class="headerlink" title="cordova-plugin-wkwebview-engine 出错"></a>cordova-plugin-wkwebview-engine 出错</h2><p>/Users/niekaifa/ikyu/KilFront/cordova-app/platforms/ios/HelloCordova/Plugins/cordova-plugin-wkwebview-engine/CDVWKWebViewEngine.m:104:80: error: property ‘userAgent’ not found on object of type ‘CDVViewController <em>‘<br>        wkWebView.customUserAgent = ((CDVViewController</em>) self.viewController).userAgent;<br>                                                                               ^<br>/Users/niekaifa/ikyu/KilFront/cordova-app/platforms/ios/HelloCordova/Plugins/cordova-plugin-wkwebview-engine/CDVWKWebViewEngine.m:375:6: error: use of undeclared identifier ‘CDVUserAgentUtil’<br>    [CDVUserAgentUtil releaseLock:vc.userAgentLockToken];<br>     ^<br>/Users/niekaifa/ikyu/KilFront/cordova-app/platforms/ios/HelloCordova/Plugins/cordova-plugin-wkwebview-engine/CDVWKWebViewEngine.m:388:6: error: use of undeclared identifier ‘CDVUserAgentUtil’<br>    [CDVUserAgentUtil releaseLock:vc.userAgentLockToken];</p>
+<p>删除 platforms/    plugins/ 文件</p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><h3 id="webView"><a href="#webView" class="headerlink" title="webView"></a>webView</h3><p>build ios 搞了两周。seven 几分钟 跑起来<br>搞搞时间很快就没了<br>cordova 文档</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">11577* yarn upgrade cordova-ios@6.1.0</span><br><span class="line">11578* cordova plugin rm cordova-plugin-ionic-webview</span><br><span class="line">11579* cordova platform add ios</span><br><span class="line">11580* cordova plugin rm cordova-plugin-statusbar</span><br><span class="line">11581* cordova plugin add cordova-plugin-ionic-webview</span><br><span class="line">11582* cordova build ios --verbose</span><br><span class="line">verbose : 打印出详细内容</span><br><span class="line">11583* cordova clean ios</span><br><span class="line">11584* cordova build ios --verbose</span><br><span class="line">build 分为两步：prepare + compile</span><br><span class="line">11585* cordova prepare ios --verbose</span><br><span class="line">11586* cordova compile ios --verbose</span><br><span class="line">11587* cd tooqing-webapp</span><br><span class="line">11588* git pull</span><br><span class="line">11589* cd ..</span><br><span class="line">11590* git submodule update --remote</span><br><span class="line">11591* cd tooqing-webapp</span><br><span class="line">11592* vue-cli-service build --mode cordova</span><br><span class="line">11593* yarn</span><br><span class="line">11594* yarn build:cordova</span><br><span class="line">11595* cd ..</span><br><span class="line">11596* cordova build ios --verbose</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">preference</span> <span class="attr">name</span>=<span class="string">&quot;WKWebViewOnly&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="allow-navigation-not-set"><a href="#allow-navigation-not-set" class="headerlink" title="allow-navigation not set"></a>allow-navigation not set</h3><p>Internal navigation rejected: <allow-navigation not set> in Cordova on iOS<br>解决办法：<br><allow-navigation href="*" /> </p>
+<h3 id="doc-find"><a href="#doc-find" class="headerlink" title="doc.find"></a>doc.find</h3><p>edit-config for ios usage descriptions: doc.find is not a function<br>解决办法：<br>cordova platform rm ios<br>cordova platform add ios<br>cordova prepare</p>
+<h3 id="file"><a href="#file" class="headerlink" title="file://"></a>file://</h3><p>XMLHttpRequest cannot load file://<br>Failed to load resource: The requested URL was not found on this server.  zh.json<br>解决办法：<br><a target="_blank" rel="noopener" href="https://github.com/AraHovakimyan/cordova-plugin-wkwebviewxhrfix">https://github.com/AraHovakimyan/cordova-plugin-wkwebviewxhrfix</a></p>
+<h2 id="ios支付"><a href="#ios支付" class="headerlink" title="ios支付"></a>ios支付</h2><h3 id="插件-1"><a href="#插件-1" class="headerlink" title="插件"></a>插件</h3><p><a target="_blank" rel="noopener" href="https://github.com/j3k0/cordova-plugin-purchase">https://github.com/j3k0/cordova-plugin-purchase</a></p>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>该插件是基于事件的API。需要注册监听器的变化。<br>监听机制的核心是 <code>when()</code></p>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><h4 id="init"><a href="#init" class="headerlink" title="init"></a>init</h4><p>register -&gt; listen events [registered , valid, requested, approved, finished, owned]</p>
+<h4 id="下单"><a href="#下单" class="headerlink" title="下单"></a>下单</h4><p>order -&gt; 平台从用户账户扣钱 -&gt; 商品进入 approved（批准）状态 -&gt; 检查交易收据合法性 -&gt; 后端发货。</p>
+<h1 id="热更新"><a href="#热更新" class="headerlink" title="热更新"></a>热更新</h1><p>cordova-hot-code-push-plugin</p>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>第一次用 App/www 下文件<br>下一次用 Extra/www<br>当用户启动应用程序——它第一次复制所有web文件到外部存储器。从这一刻起,所有的页面都从外部加载文件夹,而不是打包文件。在每次启动插件连接到您的服务器,并检查其是否可以下载新版本的web项目。如果是这样,它加载设备和安装在下一个发射。</p>
+<h2 id="CLI"><a href="#CLI" class="headerlink" title="CLI"></a>CLI</h2><ul>
+<li>generate configuration files</li>
+<li>本地服务侦听web项目</li>
+</ul>
+<h2 id="workflow"><a href="#workflow" class="headerlink" title="workflow"></a>workflow</h2><img src="/2020/08/08/cordova/workflow.png" class="">
+
+
+<img src="/2020/08/08/cordova/cordova-hot-code-push.png" class="">
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">checkForUpdate</span>(<span class="params"></span>) &#123;</span><br><span class="line">  chcp.<span class="title function_">fetchUpdate</span>(<span class="function">(<span class="params">error, data</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (error) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;--fetchUpdate error--&#x27;</span>, error.<span class="property">code</span>, error.<span class="property">description</span>);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;--fetchUpdate data--&#x27;</span>, data, data.<span class="property">config</span>);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Update is loaded stringify:&#x27;</span> + <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(data));</span><br><span class="line"></span><br><span class="line">    chcp.<span class="title function_">isUpdateAvailableForInstallation</span>(<span class="keyword">function</span>(<span class="params">error, data</span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;isUpdate error&#x27;</span>, error);</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;isUpdate data&#x27;</span>, data);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (error) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;No update was loaded =&gt; nothing to install&#x27;</span>);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;error:&#x27;</span>, error);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="variable language_">window</span>.<span class="title function_">alert</span>(<span class="string">`正在更新至版本: <span class="subst">$&#123;data.readyToInstallVersion&#125;</span>`</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 对比版本号</span></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Current content version: &#x27;</span> + data.<span class="property">currentVersion</span>);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Ready to be installed:&#x27;</span> + data.<span class="property">readyToInstallVersion</span>);</span><br><span class="line"></span><br><span class="line">        chcp.<span class="title function_">installUpdate</span>(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">if</span> (error) &#123;</span><br><span class="line">              <span class="comment">// 更新失败</span></span><br><span class="line">              <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Failed to install the update with error code: &#x27;</span> + error.<span class="property">code</span>);</span><br><span class="line">              <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;install&#x27;</span>, error.<span class="property">description</span>);</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              <span class="comment">// 更新成功</span></span><br><span class="line">              <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Update installed!!!&#x27;</span>);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="cordova-hcp-build"><a href="#cordova-hcp-build" class="headerlink" title="cordova-hcp build"></a>cordova-hcp build</h2><p>cordova-hcp build</p>
+<h2 id="chcp-updateLoadFailed"><a href="#chcp-updateLoadFailed" class="headerlink" title="chcp_updateLoadFailed"></a>chcp_updateLoadFailed</h2><p>在应用 config.xml 配置中可以定义了 native side 的版本号，例如</p>
+<chcp>
+    <native-interface version="5" />
+</chcp>
+例如当前项目 native side 的版本号是5：
+
+<p>如果服务器上配置文件 chcp.json 中的 min_native_interface 值为 5，那么符合要求，热更新后的 web content 能够在正常运行<br>如果服务器上配置文件 chcp.json 中的 min_native_interface 值为 10，高于 config.xml 文件中 <native-interface />，那么热更新将无法正常进行。此时，插件会提示错误 chcp_updateLoadFailed，提示应用需要更新升级</p>
+<h2 id="net-ERR-CLEARTEXT-NOT-PERMITTED"><a href="#net-ERR-CLEARTEXT-NOT-PERMITTED" class="headerlink" title="net::ERR_CLEARTEXT_NOT_PERMITTED"></a>net::ERR_CLEARTEXT_NOT_PERMITTED</h2><p>明文禁止<br>原因：<br>使用<a target="_blank" rel="noopener" href="http://172.18.218.1:5000/www/chcp.json">http://172.18.218.1:5000/www/chcp.json</a></p>
+<p>解决：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">widget</span> <span class="attr">id</span>=<span class="string">&quot;you-app-id&quot;</span> <span class="attr">version</span>=<span class="string">&quot;1.2.3&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">xmlns</span>=<span class="string">&quot;http://www.w3.org/ns/widgets&quot;</span> </span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:cdv</span>=<span class="string">&quot;http://cordova.apache.org/ns/1.0&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">platform</span> <span class="attr">name</span>=<span class="string">&quot;android&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">edit-config</span> <span class="attr">file</span>=<span class="string">&quot;app/src/main/AndroidManifest.xml&quot;</span> <span class="attr">mode</span>=<span class="string">&quot;merge&quot;</span> <span class="attr">target</span>=<span class="string">&quot;/manifest/application&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">application</span> <span class="attr">android:usesCleartextTraffic</span>=<span class="string">&quot;true&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">edit-config</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">platform</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="plugin-cordova-hot-code-push"><a href="#plugin-cordova-hot-code-push" class="headerlink" title="plugin cordova-hot-code-push"></a>plugin cordova-hot-code-push</h4><h5 id="UpdateLoaderWorker-java"><a href="#UpdateLoaderWorker-java" class="headerlink" title="UpdateLoaderWorker.java"></a>UpdateLoaderWorker.java</h5><p>Worker, that implements update download logic.<br>Worker，它实现更新下载逻辑。<br>During the download process events are dispatched to notify the subscribers about the progress.<br>在下载过程中，将发送流程事件以通知订阅者进度。</p>
+<p>class  PluginResultHelper<br>createPluginResult  app版本信息<br>D/CHCP: CHCP PluginResultHelper.createDataNode add text value: appVersion: “1.0.0”<br>D/CHCP: CHCP PluginResultHelper.createDataNode add text value: buildVersion: “10000”<br>    CHCP PluginResultHelper.createDataNode add text value: previousWebVersion: “”<br>    CHCP PluginResultHelper.createDataNode add text value: readyToInstallWebVersion: “”<br>    CHCP PluginResultHelper.createDataNode add text value: currentWebVersion: “2021.03.09-14.31.23”</p>
+<p>CHCP PluginResultHelper.getResult resultObject: {“data”:{“appVersion”:”1.0.0”,”buildVersion”:”10000”,”previousWebVersion”:””,”readyToInstallWebVersion”:””,”currentWebVersion”:”2021.03.09-14.31.23”}}</p>
+<h5 id="chcp-fetchUpdate"><a href="#chcp-fetchUpdate" class="headerlink" title="chcp.fetchUpdate()"></a>chcp.fetchUpdate()</h5><h6 id="error-1"><a href="#error-1" class="headerlink" title="error -1"></a>error -1</h6><p>文档<br>FAILED_TO_DOWNLOAD_APPLICATION_CONFIG - failed to download new application config from the server. Either file doesn’t exist or some internet connection problems. Error code value is -1.</p>
+<p>源码<br>String configURL = chcpXmlConfig.getConfigUrl();<br>Log.d(“CHCP”, “get config url: “ + configURL); // 空</p>
+<h6 id="error-3"><a href="#error-3" class="headerlink" title="error -3"></a>error -3</h6><p>FAILED_TO_DOWNLOAD_CONTENT_MANIFEST</p>
+<h6 id="error-16"><a href="#error-16" class="headerlink" title="error -16"></a>error -16</h6><p>当调用 chcp.installUpdate 时，安装已经在进行</p>
+<h6 id="error-18"><a href="#error-18" class="headerlink" title="error -18"></a>error -18</h6><p>API requests are ignored until assets are installed. Please, wait.</p>
+<p>assets folder in not yet installed assets文件夹还没有安装</p>
+<h6 id="待看"><a href="#待看" class="headerlink" title="待看"></a>待看</h6><p>PluginResultHelper.getResult resultObject</p>
+<p>chcp_assetsInstalledOnExternalStorage</p>
+<h6 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h6><p>is update available for installation<br>是否可以安装更新</p>
+<h5 id="manifest"><a href="#manifest" class="headerlink" title="manifest"></a>manifest</h5><p>chcp.manifest 文件<br>file 内容改变，hash 才会变</p>
+<h1 id="issues"><a href="#issues" class="headerlink" title="issues"></a>issues</h1><h2 id="ios-支付"><a href="#ios-支付" class="headerlink" title="ios 支付"></a>ios 支付</h2><p>大师：<br>搜一下：cordova inapppurchase ios -&gt; product CHAR005 is NOT valid</p>
+<p>@MovingHead Check out this solution. In my case, as I remember, I was missing some App Store agreements (e.g. paid apps agreement is required even for free apps with in-app purchases)</p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/43315512/ios-in-app-purchase-invalid-product-identifier/62494100#62494100">https://stackoverflow.com/questions/43315512/ios-in-app-purchase-invalid-product-identifier/62494100#62494100</a></p>
+<p>协议 ：<br><a target="_blank" rel="noopener" href="https://appstoreconnect.apple.com/agreements/#/">https://appstoreconnect.apple.com/agreements/#/</a></p>
+<p>I had the same exact problem, but the solutions above did not work for me.<br>This is what did:<br>It turns out I hadn’t filled out the proper payments and W9 form on AppStoreConnect.<br>Go to AppStoreConnect &gt; Agreements, Tax, and Banking…<br>Fill out the “Paid Apps” contract if it hadn’t already been filled out</p>
+<h2 id="google-pay"><a href="#google-pay" class="headerlink" title="google pay"></a>google pay</h2><p>s：<br>生命周期<br>REGISTERED +–&gt; INVALID 【我的问题出现在这里】<br>           |<br>           +–&gt; VALID +–&gt; REQUESTED +–&gt; INITIATED +-+<br>                                                      |<br>                ^      +——————————+<br>                |      |<br>                |      |             +–&gt; DOWNLOADING +–&gt; DOWNLOADED +<br>                |      |             |                                |<br>                |      +–&gt; APPROVED +——————————–+–&gt; FINISHED +–&gt; OWNED<br>                |                                                             |<br>                +————————————————————-+</p>
+<p> store.register({<br>      id: “cc.fovea.purchase.consumable1”,<br>      alias: “100 coins”,<br>      type: store.CONSUMABLE<br>    });<br>    的时候，我填了一个数组</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Cordova/" rel="tag"># Cordova</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/05/editor/" rel="prev" title="editor">
+      <i class="fa fa-chevron-left"></i> editor
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/09/17/electron/" rel="next" title="electron">
+      electron <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#basic"><span class="nav-number">1.</span> <span class="nav-text">basic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.1.</span> <span class="nav-text">环境设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#run"><span class="nav-number">1.2.</span> <span class="nav-text">run</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%92%A9%E5%AD%90"><span class="nav-number">1.3.</span> <span class="nav-text">钩子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">1.4.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%85%E9%99%A4PhoneGap%E7%BC%93%E5%AD%98"><span class="nav-number">1.5.</span> <span class="nav-text">清除PhoneGap缓存</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#niekaifa-niekaifadeMacBook-Pro-in-gradle-20-36-42"><span class="nav-number">2.</span> <span class="nav-text">niekaifa @ niekaifadeMacBook-Pro in ~&#x2F;.gradle [20:36:42]</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#plugin"><span class="nav-number">3.</span> <span class="nav-text">plugin</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#add-plugin"><span class="nav-number">3.1.</span> <span class="nav-text">add plugin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove-plugin"><span class="nav-number">3.2.</span> <span class="nav-text">remove plugin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%90%AF"><span class="nav-number">3.3.</span> <span class="nav-text">重启</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%80%E5%87%BA"><span class="nav-number">3.4.</span> <span class="nav-text">退出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%AE%E7%9B%98%E9%AB%98%E5%BA%A6"><span class="nav-number">3.5.</span> <span class="nav-text">键盘高度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%AF%E4%BB%98"><span class="nav-number">3.6.</span> <span class="nav-text">支付</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Philosophy"><span class="nav-number">3.6.1.</span> <span class="nav-text">Philosophy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C%E4%BA%A7%E5%93%81"><span class="nav-number">3.6.2.</span> <span class="nav-text">注册产品</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%AD%E4%B9%B0"><span class="nav-number">3.6.3.</span> <span class="nav-text">购买</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">3.6.3.1.</span> <span class="nav-text">简单的例子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B6%E5%88%B0%E9%AA%8C%E8%AF%81-Receipt-validation"><span class="nav-number">3.6.4.</span> <span class="nav-text">收到验证 Receipt validation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#android"><span class="nav-number">3.6.5.</span> <span class="nav-text">android</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#facebook"><span class="nav-number">3.7.</span> <span class="nav-text">facebook</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ios%E9%9A%90%E8%97%8F%E7%8A%B6%E6%80%81%E6%A0%8F"><span class="nav-number">3.8.</span> <span class="nav-text">ios隐藏状态栏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-number-of-method-references-in-a-dex-file-cannot-exceed-64K"><span class="nav-number">3.9.</span> <span class="nav-text">The number of method references in a .dex file cannot exceed 64K.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91"><span class="nav-number">3.10.</span> <span class="nav-text">自定义插件开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6%E5%B7%A5%E5%85%B7plugman"><span class="nav-number">3.10.1.</span> <span class="nav-text">全局安装插件工具plugman</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%8F%92%E4%BB%B6"><span class="nav-number">3.10.2.</span> <span class="nav-text">创建插件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6%E5%88%9B%E5%BB%BA"><span class="nav-number">3.10.2.1.</span> <span class="nav-text">插件创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6%E9%85%8D%E7%BD%AE"><span class="nav-number">3.10.2.2.</span> <span class="nav-text">插件配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E6%8F%92%E4%BB%B6"><span class="nav-number">3.10.2.3.</span> <span class="nav-text">初始化插件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8"><span class="nav-number">3.10.3.</span> <span class="nav-text">插件使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ios-plugin-%E9%98%B2%E6%AD%A2%E5%B7%A6%E5%8F%B3%E6%BB%91"><span class="nav-number">3.11.</span> <span class="nav-text">ios plugin 防止左右滑</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#android-1"><span class="nav-number">4.</span> <span class="nav-text">android</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sdk-version"><span class="nav-number">4.1.</span> <span class="nav-text">sdk version</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#debug"><span class="nav-number">4.2.</span> <span class="nav-text">debug</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#chrome-not-inspect"><span class="nav-number">4.2.1.</span> <span class="nav-text">chrome not inspect</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6"><span class="nav-number">4.3.</span> <span class="nav-text">插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cordova-plugin-statusbar"><span class="nav-number">4.3.1.</span> <span class="nav-text">cordova-plugin-statusbar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#apk%E4%B8%8B%E8%BD%BD"><span class="nav-number">4.3.2.</span> <span class="nav-text">apk下载</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#plugin%E6%89%93%E5%8D%B0log"><span class="nav-number">4.4.</span> <span class="nav-text">plugin打印log</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#index-html%E4%B8%AD%E8%B0%83%E7%94%A8"><span class="nav-number">4.4.1.</span> <span class="nav-text">index.html中调用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98-1"><span class="nav-number">4.5.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Could-not-find-tools-jar-Please-check-that-Library-Internet-Plug-Ins-JavaAppletPlugin-plugin-Contents-Home-contains-a-valid-JDK-installation"><span class="nav-number">4.5.1.</span> <span class="nav-text">Could not find tools.jar. Please check that &#x2F;Library&#x2F;Internet Plug-Ins&#x2F;JavaAppletPlugin.plugin&#x2F;Contents&#x2F;Home contains a valid JDK installation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v4-This-project-uses-AndroidX-dependencies-but-the-%E2%80%98android-useAndroidX%E2%80%99-property-is-not-enabled-Set-this-property-to-true-in-the-gradle-properties-file-and-retry"><span class="nav-number">4.5.2.</span> <span class="nav-text">v4|This project uses AndroidX dependencies, but the ‘android.useAndroidX’ property is not enabled. Set this property to true in the gradle.properties file and retry.</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ios"><span class="nav-number">5.</span> <span class="nav-text">ios</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E7%89%88%E6%9C%AC"><span class="nav-number">5.1.</span> <span class="nav-text">发版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#run-1"><span class="nav-number">5.2.</span> <span class="nav-text">run</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98"><span class="nav-number">5.3.</span> <span class="nav-text">缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%98%E6%B5%B7"><span class="nav-number">5.4.</span> <span class="nav-text">刘海</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%90%E8%97%8F%E7%8A%B6%E6%80%81%E6%A0%8F"><span class="nav-number">5.5.</span> <span class="nav-text">隐藏状态栏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%B5%E5%B1%8F%EF%BC%8C%E4%B8%8D%E5%85%81%E8%AE%B8%E7%BF%BB%E8%BD%AC"><span class="nav-number">5.6.</span> <span class="nav-text">纵屏，不允许翻转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%8F"><span class="nav-number">5.7.</span> <span class="nav-text">全屏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#build"><span class="nav-number">5.8.</span> <span class="nav-text">build</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E6%9C%BA%E6%B5%8B%E8%AF%95"><span class="nav-number">5.8.1.</span> <span class="nav-text">本机测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#build-ipa%E5%8C%85"><span class="nav-number">5.8.2.</span> <span class="nav-text">build ipa包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UIWebView-%E5%AE%A1%E6%A0%B8%E5%A4%B1%E8%B4%A5"><span class="nav-number">5.9.</span> <span class="nav-text">UIWebView 审核失败</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#use-WKWebView"><span class="nav-number">5.9.1.</span> <span class="nav-text">use WKWebView</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cordova-plugin-wkwebview-engine-%E5%87%BA%E9%94%99"><span class="nav-number">5.10.</span> <span class="nav-text">cordova-plugin-wkwebview-engine 出错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98-2"><span class="nav-number">5.11.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#webView"><span class="nav-number">5.11.1.</span> <span class="nav-text">webView</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#allow-navigation-not-set"><span class="nav-number">5.11.2.</span> <span class="nav-text">allow-navigation not set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#doc-find"><span class="nav-number">5.11.3.</span> <span class="nav-text">doc.find</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#file"><span class="nav-number">5.11.4.</span> <span class="nav-text">file:&#x2F;&#x2F;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ios%E6%94%AF%E4%BB%98"><span class="nav-number">5.12.</span> <span class="nav-text">ios支付</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6-1"><span class="nav-number">5.12.1.</span> <span class="nav-text">插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">5.12.2.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B"><span class="nav-number">5.12.3.</span> <span class="nav-text">流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#init"><span class="nav-number">5.12.3.1.</span> <span class="nav-text">init</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E5%8D%95"><span class="nav-number">5.12.3.2.</span> <span class="nav-text">下单</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%83%AD%E6%9B%B4%E6%96%B0"><span class="nav-number">6.</span> <span class="nav-text">热更新</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">6.1.</span> <span class="nav-text">工作原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CLI"><span class="nav-number">6.2.</span> <span class="nav-text">CLI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#workflow"><span class="nav-number">6.3.</span> <span class="nav-text">workflow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cordova-hcp-build"><span class="nav-number">6.4.</span> <span class="nav-text">cordova-hcp build</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chcp-updateLoadFailed"><span class="nav-number">6.5.</span> <span class="nav-text">chcp_updateLoadFailed</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#net-ERR-CLEARTEXT-NOT-PERMITTED"><span class="nav-number">6.6.</span> <span class="nav-text">net::ERR_CLEARTEXT_NOT_PERMITTED</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#plugin-cordova-hot-code-push"><span class="nav-number">6.6.0.1.</span> <span class="nav-text">plugin cordova-hot-code-push</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#UpdateLoaderWorker-java"><span class="nav-number">6.6.0.1.1.</span> <span class="nav-text">UpdateLoaderWorker.java</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#chcp-fetchUpdate"><span class="nav-number">6.6.0.1.2.</span> <span class="nav-text">chcp.fetchUpdate()</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#error-1"><span class="nav-number">6.6.0.1.2.1.</span> <span class="nav-text">error -1</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#error-3"><span class="nav-number">6.6.0.1.2.2.</span> <span class="nav-text">error -3</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#error-16"><span class="nav-number">6.6.0.1.2.3.</span> <span class="nav-text">error -16</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#error-18"><span class="nav-number">6.6.0.1.2.4.</span> <span class="nav-text">error -18</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%BE%85%E7%9C%8B"><span class="nav-number">6.6.0.1.2.5.</span> <span class="nav-text">待看</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BF%BB%E8%AF%91"><span class="nav-number">6.6.0.1.2.6.</span> <span class="nav-text">翻译</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#manifest"><span class="nav-number">6.6.0.1.3.</span> <span class="nav-text">manifest</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#issues"><span class="nav-number">7.</span> <span class="nav-text">issues</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ios-%E6%94%AF%E4%BB%98"><span class="nav-number">7.1.</span> <span class="nav-text">ios 支付</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#google-pay"><span class="nav-number">7.2.</span> <span class="nav-text">google pay</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">kil</p>
+  <div class="site-description" itemprop="description">心如止水，潜心修行</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kilfront" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kilfront" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kaifaweb@163.com" title="E-Mail → mailto:kaifaweb@163.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kil</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -274,6 +274,10 @@ hexo g
 hexo d
 ```
 
+hexo d 报错：ERROR Deployer not found: git
+解决办法：npm install hexo-deployer-git
+
+
 ### 创建新文件
 ``` BASH
 $ hexo new Linux
@@ -308,16 +312,20 @@ CNAME kilfront.github.io
 
 ### 部署到服务器
 ``` zsh
+服务器上 blog 同目录，创建 blog.git文件
+git init --bare blog.git
+
 root@VM-0-4-ubuntu:/home/git# ls
 kil-blog  kil-blog.git
 
+# hooks 文件下 创建一个 post-receive 文件
 root@VM-0-4-ubuntu:/home/git/kil-blog.git/hooks# cat post-receive
 #!/bin/bash
 git --work-tree=/home/kil-blog --git-dir=/home/git/kil-blog.git checkout -f
 
 # 测试git服务器是否部署成功
 # niekaifa @ niekaifadeMacBook-Pro in ~/ikyu/temp [17:21:21]
-$ git clone root@122.51.101.113:/home/git/kil-blog.git
+$ git clone root@129.211.209.113:/home/git/kil-blog.git
 
 root@VM-0-4-ubuntu:/etc/nginx/conf.d# cat default.conf
 server {

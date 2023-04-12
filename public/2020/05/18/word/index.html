@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":false,"scrollpercent":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="项目单词thumbnails 缩略图 CDNCDN是一个key（路由） ，value （内容）形式 model 和 moduleModel通常是指模型。这个模型也许是你需求分析出来的， 也许是你算法做出来的。 不过最大可能是MVC的网站，或者是GUI开发模式中的M里的那个模型。 所以什么时候用Model取决于你要做什么。以前你打算花长时间做。如果做很短的项目可以不用Model。如果超过1天时间的项">
+<meta property="og:type" content="article">
+<meta property="og:title" content="word">
+<meta property="og:url" content="http://example.com/2020/05/18/word/index.html">
+<meta property="og:site_name" content="Kil Notes">
+<meta property="og:description" content="项目单词thumbnails 缩略图 CDNCDN是一个key（路由） ，value （内容）形式 model 和 moduleModel通常是指模型。这个模型也许是你需求分析出来的， 也许是你算法做出来的。 不过最大可能是MVC的网站，或者是GUI开发模式中的M里的那个模型。 所以什么时候用Model取决于你要做什么。以前你打算花长时间做。如果做很短的项目可以不用Model。如果超过1天时间的项">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-05-18T03:09:05.000Z">
+<meta property="article:modified_time" content="2023-04-10T01:42:08.677Z">
+<meta property="article:author" content="kil">
+<meta property="article:tag" content="word">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/05/18/word/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>word | Kil Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Kil Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Quick notes</p>
+      <a>
+        <img class="custom-logo-image" src="[object Object]" alt="Kil Notes">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/05/18/word/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="kil">
+      <meta itemprop="description" content="心如止水，潜心修行">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kil Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          word
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-18 11:09:05" itemprop="dateCreated datePublished" datetime="2020-05-18T11:09:05+08:00">2020-05-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/word/" itemprop="url" rel="index"><span itemprop="name">word</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="项目单词"><a href="#项目单词" class="headerlink" title="项目单词"></a>项目单词</h1><p>thumbnails 缩略图</p>
+<h1 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h1><p>CDN是一个key（路由） ，value （内容）形式</p>
+<h1 id="model-和-module"><a href="#model-和-module" class="headerlink" title="model 和 module"></a>model 和 module</h1><p>Model通常是指模型。这个模型也许是你需求分析出来的， 也许是你算法做出来的。 不过最大可能是MVC的网站，或者是GUI开发模式中的M里的那个模型。</p>
+<p>所以什么时候用Model取决于你要做什么。以前你打算花长时间做。如果做很短的项目可以不用Model。如果超过1天时间的项目，还是可以用Model的。 这时就要按你所使用的框架，设计你的MODEL。</p>
+<p>Module是指模块，这个概念最早是从结构化编程里来的。 简单说就是一个独立的python程序文件。可以被其它的程序import方式来使用。 这个东西大多数情形下都会用的。只要程序超过50行左右通常会独立建立一个Module，这是一个好的编程习惯。</p>
+<p>也有1千行都是一个文件的程序员。 编写的程序也未必就是差的。 这个主要还是自己的把控能力。 本人习惯将思维限制在一个小范围里，所以会每想好一个问题，就做成一个单元，module，并独立测试。以后重复使用。</p>
+<h1 id="state-和-status"><a href="#state-和-status" class="headerlink" title="state 和 status"></a>state 和 status</h1><p>status == how are you? [good/bad]</p>
+<p>state == what are you doing? [resting/working]</p>
+<h1 id="职位"><a href="#职位" class="headerlink" title="职位"></a>职位</h1><p>PM: Product Manager，产品e68a8462616964757a686964616f31333365666262经理，又称品牌经理（Brand Manager）。举凡产品从创意到上市，所有相关的研发、调研、生产、编预算、广告、促销活动等等，都由产品经理掌控。</p>
+<p>QA: Quality Assurance，品质保证。QA的主要职责就是质量保证工作。</p>
+<h2 id="RBAC"><a href="#RBAC" class="headerlink" title="RBAC"></a>RBAC</h2><p>基于角色的访问控制（RBAC）是实施面向企业安全策略的一种有效的访问控制方式。</p>
+<h2 id="IDE"><a href="#IDE" class="headerlink" title="IDE"></a>IDE</h2><p>集成开发环境（IDE，Integrated Development Environment ）是用于提供程序开发环境的应用程序，一般包括代码编辑器、编译器、调试器和图形用户界面等工具。</p>
+<h2 id="RegExp"><a href="#RegExp" class="headerlink" title="RegExp"></a>RegExp</h2><p>正规表达式（英语：Regular Expression，常简写为regex、regexp或RE）</p>
+<h2 id="软件环境"><a href="#软件环境" class="headerlink" title="软件环境"></a>软件环境</h2><p>dev是单词【develop：开发】的简写<br>代表：开发环境<br>该环境下的配置项只影响开发人员本地代码配置。<br>在项目早起代码本地编写时调试使用。</p>
+<p>test：测试环境<br>该环境配置影响整个团队的测试环境。</p>
+<p>prod是单词【production：生产】的简写<br>代表：正式生产环境<br>程序最终发布后所需要的参数配置信息</p>
+<p>pve：虚拟机</p>
+<p>UAT环境：UAT，(User Acceptance Test),用户接受度测试 即验收测试，所以UAT环境主要是用来作为客户体验的环境。</p>
+<h2 id="软件版本"><a href="#软件版本" class="headerlink" title="软件版本"></a>软件版本</h2><h3 id="软件的开发期"><a href="#软件的开发期" class="headerlink" title="软件的开发期"></a>软件的开发期</h3><p>说完测试的几个阶段，我们就来说说软件开发阶段的几个版本：</p>
+<p>Alpha版本<br>预览版或者叫内测版，对应测试阶段中的α阶段，所以这个版本也叫α版，这个版本包含很多BUG，功能不齐全，主要是给开发人员和测试人员测试和找BUG用的。</p>
+<p>Beta版本<br>测试版或者叫公开测试版，对应测试阶段中的β阶段，所以这个版本也叫β版。该阶段的版本会一直加入新的功能，主要是给“部落”用户和忠实用户测试用的，该版本仍然存在很多BUG，但是相对Alpha版要稳定一些，通常在 Alpha版之后推出。例如微信经常会发一些Beta版本来让用户测试体验；Apple IOS系统也会经常发布很多Beta版本让用户体验测试。</p>
+<p>RC(Release Candidate)<br>最终测试版本，可能成为最终产品的候选版本，如果未出现问题则可发布成为正式版本，RC版本可以说是最接近正式版的版本，就是正式版之前的最后一个测试版，多数开源软件会推出两个RC版本，最后的 RC2 则成为正式版本。</p>
+<p>Release版<br>该版本意味“最终版本”，在前面版本的一系列测试版之后，终归会有一个正式版本，是最终交付用户使用的一个版本。该版本有时也称为标准版。一般情况下，Release不会以单词形式出现在软件封面上，取而代之的是符号(R)。</p>
+<h3 id="软件的完成期"><a href="#软件的完成期" class="headerlink" title="软件的完成期"></a>软件的完成期</h3><p>RC2版本发布完成后，就到了软件的完成时期，如果RC2没有大问题，就会变为最终的发布版本。具体有下面几个阶段：</p>
+<p>Stable</p>
+<p>稳定版；来自预览版本释出使用与改善而修正完成。</p>
+<p>GA(General Availability)</p>
+<p>正式发布的版本；在国外都是用GA来说明release版本的。</p>
+<p>RTM(Release to Manufacturing)</p>
+<p>给生产商的release版本；RTM版本并不一定意味着创作者解决了软件所有问题；仍有可能向公众发布前更新版本。另外一种RTM的称呼是RTW（Release To Web），表示正式版本的软件发布到Web网站上供客户免费下载。</p>
+<p>RTL(Retail)</p>
+<p>零售版；是真正的正式版，正式上架零售版。以Windows 7为例，RTM版与零售版的版本号是一样的。</p>
+<h3 id="其他版本"><a href="#其他版本" class="headerlink" title="其他版本"></a>其他版本</h3><p>OEM(Original Equipment Manufacturer)<br>原始设备制造商；是给计算机厂商随着计算机贩卖的，也就是随机版；只能随机器出货，不能零售。只能全新安装，不能从旧有操作系统升级。包装不像零售版精美，通常只有一面CD和说明书(授权书)。</p>
+<p>RVL<br>号称是正式版，其实RVL根本不是版本的名称。它是中文版/英文版文档破解出来的。</p>
+<p>EVAL<br>而流通在网络上的EVAL版，与“评估版”类似，功能上和零售版没有区别。</p>
+<p>LTS Long Term Support 长期支持</p>
+<h2 id="SSL"><a href="#SSL" class="headerlink" title="SSL"></a>SSL</h2><p>SSL(Secure Sockets Layer 安全套接字协议)</p>
+<h2 id="DTO"><a href="#DTO" class="headerlink" title="DTO"></a>DTO</h2><p>DTO:Data Transfer Object（数据传输对象）DTO 是一组需要跨进程或网络边界传输的聚合数据的简单容器。它不应该包含业务逻辑，并将其行为限制为诸如内部一致性检查和基本验证之类的活动。注意，不要因实 现这些方法而导致 DTO 依赖于任何新类。在设计数据传输对象时，您有两种主要选择：使用一般集合；或使用显式的 getter 和 setter 方法创建自定义对象。</p>
+<h1 id="SaaS"><a href="#SaaS" class="headerlink" title="SaaS"></a>SaaS</h1><p>是Software-as-a-Service的缩写名称，意思为软件即服务，即通过网络提供软件服务。</p>
+<h1 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h1><p>静态语言和动态语言的区别<br>基本概念<br>静态语言（强类型语言）<br>静态语言是在编译时变量的数据类型即可确定的语言，多数静态类型语言要求在使用变量之前必须声明数据类型。<br>例如：C++、Java、Delphi、C#等。</p>
+<p>无隐式转换</p>
+<p>动态语言（弱类型语言）<br>动态语言是在运行时确定数据类型的语言。变量使用之前不需要类型声明，通常变量的类型是被赋值的那个值的类型。<br>例如PHP/ASP/Ruby/Python/Perl/ABAP/SQL/JavaScript/Unix Shell等等。</p>
+<p>有隐式转换</p>
+<p>强类型定义语言<br>强制数据类型定义的语言。也就是说，一旦一个变量被指定了某个数据类型，如果不经过强制转换，那么它就永远是这个数据类型了。举个例子：如果你定义了一个整型变量a,那么程序根本不可能将a当作字符串类型处理。强类型定义语言是类型安全的语言。</p>
+<p>弱类型定义语言<br>数据类型可以被忽略的语言。它与强类型定义语言相反, 一个变量可以赋不同数据类型的值。强类型定义语言在速度上可能略逊色于弱类型定义语言，但是强类型定义语言带来的严谨性能够有效的避免许多错误。</p>
+<p>两者区别<br>特性<br>强类型语言是一旦变量的类型被确定，就不能转化的语言。<br>弱类型语言则反之，一个变量的类型是由其应用上下文确定的。</p>
+<p>静态语言的优势<br>由于类型的强制声明，使得IDE有很强的代码感知能力，故，在实现复杂的业务逻辑、开发大型商业系统、以及那些生命周期很长的应用中，依托IDE对系统的开发很有保障；<br>由于静态语言相对比较封闭，使得第三方开发包对代码的侵害性可以降到最低；<br>动态语言的优势<br>思维不受束缚，可以任意发挥，把更多的精力放在产品本身上；<br>集中思考业务逻辑实现，思考过程即实现过程；</p>
+<h1 id="EOF"><a href="#EOF" class="headerlink" title="EOF"></a>EOF</h1><p>End Of FIle   文件结尾</p>
+<h1 id="FSM"><a href="#FSM" class="headerlink" title="FSM"></a>FSM</h1><p>Finite State Machine  有限状态机</p>
+<h1 id="SN码"><a href="#SN码" class="headerlink" title="SN码"></a>SN码</h1><p>Serial Number<br>产品序列码</p>
+<h1 id="剪贴板"><a href="#剪贴板" class="headerlink" title="剪贴板"></a>剪贴板</h1><p>剪贴板（ClipBoard）是内存中的一块区域，是Windows内置的一个非常有用的工具，通过小小的剪贴板，架起了一座彩桥，使得在各种应用程序之间，传递和共享信息成为可能。然而美中不足的是，剪贴板只能保留一份数据，每当新的数据传入，旧的便会被覆盖。</p>
+<h1 id="oAuth"><a href="#oAuth" class="headerlink" title="oAuth"></a>oAuth</h1><p>Open Authorization<br>OAUTH协议为用户资源的授权提供了一个安全的、开放而又简易的标准。与以往的授权方式不同之处是OAUTH的授权不会使第三方触及到用户的帐号信息（如用户名与密码），即第三方无需使用用户的用户名与密码就可以申请获得该用户资源的授权，因此OAUTH是安全的.</p>
+<h1 id="文件命名"><a href="#文件命名" class="headerlink" title="文件命名"></a>文件命名</h1><p>toy-</p>
+<h1 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h1><p>我们把变量从内存中变成可存储或传输的过程称之为序列化<br>在Python中叫pickling，在其他语言中也被称之为serialization，marshalling，flattening等等，都是一个意思。<br>序列化之后，就可以把序列化后的内容写入磁盘，或者通过网络传输到别的机器上。</p>
+<h1 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h1><p>反过来，把变量内容从序列化的对象重新读到内存里称之为反序列化，即unpickling。</p>
+<h1 id="GC"><a href="#GC" class="headerlink" title="GC"></a>GC</h1><p>CG原为Computer Graphics<br>指的是计算机动画，是借助计算机来制作动画的技术。大致可bai以分为二维动画（2D）和三维动画（3D）两种。  </p>
+<h2 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h2><p>↓↑</p>
+<h1 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h1><h2 id="UTC"><a href="#UTC" class="headerlink" title="UTC"></a>UTC</h2><p>协调世界时（英语：Coordinated Universal Time，法语：Temps Universel Coordonné，简称UTC）是最主要的世界时间标准，其以原子时秒长为基础，在时刻上尽量接近于格林威治标准时间。<br>yyyy-MM-dd’T’HH:mm:ss.SSSZ<br>2021-04-04T01:12:22.448Z</p>
+<h1 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h1><h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>1、单例类只能有一个实例。<br>2、单例类必须自己创建自己的唯一实例。<br>3、单例类必须给所有其他对象提供这一实例。</p>
+<h1 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h1><p>CPU的这两大架构：ARM和X86<br>ARM<br>ARM64是CPU构架的一种，通常用于手机、平板等CPU，目前笔记本电脑也会采用ARM64构架的CPU。<br>x86<br>x86是CPU构架的一种，通常用于笔记本电脑、台式电脑、服务器、超级计算机。</p>
+<h1 id="amd64-amp-arm64"><a href="#amd64-amp-arm64" class="headerlink" title="amd64 &amp; arm64"></a>amd64 &amp; arm64</h1><p>芯片架构<br>amd64 电脑，arm64 手机</p>
+<p>arm：太早</p>
+<h1 id="SDK"><a href="#SDK" class="headerlink" title="SDK"></a>SDK</h1><p>软件开发工具包 (Software development kit)</p>
+<h1 id="slim"><a href="#slim" class="headerlink" title="slim"></a>slim</h1><p>jquery.slim.min.js  精简版本</p>
+<h1 id="Splash-screen"><a href="#Splash-screen" class="headerlink" title="Splash screen"></a>Splash screen</h1><p>启动页</p>
+<h1 id="CLI"><a href="#CLI" class="headerlink" title="CLI"></a>CLI</h1><p>Command-Line Interface<br>命令行界面</p>
+<h1 id="UI-UX"><a href="#UI-UX" class="headerlink" title="UI/UX"></a>UI/UX</h1><p>UI：user interface 用户界面<br>UX：user Experience 用户体验</p>
+<h1 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h1><p>Domain Name System 域名系统</p>
+<h1 id="CDN-1"><a href="#CDN-1" class="headerlink" title="CDN"></a>CDN</h1><p>Content Delivery Network 内容分发网络。“网络加速器”</p>
+<h1 id="FLAC"><a href="#FLAC" class="headerlink" title="FLAC"></a>FLAC</h1><p>Free Lossless Audio Codec<br>无损音频压缩编码。mp3是有损压缩</p>
+<h1 id="ERP"><a href="#ERP" class="headerlink" title="ERP"></a>ERP</h1><p>Enterprise resource planning<br>企业资源计划</p>
+<h1 id="SaaS-1"><a href="#SaaS-1" class="headerlink" title="SaaS"></a>SaaS</h1><p>Software-as-a-service<br>软件即服务</p>
+<h1 id="diff"><a href="#diff" class="headerlink" title="diff"></a>diff</h1><p>diff是Unix系统的一个很重要的工具程序。<br>它用来比较两个文本文件的差异，是代码版本管理的基石之一</p>
+<h1 id="other"><a href="#other" class="headerlink" title="other"></a>other</h1><p>computed: 计算属性<br>computer: 计算机</p>
+<h1 id="数量"><a href="#数量" class="headerlink" title="数量"></a>数量</h1><p>k是千、万是10k。M是兆（即百万）。</p>
+<h1 id="DRY"><a href="#DRY" class="headerlink" title="DRY"></a>DRY</h1><p>DRY是Don’t Repeat Yourself的首字母缩写，直译就是不要重复你自己</p>
+<h1 id="高级语言与低级语言"><a href="#高级语言与低级语言" class="headerlink" title="高级语言与低级语言"></a>高级语言与低级语言</h1><p>高级语言：比较接近人的一些习惯，人的用法<br>低级语言：更接近操作系统</p>
+<h1 id="URI-和-URL"><a href="#URI-和-URL" class="headerlink" title="URI 和 URL"></a>URI 和 URL</h1><p>身份证号是 URI<br>动物住址协议://地球/中国/浙江省/杭州市/西湖区/某大学/14号宿舍楼/525号寝/张三.人 URL</p>
+<p>URL是URI的子集。URL是以描述人的位置来唯一确定一个人的。<br>不论是用定位的方式还是用编号的方式，我们都可以唯一确定一个人，都是URl的一种实现，而URL就是用定位的方式实现的URI。</p>
+<h1 id="计算机"><a href="#计算机" class="headerlink" title="计算机"></a>计算机</h1><h2 id="处理器架构"><a href="#处理器架构" class="headerlink" title="处理器架构"></a>处理器架构</h2><h3 id="ARM"><a href="#ARM" class="headerlink" title="ARM"></a>ARM</h3><p>一种常用于手机、平板电脑和其他便携式设备的芯片架构。</p>
+<h3 id="x86-64"><a href="#x86-64" class="headerlink" title="x86_64"></a>x86_64</h3><p>一种常用于台式电脑和笔记本电脑的处理器架构。提供比ARM架构更高的性能和更多的功能。<br>x86_64是一种计算机处理器架构，也称为x64、x86-64、Intel 64或AMD64。它是x86架构的扩展，具有更大的寻址能力和更多的寄存器，能够提供更高的计算性能。<br>x86_64架构的处理器通常用于台式电脑和笔记本电脑，并且支持虚拟化技术。它与x86架构的处理器兼容，可以运行x86架构的操作系统和应用</p>
+<h3 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sw_vers</span><br><span class="line">ProductName:    macOS</span><br><span class="line">ProductVersion: 12.2 # 操作系统的版本</span><br><span class="line">BuildVersion:   21D49</span><br></pre></td></tr></table></figure>
+
+<h1 id="BI"><a href="#BI" class="headerlink" title="BI"></a>BI</h1><p>商业智能 Business Intelligence</p>
+<ul>
+<li>数据仓库技术</li>
+<li>线上分析处理技术（OLAP）</li>
+<li>数据挖掘</li>
+<li>数据展现技术</li>
+<li>数据分析，供角色者实现商业价值</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/word/" rel="tag"># word</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/20/HTML/" rel="prev" title="HTML">
+      <i class="fa fa-chevron-left"></i> HTML
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/19/rxjs/" rel="next" title="rxjs">
+      rxjs <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%8D%95%E8%AF%8D"><span class="nav-number">1.</span> <span class="nav-text">项目单词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CDN"><span class="nav-number">2.</span> <span class="nav-text">CDN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#model-%E5%92%8C-module"><span class="nav-number">3.</span> <span class="nav-text">model 和 module</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#state-%E5%92%8C-status"><span class="nav-number">4.</span> <span class="nav-text">state 和 status</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%81%8C%E4%BD%8D"><span class="nav-number">5.</span> <span class="nav-text">职位</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RBAC"><span class="nav-number">5.1.</span> <span class="nav-text">RBAC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IDE"><span class="nav-number">5.2.</span> <span class="nav-text">IDE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RegExp"><span class="nav-number">5.3.</span> <span class="nav-text">RegExp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E7%8E%AF%E5%A2%83"><span class="nav-number">5.4.</span> <span class="nav-text">软件环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E7%89%88%E6%9C%AC"><span class="nav-number">5.5.</span> <span class="nav-text">软件版本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%BC%80%E5%8F%91%E6%9C%9F"><span class="nav-number">5.5.1.</span> <span class="nav-text">软件的开发期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%AE%8C%E6%88%90%E6%9C%9F"><span class="nav-number">5.5.2.</span> <span class="nav-text">软件的完成期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%89%88%E6%9C%AC"><span class="nav-number">5.5.3.</span> <span class="nav-text">其他版本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL"><span class="nav-number">5.6.</span> <span class="nav-text">SSL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DTO"><span class="nav-number">5.7.</span> <span class="nav-text">DTO</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SaaS"><span class="nav-number">6.</span> <span class="nav-text">SaaS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B"><span class="nav-number">7.</span> <span class="nav-text">类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#EOF"><span class="nav-number">8.</span> <span class="nav-text">EOF</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FSM"><span class="nav-number">9.</span> <span class="nav-text">FSM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SN%E7%A0%81"><span class="nav-number">10.</span> <span class="nav-text">SN码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%AA%E8%B4%B4%E6%9D%BF"><span class="nav-number">11.</span> <span class="nav-text">剪贴板</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#oAuth"><span class="nav-number">12.</span> <span class="nav-text">oAuth</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%91%BD%E5%90%8D"><span class="nav-number">13.</span> <span class="nav-text">文件命名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">14.</span> <span class="nav-text">序列化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">15.</span> <span class="nav-text">反序列化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GC"><span class="nav-number">16.</span> <span class="nav-text">GC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6"><span class="nav-number">16.1.</span> <span class="nav-text">特殊字符</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%B6%E9%97%B4"><span class="nav-number">17.</span> <span class="nav-text">时间</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#UTC"><span class="nav-number">17.1.</span> <span class="nav-text">UTC</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%BC%8F"><span class="nav-number">18.</span> <span class="nav-text">模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="nav-number">18.1.</span> <span class="nav-text">单例模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CPU"><span class="nav-number">19.</span> <span class="nav-text">CPU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#amd64-amp-arm64"><span class="nav-number">20.</span> <span class="nav-text">amd64 &amp; arm64</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SDK"><span class="nav-number">21.</span> <span class="nav-text">SDK</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#slim"><span class="nav-number">22.</span> <span class="nav-text">slim</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Splash-screen"><span class="nav-number">23.</span> <span class="nav-text">Splash screen</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CLI"><span class="nav-number">24.</span> <span class="nav-text">CLI</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UI-UX"><span class="nav-number">25.</span> <span class="nav-text">UI&#x2F;UX</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DNS"><span class="nav-number">26.</span> <span class="nav-text">DNS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CDN-1"><span class="nav-number">27.</span> <span class="nav-text">CDN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FLAC"><span class="nav-number">28.</span> <span class="nav-text">FLAC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ERP"><span class="nav-number">29.</span> <span class="nav-text">ERP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SaaS-1"><span class="nav-number">30.</span> <span class="nav-text">SaaS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#diff"><span class="nav-number">31.</span> <span class="nav-text">diff</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#other"><span class="nav-number">32.</span> <span class="nav-text">other</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E9%87%8F"><span class="nav-number">33.</span> <span class="nav-text">数量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DRY"><span class="nav-number">34.</span> <span class="nav-text">DRY</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%AB%98%E7%BA%A7%E8%AF%AD%E8%A8%80%E4%B8%8E%E4%BD%8E%E7%BA%A7%E8%AF%AD%E8%A8%80"><span class="nav-number">35.</span> <span class="nav-text">高级语言与低级语言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#URI-%E5%92%8C-URL"><span class="nav-number">36.</span> <span class="nav-text">URI 和 URL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA"><span class="nav-number">37.</span> <span class="nav-text">计算机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E5%99%A8%E6%9E%B6%E6%9E%84"><span class="nav-number">37.1.</span> <span class="nav-text">处理器架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ARM"><span class="nav-number">37.1.1.</span> <span class="nav-text">ARM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#x86-64"><span class="nav-number">37.1.2.</span> <span class="nav-text">x86_64</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-number">37.1.3.</span> <span class="nav-text">操作系统</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BI"><span class="nav-number">38.</span> <span class="nav-text">BI</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">kil</p>
+  <div class="site-description" itemprop="description">心如止水，潜心修行</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kilfront" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kilfront" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kaifaweb@163.com" title="E-Mail → mailto:kaifaweb@163.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kil</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

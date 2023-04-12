@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":false,"scrollpercent":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="electronusehttps:&#x2F;&#x2F;github.com&#x2F;KilFront&#x2F;electron-app electron&amp;&amp;angularhttps:&#x2F;&#x2F;github.com&#x2F;KilFront&#x2F;electron-app&#x2F;tree&#x2F;angular angularprimeNG[praɪm]angular UI 框架 dialog对话框dynamic  [daɪˈnæmɪk] 动态 打">
+<meta property="og:type" content="article">
+<meta property="og:title" content="editor">
+<meta property="og:url" content="http://example.com/2020/08/05/editor/index.html">
+<meta property="og:site_name" content="Kil Notes">
+<meta property="og:description" content="electronusehttps:&#x2F;&#x2F;github.com&#x2F;KilFront&#x2F;electron-app electron&amp;&amp;angularhttps:&#x2F;&#x2F;github.com&#x2F;KilFront&#x2F;electron-app&#x2F;tree&#x2F;angular angularprimeNG[praɪm]angular UI 框架 dialog对话框dynamic  [daɪˈnæmɪk] 动态 打">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-08-05T09:20:05.000Z">
+<meta property="article:modified_time" content="2022-04-21T12:04:18.680Z">
+<meta property="article:author" content="kil">
+<meta property="article:tag" content="Angular">
+<meta property="article:tag" content="TypeScript">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/08/05/editor/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>editor | Kil Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Kil Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Quick notes</p>
+      <a>
+        <img class="custom-logo-image" src="[object Object]" alt="Kil Notes">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/08/05/editor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="kil">
+      <meta itemprop="description" content="心如止水，潜心修行">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kil Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          editor
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-05 17:20:05" itemprop="dateCreated datePublished" datetime="2020-08-05T17:20:05+08:00">2020-08-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="electron"><a href="#electron" class="headerlink" title="electron"></a>electron</h1><h2 id="use"><a href="#use" class="headerlink" title="use"></a>use</h2><p><a target="_blank" rel="noopener" href="https://github.com/KilFront/electron-app">https://github.com/KilFront/electron-app</a></p>
+<h2 id="electron-amp-amp-angular"><a href="#electron-amp-amp-angular" class="headerlink" title="electron&amp;&amp;angular"></a>electron&amp;&amp;angular</h2><p><a target="_blank" rel="noopener" href="https://github.com/KilFront/electron-app/tree/angular">https://github.com/KilFront/electron-app/tree/angular</a></p>
+<h1 id="angular"><a href="#angular" class="headerlink" title="angular"></a>angular</h1><h1 id="primeNG"><a href="#primeNG" class="headerlink" title="primeNG"></a>primeNG</h1><p>[praɪm]<br>angular UI 框架</p>
+<h2 id="dialog"><a href="#dialog" class="headerlink" title="dialog"></a>dialog</h2><p>对话框<br>dynamic  [daɪˈnæmɪk] 动态</p>
+<h3 id="打开对话框"><a href="#打开对话框" class="headerlink" title="打开对话框"></a>打开对话框</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">DialogService</span> &#125; <span class="keyword">from</span> <span class="string">&quot;primeng/dynamicdialog&quot;</span>;</span><br><span class="line"><span class="attr">providers</span>: [<span class="title class_">DialogService</span>],</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">dialogService</span>.<span class="title function_">open</span>(<span class="title class_">GameVersionListComponent</span>, &#123;</span><br><span class="line">  <span class="attr">header</span>: <span class="string">`<span class="subst">$&#123;<span class="variable language_">this</span>.game.name&#125;</span>-历史版本`</span>,</span><br><span class="line">  <span class="attr">width</span>: <span class="string">&quot;550px&quot;</span>,</span><br><span class="line">  <span class="attr">style</span>: &#123; <span class="attr">top</span>: <span class="string">&quot;30%&quot;</span> &#125;,</span><br><span class="line">  <span class="attr">data</span>: &#123;</span><br><span class="line">    <span class="attr">game</span>: <span class="variable language_">this</span>.<span class="property">game</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="对话框传值"><a href="#对话框传值" class="headerlink" title="对话框传值"></a>对话框传值</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">DynamicDialogConfig</span>, <span class="title class_">DynamicDialogRef</span> &#125; <span class="keyword">from</span> <span class="string">&quot;primeng/dynamicdialog&quot;</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="attr">ref</span>: <span class="title class_">DynamicDialogRef</span>,</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">ref</span>.<span class="title function_">close</span>(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="idea"><a href="#idea" class="headerlink" title="idea"></a>idea</h1><h2 id="画布鼠标"><a href="#画布鼠标" class="headerlink" title="画布鼠标"></a>画布鼠标</h2><p>1、点击物件时，更新选择工具<br>this.updateSelectedTool(ToolBtnsEvent.BRUSH);</p>
+<h2 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h2><p>elementNode -&gt; animations -&gt; animationData[] </p>
+<h1 id="data"><a href="#data" class="headerlink" title="data"></a>data</h1><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> <span class="title class_">Metadata</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="attr">_id</span>: <span class="built_in">number</span> = <span class="title class_">Helpers</span>.<span class="title function_">genId</span>();</span><br><span class="line">  <span class="keyword">private</span> <span class="attr">_name</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="attr">_parent</span>: <span class="built_in">number</span> = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="attr">_sn</span>: <span class="built_in">string</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="attr">_version</span>: <span class="built_in">string</span> = <span class="string">&quot;1&quot;</span>;</span><br><span class="line">  <span class="keyword">private</span> _is_moss?: <span class="built_in">boolean</span>;</span><br><span class="line">  <span class="keyword">protected</span> _type = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">protected</span> <span class="attr">_cap</span>: <span class="title class_">Capsule</span>;</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<h1 id="code"><a href="#code" class="headerlink" title="code"></a>code</h1><h2 id="会员对应特权"><a href="#会员对应特权" class="headerlink" title="会员对应特权"></a>会员对应特权</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 普通，基础，经典，进阶，专业</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">MaxituanBenefitsConfig</span> = &#123;</span><br><span class="line">  <span class="attr">GAME_TEMPLATES</span>: [[<span class="string">&quot;图形化聊天室&quot;</span>, <span class="string">&quot;空白世界&quot;</span>], <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>],</span><br><span class="line">  <span class="attr">CREATE_SCENE_NUMBER</span>: [<span class="number">3</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="literal">null</span>],</span><br><span class="line">  <span class="attr">SCENE_SIZE</span>: [</span><br><span class="line">    [<span class="number">30</span>, <span class="number">30</span>],</span><br><span class="line">    [<span class="number">30</span>, <span class="number">30</span>],</span><br><span class="line">    [<span class="number">50</span>, <span class="number">50</span>],</span><br><span class="line">    [<span class="number">100</span>, <span class="number">100</span>],</span><br><span class="line">    [<span class="number">200</span>, <span class="number">200</span>],</span><br><span class="line">  ], <span class="comment">// 场景尺寸</span></span><br><span class="line">  <span class="attr">CAN_SAVE_GAME</span>: [<span class="literal">false</span>, <span class="literal">true</span>, <span class="literal">true</span>, <span class="literal">true</span>, <span class="literal">true</span>], <span class="comment">// 允许保存游戏</span></span><br><span class="line">  <span class="attr">GAME_PUBLISHED_NUMBER</span>: [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="literal">null</span>], <span class="comment">// 游戏发布</span></span><br><span class="line">  <span class="attr">AVATAR_PUT_ON_SHELF_NUMBER</span>: [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">200</span>, <span class="literal">null</span>], <span class="comment">// 装扮上架</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">get</span> <span class="title function_">userMaxituanBenefits</span>() &#123;</span><br><span class="line">  <span class="keyword">let</span> benefit = &#123;&#125;;</span><br><span class="line">  <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">currentUser</span>.<span class="property">maxituan_card</span> &amp;&amp; <span class="variable language_">this</span>.<span class="property">currentUser</span>.<span class="property">maxituan_card</span>.<span class="property">source_target_entity</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> vipLevel = <span class="variable language_">this</span>.<span class="property">currentUser</span>.<span class="property">maxituan_card</span>.<span class="property">source_target_entity</span>.<span class="property">vip_level</span> || <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">of</span> <span class="title class_">Object</span>.<span class="title function_">keys</span>(<span class="title class_">MaxituanBenefitsConfig</span>)) &#123;</span><br><span class="line">      benefit[key] = <span class="title class_">MaxituanBenefitsConfig</span>[key][vipLevel];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">of</span> <span class="title class_">Object</span>.<span class="title function_">keys</span>(<span class="title class_">MaxituanBenefitsConfig</span>)) &#123;</span><br><span class="line">      benefit[key] = <span class="title class_">MaxituanBenefitsConfig</span>[key][<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> benefit;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="title function_">hasPermission</span>(<span class="params">benefitType: MaxituanBenefits, checkData: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> benefit = <span class="variable language_">this</span>.<span class="property">userMaxituanBenefits</span>[benefitType];</span><br><span class="line">  <span class="keyword">if</span> (benefit === <span class="literal">undefined</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">switch</span> (benefitType) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">MaxituanBenefits</span>.<span class="property">GAME_TEMPLATES</span>:</span><br><span class="line">      <span class="keyword">if</span> (benefit === <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (benefit.<span class="title function_">indexOf</span>(checkData) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">MaxituanBenefits</span>.<span class="property">SCENE_SIZE</span>:</span><br><span class="line">      <span class="keyword">const</span> [width, height] = benefit;</span><br><span class="line">      <span class="keyword">const</span> [w, h] = checkData;</span><br><span class="line">      <span class="keyword">if</span> (w &gt; width || h &gt; height) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">MaxituanBenefits</span>.<span class="property">CREATE_SCENE_NUMBER</span>:</span><br><span class="line">      <span class="keyword">if</span> (benefit === <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (benefit &lt;= checkData) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">MaxituanBenefits</span>.<span class="property">GAME_PUBLISHED_NUMBER</span>:</span><br><span class="line">      <span class="keyword">if</span> (benefit === <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (benefit &lt;= checkData) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">MaxituanBenefits</span>.<span class="property">AVATAR_PUT_ON_SHELF_NUMBER</span>:</span><br><span class="line">      <span class="keyword">if</span> (benefit === <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (benefit &lt;= checkData) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="类封装"><a href="#类封装" class="headerlink" title="类封装"></a>类封装</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">Game</span> <span class="keyword">implements</span> <span class="title class_">IGame</span> &#123;</span><br><span class="line">  <span class="attr">_id</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">serverStatus</span>: <span class="built_in">number</span>;</span><br><span class="line">  <span class="attr">cover</span>: <span class="built_in">string</span>; <span class="comment">// 封面图</span></span><br><span class="line">  <span class="attr">tags</span>: <span class="built_in">string</span>[];</span><br><span class="line">  <span class="attr">visibility</span>: <span class="title class_">Visibility</span>;</span><br><span class="line">  <span class="attr">template</span>: <span class="built_in">boolean</span> = <span class="literal">true</span>;</span><br><span class="line">  <span class="attr">thumbnails</span>: <span class="built_in">string</span>[];</span><br><span class="line">  <span class="attr">version</span>: <span class="built_in">string</span>; <span class="comment">// 当前运行的发布版本</span></span><br><span class="line">  <span class="attr">lastVersion</span>: <span class="built_in">string</span>; <span class="comment">// 最后修改版本</span></span><br><span class="line">  <span class="attr">liked_count</span>: <span class="built_in">number</span>;</span><br><span class="line">  <span class="attr">unliked_count</span>: <span class="built_in">number</span>;</span><br><span class="line">  <span class="attr">recommendedLevel</span>: <span class="built_in">number</span>;</span><br><span class="line">  <span class="attr">owner</span>: <span class="title class_">Partial</span>&lt;<span class="title class_">User</span>&gt;;</span><br><span class="line">  <span class="attr">name</span>: <span class="built_in">string</span> = <span class="string">&quot;空白游戏&quot;</span>;</span><br><span class="line">  <span class="attr">description</span>: <span class="built_in">string</span>;</span><br><span class="line">  createdAt?: <span class="built_in">string</span>;</span><br><span class="line">  updatedAt?: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">releaseVersions</span>: <span class="title class_">GameVersion</span>[];</span><br><span class="line">  <span class="attr">pastVersions</span>: <span class="title class_">GameVersion</span>[];</span><br><span class="line">  <span class="attr">visitsUpdateAt</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">positiveRateUpdateAt</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">incomeTuDingUpdateAt</span>: <span class="built_in">string</span>;</span><br><span class="line"></span><br><span class="line">  forkedGame?: <span class="built_in">string</span>;</span><br><span class="line">  forkedGameVer?: <span class="built_in">string</span>;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">data?: Partial&lt;Game&gt;</span>) &#123;</span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">assign</span>(<span class="variable language_">this</span>, data);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">get</span> <span class="title function_">gameCover</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">cover</span></span><br><span class="line">      ? url.<span class="title function_">resolve</span>(<span class="variable constant_">WEB_HOME_PATH</span>, <span class="variable language_">this</span>.<span class="property">cover</span>)</span><br><span class="line">      : <span class="string">&quot;./assets/images/ui/empty_template_thumb.png&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<h2 id="HostListener"><a href="#HostListener" class="headerlink" title="HostListener"></a>HostListener</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">HostListener</span> &#125; <span class="keyword">from</span> <span class="string">&quot;@angular/core&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="meta">@HostListener</span>(<span class="string">&quot;mouseover&quot;</span>, [<span class="string">&quot;$event&quot;</span>])</span><br><span class="line">  <span class="title function_">mouseover</span>(<span class="params">event: KeyboardEvent</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> ((event.<span class="property">srcElement</span> <span class="keyword">as</span> <span class="built_in">any</span>).<span class="property">localName</span> === <span class="string">&quot;input&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">switch</span> (<span class="variable language_">this</span>.<span class="property">editorService</span>.<span class="property">selectedTool</span>) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="title class_">ToolBtnsEvent</span>.<span class="property">MOVE</span>:</span><br><span class="line">        <span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">style</span>.<span class="property">cursor</span> = <span class="string">&quot;url(&#x27;assets/icon/cursor-move.png&#x27;), auto&quot;</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="title class_">ToolBtnsEvent</span>.<span class="property">SELECT</span>:</span><br><span class="line">        <span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">style</span>.<span class="property">cursor</span> = <span class="string">&quot;url(&#x27;assets/icon/cursor-select.png&#x27;), auto&quot;</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="title class_">ToolBtnsEvent</span>.<span class="property">BRUSH</span>:</span><br><span class="line">        <span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">style</span>.<span class="property">cursor</span> = <span class="string">&quot;url(&#x27;assets/icon/cursor-draw.png&#x27;), auto&quot;</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="title class_">ToolBtnsEvent</span>.<span class="property">ERASER</span>:</span><br><span class="line">        <span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">style</span>.<span class="property">cursor</span> = <span class="string">&quot;url(&#x27;assets/icon/cursor-eraser.png&#x27;), auto&quot;</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="title class_">ToolBtnsEvent</span>.<span class="property">GRABID</span>:</span><br><span class="line">        <span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">style</span>.<span class="property">cursor</span> = <span class="string">&quot;grab&quot;</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@HostListener</span>(<span class="string">&quot;mouseout&quot;</span>, [<span class="string">&quot;$event&quot;</span>])</span><br><span class="line">  <span class="title function_">mouseout</span>(<span class="params">event: KeyboardEvent</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> ((event.<span class="property">srcElement</span> <span class="keyword">as</span> <span class="built_in">any</span>).<span class="property">localName</span> === <span class="string">&quot;input&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">style</span>.<span class="property">cursor</span> = <span class="string">&quot;default&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="string">``</span><span class="string">`  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">### 横向滚动</span></span><br><span class="line"><span class="string">`</span><span class="string">``</span> ts</span><br><span class="line">  <span class="meta">@HostListener</span>(<span class="string">&quot;window:mousewheel&quot;</span>, [<span class="string">&quot;$event&quot;</span>])</span><br><span class="line">  <span class="title function_">horizontalScroll</span>(<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> scrollTarget = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;frame-time&quot;</span>);</span><br><span class="line">    scrollTarget.<span class="title function_">addEventListener</span>(<span class="string">&quot;mousewheel&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> detail = event.<span class="property">wheelDelta</span> || event.<span class="property">detail</span>;</span><br><span class="line">      <span class="keyword">const</span> moveForwardStep = <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">const</span> moveBackStep = -<span class="number">1</span>;</span><br><span class="line">      <span class="keyword">let</span> step = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">if</span> (detail &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        step = moveForwardStep * <span class="number">100</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        step = moveBackStep * <span class="number">100</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      scrollTarget.<span class="property">scrollLeft</span> += step;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改名字"><a href="#修改名字" class="headerlink" title="修改名字"></a>修改名字</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ng-container</span> *<span class="attr">ngIf</span>=<span class="string">&quot;isEditor; else editName&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span></span></span><br><span class="line"><span class="tag">      <span class="attr">class</span>=<span class="string">&quot;name-input&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">type</span>=<span class="string">&quot;text&quot;</span></span></span><br><span class="line"><span class="tag">      [(<span class="attr">ngModel</span>)]=<span class="string">&quot;elementEditorService.elementNode.name&quot;</span></span></span><br><span class="line"><span class="tag">      (<span class="attr">keyup.enter</span>)=<span class="string">&quot;onChangeName()&quot;</span></span></span><br><span class="line"><span class="tag">    /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;pi pi-check&quot;</span> (<span class="attr">click</span>)=<span class="string">&quot;onChangeName()&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;pi pi-times&quot;</span> (<span class="attr">click</span>)=<span class="string">&quot;isEditor = false&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ng-container</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ng-template</span> #<span class="attr">editName</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123; elementEditorService.elementNode.name &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;pi pi-fw pi-pencil&quot;</span> (<span class="attr">click</span>)=<span class="string">&quot;isEditor = true&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ng-template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="保存物件"><a href="#保存物件" class="headerlink" title="保存物件"></a>保存物件</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="title class_">ToolBtnsEvent</span>.<span class="property">SAVEELEMENT</span>:</span><br><span class="line">  <span class="comment">// 确定版本号</span></span><br><span class="line">  <span class="keyword">const</span> version = <span class="variable language_">this</span>.<span class="property">elementEditorService</span>.<span class="property">currentVersion</span></span><br><span class="line">    ? <span class="variable language_">this</span>.<span class="property">elementEditorService</span>.<span class="property">currentVersion</span>.<span class="property">version</span></span><br><span class="line">    : <span class="string">&quot;0&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> nextversion = (<span class="built_in">parseInt</span>(version, <span class="number">10</span>) + <span class="number">1</span>).<span class="title function_">toString</span>();</span><br><span class="line"></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">elementEditorService</span></span><br><span class="line">    .<span class="title function_">saveElement</span>()</span><br><span class="line">    .<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">componentService</span>.<span class="title function_">uploadComponentResource</span>(</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">elementEditorService</span>.<span class="property">component</span>,</span><br><span class="line">        nextversion</span><br><span class="line">      );</span><br><span class="line">    &#125;)</span><br><span class="line">    .<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> newComponentResource = <span class="title function_">scanFolderSync</span>(</span><br><span class="line">        <span class="title class_">CommonUtils</span>.<span class="title function_">genComponentFoler</span>(<span class="variable language_">this</span>.<span class="property">elementEditorService</span>.<span class="property">component</span>, nextversion),</span><br><span class="line">        <span class="literal">false</span></span><br><span class="line">      );</span><br><span class="line">      <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">componentService</span></span><br><span class="line">        .<span class="title function_">updateComponentVersion</span>(<span class="variable language_">this</span>.<span class="property">elementEditorService</span>.<span class="property">component</span>.<span class="property">id</span>, &#123;</span><br><span class="line">          <span class="attr">version</span>: &#123;</span><br><span class="line">            <span class="attr">version</span>: nextversion,</span><br><span class="line">            <span class="attr">resources</span>: newComponentResource,</span><br><span class="line">          &#125;,</span><br><span class="line">        &#125;)</span><br><span class="line">        .<span class="title function_">toPromise</span>();</span><br><span class="line">    &#125;)</span><br><span class="line">    .<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">componentService</span></span><br><span class="line">        .<span class="title function_">getComponent</span>(<span class="variable language_">this</span>.<span class="property">elementEditorService</span>.<span class="property">component</span>.<span class="property">id</span>)</span><br><span class="line">        .<span class="title function_">toPromise</span>();</span><br><span class="line">    &#125;)</span><br><span class="line">    .<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">elementEditorService</span>.<span class="property">component</span> = (res <span class="keyword">as</span> <span class="built_in">any</span>).<span class="property">data</span>;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">componentService</span>.<span class="title function_">setComponentListUpdate</span>(<span class="string">&quot;MINE_ELEMENTNODE&quot;</span>);</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">globalMessage</span>.<span class="title function_">add</span>(<span class="string">&quot;保存物件成功&quot;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">saveElement</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="attr">tasks</span>: <span class="title class_">Promise</span>&lt;<span class="built_in">any</span>&gt;[] = [];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 返回：haitun/ElementNode/5ff949810f8edd1155ebe347/1</span></span><br><span class="line">    <span class="keyword">const</span> currentVersionPath = <span class="variable language_">this</span>.<span class="title function_">getCurrentVersionPath</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 必须有新版本，否则七牛会有缓存问题，导致不能使用到最新版的物件</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> nextVersionPath = <span class="variable language_">this</span>.<span class="title function_">getNextVersionPath</span>();</span><br><span class="line">    <span class="keyword">const</span> targetDisplayTextureFile = <span class="string">`<span class="subst">$&#123;nextVersionPath&#125;</span>/<span class="subst">$&#123;<span class="variable language_">this</span>.component.id&#125;</span>.png`</span>;</span><br><span class="line">    <span class="keyword">const</span> targetDisplayDataFile = <span class="string">`<span class="subst">$&#123;nextVersionPath&#125;</span>/<span class="subst">$&#123;<span class="variable language_">this</span>.component.id&#125;</span>.json`</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 版本下所有文件路径</span></span><br><span class="line">    <span class="keyword">const</span> files = <span class="title function_">scanFolderSync</span>(path.<span class="title function_">join</span>(<span class="variable constant_">LOCAL_HOME_PATH</span>, currentVersionPath));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> file <span class="keyword">of</span> files) &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="variable constant_">T_LUA_REGEX</span>.<span class="title function_">test</span>(file)) &#123;</span><br><span class="line">        <span class="keyword">const</span> outputFilePath = path.<span class="property">posix</span>.<span class="title function_">join</span>(</span><br><span class="line">          <span class="variable constant_">LOCAL_HOME_PATH</span>,</span><br><span class="line">          nextVersionPath,</span><br><span class="line">          <span class="string">&quot;scripts&quot;</span>,</span><br><span class="line">          <span class="comment">// 返回 path 的最后一部分; 文件.html</span></span><br><span class="line">          path.<span class="title function_">basename</span>(file)</span><br><span class="line">        );</span><br><span class="line">        fsa.<span class="title function_">ensureFileSync</span>(outputFilePath);</span><br><span class="line">        tasks.<span class="title function_">push</span>(<span class="title function_">copyFile</span>(file, outputFilePath));</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> outputFilePath = path.<span class="title function_">join</span>(<span class="variable constant_">LOCAL_HOME_PATH</span>, nextVersionPath, path.<span class="title function_">basename</span>(file));</span><br><span class="line">        fsa.<span class="title function_">ensureFileSync</span>(outputFilePath);</span><br><span class="line">        tasks.<span class="title function_">push</span>(<span class="title function_">copyFile</span>(file, outputFilePath));</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    tasks.<span class="title function_">push</span>(<span class="variable language_">this</span>.<span class="title function_">saveThumb</span>());</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">elementNode</span>.<span class="property">animations</span>.<span class="property">display</span>.<span class="property">texturePath</span> = targetDisplayTextureFile;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">elementNode</span>.<span class="property">animations</span>.<span class="property">display</span>.<span class="property">dataPath</span> = targetDisplayDataFile;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 序列化</span></span><br><span class="line">    <span class="keyword">const</span> elementBuffer = <span class="variable language_">this</span>.<span class="property">elementConfig</span>.<span class="title function_">serialize</span>();</span><br><span class="line">    <span class="keyword">const</span> configPath = <span class="string">`<span class="subst">$&#123;nextVersionPath&#125;</span>/<span class="subst">$&#123;<span class="variable language_">this</span>.component.id&#125;</span>.pi`</span>;</span><br><span class="line">    tasks.<span class="title function_">push</span>(<span class="title function_">saveFile</span>(path.<span class="property">posix</span>.<span class="title function_">join</span>(<span class="variable constant_">LOCAL_HOME_PATH</span>, configPath), elementBuffer));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">all</span>(tasks);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="title function_">getCurrentVersionPath</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 数据库上的version || 默认</span></span><br><span class="line">    <span class="keyword">const</span> currentVersion = <span class="variable language_">this</span>.<span class="property">component</span>.<span class="property">currentVersion</span> ||</span><br><span class="line">      _.<span class="title function_">last</span>(<span class="variable language_">this</span>.<span class="property">component</span>.<span class="property">versions</span>) || &#123; <span class="attr">version</span>: <span class="string">&quot;1&quot;</span> &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> path.<span class="property">posix</span>.<span class="title function_">join</span>(</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">component</span>.<span class="property">owner</span>.<span class="property">username</span>,</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">component</span>.<span class="property">type</span>,</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">component</span>.<span class="property">id</span>,</span><br><span class="line">      currentVersion.<span class="property">version</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="title function_">getNextVersionPath</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> currentVersion = <span class="variable language_">this</span>.<span class="property">component</span>.<span class="property">currentVersion</span> ||</span><br><span class="line">      _.<span class="title function_">last</span>(<span class="variable language_">this</span>.<span class="property">component</span>.<span class="property">versions</span>) || &#123; <span class="attr">version</span>: <span class="string">&quot;0&quot;</span> &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> nextversion = (<span class="built_in">parseInt</span>(currentVersion.<span class="property">version</span>, <span class="number">10</span>) + <span class="number">1</span>).<span class="title function_">toString</span>();</span><br><span class="line">    <span class="keyword">return</span> path.<span class="property">posix</span>.<span class="title function_">join</span>(</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">component</span>.<span class="property">owner</span>.<span class="property">username</span>,</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">component</span>.<span class="property">type</span>,</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">component</span>.<span class="property">id</span>,</span><br><span class="line">      nextversion</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 存疑：递归使用同一变量&#123;files&#125;，有引发死循环的可能</span></span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">scanFolderSync</span>(<span class="params">targetPath: <span class="built_in">string</span>, absolute: <span class="built_in">boolean</span> = <span class="literal">true</span></span>): <span class="built_in">string</span>[] &#123;</span><br><span class="line">    <span class="keyword">let</span> files = [];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">_scanFolder</span>(<span class="params">folderPath: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">      <span class="comment">// 读取目录的内容</span></span><br><span class="line">      <span class="comment">// 返回：fileNameArray [ &#x27;dir&#x27;, &#x27;test.js&#x27;, &#x27;test.ts&#x27; ]</span></span><br><span class="line">      <span class="keyword">let</span> fileNameArray = fs.<span class="title function_">readdirSync</span>(folderPath);</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> fn <span class="keyword">of</span> fileNameArray) &#123;</span><br><span class="line">        <span class="keyword">let</span> fullPath = path.<span class="property">posix</span>.<span class="title function_">join</span>(folderPath, fn);</span><br><span class="line">        <span class="keyword">let</span> fileStats = fs.<span class="title function_">statSync</span>(fullPath);</span><br><span class="line">        <span class="keyword">if</span> (fileStats.<span class="title function_">isFile</span>()) &#123;</span><br><span class="line">          files.<span class="title function_">push</span>(fullPath);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          files = files.<span class="title function_">concat</span>(<span class="title function_">_scanFolder</span>(fullPath));</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> files;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">_scanFolder</span>(targetPath);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (absolute) &#123;</span><br><span class="line">      <span class="keyword">return</span> files;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> files.<span class="title function_">map</span>(<span class="function">(<span class="params">file</span>) =&gt;</span> file.<span class="title function_">split</span>(<span class="string">`<span class="subst">$&#123;LOCAL_HOME_PATH&#125;</span>/`</span>)[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="css"><a href="#css" class="headerlink" title="css"></a>css</h2><h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.pixel-after</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.pixel-toolbar-save</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">  <span class="keyword">@extend</span> .pixel-after;</span><br><span class="line">  <span class="attribute">background</span>: url(<span class="string">&quot;~assets/icon/toolbar-save.svg&quot;</span>) center center;</span><br><span class="line">  <span class="attribute">background-size</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Angular/" rel="tag"># Angular</a>
+              <a href="/tags/TypeScript/" rel="tag"># TypeScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/30/advanced-exercise/" rel="prev" title="advanced-exercise">
+      <i class="fa fa-chevron-left"></i> advanced-exercise
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/08/cordova/" rel="next" title="cordova">
+      cordova <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#electron"><span class="nav-number">1.</span> <span class="nav-text">electron</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#use"><span class="nav-number">1.1.</span> <span class="nav-text">use</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#electron-amp-amp-angular"><span class="nav-number">1.2.</span> <span class="nav-text">electron&amp;&amp;angular</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#angular"><span class="nav-number">2.</span> <span class="nav-text">angular</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#primeNG"><span class="nav-number">3.</span> <span class="nav-text">primeNG</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dialog"><span class="nav-number">3.1.</span> <span class="nav-text">dialog</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E5%BC%80%E5%AF%B9%E8%AF%9D%E6%A1%86"><span class="nav-number">3.1.1.</span> <span class="nav-text">打开对话框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%AF%9D%E6%A1%86%E4%BC%A0%E5%80%BC"><span class="nav-number">3.1.2.</span> <span class="nav-text">对话框传值</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#idea"><span class="nav-number">4.</span> <span class="nav-text">idea</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%BB%E5%B8%83%E9%BC%A0%E6%A0%87"><span class="nav-number">4.1.</span> <span class="nav-text">画布鼠标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E7%94%BB"><span class="nav-number">4.2.</span> <span class="nav-text">动画</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#data"><span class="nav-number">5.</span> <span class="nav-text">data</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#code"><span class="nav-number">6.</span> <span class="nav-text">code</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%9A%E5%91%98%E5%AF%B9%E5%BA%94%E7%89%B9%E6%9D%83"><span class="nav-number">6.1.</span> <span class="nav-text">会员对应特权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%B0%81%E8%A3%85"><span class="nav-number">6.2.</span> <span class="nav-text">类封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HostListener"><span class="nav-number">6.3.</span> <span class="nav-text">HostListener</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%90%8D%E5%AD%97"><span class="nav-number">6.4.</span> <span class="nav-text">修改名字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%9D%E5%AD%98%E7%89%A9%E4%BB%B6"><span class="nav-number">6.5.</span> <span class="nav-text">保存物件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#css"><span class="nav-number">6.6.</span> <span class="nav-text">css</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF"><span class="nav-number">6.6.1.</span> <span class="nav-text">继承</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">kil</p>
+  <div class="site-description" itemprop="description">心如止水，潜心修行</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kilfront" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kilfront" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kaifaweb@163.com" title="E-Mail → mailto:kaifaweb@163.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kil</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

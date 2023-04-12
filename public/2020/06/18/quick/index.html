@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":false,"scrollpercent":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="开发效率提升之工具篇 随时记下闪现的灵感Evernote速记快捷键Control+Command+N文件存储在 Temp &gt; test ChromeVimiumVimium 键盘党必备, 使用vim命令管理页面.教程 最基础的操作-上下左右 -w&#x2F;s&#x2F;a&#x2F;d跳转标签页 J&#x2F;K之前我们用小写j和k进行前进和后退，为了尽量不移动手指(就是这么懒), 我们直接用大写J和大写K来跳转标签页，J向前跳">
+<meta property="og:type" content="article">
+<meta property="og:title" content="quick">
+<meta property="og:url" content="http://example.com/2020/06/18/quick/index.html">
+<meta property="og:site_name" content="Kil Notes">
+<meta property="og:description" content="开发效率提升之工具篇 随时记下闪现的灵感Evernote速记快捷键Control+Command+N文件存储在 Temp &gt; test ChromeVimiumVimium 键盘党必备, 使用vim命令管理页面.教程 最基础的操作-上下左右 -w&#x2F;s&#x2F;a&#x2F;d跳转标签页 J&#x2F;K之前我们用小写j和k进行前进和后退，为了尽量不移动手指(就是这么懒), 我们直接用大写J和大写K来跳转标签页，J向前跳">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-06-18T08:44:09.000Z">
+<meta property="article:modified_time" content="2022-04-21T12:04:18.705Z">
+<meta property="article:author" content="kil">
+<meta property="article:tag" content="quick">
+<meta property="article:tag" content="Tool">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/06/18/quick/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>quick | Kil Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Kil Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Quick notes</p>
+      <a>
+        <img class="custom-logo-image" src="[object Object]" alt="Kil Notes">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/06/18/quick/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="kil">
+      <meta itemprop="description" content="心如止水，潜心修行">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kil Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          quick
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-18 16:44:09" itemprop="dateCreated datePublished" datetime="2020-06-18T16:44:09+08:00">2020-06-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tool/" itemprop="url" rel="index"><span itemprop="name">Tool</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>开发效率提升之工具篇</p>
+<h1 id="随时记下闪现的灵感"><a href="#随时记下闪现的灵感" class="headerlink" title="随时记下闪现的灵感"></a>随时记下闪现的灵感</h1><p>Evernote速记快捷键Control+Command+N<br>文件存储在 Temp &gt; test</p>
+<h1 id="Chrome"><a href="#Chrome" class="headerlink" title="Chrome"></a>Chrome</h1><h2 id="Vimium"><a href="#Vimium" class="headerlink" title="Vimium"></a>Vimium</h2><p><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb">Vimium</a> 键盘党必备, 使用vim命令管理页面.<br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/849d6b21e02e">教程</a></p>
+<h3 id="最基础的操作-上下左右-w-s-a-d"><a href="#最基础的操作-上下左右-w-s-a-d" class="headerlink" title="最基础的操作-上下左右 -w/s/a/d"></a>最基础的操作-上下左右 -w/s/a/d</h3><h3 id="跳转标签页-J-K"><a href="#跳转标签页-J-K" class="headerlink" title="跳转标签页 J/K"></a>跳转标签页 J/K</h3><p>之前我们用小写j和k进行前进和后退，为了尽量不移动手指(就是这么懒), 我们直接用大写J和大写K来跳转标签页，J向前跳，K向后跳，再也不用一直ctrl+tab了</p>
+<h3 id="后退-前进-j-k"><a href="#后退-前进-j-k" class="headerlink" title="后退/前进 j/k"></a>后退/前进 j/k</h3><p>我们经常会用到后退和前进每次都要在左上角点击实在太麻烦，所以我把两个操作放到了右手边j和k,按j后退，按k前进,这样两个键就可以进退自如了,</p>
+<h3 id="终极跳转链接大法-f"><a href="#终极跳转链接大法-f" class="headerlink" title="终极跳转链接大法 f"></a>终极跳转链接大法 f</h3><h3 id="回到顶部-底部-qq-ee"><a href="#回到顶部-底部-qq-ee" class="headerlink" title="回到顶部/底部 qq/ee"></a>回到顶部/底部 qq/ee</h3><h3 id="半页滚动-h-l"><a href="#半页滚动-h-l" class="headerlink" title="半页滚动 h/l"></a>半页滚动 h/l</h3><h3 id="关闭页面-恢复页面-x-X"><a href="#关闭页面-恢复页面-x-X" class="headerlink" title="关闭页面/恢复页面  x/X"></a>关闭页面/恢复页面  x/X</h3><h3 id="终极搜索栏-o-O"><a href="#终极搜索栏-o-O" class="headerlink" title="终极搜索栏  o/O"></a>终极搜索栏  o/O</h3><p>小写o是在当前标签页打开，大写O是在新标签页打开</p>
+<h3 id="搜索书签-b"><a href="#搜索书签-b" class="headerlink" title="搜索书签  b"></a>搜索书签  b</h3><h3 id="刷新页面-r"><a href="#刷新页面-r" class="headerlink" title="刷新页面  r"></a>刷新页面  r</h3><h1 id="有道"><a href="#有道" class="headerlink" title="有道"></a>有道</h1><p>option + z 快速搜索单词</p>
+<h1 id="shadowsocks"><a href="#shadowsocks" class="headerlink" title="shadowsocks"></a>shadowsocks</h1><p>偏好设置 》 常规</p>
+<h2 id="切换代理模式"><a href="#切换代理模式" class="headerlink" title="切换代理模式"></a>切换代理模式</h2><p>command + 9</p>
+<h2 id="开关"><a href="#开关" class="headerlink" title="开关"></a>开关</h2><p>command + 0</p>
+<h1 id="chrome"><a href="#chrome" class="headerlink" title="chrome"></a>chrome</h1><p>command + y 打开历史记录</p>
+<h1 id="开发时"><a href="#开发时" class="headerlink" title="开发时"></a>开发时</h1><h2 id="不切屏"><a href="#不切屏" class="headerlink" title="不切屏"></a>不切屏</h2><p>Blue：两个屏幕，commod + s 另一个屏幕直接看结果</p>
+<h1 id="chrome-鼠标"><a href="#chrome-鼠标" class="headerlink" title="chrome 鼠标"></a>chrome 鼠标</h1><p>crxMouse Chrome™ 手势</p>
+<h1 id="知乎"><a href="#知乎" class="headerlink" title="知乎"></a>知乎</h1><p>寻找点赞top答案<br>跟话题<br><a target="_blank" rel="noopener" href="https://www.zhihu.com/topic/19554298/top-answers">https://www.zhihu.com/topic/19554298/top-answers</a></p>
+<p>优秀回答者<br><a target="_blank" rel="noopener" href="https://www.zhihu.com/topic/19554298/top-writer">https://www.zhihu.com/topic/19554298/top-writer</a></p>
+<h1 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h1><h2 id="date"><a href="#date" class="headerlink" title="date()"></a>date()</h2><p>vdate =&gt;<br>data() {<br>  return {</p>
+<p>  }<br>},</p>
+<h2 id="methods"><a href="#methods" class="headerlink" title="methods"></a>methods</h2><p>vmet =&gt;<br>methods: {<br>  onFoo(){<br>    on 是vue指令前缀  代表事件<br>  }<br>}</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/quick/" rel="tag"># quick</a>
+              <a href="/tags/Tool/" rel="tag"># Tool</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/18/function/" rel="prev" title="function">
+      <i class="fa fa-chevron-left"></i> function
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/20/css-layout/" rel="next" title="flex">
+      flex <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9A%8F%E6%97%B6%E8%AE%B0%E4%B8%8B%E9%97%AA%E7%8E%B0%E7%9A%84%E7%81%B5%E6%84%9F"><span class="nav-number">1.</span> <span class="nav-text">随时记下闪现的灵感</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chrome"><span class="nav-number">2.</span> <span class="nav-text">Chrome</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vimium"><span class="nav-number">2.1.</span> <span class="nav-text">Vimium</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%9F%BA%E7%A1%80%E7%9A%84%E6%93%8D%E4%BD%9C-%E4%B8%8A%E4%B8%8B%E5%B7%A6%E5%8F%B3-w-s-a-d"><span class="nav-number">2.1.1.</span> <span class="nav-text">最基础的操作-上下左右 -w&#x2F;s&#x2F;a&#x2F;d</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%B3%E8%BD%AC%E6%A0%87%E7%AD%BE%E9%A1%B5-J-K"><span class="nav-number">2.1.2.</span> <span class="nav-text">跳转标签页 J&#x2F;K</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E9%80%80-%E5%89%8D%E8%BF%9B-j-k"><span class="nav-number">2.1.3.</span> <span class="nav-text">后退&#x2F;前进 j&#x2F;k</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%88%E6%9E%81%E8%B7%B3%E8%BD%AC%E9%93%BE%E6%8E%A5%E5%A4%A7%E6%B3%95-f"><span class="nav-number">2.1.4.</span> <span class="nav-text">终极跳转链接大法 f</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E5%88%B0%E9%A1%B6%E9%83%A8-%E5%BA%95%E9%83%A8-qq-ee"><span class="nav-number">2.1.5.</span> <span class="nav-text">回到顶部&#x2F;底部 qq&#x2F;ee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8A%E9%A1%B5%E6%BB%9A%E5%8A%A8-h-l"><span class="nav-number">2.1.6.</span> <span class="nav-text">半页滚动 h&#x2F;l</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E9%A1%B5%E9%9D%A2-%E6%81%A2%E5%A4%8D%E9%A1%B5%E9%9D%A2-x-X"><span class="nav-number">2.1.7.</span> <span class="nav-text">关闭页面&#x2F;恢复页面  x&#x2F;X</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%88%E6%9E%81%E6%90%9C%E7%B4%A2%E6%A0%8F-o-O"><span class="nav-number">2.1.8.</span> <span class="nav-text">终极搜索栏  o&#x2F;O</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E4%B9%A6%E7%AD%BE-b"><span class="nav-number">2.1.9.</span> <span class="nav-text">搜索书签  b</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%B7%E6%96%B0%E9%A1%B5%E9%9D%A2-r"><span class="nav-number">2.1.10.</span> <span class="nav-text">刷新页面  r</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%89%E9%81%93"><span class="nav-number">3.</span> <span class="nav-text">有道</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shadowsocks"><span class="nav-number">4.</span> <span class="nav-text">shadowsocks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.1.</span> <span class="nav-text">切换代理模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%85%B3"><span class="nav-number">4.2.</span> <span class="nav-text">开关</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#chrome"><span class="nav-number">5.</span> <span class="nav-text">chrome</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E6%97%B6"><span class="nav-number">6.</span> <span class="nav-text">开发时</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%88%87%E5%B1%8F"><span class="nav-number">6.1.</span> <span class="nav-text">不切屏</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#chrome-%E9%BC%A0%E6%A0%87"><span class="nav-number">7.</span> <span class="nav-text">chrome 鼠标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%A5%E4%B9%8E"><span class="nav-number">8.</span> <span class="nav-text">知乎</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue"><span class="nav-number">9.</span> <span class="nav-text">vue</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#date"><span class="nav-number">9.1.</span> <span class="nav-text">date()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#methods"><span class="nav-number">9.2.</span> <span class="nav-text">methods</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">kil</p>
+  <div class="site-description" itemprop="description">心如止水，潜心修行</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kilfront" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kilfront" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kaifaweb@163.com" title="E-Mail → mailto:kaifaweb@163.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kil</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

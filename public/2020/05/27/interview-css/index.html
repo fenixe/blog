@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":false,"scrollpercent":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="重点重绘和回流其他1、介绍一下标准的CSS的盒子模型？与低版本IE的盒子模型有什么不同的？ 标准盒子模型：宽度&#x3D;内容的宽度（content）+ border + padding + margin低版本IE盒子模型：宽度&#x3D;内容宽度（content+border+padding）+ margin 2、box-sizing属性？ 用来控制元素的盒子模型的解析模式，默认为content-boxcontex">
+<meta property="og:type" content="article">
+<meta property="og:title" content="interview-css">
+<meta property="og:url" content="http://example.com/2020/05/27/interview-css/index.html">
+<meta property="og:site_name" content="Kil Notes">
+<meta property="og:description" content="重点重绘和回流其他1、介绍一下标准的CSS的盒子模型？与低版本IE的盒子模型有什么不同的？ 标准盒子模型：宽度&#x3D;内容的宽度（content）+ border + padding + margin低版本IE盒子模型：宽度&#x3D;内容宽度（content+border+padding）+ margin 2、box-sizing属性？ 用来控制元素的盒子模型的解析模式，默认为content-boxcontex">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-05-27T07:23:08.000Z">
+<meta property="article:modified_time" content="2022-04-21T12:04:18.697Z">
+<meta property="article:author" content="kil">
+<meta property="article:tag" content="css">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/05/27/interview-css/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>interview-css | Kil Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Kil Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Quick notes</p>
+      <a>
+        <img class="custom-logo-image" src="[object Object]" alt="Kil Notes">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/05/27/interview-css/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="kil">
+      <meta itemprop="description" content="心如止水，潜心修行">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kil Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          interview-css
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-27 15:23:08" itemprop="dateCreated datePublished" datetime="2020-05-27T15:23:08+08:00">2020-05-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/interview/" itemprop="url" rel="index"><span itemprop="name">interview</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h1><h2 id="重绘和回流"><a href="#重绘和回流" class="headerlink" title="重绘和回流"></a>重绘和回流</h2><h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>1、介绍一下标准的CSS的盒子模型？与低版本IE的盒子模型有什么不同的？</p>
+<p>标准盒子模型：宽度=内容的宽度（content）+ border + padding + margin<br>低版本IE盒子模型：宽度=内容宽度（content+border+padding）+ margin</p>
+<p>2、box-sizing属性？</p>
+<p>用来控制元素的盒子模型的解析模式，默认为content-box<br>context-box：W3C的标准盒子模型，设置元素的 height/width 属性指的是content部分的高/宽<br>border-box：IE传统盒子模型。设置元素的height/width属性指的是border + padding + content部分的高/宽</p>
+<p>3、CSS选择器有哪些？哪些属性可以继承？</p>
+<p>CSS选择符：id选择器(#myid)、类选择器(.myclassname)、标签选择器(div, h1, p)、相邻选择器(h1 + p)、子选择器（ul &gt; li）、后代选择器（li a）、通配符选择器（*）、属性选择器（a[rel=”external”]）、伪类选择器（a:hover, li:nth-child）</p>
+<p>可继承的属性：font-size, font-family, color</p>
+<p>不可继承的样式：border, padding, margin, width, height</p>
+<p>优先级（就近原则）：!important &gt; [ id &gt; class &gt; tag ]<br>!important 比内联优先级高</p>
+<p>4、CSS优先级算法如何计算？</p>
+<p>元素选择符： 1<br>class选择符： 10<br>id选择符：100<br>元素标签：1000</p>
+<p>!important声明的样式优先级最高，如果冲突再进行计算。</p>
+<p>如果优先级相同，则选择最后出现的样式。</p>
+<p>继承得到的样式的优先级最低。</p>
+<p>5、CSS3新增伪类有那些?</p>
+<p>p:first-of-type 选择属于其父元素的首个元素<br>p:last-of-type 选择属于其父元素的最后元素<br>p:only-of-type 选择属于其父元素唯一的元素<br>p:only-child 选择属于其父元素的唯一子元素<br>p:nth-child(2) 选择属于其父元素的第二个子元素<br>:enabled :disabled 表单控件的禁用状态。<br>:checked 单选框或复选框被选中。</p>
+<p>6、如何居中div？如何居中一个浮动元素？如何让绝对定位的div居中？</p>
+<p>div：</p>
+<p>1<br>2<br>3<br>4<br>border: 1px solid red;<br>margin: 0 auto;<br>height: 50px;<br>width: 80px;<br>浮动元素的上下左右居中：</p>
+<p>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>border: 1px solid red;<br>float: left;<br>position: absolute;<br>width: 200px;<br>height: 100px;<br>left: 50%;<br>top: 50%;<br>margin: -50px 0 0 -100px;<br>绝对定位的左右居中：</p>
+<p>1<br>2<br>3<br>4<br>5<br>6<br>7<br>border: 1px solid black;<br>position: absolute;<br>width: 200px;<br>height: 100px;<br>margin: 0 auto;<br>left: 0;<br>right: 0;<br>还有更加优雅的居中方式就是用flexbox，我以后会做整理。</p>
+<h1 id="display"><a href="#display" class="headerlink" title="display"></a>display</h1><p>display 属性可以设置元素的内部和外部显示类型 display types。元素的外部显示类型 outer display types 将决定该元素在流式布局中的表现（块级或内联元素）；元素的内部显示类型 inner display types 可以控制其子元素的布局（例如：flow layout，grid 或 flex）。</p>
+<h2 id="display常用属性"><a href="#display常用属性" class="headerlink" title="display常用属性"></a>display常用属性</h2><ul>
+<li>none 此元素不会被显示。</li>
+<li>block 此元素将显示为块级元素，此元素前后会带有换行符。</li>
+<li>inline 默认。此元素会被显示为内联元素，元素前后没有换行符。</li>
+<li>inline-block 行内块元素。（CSS2.1 新增的值）</li>
+</ul>
+<h2 id="display非常规属性"><a href="#display非常规属性" class="headerlink" title="display非常规属性"></a>display非常规属性</h2><ul>
+<li>flex Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。</li>
+<li>grid 栅格布局</li>
+</ul>
+<p>byte</p>
+<h1 id="position"><a href="#position" class="headerlink" title="position"></a>position</h1><p>position属性指定一个元素（静态的，相对的，绝对或固定）的定位方法的类型。</p>
+<h2 id="position常用属性"><a href="#position常用属性" class="headerlink" title="position常用属性"></a>position常用属性</h2><ul>
+<li>relative    生成相对定位的元素，相对于其正常位置进行定位。因此，”left:20” 会向元素的 LEFT 位置添加 20 像素。</li>
+<li>absolute    生成绝对定位的元素，相对于static定位以外的第一个父元素进行定位。元素的位置通过 “left”, “top”, “right” 以及 “bottom” 属性进行规定。</li>
+<li>fixed        生成固定定位的元素，相对于浏览器窗口进行定位。元素的位置通过 “left”, “top”, “right” 以及 “bottom” 属性进行规定。</li>
+<li>static    默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right 或者 z-index 声明）。</li>
+</ul>
+<p>byte</p>
+<p>8、position的值？</p>
+<p>static（默认）：按照正常文档流进行排列；<br>relative（相对定位）：不脱离文档流，参考自身静态位置通过 top, bottom, left, right 定位；<br>absolute(绝对定位)：参考距其最近一个不为static的父级元素通过top, bottom, left, right 定位；<br>fixed(固定定位)：所固定的参照对像是可视窗口。</p>
+<p>9、CSS3有哪些新特性？</p>
+<p>RGBA和透明度</p>
+<p>background-image background-origin(content-box/padding-box/border-box) background-size background-repeat</p>
+<p>word-wrap（对长的不可分割单词换行）word-wrap：break-word</p>
+<p>文字阴影：text-shadow： 5px 5px 5px #FF0000;（水平阴影，垂直阴影，模糊距离，阴影颜色）</p>
+<p>font-face属性：定义自己的字体</p>
+<p>圆角（边框半径）：border-radius 属性用于创建圆角</p>
+<p>边框图片：border-image: url(border.png) 30 30 round</p>
+<p>盒阴影：box-shadow: 10px 10px 5px #888888</p>
+<p>媒体查询：定义两套css，当浏览器的尺寸变化时会采用不同的属性</p>
+<p>10、请解释一下CSS3的flexbox（弹性盒布局模型）,以及适用场景？</p>
+<p>该布局模型的目的是提供一种更加高效的方式来对容器中的条目进行布局、对齐和分配空间。在传统的布局方式中，block 布局是把块在垂直方向从上到下依次排列的；而 inline 布局则是在水平方向来排列。弹性盒布局并没有这样内在的方向限制，可以由开发人员自由操作。<br>试用场景：弹性布局适合于移动前端开发，在Android和ios上也完美支持。</p>
+<h1 id="用CSS实现三角形"><a href="#用CSS实现三角形" class="headerlink" title="用CSS实现三角形"></a>用CSS实现三角形</h1><p>思路：创建一个宽高为0的带边框的div，取消其他三边框</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">border-width</span>: <span class="number">40px</span>;</span><br><span class="line">    <span class="attribute">border-style</span>: solid;</span><br><span class="line">    <span class="attribute">border-color</span>: red transparent transparent transparent;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>原理：主要使用了border这个属性</p>
+<p>12、一个满屏品字布局如何设计?</p>
+<p>第一种真正的品字：</p>
+<p>三块高宽是确定的；</p>
+<p>上面那块用margin: 0 auto;居中；</p>
+<p>下面两块用float或者inline-block不换行；</p>
+<p>用margin调整位置使他们居中。</p>
+<p>第二种全屏的品字布局:<br>上面的div设置成100%，下面的div分别宽50%，然后使用float或者inline使其不换行。</p>
+<p>13、常见的兼容性问题？</p>
+<p>不同浏览器的标签默认的margin和padding不一样。*{margin:0;padding:0;}</p>
+<p>IE6双边距bug：块属性标签float后，又有横行的margin情况下，在IE6显示margin比设置的大。hack：display:inline;将其转化为行内属性。</p>
+<p>渐进识别的方式，从总体中逐渐排除局部。首先，巧妙的使用“9”这一标记，将IE浏览器从所有情况中分离出来。接着，再次使用“+”将IE8和IE7、IE6分离开来，这样IE8已经独立识别。</p>
+<p>1<br>2<br>3<br>4<br>5<br>6<br>{<br>background-color:#f1ee18;/<em>所有识别</em>/<br>.background-color:#00deff\9; /<em>IE6、7、8识别</em>/<br>+background-color:#a200ff;/<em>IE6、7识别</em>/<br>_background-color:#1e0bd1;/<em>IE6识别</em>/<br>}<br>设置较小高度标签（一般小于10px），在IE6，IE7中高度超出自己设置高度。hack：给超出高度的标签设置overflow:hidden;或者设置行高line-height 小于你设置的高度。</p>
+<p>IE下，可以使用获取常规属性的方法来获取自定义属性,也可以使用getAttribute()获取自定义属性；Firefox下，只能使用getAttribute()获取自定义属性。解决方法:统一通过getAttribute()获取自定义属性。</p>
+<p>Chrome 中文界面下默认会将小于 12px 的文本强制按照 12px 显示,可通过加入 CSS 属性 -webkit-text-size-adjust: none; 解决。</p>
+<p>超链接访问过后hover样式就不出现了，被点击访问过的超链接样式不再具有hover和active了。解决方法是改变CSS属性的排列顺序:L-V-H-A ( love hate ): a:link {} a:visited {} a:hover {} a:active {}</p>
+<p>14、为什么要初始化CSS样式</p>
+<p>因为浏览器的兼容问题，不同浏览器对有些标签的默认值是不同的，如果没对CSS初始化往往会出现浏览器之间的页面显示差异。</p>
+<p>15、absolute的containing block计算方式跟正常流有什么不同？</p>
+<p>无论属于哪种，都要先找到其祖先元素中最近的 position 值不为 static 的元素，然后再判断：</p>
+<p>若此元素为 inline 元素，则 containing block 为能够包含这个元素生成的第一个和最后一个 inline box 的 padding box (除 margin, border 外的区域) 的最小矩形；</p>
+<p>否则,则由这个祖先元素的 padding box 构成。</p>
+<p>如果都找不到，则为 initial containing block。</p>
+<p>补充：</p>
+<p>static(默认的)/relative：简单说就是它的父元素的内容框（即去掉padding的部分）</p>
+<p>absolute: 向上找最近的定位为absolute/relative的元素</p>
+<p>fixed: 它的containing block一律为根元素(html/body)</p>
+<p>16、CSS里的visibility属性有个collapse属性值？在不同浏览器下以后什么区别？</p>
+<p>当一个元素的visibility属性被设置成collapse值后，对于一般的元素，它的表现跟hidden是一样的。</p>
+<p>chrome中，使用collapse值和使用hidden没有区别。</p>
+<p>firefox，opera和IE，使用collapse值和使用display：none没有什么区别。</p>
+<p>17、display:none与visibility：hidden的区别？</p>
+<p>display：none 不显示对应的元素，在文档布局中不再分配空间（回流+重绘）<br>visibility：hidden 隐藏对应元素，在文档布局中仍保留原来的空间（重绘）</p>
+<p>18、position跟display、overflow、float这些特性相互叠加后会怎么样？</p>
+<p>display属性规定元素应该生成的框的类型；position属性规定元素的定位类型；float属性是一种布局方式，定义元素在哪个方向浮动。<br>类似于优先级机制：position：absolute/fixed优先级最高，有他们在时，float不起作用，display值需要调整。float 或者absolute定位的元素，只能是块元素或表格。</p>
+<p>19、对BFC规范(块级格式化上下文：block formatting context)的理解？</p>
+<p>BFC规定了内部的Block Box如何布局。<br>定位方案：</p>
+<p>内部的Box会在垂直方向上一个接一个放置。</p>
+<p>Box垂直方向的距离由margin决定，属于同一个BFC的两个相邻Box的margin会发生重叠。</p>
+<p>每个元素的margin box 的左边，与包含块border box的左边相接触。</p>
+<p>BFC的区域不会与float box重叠。</p>
+<p>BFC是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。</p>
+<p>计算BFC的高度时，浮动元素也会参与计算。</p>
+<p>满足下列条件之一就可触发BFC</p>
+<p>根元素，即html</p>
+<p>float的值不为none（默认）</p>
+<p>overflow的值不为visible（默认）</p>
+<p>display的值为inline-block、table-cell、table-caption</p>
+<p>position的值为absolute或fixed</p>
+<p>20、为什么会出现浮动和什么时候需要清除浮动？清除浮动的方式？</p>
+<p>浮动元素碰到包含它的边框或者浮动元素的边框停留。由于浮动元素不在文档流中，所以文档流的块框表现得就像浮动框不存在一样。浮动元素会漂浮在文档流的块框上。<br>浮动带来的问题：</p>
+<p>父元素的高度无法被撑开，影响与父元素同级的元素</p>
+<p>与浮动元素同级的非浮动元素（内联元素）会跟随其后</p>
+<p>若非第一个元素浮动，则该元素之前的元素也需要浮动，否则会影响页面显示的结构。</p>
+<p>清除浮动的方式：</p>
+<p>父级div定义height</p>
+<p>最后一个浮动元素后加空div标签 并添加样式clear:both。</p>
+<p>包含浮动元素的父标签添加样式overflow为hidden或auto。</p>
+<p>父级div定义zoom</p>
+<p>21、上下margin重合的问题</p>
+<p>在重合元素外包裹一层容器，并触发该容器生成一个BFC。<br>例子：</p>
+<p>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20</p>
+<div class="aside"></div>
+<div class="text">
+    <div class="main"></div>
+</div>
+<!--下面是css代码-->
+ .aside {
+            margin-bottom: 100px;
+            width: 100px;
+            height: 150px;
+            background: #f66;
+        }
+        .main {
+            margin-top: 100px;
+            height: 200px;
+            background: #fcc;
+        }
+         .text{
+            /*盒子main的外面包一个div，通过改变此div的属性使两个盒子分属于两个不同的BFC，以此来阻止margin重叠*/
+            overflow: hidden;  //此时已经触发了BFC属性。
+        }
+22、设置元素浮动后，该元素的display值是多少？
+
+<p>自动变成display:block</p>
+<p>23、移动端的布局用过媒体查询吗？</p>
+<p>通过媒体查询可以为不同大小和尺寸的媒体定义不同的css，适应相应的设备的显示。</p>
+<head>里边<link rel=”stylesheet” type=”text/css” href=”xxx.css” media=”only screen and (max-device-width:480px)”>
+
+<p>CSS : @media only screen and (max-device-width:480px) {/css样式/}</p>
+<p>24、使用 CSS 预处理器吗？<br>Less sass</p>
+<p>25、CSS优化、提高性能的方法有哪些？</p>
+<p>避免过度约束</p>
+<p>避免后代选择符</p>
+<p>避免链式选择符</p>
+<p>使用紧凑的语法</p>
+<p>避免不必要的命名空间</p>
+<p>避免不必要的重复</p>
+<p>最好使用表示语义的名字。一个好的类名应该是描述他是什么而不是像什么</p>
+<p>避免！important，可以选择其他选择器</p>
+<p>尽可能的精简规则，你可以合并不同类里的重复规则</p>
+<p>26、浏览器是怎样解析CSS选择器的？</p>
+<p>CSS选择器的解析是从右向左解析的。若从左向右的匹配，发现不符合规则，需要进行回溯，会损失很多性能。若从右向左匹配，先找到所有的最右节点，对于每一个节点，向上寻找其父节点直到找到根元素或满足条件的匹配规则，则结束这个分支的遍历。两种匹配规则的性能差别很大，是因为从右向左的匹配在第一步就筛选掉了大量的不符合条件的最右节点（叶子节点），而从左向右的匹配规则的性能都浪费在了失败的查找上面。<br>而在 CSS 解析完毕后，需要将解析的结果与 DOM Tree 的内容一起进行分析建立一棵 Render Tree，最终用来进行绘图。在建立 Render Tree 时（WebKit 中的「Attachment」过程），浏览器就要为每个 DOM Tree 中的元素根据 CSS 的解析结果（Style Rules）来确定生成怎样的 Render Tree。</p>
+<p>27、在网页中的应该使用奇数还是偶数的字体？为什么呢？</p>
+<p>使用偶数字体。偶数字号相对更容易和 web 设计的其他部分构成比例关系。Windows 自带的点阵宋体（中易宋体）从 Vista 开始只提供 12、14、16 px 这三个大小的点阵，而 13、15、17 px时用的是小一号的点。（即每个字占的空间大了 1 px，但点阵没变），于是略显稀疏。</p>
+<h1 id="margin和padding"><a href="#margin和padding" class="headerlink" title="margin和padding"></a>margin和padding</h1><p>margin和padding分别适合什么场景使用？</p>
+<h2 id="margin：（外边距）是指从自身边框到另一个容器边框之间的距离，就是容器外距离。"><a href="#margin：（外边距）是指从自身边框到另一个容器边框之间的距离，就是容器外距离。" class="headerlink" title="margin：（外边距）是指从自身边框到另一个容器边框之间的距离，就是容器外距离。"></a>margin：（外边距）是指从自身边框到另一个容器边框之间的距离，就是容器外距离。</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* margin 指的是box1 与box2之间的边距 */</span></span><br><span class="line">&lt;<span class="selector-tag">div</span> class=&quot;box1&quot;&gt;&lt;/<span class="selector-tag">div</span>&gt;</span><br><span class="line">&lt;<span class="selector-tag">div</span> class=&quot;box2&quot;&gt;&lt;/<span class="selector-tag">div</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="padding：（内边距）是指自身边框到自身内部另一个容器边框之间的距离，就是容器内距离。"><a href="#padding：（内边距）是指自身边框到自身内部另一个容器边框之间的距离，就是容器内距离。" class="headerlink" title="padding：（内边距）是指自身边框到自身内部另一个容器边框之间的距离，就是容器内距离。"></a>padding：（内边距）是指自身边框到自身内部另一个容器边框之间的距离，就是容器内距离。</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* padding是指box1到box2的内边距，常用与父子DOM元素之间 */</span></span><br><span class="line">&lt;<span class="selector-tag">div</span> class=&quot;box1&quot;&gt;</span><br><span class="line">    &lt;<span class="selector-tag">div</span> class=&quot;box2&quot;&gt;&lt;/<span class="selector-tag">div</span>&gt;</span><br><span class="line">&lt;/<span class="selector-tag">div</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>margin值可以为负值/padding值不能为负值</p>
+<p>29、元素竖向的百分比设定是相对于容器的高度吗？</p>
+<p>当按百分比设定一个元素的宽度时，它是相对于父容器的宽度计算的，但是，对于一些表示竖向距离的属性，例如 padding-top , padding-bottom , margin-top , margin-bottom 等，当按百分比设定它们时，依据的也是父容器的宽度，而不是高度。</p>
+<p>30、全屏滚动的原理是什么？用到了CSS的哪些属性？</p>
+<p>原理：有点类似于轮播，整体的元素一直排列下去，假设有5个需要展示的全屏页面，那么高度是500%，只是展示100%，剩下的可以通过transform进行y轴定位，也可以通过margin-top实现</p>
+<p>overflow：hidden；transition：all 1000ms ease；</p>
+<p>31、什么是响应式设计？响应式设计的基本原理是什么？如何兼容低版本的IE？</p>
+<p>响应式网站设计(Responsive Web design)是一个网站能够兼容多个终端，而不是为每一个终端做一个特定的版本。<br>基本原理是通过媒体查询检测不同的设备屏幕尺寸做处理。<br>页面头部必须有meta声明的viewport。</p>
+<p>1</p>
+<meta name="’viewport’" content="”width=device-width," initial-scale="1." maximum-scale="1,user-scalable=no”"/>
+32、视差滚动效果？
+
+<p>视差滚动（Parallax Scrolling）通过在网页向下滚动的时候，控制背景的移动速度比前景的移动速度慢来创建出令人惊叹的3D效果。</p>
+<p>CSS3实现<br>优点：开发时间短、性能和开发效率比较好，缺点是不能兼容到低版本的浏览器</p>
+<p>jQuery实现<br>通过控制不同层滚动速度，计算每一层的时间，控制滚动效果。<br>优点：能兼容到各个版本的，效果可控性好<br>缺点：开发起来对制作者要求高</p>
+<p>插件实现方式<br>例如：parallax-scrolling，兼容性十分好</p>
+<p>33、::before 和 :after中双冒号和单冒号有什么区别？解释一下这2个伪元素的作用</p>
+<p>单冒号(:)用于CSS3伪类，双冒号(::)用于CSS3伪元素。</p>
+<p>::before就是以一个子元素的存在，定义在元素主体内容之前的一个伪元素。并不存在于dom之中，只存在在页面之中。</p>
+<p>:before 和 :after 这两个伪元素，是在CSS2.1里新出现的。起初，伪元素的前缀使用的是单冒号语法，但随着Web的进化，在CSS3的规范里，伪元素的语法被修改成使用双冒号，成为::before ::after</p>
+<p>34、你对line-height是如何理解的？</p>
+<p>行高是指一行文字的高度，具体说是两行文字间基线的距离。CSS中起高度作用的是height和line-height，没有定义height属性，最终其表现作用一定是line-height。<br>单行文本垂直居中：把line-height值设置为height一样大小的值可以实现单行文字的垂直居中，其实也可以把height删除。<br>多行文本垂直居中：需要设置display属性为inline-block。</p>
+<p>35、怎么让Chrome支持小于12px 的文字？</p>
+<p>1<br>p{font-size:10px;-webkit-transform:scale(0.8);} //0.8是缩放比例<br>36、让页面里的字体变清晰，变细用CSS怎么做？</p>
+<p>-webkit-font-smoothing在window系统下没有起作用，但是在IOS设备上起作用-webkit-font-smoothing：antialiased是最佳的，灰度平滑。</p>
+<p>37、position:fixed;在android下无效怎么处理？</p>
+<p>1</p>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+38、如果需要手动写动画，你认为最小时间间隔是多久，为什么？
+多数显示器默认频率是60Hz，即1秒刷新60次，所以理论上最小间隔为1/60＊1000ms ＝ 16.7ms。
+
+<p>39、li与li之间有看不见的空白间隔是什么原因引起的？有什么解决办法？</p>
+<p>行框的排列会受到中间空白（回车空格）等的影响，因为空格也属于字符,这些空白也会被应用样式，占据空间，所以会有间隔，把字符大小设为0，就没有空格了。<br>解决方法：</p>
+<p>可以将<li>代码全部写在一排</p>
+<p>浮动li中float：left</p>
+<p>在ul中用font-size：0（谷歌不支持）；可以使用letter-space：-3px</p>
+<p>40、display:inline-block 什么时候会显示间隙？</p>
+<p>有空格时候会有间隙 解决：移除空格</p>
+<p>margin正值的时候 解决：margin使用负值</p>
+<p>使用font-size时候 解决：font-size:0、letter-spacing、word-spacing</p>
+<p>41、有一个高度自适应的div，里面有两个div，一个高度100px，希望另一个填满剩下的高度</p>
+<p>外层div使用position：relative；高度要求自适应的div使用position: absolute; top: 100px; bottom: 0; left: 0</p>
+<p>42、png、jpg、gif 这些图片格式解释一下，分别什么时候用。有没有了解过webp？</p>
+<p>png是便携式网络图片（Portable Network Graphics）是一种无损数据压缩位图文件格式.优点是：压缩比高，色彩好。 大多数地方都可以用。</p>
+<p>jpg是一种针对相片使用的一种失真压缩方法，是一种破坏性的压缩，在色调及颜色平滑变化做的不错。在www上，被用来储存和传输照片的格式。</p>
+<p>gif是一种位图文件格式，以8位色重现真色彩的图像。可以实现动画效果.</p>
+<p>webp格式是谷歌在2010年推出的图片格式，压缩率只有jpg的2/3，大小比png小了45%。缺点是压缩的时间更久了，兼容性不好，目前谷歌和opera支持。</p>
+<p>43、style标签写在body后与body前有什么区别？</p>
+<p>页面加载自上而下 当然是先加载样式。<br>写在body标签后由于浏览器以逐行方式对HTML文档进行解析，当解析到写在尾部的样式表（外联或写在style标签）会导致浏览器停止之前的渲染，等待加载且解析样式表完成之后重新渲染，在windows的IE下可能会出现FOUC现象（即样式失效导致的页面闪烁问题）</p>
+<p>44、CSS属性overflow属性定义溢出元素内容区的内容会如何处理?</p>
+<p>参数是scroll时候，必会出现滚动条。<br>参数是auto时候，子元素内容大于父元素时出现滚动条。<br>参数是visible时候，溢出的内容出现在父元素之外。<br>参数是hidden时候，溢出隐藏。</p>
+<p>45、阐述一下CSS Sprites</p>
+<p>将一个页面涉及到的所有图片都包含到一张大图中去，然后利用CSS的 background-image，background- repeat，background-position 的组合进行背景定位。利用CSS Sprites能很好地减少网页的http请求，从而大大的提高页面的性能；CSS Sprites能减少图片的字节。</p>
+<h1 id="上下左右垂直居中"><a href="#上下左右垂直居中" class="headerlink" title="上下左右垂直居中"></a>上下左右垂直居中</h1><p>推荐flex布局</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">display</span>: flex;</span><br><span class="line"><span class="attribute">justify-content</span>: center;</span><br><span class="line"><span class="attribute">align-items</span>: center;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/css/" rel="tag"># css</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/27/web/" rel="prev" title="web">
+      <i class="fa fa-chevron-left"></i> web
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/27/guide/" rel="next" title="guide">
+      guide <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8D%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">重点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E7%BB%98%E5%92%8C%E5%9B%9E%E6%B5%81"><span class="nav-number">1.1.</span> <span class="nav-text">重绘和回流</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">2.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#display"><span class="nav-number">3.</span> <span class="nav-text">display</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#display%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7"><span class="nav-number">3.1.</span> <span class="nav-text">display常用属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#display%E9%9D%9E%E5%B8%B8%E8%A7%84%E5%B1%9E%E6%80%A7"><span class="nav-number">3.2.</span> <span class="nav-text">display非常规属性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#position"><span class="nav-number">4.</span> <span class="nav-text">position</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#position%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7"><span class="nav-number">4.1.</span> <span class="nav-text">position常用属性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8CSS%E5%AE%9E%E7%8E%B0%E4%B8%89%E8%A7%92%E5%BD%A2"><span class="nav-number">5.</span> <span class="nav-text">用CSS实现三角形</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#margin%E5%92%8Cpadding"><span class="nav-number">6.</span> <span class="nav-text">margin和padding</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#margin%EF%BC%9A%EF%BC%88%E5%A4%96%E8%BE%B9%E8%B7%9D%EF%BC%89%E6%98%AF%E6%8C%87%E4%BB%8E%E8%87%AA%E8%BA%AB%E8%BE%B9%E6%A1%86%E5%88%B0%E5%8F%A6%E4%B8%80%E4%B8%AA%E5%AE%B9%E5%99%A8%E8%BE%B9%E6%A1%86%E4%B9%8B%E9%97%B4%E7%9A%84%E8%B7%9D%E7%A6%BB%EF%BC%8C%E5%B0%B1%E6%98%AF%E5%AE%B9%E5%99%A8%E5%A4%96%E8%B7%9D%E7%A6%BB%E3%80%82"><span class="nav-number">6.1.</span> <span class="nav-text">margin：（外边距）是指从自身边框到另一个容器边框之间的距离，就是容器外距离。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#padding%EF%BC%9A%EF%BC%88%E5%86%85%E8%BE%B9%E8%B7%9D%EF%BC%89%E6%98%AF%E6%8C%87%E8%87%AA%E8%BA%AB%E8%BE%B9%E6%A1%86%E5%88%B0%E8%87%AA%E8%BA%AB%E5%86%85%E9%83%A8%E5%8F%A6%E4%B8%80%E4%B8%AA%E5%AE%B9%E5%99%A8%E8%BE%B9%E6%A1%86%E4%B9%8B%E9%97%B4%E7%9A%84%E8%B7%9D%E7%A6%BB%EF%BC%8C%E5%B0%B1%E6%98%AF%E5%AE%B9%E5%99%A8%E5%86%85%E8%B7%9D%E7%A6%BB%E3%80%82"><span class="nav-number">6.2.</span> <span class="nav-text">padding：（内边距）是指自身边框到自身内部另一个容器边框之间的距离，就是容器内距离。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F"><span class="nav-number">6.3.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E5%B7%A6%E5%8F%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD"><span class="nav-number">7.</span> <span class="nav-text">上下左右垂直居中</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">kil</p>
+  <div class="site-description" itemprop="description">心如止水，潜心修行</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kilfront" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kilfront" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kaifaweb@163.com" title="E-Mail → mailto:kaifaweb@163.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kil</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

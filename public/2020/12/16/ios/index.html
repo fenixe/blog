@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":false,"scrollpercent":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="basisapple download all: https:&#x2F;&#x2F;developer.apple.com&#x2F;download&#x2F;all&#x2F;bilibili学习地址：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1Tt411a7Xa?p&#x3D;6 logNSLog(@”Text %@”, object);NSLog(@”I want to log: %@”, myString); int i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ios">
+<meta property="og:url" content="http://example.com/2020/12/16/ios/index.html">
+<meta property="og:site_name" content="Kil Notes">
+<meta property="og:description" content="basisapple download all: https:&#x2F;&#x2F;developer.apple.com&#x2F;download&#x2F;all&#x2F;bilibili学习地址：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1Tt411a7Xa?p&#x3D;6 logNSLog(@”Text %@”, object);NSLog(@”I want to log: %@”, myString); int i">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/2020/12/16/ios/icon.png">
+<meta property="og:image" content="http://example.com/2020/12/16/ios/explore.png">
+<meta property="og:image" content="http://example.com/2020/12/16/ios/ios02.png">
+<meta property="og:image" content="http://example.com/2020/12/16/ios/ios00.png">
+<meta property="og:image" content="http://example.com/2020/12/16/ios/ios01.png">
+<meta property="og:image" content="http://example.com/2020/12/16/ios/ios_date.png">
+<meta property="article:published_time" content="2020-12-16T06:17:02.000Z">
+<meta property="article:modified_time" content="2022-08-31T07:46:23.389Z">
+<meta property="article:author" content="kil">
+<meta property="article:tag" content="ios">
+<meta property="article:tag" content="OC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/12/16/ios/icon.png">
+
+<link rel="canonical" href="http://example.com/2020/12/16/ios/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>ios | Kil Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Kil Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Quick notes</p>
+      <a>
+        <img class="custom-logo-image" src="[object Object]" alt="Kil Notes">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/16/ios/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="kil">
+      <meta itemprop="description" content="心如止水，潜心修行">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kil Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ios
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-12-16 14:17:02" itemprop="dateCreated datePublished" datetime="2020-12-16T14:17:02+08:00">2020-12-16</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="basis"><a href="#basis" class="headerlink" title="basis"></a>basis</h1><p>apple download all: <a target="_blank" rel="noopener" href="https://developer.apple.com/download/all/">https://developer.apple.com/download/all/</a><br>bilibili学习地址：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Tt411a7Xa?p=6">https://www.bilibili.com/video/BV1Tt411a7Xa?p=6</a></p>
+<h2 id="log"><a href="#log" class="headerlink" title="log"></a>log</h2><p>NSLog(@”Text %@”, object);<br>NSLog(@”I want to log: %@”, myString);</p>
+<p>int i = 1234;<br>NSLog(@”The number is: %d”, i);</p>
+<h2 id="NS前缀"><a href="#NS前缀" class="headerlink" title="NS前缀"></a>NS前缀</h2><p>NextStep —&gt; Cocoa —&gt; Foundation框架之中</p>
+<h2 id="符号"><a href="#符号" class="headerlink" title="@符号"></a>@符号</h2><ol>
+<li>将C字符串转换为OC字符串<br>“jack”   @”jack”</li>
+<li>OC中的绝大部分的关键字都是以@符号开头</li>
+</ol>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>单行注释：<br>   //<br>多行注释：<br>   /* */</p>
+<h2 id="函数定义调用"><a href="#函数定义调用" class="headerlink" title="函数定义调用"></a>函数定义调用</h2><figure class="highlight m"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;Foundation/Foundation.h&gt;</span><br><span class="line"></span><br><span class="line">void test();</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    test();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void test() &#123;</span><br><span class="line">    NSLog(@<span class="string">&quot;test&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><h3 id="编译运行"><a href="#编译运行" class="headerlink" title="编译运行"></a>编译运行</h3><p>Command + R </p>
+<h3 id="模拟器"><a href="#模拟器" class="headerlink" title="模拟器"></a>模拟器</h3><p>模拟器最小化<br>Command + M</p>
+<h3 id="storyboard"><a href="#storyboard" class="headerlink" title="storyboard"></a>storyboard</h3><p>撤销<br>Command + Z</p>
+<h2 id="icon"><a href="#icon" class="headerlink" title="icon"></a>icon</h2><h3 id="1x2x3x"><a href="#1x2x3x" class="headerlink" title="1x2x3x"></a>1x2x3x</h3><p>1x: 100 x 100<br>2x: 200 x 200<br>3x: 300 x 300</p>
+<h3 id="create"><a href="#create" class="headerlink" title="create"></a>create</h3><p><a target="_blank" rel="noopener" href="https://www.canva.com/design/DAEQd2a45Rk/1V4999fQpblK7jG9pUyH5w/edit">https://www.canva.com/design/DAEQd2a45Rk/1V4999fQpblK7jG9pUyH5w/edit</a></p>
+<h3 id="批量生成不同尺寸图片"><a href="#批量生成不同尺寸图片" class="headerlink" title="批量生成不同尺寸图片"></a>批量生成不同尺寸图片</h3><p><a target="_blank" rel="noopener" href="https://appicon.co/#app-icon">https://appicon.co/#app-icon</a></p>
+<h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><h3 id="无线网调试"><a href="#无线网调试" class="headerlink" title="无线网调试"></a>无线网调试</h3><p>设置：window &gt; Devices and Simulators<br>勾选上：Connect via network</p>
+<p>1.通过数据线将真机连接至Xcode<br>2.打开Xcode -&gt; 顶部菜单栏 -&gt; Window -&gt; Devices and Simulators -&gt; 选择你的机器 -&gt; 勾选 Connect via network (如下)</p>
+<h3 id="支持最新14-6"><a href="#支持最新14-6" class="headerlink" title="支持最新14.6"></a>支持最新14.6</h3><p>Step 1<br>Download iOS 14.6 support files<br><a target="_blank" rel="noopener" href="https://github.com/JinjunHan/iOSDeviceSupport/raw/master/DeviceSupport/14.6.zip">https://github.com/JinjunHan/iOSDeviceSupport/raw/master/DeviceSupport/14.6.zip</a><br>Step 2<br>Extract the zip content<br>Step 3<br>Paste it at<br>/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/DeviceSupport<br>Step 4<br>Restart xcode.</p>
+<h2 id="模拟器-1"><a href="#模拟器-1" class="headerlink" title="模拟器"></a>模拟器</h2><h3 id="清理"><a href="#清理" class="headerlink" title="清理"></a>清理</h3><p>Simulator &gt; Device &gt; Erase all content and setting<br>删除所有内容和设置</p>
+<h2 id="推送到TestFligth"><a href="#推送到TestFligth" class="headerlink" title="推送到TestFligth"></a>推送到TestFligth</h2><p>皮卡堂 &gt; Any iOS Device(arm64)<br>Product &gt; Archive</p>
+<h1 id="型号尺寸"><a href="#型号尺寸" class="headerlink" title="型号尺寸"></a>型号尺寸</h1><p>iphone 12 mini   宽：376，高：812<br>iphone 12        宽：390，高：844</p>
+<h2 id="icon-1"><a href="#icon-1" class="headerlink" title="icon"></a>icon</h2><p>iPad Pro    167px × 167px (83.5pt × 83.5pt @2x)</p>
+<img src="/2020/12/16/ios/icon.png" class="">
+
+<h1 id="OC"><a href="#OC" class="headerlink" title="OC"></a>OC</h1><p>Objective-C是C语言的严格超集<br>面向对象的C语言</p>
+<h2 id="扩展名"><a href="#扩展名" class="headerlink" title="扩展名"></a>扩展名</h2><table>
+<thead>
+<tr>
+<th align="left">扩展名</th>
+<th align="left">内容类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">.h</td>
+<td align="left">头文件。头文件包含类，类型，函数和常数的声明。</td>
+</tr>
+<tr>
+<td align="left">.m</td>
+<td align="left">源代码文件。这是典型的源代码文件扩展名，可以包含 Objective-C 和 C 代码。</td>
+</tr>
+<tr>
+<td align="left">.mm</td>
+<td align="left">源代码文件。带有这种扩展名的源代码文件，除了可以包含Objective-C和C代码以外还可以包含C++代码。仅在你的Objective-C代码中确实需要使用C++类或者特性的时候才用这种扩展名。</td>
+</tr>
+</tbody></table>
+<h2 id="创建OC文件"><a href="#创建OC文件" class="headerlink" title="创建OC文件"></a>创建OC文件</h2><p>Xcode -&gt; Create a new Xcode project -&gt; OS X -&gt; Command Line Tool<br>中国人的探索精神就是这样，没有</p>
+<img src="/2020/12/16/ios/explore.png" class="">
+
+
+<h2 id="basis-1"><a href="#basis-1" class="headerlink" title="basis"></a>basis</h2><ol>
+<li><p>OC相对于C<br>a. 在C的基础上新增了一小部分面向对象的语法<br>b. 将C的复杂的、繁琐的、可恶的语法封装的更为简单</p>
+</li>
+<li><p>OC程序的源文件的后缀名是.m m代表message 代表OC中最重要的一个机制   消息机制<br>C程序的源文件的后缀名.C</p>
+</li>
+<li><p>main函数仍是OC程序的入口和出口<br>int类型的返回值  代表程序的结束状态<br>main函数的参数：仍然可以接收用户在运行程序的时候传递数据给程序</p>
+<pre><code>          参数也可以不要
+</code></pre>
+</li>
+<li><p>#import指令<br>1）.以#号开头，是1个预处理指令<br>2）.作用： 是#inlcude指令的增强版，讲文件的内容在预编译的时候拷贝写指令的地方<br>3）.增强： 同1个文件无论#import多少次，只会包含1次</p>
+<pre><code>      如果#include指令要实现这个效果  就必须要配合条件编译指令来实现
+      而#import指令只需要直接包含就可以  其他什么都不用做
+</code></pre>
+</li>
+</ol>
+<figure class="highlight m"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;Foundation/Foundation.h&gt;</span><br><span class="line"></span><br><span class="line">int main(int argc, const char * argv[]) &#123;</span><br><span class="line">    @autoreleasepool &#123; </span><br><span class="line">        // insert code here...</span><br><span class="line">        NSLog(@<span class="string">&quot;Hello, World!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>@autoreleasepool 自动释放池<br>NSLog 函数，来自 Foundation.h<br>   1). 作用：是printf函数的增强版，向控制台输出信息<br>   2). 语法：<br>         NSLog(@”格式控制字符串”, 变量列表)；<br>      最简单的语法：<br>         NSLog(@”要输出的信息”)；</p>
+<h3 id="NSString"><a href="#NSString" class="headerlink" title="NSString"></a>NSString</h3><p>NSSting 类型的指针变量，专门用来存储OC字符串的地址</p>
+<p>OC的字符串常量必须要使用1个前缀@符合<br>   “jack” C语言的字符串<br>   @”jack” OC字符串常量</p>
+<p>NSString *str = @”jack”</p>
+<p>NSLog(str);<br>如果要使用NSLog函数输出OC字符串的值，那么使用占位符%@<br>NSLog(@”大家好，我叫%@”, str);</p>
+<h3 id="NSNumber"><a href="#NSNumber" class="headerlink" title="NSNumber"></a>NSNumber</h3><p>NSArray、NSDictionary、NSSet 等集合对象只能保存对象，如果要保存 char、short、int、float、double、BOOL 或指向结构的指针等基础数据类型，则可以先将这些基本数据类型封装成 NSNumber 对象，再存入集合对象。<br>NSNumber 类用来包装基本数据类型。<br>NSValue 是 NSNumber 的父类。<br>不能直接用 NSNumber 对象做计算，只能提取值。</p>
+<p>// 包装基本数据类型<br>NSNumber *intNumber = [NSNumber numberWithInteger:100];<br>NSNumber *floatNumber =[NSNumber numberWithFloat:24.58];<br>NSNumber *boolNumber = [NSNumber numberWithBool:YES];</p>
+<h1 id="iOS-流程"><a href="#iOS-流程" class="headerlink" title="iOS 流程"></a>iOS 流程</h1><h2 id="最终目的"><a href="#最终目的" class="headerlink" title="最终目的"></a>最终目的</h2><p>打包一个公司iOS app</p>
+<h2 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h2><ul>
+<li>Cordova<br>  打包工具</li>
+</ul>
+<h2 id="预测会出现的问题"><a href="#预测会出现的问题" class="headerlink" title="预测会出现的问题"></a>预测会出现的问题</h2><ul>
+<li>证书安装</li>
+</ul>
+<h2 id="cordova"><a href="#cordova" class="headerlink" title="cordova"></a>cordova</h2><p>npm install -g cordova<br>v10.0.0</p>
+<h3 id="open"><a href="#open" class="headerlink" title="open"></a>open</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">macs-Mac-mini:test-app mac$ open platforms/ios/HelloCordova.xcodeproj/</span><br></pre></td></tr></table></figure>
+<p>error:<br>Showing Recent Messages<br>Signing for “HelloCordova” requires a development team. Select a development team in the Signing &amp; Capabilities editor.</p>
+<h2 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h2><h3 id="创建一个标识符"><a href="#创建一个标识符" class="headerlink" title="创建一个标识符"></a>创建一个标识符</h3><p><a target="_blank" rel="noopener" href="https://developer.apple.com/account/resources/identifiers/add/bundleId">Register a new identifier</a></p>
+<h4 id="删除标识符"><a href="#删除标识符" class="headerlink" title="删除标识符"></a>删除标识符</h4><p>The App ID ‘XXXXX’ appears to be in use by the App Store, so it can not be removed at this time.<br>解决方案：<br>在App Strore Connect 找到与此App ID 相关的App，将套装ID修改成别的<br>然后再进行删除<br>注意：<br>如果曾经上传过这个bundle ID 的二进制文件到App Strore Connect，将无法删除</p>
+<h3 id="套装ID"><a href="#套装ID" class="headerlink" title="套装ID"></a>套装ID</h3><p>假设在开发者网站已经创建了两个App ID ，一个是：<br>精确型<br>Explicit App ID  为 :  com.companyA.oneApp，<br>App ID Description Name  为：oneApp。</p>
+<p>另外一个是：<br>通配型<br>Wildcard App ID  为： com.companyB.* <br>App ID Description Name  为：twoApp。</p>
+<h3 id="Capabilities部分"><a href="#Capabilities部分" class="headerlink" title="Capabilities部分"></a>Capabilities部分</h3><p>Capabilities部分是说明你的app需要具有哪些能力，需要哪些你就勾选哪些，具体说明如下（本人非ios开发者，很多只是字面翻译，具体请查询相关文档）：</p>
+<p>Access WiFi Information：访问wifi信息 比如你要用到获取WiFi的SSID信息，需要开启该功能<br>App Groups：开启数据共享 比如公司多个app之间数据需要共享，可以开启这个功能<br>Apple Pay Payment Processing：Apple Pay支付处理，需要苹果支付的需要开启<br>Associated Domains：通用链接，通过唯一的网址，就可以链接到App中具体的视图，不需要特殊的schema。如果用户没有安装App则链接到对应的普通网页。<br>AutoFill Credential Provider：自动填充凭据提供程序<br>ClassKit：ClassKit框架<br>Custom Network Protocol(Supported only on:macOS)：自定义网络协议（仅mac系统上支持）<br>Data Protection：应用程序加密<br>Fonts：字体<br>Game Center：游戏中心<br>HealthKit：健康框架<br>HomeKit：家庭框架<br>Hotspot：app内自动连接热点<br>iCloud：iCloud 同步数据<br>In-App Purchase：应用内支付<br>Inter-App Audio：音频流发送<br>Low Latency HLS：低延迟<br>Mac(Supported only on:macOS)：<br>Multipath：扩展连接<br>Network Extensions：网络扩展（vpn&amp;wifi）<br>NFC Tag Reading：近场通讯<br>Personal VPN：个人vpn<br>Push Notifications：消息推送<br>Sign In with Apple：苹果账号登录<br>SiriKit：siri框架<br>System Extension(Supported only on:macOS)：系统扩展（仅mac支持）<br>User Management(Supported only on:tvOS)：用户管理（仅tvOS支持）<br>Wallet：票据凭证<br>Wireless Accessory Configuration：无线附件配置</p>
+<h2 id="Xcode"><a href="#Xcode" class="headerlink" title="Xcode"></a>Xcode</h2><h3 id="账号登录"><a href="#账号登录" class="headerlink" title="账号登录"></a>账号登录</h3><p>Xcode -&gt; xcode server -&gt; account</p>
+<img src="/2020/12/16/ios/ios02.png" class="">
+<h3 id="调试-1"><a href="#调试-1" class="headerlink" title="调试"></a>调试</h3><p>Automatically manage signing<br>自动配置证书,自动创建和更新证书</p>
+<img src="/2020/12/16/ios/ios00.png" class="">
+<img src="/2020/12/16/ios/ios01.png" class="">
+
+<p>创建的证书名称是开发者的名字后面括号加上我电脑的名称。<br><a target="_blank" rel="noopener" href="https://developer.apple.com/account/resources/certificates/list">https://developer.apple.com/account/resources/certificates/list</a></p>
+<h3 id="Certificate"><a href="#Certificate" class="headerlink" title="Certificate"></a>Certificate</h3><p>证书是用来给应用程序签名的，只有经过签名的应用程序才能保证他的来源是可信任的，并且代码是完整的，未经修改的。</p>
+<p>相信大家入门程序员的时候，大多都是在 VC 或 VS 上打 C/C++ 入门的，那时候一切都很简单，code-build-link-run，并没有什么认证过程，而由于苹果对其生态圈管理严格，任何在 iOS 上跑的程序都需要经过苹果的“同意”。所以，不论是 AppStore，还是 Xcode 本地 build 的项目，苹果都需要验证这个应用的身份。</p>
+<h1 id="学习appleapi文档"><a href="#学习appleapi文档" class="headerlink" title="学习appleapi文档"></a>学习appleapi文档</h1><p><a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/webkit/wkwebviewconfiguration">https://developer.apple.com/documentation/webkit/wkwebviewconfiguration</a><br>干净清晰<br><a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/technologies">https://developer.apple.com/documentation/technologies</a><br>一上来先列个目录<br>把api分类一下，每个大类下面有一句话描述用户可能要用这个类别api做的事情</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="移动端ios使用new-Date-“2021-02-03-00-00-00“-获取时间为NAN"><a href="#移动端ios使用new-Date-“2021-02-03-00-00-00“-获取时间为NAN" class="headerlink" title="移动端ios使用new Date(“2021-02-03 00:00:00“)获取时间为NAN"></a>移动端ios使用new Date(“2021-02-03 00:00:00“)获取时间为NAN</h2><p>使用ionic4+angular8框架开发app<br>在ios端使用如下代码获取时间毫秒数,控制台打印显示NAN</p>
+<p>new Date(“2021-02-03 00:00:00”).getTime()<br>1<br>android端显示正常，获取结果为1612281600000<br>经网上查阅资料使用new Date()移动端兼容性如下图所示</p>
+<img src="/2020/12/16/ios/ios_date.png" class="">
+
+<p>解决办法<br>根据上图采用第四种解决办法，将”-“替换为”/“</p>
+<p>let time = “2021-02-03 00:00:00”;<br>let formatTime = time.replace(/-/g, ‘/‘)<br>new Date(newTime).getTime()</p>
+<p>移动端vConsole控制台成功输出毫秒数1612281600000<br>————————————————<br>版权声明：本文为CSDN博主「renjiantaotie」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/renjiantaotie/article/details/113630560">https://blog.csdn.net/renjiantaotie/article/details/113630560</a></p>
+<h2 id="XCode-Command-Line-Tools"><a href="#XCode-Command-Line-Tools" class="headerlink" title="XCode Command Line Tools"></a>XCode Command Line Tools</h2><p>使用 macOS 时，Apple 自家的 XCode Command Line Tools 基本上很难绕开。比如你想用 Homebrew 安装点什么东西，它都会依赖 XCode CLT。</p>
+<p>比较不幸地是，如果你更新了 macOS，那你就得重新安装 XCode。如果你重新安装 XCode，那么匹配版本的 CLT 也得重新安装。更为不幸的是，最近使用 xcode-select –install 安装 CLT，经常失败。遂起了手动安装的念头。</p>
+<p>摸索后步骤如下：</p>
+<p>Apple 家官网：<a target="_blank" rel="noopener" href="https://developer.apple.com/download/more/">https://developer.apple.com/download/more/</a><br>以 Apple ID 登录<br>在搜索框搜索 Command Line Tools<br>打开你 macOS 上的 XCode，检查其版本号<br>下载对应版本的 Command Line Tools 镜像（*.dmg）<br>从镜像里手工安装</p>
+<h1 id="In-App-Purchase"><a href="#In-App-Purchase" class="headerlink" title="In-App Purchase"></a>In-App Purchase</h1><h2 id="base"><a href="#base" class="headerlink" title="base"></a>base</h2><p>iOS支付框架：<a target="_blank" rel="noopener" href="https://developer.apple.com/cn/documentation/storekit/">StoreKit</a><br>跨平台</p>
+<h2 id="App-内购买项目类型"><a href="#App-内购买项目类型" class="headerlink" title="App 内购买项目类型"></a>App 内购买项目类型</h2><p>4种<br>pkt使用: 消耗型项目</p>
+<h3 id="提供app内购买项目"><a href="#提供app内购买项目" class="headerlink" title="提供app内购买项目"></a>提供app内购买项目</h3><p>文档：<a target="_blank" rel="noopener" href="https://developer.apple.com/cn/documentation/storekit/in-app_purchase/#topics">https://developer.apple.com/cn/documentation/storekit/in-app_purchase/#topics</a><br>首先需要签署《付费应用程序协议》。您签署协议之后即可提交报税表。</p>
+<h3 id="创建app内购买项目"><a href="#创建app内购买项目" class="headerlink" title="创建app内购买项目"></a>创建app内购买项目</h3><p><a target="_blank" rel="noopener" href="https://help.apple.com/app-store-connect/?lang=zh-cn#/devae49fb316">https://help.apple.com/app-store-connect/?lang=zh-cn#/devae49fb316</a></p>
+<h3 id="确定用户状态"><a href="#确定用户状态" class="headerlink" title="确定用户状态"></a>确定用户状态</h3><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><h2 id="issues"><a href="#issues" class="headerlink" title="issues"></a>issues</h2><h3 id="App-Store-服务器通知网址-URL"><a href="#App-Store-服务器通知网址-URL" class="headerlink" title="App Store 服务器通知网址 (URL)"></a>App Store 服务器通知网址 (URL)</h3><p><a target="_blank" rel="noopener" href="https://help.apple.com/app-store-connect/?lang=zh-cn#/dev0067a330b">https://help.apple.com/app-store-connect/?lang=zh-cn#/dev0067a330b</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ios/" rel="tag"># ios</a>
+              <a href="/tags/OC/" rel="tag"># OC</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/14/js-function/" rel="prev" title="js-function">
+      <i class="fa fa-chevron-left"></i> js-function
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/19/2021/" rel="next" title="2021">
+      2021 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#basis"><span class="nav-number">1.</span> <span class="nav-text">basis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#log"><span class="nav-number">1.1.</span> <span class="nav-text">log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NS%E5%89%8D%E7%BC%80"><span class="nav-number">1.2.</span> <span class="nav-text">NS前缀</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7"><span class="nav-number">1.3.</span> <span class="nav-text">@符号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E9%87%8A"><span class="nav-number">1.4.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89%E8%B0%83%E7%94%A8"><span class="nav-number">1.5.</span> <span class="nav-text">函数定义调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">1.6.</span> <span class="nav-text">快捷键</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C"><span class="nav-number">1.6.1.</span> <span class="nav-text">编译运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E5%99%A8"><span class="nav-number">1.6.2.</span> <span class="nav-text">模拟器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#storyboard"><span class="nav-number">1.6.3.</span> <span class="nav-text">storyboard</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#icon"><span class="nav-number">1.7.</span> <span class="nav-text">icon</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1x2x3x"><span class="nav-number">1.7.1.</span> <span class="nav-text">1x2x3x</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#create"><span class="nav-number">1.7.2.</span> <span class="nav-text">create</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E7%94%9F%E6%88%90%E4%B8%8D%E5%90%8C%E5%B0%BA%E5%AF%B8%E5%9B%BE%E7%89%87"><span class="nav-number">1.7.3.</span> <span class="nav-text">批量生成不同尺寸图片</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E8%AF%95"><span class="nav-number">1.8.</span> <span class="nav-text">调试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E7%BA%BF%E7%BD%91%E8%B0%83%E8%AF%95"><span class="nav-number">1.8.1.</span> <span class="nav-text">无线网调试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E6%9C%80%E6%96%B014-6"><span class="nav-number">1.8.2.</span> <span class="nav-text">支持最新14.6</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E5%99%A8-1"><span class="nav-number">1.9.</span> <span class="nav-text">模拟器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%85%E7%90%86"><span class="nav-number">1.9.1.</span> <span class="nav-text">清理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E9%80%81%E5%88%B0TestFligth"><span class="nav-number">1.10.</span> <span class="nav-text">推送到TestFligth</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9E%8B%E5%8F%B7%E5%B0%BA%E5%AF%B8"><span class="nav-number">2.</span> <span class="nav-text">型号尺寸</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#icon-1"><span class="nav-number">2.1.</span> <span class="nav-text">icon</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OC"><span class="nav-number">3.</span> <span class="nav-text">OC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E5%90%8D"><span class="nav-number">3.1.</span> <span class="nav-text">扩展名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAOC%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.</span> <span class="nav-text">创建OC文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#basis-1"><span class="nav-number">3.3.</span> <span class="nav-text">basis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NSString"><span class="nav-number">3.3.1.</span> <span class="nav-text">NSString</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NSNumber"><span class="nav-number">3.3.2.</span> <span class="nav-text">NSNumber</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iOS-%E6%B5%81%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">iOS 流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E7%9B%AE%E7%9A%84"><span class="nav-number">4.1.</span> <span class="nav-text">最终目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E6%A0%88"><span class="nav-number">4.2.</span> <span class="nav-text">技术栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E6%B5%8B%E4%BC%9A%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">4.3.</span> <span class="nav-text">预测会出现的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cordova"><span class="nav-number">4.4.</span> <span class="nav-text">cordova</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#open"><span class="nav-number">4.4.1.</span> <span class="nav-text">open</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS"><span class="nav-number">4.5.</span> <span class="nav-text">iOS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A0%87%E8%AF%86%E7%AC%A6"><span class="nav-number">4.5.1.</span> <span class="nav-text">创建一个标识符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%A0%87%E8%AF%86%E7%AC%A6"><span class="nav-number">4.5.1.1.</span> <span class="nav-text">删除标识符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A5%97%E8%A3%85ID"><span class="nav-number">4.5.2.</span> <span class="nav-text">套装ID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Capabilities%E9%83%A8%E5%88%86"><span class="nav-number">4.5.3.</span> <span class="nav-text">Capabilities部分</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xcode"><span class="nav-number">4.6.</span> <span class="nav-text">Xcode</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%A6%E5%8F%B7%E7%99%BB%E5%BD%95"><span class="nav-number">4.6.1.</span> <span class="nav-text">账号登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E8%AF%95-1"><span class="nav-number">4.6.2.</span> <span class="nav-text">调试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Certificate"><span class="nav-number">4.6.3.</span> <span class="nav-text">Certificate</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0appleapi%E6%96%87%E6%A1%A3"><span class="nav-number">5.</span> <span class="nav-text">学习appleapi文档</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E7%AB%AFios%E4%BD%BF%E7%94%A8new-Date-%E2%80%9C2021-02-03-00-00-00%E2%80%9C-%E8%8E%B7%E5%8F%96%E6%97%B6%E9%97%B4%E4%B8%BANAN"><span class="nav-number">6.1.</span> <span class="nav-text">移动端ios使用new Date(“2021-02-03 00:00:00“)获取时间为NAN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XCode-Command-Line-Tools"><span class="nav-number">6.2.</span> <span class="nav-text">XCode Command Line Tools</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#In-App-Purchase"><span class="nav-number">7.</span> <span class="nav-text">In-App Purchase</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#base"><span class="nav-number">7.1.</span> <span class="nav-text">base</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#App-%E5%86%85%E8%B4%AD%E4%B9%B0%E9%A1%B9%E7%9B%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">7.2.</span> <span class="nav-text">App 内购买项目类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E4%BE%9Bapp%E5%86%85%E8%B4%AD%E4%B9%B0%E9%A1%B9%E7%9B%AE"><span class="nav-number">7.2.1.</span> <span class="nav-text">提供app内购买项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAapp%E5%86%85%E8%B4%AD%E4%B9%B0%E9%A1%B9%E7%9B%AE"><span class="nav-number">7.2.2.</span> <span class="nav-text">创建app内购买项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A1%AE%E5%AE%9A%E7%94%A8%E6%88%B7%E7%8A%B6%E6%80%81"><span class="nav-number">7.2.3.</span> <span class="nav-text">确定用户状态</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">7.3.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#issues"><span class="nav-number">7.4.</span> <span class="nav-text">issues</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#App-Store-%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E7%9F%A5%E7%BD%91%E5%9D%80-URL"><span class="nav-number">7.4.1.</span> <span class="nav-text">App Store 服务器通知网址 (URL)</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">kil</p>
+  <div class="site-description" itemprop="description">心如止水，潜心修行</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kilfront" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kilfront" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kaifaweb@163.com" title="E-Mail → mailto:kaifaweb@163.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kil</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

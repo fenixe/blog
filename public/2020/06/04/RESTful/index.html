@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":false,"scrollpercent":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="路径规范http:&#x2F;&#x2F;www.ruanyifeng.com&#x2F;blog&#x2F;2014&#x2F;05&#x2F;restful_api.html ELK业务背景：分析日志的用处可大了，你想，假如一个分布式系统有 1000 台机器，系统出现故障时，我要看下日志，还得一台一台登录上去查看，是不是非常麻烦？ 反向索引又叫倒排索引，是根据文章内容中的关键字建立索引。搜索引擎原理就是建立反向索引。Elasticsearch 在 Lu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RESTful">
+<meta property="og:url" content="http://example.com/2020/06/04/RESTful/index.html">
+<meta property="og:site_name" content="Kil Notes">
+<meta property="og:description" content="路径规范http:&#x2F;&#x2F;www.ruanyifeng.com&#x2F;blog&#x2F;2014&#x2F;05&#x2F;restful_api.html ELK业务背景：分析日志的用处可大了，你想，假如一个分布式系统有 1000 台机器，系统出现故障时，我要看下日志，还得一台一台登录上去查看，是不是非常麻烦？ 反向索引又叫倒排索引，是根据文章内容中的关键字建立索引。搜索引擎原理就是建立反向索引。Elasticsearch 在 Lu">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/2020/06/04/RESTful/index.png">
+<meta property="article:published_time" content="2020-06-04T08:18:31.000Z">
+<meta property="article:modified_time" content="2022-08-31T07:46:23.643Z">
+<meta property="article:author" content="kil">
+<meta property="article:tag" content="network">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/06/04/RESTful/index.png">
+
+<link rel="canonical" href="http://example.com/2020/06/04/RESTful/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>RESTful | Kil Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Kil Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Quick notes</p>
+      <a>
+        <img class="custom-logo-image" src="[object Object]" alt="Kil Notes">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/06/04/RESTful/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="kil">
+      <meta itemprop="description" content="心如止水，潜心修行">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kil Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          RESTful
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-04 16:18:31" itemprop="dateCreated datePublished" datetime="2020-06-04T16:18:31+08:00">2020-06-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/network/" itemprop="url" rel="index"><span itemprop="name">network</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="路径规范"><a href="#路径规范" class="headerlink" title="路径规范"></a>路径规范</h1><p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html">http://www.ruanyifeng.com/blog/2014/05/restful_api.html</a></p>
+<h1 id="ELK"><a href="#ELK" class="headerlink" title="ELK"></a>ELK</h1><p>业务背景：<br>分析日志的用处可大了，你想，假如一个分布式系统有 1000 台机器，系统出现故障时，我要看下日志，还得一台一台登录上去查看，是不是非常麻烦？</p>
+<p>反向索引又叫倒排索引，是根据文章内容中的关键字建立索引。<br>搜索引擎原理就是建立反向索引。<br>Elasticsearch 在 Lucene 的基础上进行封装，实现了分布式搜索引擎。<br>Elasticsearch 中的索引、类型和文档的概念比较重要，类似于 MySQL 中的数据库、表和行。<br>Elasticsearch 也是 Master-slave 架构，也实现了数据的分片和备份。<br>Elasticsearch 一个典型应用就是 ELK 日志分析系统。</p>
+<h2 id="base"><a href="#base" class="headerlink" title="base"></a>base</h2><h3 id="hits"><a href="#hits" class="headerlink" title="hits"></a>hits</h3><p>使用 _search，结果放在数组 hits 中。一个搜索默认返回十条结果。</p>
+<h3 id="took"><a href="#took" class="headerlink" title="took"></a>took</h3><p>took 值告诉我们执行整个搜索请求耗费了多少毫秒。</p>
+<h3 id="shards"><a href="#shards" class="headerlink" title="shards"></a>shards</h3><p>_shards 部分告诉我们在查询中参与分片的总数，以及这些分片成功了多少个失败了多少个。正常情况下我们不希望分片失败，但是分片失败是可能发生的。如果我们遭遇到一种灾难级别的故障，在这个故障中丢失了相同分片的原始数据和副本，那么对这个分片将没有可用副本来对搜索请求作出响应。假若这样，Elasticsearch 将报告这个分片是失败的，但是会继续返回剩余分片的结果。</p>
+<h2 id="log信息"><a href="#log信息" class="headerlink" title="log信息"></a>log信息</h2><p>时间戳——知道事情发生的时间<br>计算机/服务器名称——如果你正在运行一个分布式系统<br>进程ID——如果你正在使用类似pm2的东西运行多个节点进程<br>消息——包含一些内容的实际消息<br>堆栈跟踪——用于记录错误的场景<br>其他一些额外的变量/信息</p>
+<h2 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h2><p>query-filter-context</p>
+<h3 id="轻量搜索"><a href="#轻量搜索" class="headerlink" title="轻量搜索"></a>轻量搜索</h3><p>搜索phone为13215693211的数据<br>GET /logstash-alpha-202*/_search?q=phone:13215693211</p>
+<h3 id="查询表达式-搜索"><a href="#查询表达式-搜索" class="headerlink" title="查询表达式 搜索"></a>查询表达式 搜索</h3><p>GET /logstash-alpha-202*/_search<br>{<br>  “query” : {<br>    “match” : {<br>      “phone” : “13215693211”<br>    }<br>  }<br>}</p>
+<h3 id="或"><a href="#或" class="headerlink" title="或"></a>或</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">GET /my_store/products/_search</span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">   <span class="attr">&quot;query&quot;</span> <span class="punctuation">:</span></span><br><span class="line">   <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;bool&quot;</span> <span class="punctuation">:</span> </span><br><span class="line">      <span class="punctuation">&#123;</span></span><br><span class="line">              <span class="attr">&quot;should&quot;</span> <span class="punctuation">:</span> </span><br><span class="line">              <span class="punctuation">[</span></span><br><span class="line">                 <span class="punctuation">&#123;</span> <span class="attr">&quot;term&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="attr">&quot;price&quot;</span> <span class="punctuation">:</span> <span class="number">20</span><span class="punctuation">&#125;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span> </span><br><span class="line">                 <span class="punctuation">&#123;</span> <span class="attr">&quot;term&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="attr">&quot;productID&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;XHDK-A-1293-#fJ3&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">&#125;</span> </span><br><span class="line">              <span class="punctuation">]</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">   <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="且"><a href="#且" class="headerlink" title="且"></a>且</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">GET /my_store/products/_search</span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">   <span class="attr">&quot;query&quot;</span> <span class="punctuation">:</span></span><br><span class="line">   <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;bool&quot;</span> <span class="punctuation">:</span> </span><br><span class="line">      <span class="punctuation">&#123;</span></span><br><span class="line">              <span class="attr">&quot;must&quot;</span> <span class="punctuation">:</span> </span><br><span class="line">              <span class="punctuation">[</span></span><br><span class="line">                 <span class="punctuation">&#123;</span> <span class="attr">&quot;term&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="attr">&quot;price&quot;</span> <span class="punctuation">:</span> <span class="number">20</span><span class="punctuation">&#125;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span> </span><br><span class="line">                 <span class="punctuation">&#123;</span> <span class="attr">&quot;term&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="attr">&quot;productID&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;XHDK-A-1293-#fJ3&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">&#125;</span> </span><br><span class="line">              <span class="punctuation">]</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">   <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="非"><a href="#非" class="headerlink" title="非"></a>非</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">GET /my_store/products/_search</span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">   <span class="attr">&quot;query&quot;</span> <span class="punctuation">:</span></span><br><span class="line">   <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;bool&quot;</span> <span class="punctuation">:</span> </span><br><span class="line">      <span class="punctuation">&#123;</span></span><br><span class="line">              <span class="attr">&quot;must_not&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="attr">&quot;term&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="attr">&quot;price&quot;</span> <span class="punctuation">:</span> <span class="number">30</span><span class="punctuation">&#125;</span> <span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">   <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="查询表达式"><a href="#查询表达式" class="headerlink" title="查询表达式"></a>查询表达式</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GET /megacorp/employee/_search</span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;query&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;match&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;last_name&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;Smith&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="复杂的表达式"><a href="#复杂的表达式" class="headerlink" title="复杂的表达式"></a>复杂的表达式</h3><p>使用过滤器 filter<br>同样搜索姓氏为 Smith 的员工，但这次我们只需要年龄大于 30 的</p>
+<p>range 查询找出那些落在指定区间内的数字或者时间：<br>gt<br>大于<br>gte<br>大于等于<br>lt<br>小于<br>lte<br>小于等于</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">GET /megacorp/employee/_search</span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;query&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;bool&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;must&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;match&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                    <span class="attr">&quot;last_name&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;smith&quot;</span> </span><br><span class="line">                <span class="punctuation">&#125;</span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;filter&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;range&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                    <span class="attr">&quot;age&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="attr">&quot;gt&quot;</span> <span class="punctuation">:</span> <span class="number">30</span> <span class="punctuation">&#125;</span> <span class="comment">// 这部分是一个 range 过滤器 ， 它能找到年龄大于 30 的文档，其中 gt 表示_大于_(great than)。</span></span><br><span class="line">                <span class="punctuation">&#125;</span></span><br><span class="line">            <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="相关性"><a href="#相关性" class="headerlink" title="相关性"></a>相关性</h3><p>Elasticsearch中的 相关性 概念非常重要，也是完全区别于传统关系型数据库的一个概念，数据库中的一条记录要么匹配要么不匹配。<br>搜索下所有喜欢攀岩（rock climbing）的员工：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GET /megacorp/employee/_search</span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;query&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;match&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;about&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;rock climbing&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">   ...</span><br><span class="line">   <span class="attr">&quot;hits&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;total&quot;</span><span class="punctuation">:</span>      <span class="number">2</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;max_score&quot;</span><span class="punctuation">:</span>  <span class="number">0.16273327</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;hits&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">         <span class="punctuation">&#123;</span></span><br><span class="line">            ...</span><br><span class="line">            <span class="attr">&quot;_score&quot;</span><span class="punctuation">:</span>         <span class="number">0.16273327</span><span class="punctuation">,</span> </span><br><span class="line">            <span class="attr">&quot;_source&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">               <span class="attr">&quot;first_name&quot;</span><span class="punctuation">:</span>  <span class="string">&quot;John&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;last_name&quot;</span><span class="punctuation">:</span>   <span class="string">&quot;Smith&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;age&quot;</span><span class="punctuation">:</span>         <span class="number">25</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;about&quot;</span><span class="punctuation">:</span>       <span class="string">&quot;I love to go rock climbing&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;interests&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span> <span class="string">&quot;sports&quot;</span><span class="punctuation">,</span> <span class="string">&quot;music&quot;</span> <span class="punctuation">]</span></span><br><span class="line">            <span class="punctuation">&#125;</span></span><br><span class="line">         <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">         <span class="punctuation">&#123;</span></span><br><span class="line">            ...</span><br><span class="line">            <span class="attr">&quot;_score&quot;</span><span class="punctuation">:</span>         <span class="number">0.016878016</span><span class="punctuation">,</span> </span><br><span class="line">            <span class="attr">&quot;_source&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">               <span class="attr">&quot;first_name&quot;</span><span class="punctuation">:</span>  <span class="string">&quot;Jane&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;last_name&quot;</span><span class="punctuation">:</span>   <span class="string">&quot;Smith&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;age&quot;</span><span class="punctuation">:</span>         <span class="number">32</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;about&quot;</span><span class="punctuation">:</span>       <span class="string">&quot;I like to collect rock albums&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;interests&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span> <span class="string">&quot;music&quot;</span> <span class="punctuation">]</span></span><br><span class="line">            <span class="punctuation">&#125;</span></span><br><span class="line">         <span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">]</span></span><br><span class="line">   <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>她的 about 属性里提到了 “rock” 。因为只有 “rock” 而没有 “climbing” ，所以她的相关性得分低于 John 的。</p>
+<h3 id="精准匹配"><a href="#精准匹配" class="headerlink" title="精准匹配"></a>精准匹配</h3><p>找出一个属性中的独立单词是没有问题的，但有时候想要精确匹配一系列单词或者_短语_ 。 比如， 我们想执行这样一个查询，仅匹配同时包含 “rock” 和 “climbing” ，并且 二者以短语 “rock climbing” 的形式紧挨着的雇员记录。<br>为此对 match 查询稍作调整，使用一个叫做 match_phrase 的查询</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GET /megacorp/employee/_search</span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;query&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;match_phrase&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;about&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;rock climbing&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">   ...</span><br><span class="line">   <span class="attr">&quot;hits&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;total&quot;</span><span class="punctuation">:</span>      <span class="number">1</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;max_score&quot;</span><span class="punctuation">:</span>  <span class="number">0.23013961</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;hits&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">         <span class="punctuation">&#123;</span></span><br><span class="line">            ...</span><br><span class="line">            <span class="attr">&quot;_score&quot;</span><span class="punctuation">:</span>         <span class="number">0.23013961</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;_source&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">               <span class="attr">&quot;first_name&quot;</span><span class="punctuation">:</span>  <span class="string">&quot;John&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;last_name&quot;</span><span class="punctuation">:</span>   <span class="string">&quot;Smith&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;age&quot;</span><span class="punctuation">:</span>         <span class="number">25</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;about&quot;</span><span class="punctuation">:</span>       <span class="string">&quot;I love to go rock climbing&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;interests&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span> <span class="string">&quot;sports&quot;</span><span class="punctuation">,</span> <span class="string">&quot;music&quot;</span> <span class="punctuation">]</span></span><br><span class="line">            <span class="punctuation">&#125;</span></span><br><span class="line">         <span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">]</span></span><br><span class="line">   <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h3><p>聚合（aggregations）<br>GET /megacorp/employee/_search<br>{<br>  “aggs”: {<br>    “all_interests”: {<br>      “terms”: { “field”: “interests” }<br>    }<br>  }<br>}</p>
+<h2 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h2><h3 id="空搜索"><a href="#空搜索" class="headerlink" title="空搜索"></a>空搜索</h3><p>GET /_search<br>搜索API的最基础的形式是没有指定任何查询的空搜索，它简单地返回集群中所有索引下的所有文档：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;took&quot;</span> <span class="punctuation">:</span> <span class="number">11542</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;timed_out&quot;</span> <span class="punctuation">:</span> <span class="keyword">false</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;num_reduce_phases&quot;</span> <span class="punctuation">:</span> <span class="number">3</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;_shards&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;total&quot;</span> <span class="punctuation">:</span> <span class="number">1045</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;successful&quot;</span> <span class="punctuation">:</span> <span class="number">1045</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;skipped&quot;</span> <span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;failed&quot;</span> <span class="punctuation">:</span> <span class="number">0</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;hits&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;total&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;value&quot;</span> <span class="punctuation">:</span> <span class="number">10000</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;relation&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;gte&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;max_score&quot;</span> <span class="punctuation">:</span> <span class="number">1.0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;hits&quot;</span> <span class="punctuation">:</span> <span class="punctuation">[</span></span><br></pre></td></tr></table></figure>
+
+<p>hits： 采样数</p>
+<h3 id="多索引，多类型"><a href="#多索引，多类型" class="headerlink" title="多索引，多类型"></a>多索引，多类型</h3><p>多索引，多类型<br>你有没有注意到之前的 empty search 的结果，不同类型的文档— user 和 tweet 来自不同的索引— us 和 gb ？</p>
+<p>如果不对某一特殊的索引或者类型做限制，就会搜索集群中的所有文档。Elasticsearch 转发搜索请求到每一个主分片或者副本分片，汇集查询出的前10个结果，并且返回给我们。</p>
+<p>然而，经常的情况下，你想在一个或多个特殊的索引并且在一个或者多个特殊的类型中进行搜索。我们可以通过在URL中指定特殊的索引和类型达到这种效果，如下所示：</p>
+<p>/_search<br>在所有的索引中搜索所有的类型<br>/gb/_search<br>在 gb 索引中搜索所有的类型<br>/gb,us/_search<br>在 gb 和 us 索引中搜索所有的文档<br>/g*,u*/_search<br>在任何以 g 或者 u 开头的索引中搜索所有的类型<br>/gb/user/_search<br>在 gb 索引中搜索 user 类型<br>/gb,us/user,tweet/_search<br>在 gb 和 us 索引中搜索 user 和 tweet 类型<br>/_all/user,tweet/_search<br>在所有的索引中搜索 user 和 tweet 类型<br>当在单一的索引下进行搜索的时候，Elasticsearch 转发请求到索引的每个分片中，可以是主分片也可以是副本分片，然后从每个分片中收集结果。多索引搜索恰好也是用相同的方式工作的—​只是会涉及到更多的分片。</p>
+<h3 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h3><p>size<br>显示应该返回的结果数量，默认是 10<br>from<br>显示应该跳过的初始结果数量，默认是 0<br>如果每页展示 5 条结果，可以用下面方式请求得到 1 到 3 页的结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET /_search?size=5</span><br><span class="line">GET /_search?size=5&amp;from=5</span><br><span class="line">GET /_search?size=5&amp;from=10</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GET /logstash-alpha-2021.04*/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;size&quot; : 0, // 0: 不显示详细信息，10: 显示每条详细信息</span><br><span class="line">  &quot;aggs&quot; : &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="映射和分析"><a href="#映射和分析" class="headerlink" title="映射和分析"></a>映射和分析</h3><p>当摆弄索引里面的数据时，我们发现一些奇怪的事情。一些事情看起来被打乱了：在我们的索引中有12条推文，其中只有一条包含日期 2014-09-15 ，但是看一看下面查询命中的 总数 （total）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GET /_search?q=2014              # 12 results</span><br><span class="line">GET /_search?q=2014-09-15        # 12 results !</span><br><span class="line">GET /_search?q=date:2014-09-15   # 1  result</span><br><span class="line">GET /_search?q=date:2014         # 0  results !</span><br></pre></td></tr></table></figure>
+
+<h3 id="字段折叠"><a href="#字段折叠" class="headerlink" title="字段折叠"></a>字段折叠</h3><p>GET /logstash-alpha-202*/_search<br>{<br>  “query”:{<br>    “bool”: {<br>      “must”: {<br>        “match”: { “event”: “online_time” }<br>      },<br>      “filter”: {<br>        “range”: {<br>          “timestamp”: {<br>            “gt”: “2021-05-18T16:00:00Z”,<br>            “lt”: “2021-05-19T15:59:59Z”<br>          }<br>        }<br>      }<br>    }<br>  },<br>  “size”: 0,<br>  “aggs”: {<br>    “lists”: {<br>      “terms”: {<br>        “field”: “userId.keyword”,<br>        “size”: 10000<br>      },<br>      “aggs”:{<br>          “details_hits”:{<br>            “top_hits”:{<br>            “_source”: {<br>              “includes”: [<br>                “userId”,<br>                “phone”,<br>                “nickname”,<br>                “username”<br>              ]<br>            },<br>              “size”:1<br>            }<br>          }<br>        }<br>    }<br>  }<br>}</p>
+<h3 id="term"><a href="#term" class="headerlink" title="term"></a>term</h3><p>term 查询被用于精确值匹配，这些精确值可能是数字、时间、布尔或者那些 not_analyzed 的字符串：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;term&quot;: &#123; &quot;age&quot;:    26           &#125;&#125;</span><br><span class="line">&#123; &quot;term&quot;: &#123; &quot;date&quot;:   &quot;2014-09-01&quot; &#125;&#125;</span><br><span class="line">&#123; &quot;term&quot;: &#123; &quot;public&quot;: true         &#125;&#125;</span><br><span class="line">&#123; &quot;term&quot;: &#123; &quot;tag&quot;:    &quot;full_text&quot;  &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="terms-查询"><a href="#terms-查询" class="headerlink" title="terms 查询"></a>terms 查询</h3><p>terms 查询和 term 查询一样，但它允许你指定多值进行匹配。如果这个字段包含了指定值中的任何一个值，那么这个文档满足条件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;terms&quot;: &#123; &quot;tag&quot;: [ &quot;search&quot;, &quot;full_text&quot;, &quot;nosql&quot; ] &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多级排序"><a href="#多级排序" class="headerlink" title="多级排序"></a>多级排序</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">GET /_search</span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;query&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;bool&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;must&quot;</span><span class="punctuation">:</span>   <span class="punctuation">&#123;</span> <span class="attr">&quot;match&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="attr">&quot;tweet&quot;</span><span class="punctuation">:</span> <span class="string">&quot;manage text search&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;filter&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="attr">&quot;term&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="attr">&quot;user_id&quot;</span> <span class="punctuation">:</span> <span class="number">2</span> <span class="punctuation">&#125;</span><span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;sort&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span> <span class="attr">&quot;date&quot;</span><span class="punctuation">:</span>   <span class="punctuation">&#123;</span> <span class="attr">&quot;order&quot;</span><span class="punctuation">:</span> <span class="string">&quot;desc&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span> <span class="attr">&quot;_score&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="attr">&quot;order&quot;</span><span class="punctuation">:</span> <span class="string">&quot;desc&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="正则"><a href="#正则" class="headerlink" title="正则"></a>正则</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">GET /logstash-alpha-*/_search</span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;query&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;bool&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;must&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;match&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;event&quot;</span><span class="punctuation">:</span> <span class="string">&quot;game_sign&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;filter&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;regexp&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;phone&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;[1]&#123;1&#125;[3-9]&#123;1&#125;[0-9]&#123;9&#125;&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="日期，东八区"><a href="#日期，东八区" class="headerlink" title="日期，东八区"></a>日期，东八区</h3><p>Elasticsearch默认为UTC时间，即零时区，查询时若不指定时区，则默认以0时区查询，和我们所在的东八区差8小时。yyyy-MM-dd’T’HH:mm:ss.SSSZ，这里的Z就代表UTC时区。<br>Es在进行日期查询/聚合时可以指定时区：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//日期范围查询</span><br><span class="line">POST datatypetest/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;range&quot;: &#123;</span><br><span class="line">      &quot;date3&quot;: &#123;</span><br><span class="line">        &quot;gte&quot;: &quot;2018-07-05&quot;,</span><br><span class="line">        &quot;lte&quot;: &quot;now&quot;,</span><br><span class="line">        &quot;time_zone&quot;: &quot;Asia/Shanghai&quot;//这就是东八区（北京时间/中国标准时间）</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//日期聚合</span><br><span class="line">GET my_index/_search?size=0</span><br><span class="line">&#123;</span><br><span class="line">  &quot;aggs&quot;: &#123;</span><br><span class="line">    &quot;by_day&quot;: &#123;</span><br><span class="line">      &quot;date_histogram&quot;: &#123;</span><br><span class="line">        &quot;field&quot;:     &quot;date&quot;,</span><br><span class="line">        &quot;interval&quot;:  &quot;day&quot;,</span><br><span class="line">        &quot;time_zone&quot;: &quot;Asia/Shanghai&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="不同时间"><a href="#不同时间" class="headerlink" title="不同时间"></a>不同时间</h4><p>CST：中国标准时间（China Standard Time），这个解释可能是针对RedHat Linux。</p>
+<p>UTC：协调世界时，又称世界标准时间，简称UTC，从英文国际时间/法文协调时间”Universal Time/Temps Cordonné”而来。中国大陆、香港、澳门、台湾、蒙古国、新加坡、马来西亚、菲律宾、澳洲西部的时间与UTC的时差均为+8，也就是UTC+8。</p>
+<p>GMT：格林尼治标准时间（旧译格林威治平均时间或格林威治标准时间；英语：Greenwich Mean Time，GMT）是指位于英国伦敦郊区的皇家格林尼治天文台的标准时间，因为本初子午线被定义在通过那里的经线。</p>
+<h3 id="处理文档数目非零的-buckets"><a href="#处理文档数目非零的-buckets" class="headerlink" title="处理文档数目非零的 buckets"></a>处理文档数目非零的 buckets</h3><p>date_histogram （和 histogram 一样）默认只会返回文档数目非零的 buckets。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">GET /cars/transactions/_search</span><br><span class="line">&#123;</span><br><span class="line">   &quot;size&quot; : 0,</span><br><span class="line">   &quot;aggs&quot;: &#123;</span><br><span class="line">      &quot;sales&quot;: &#123;</span><br><span class="line">         &quot;date_histogram&quot;: &#123;</span><br><span class="line">            &quot;field&quot;: &quot;sold&quot;,</span><br><span class="line">            &quot;interval&quot;: &quot;month&quot;,</span><br><span class="line">            &quot;format&quot;: &quot;yyyy-MM-dd&quot;,</span><br><span class="line">            &quot;min_doc_count&quot; : 0,  // 这个参数强制返回空 buckets。</span><br><span class="line">            &quot;extended_bounds&quot; : &#123;  // 这个参数强制返回整年。</span><br><span class="line">                &quot;min&quot; : &quot;2014-01-01&quot;,</span><br><span class="line">                &quot;max&quot; : &quot;2014-12-31&quot;</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="去重"><a href="#去重" class="headerlink" title="去重"></a>去重</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;&#125;,</span><br><span class="line">    &quot;aggs&quot; : &#123;</span><br><span class="line">    &quot;count&quot;: &#123;</span><br><span class="line">      &quot;date_histogram&quot; : &#123;</span><br><span class="line">        &quot;field&quot;: &quot;timestamp&quot;,</span><br><span class="line">        &quot;interval&quot;: &quot;day&quot;,</span><br><span class="line">        &quot;time_zone&quot;: &quot;Asia/Shanghai&quot;,</span><br><span class="line">        &quot;format&quot;: &quot;yyyy-MM-dd&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;aggs&quot;: &#123;</span><br><span class="line">          &quot;unique_doc_count&quot; : &#123;</span><br><span class="line">              &quot;cardinality&quot; : &#123;</span><br><span class="line">                &quot;field&quot; : &quot;user_id&quot;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Index-Patterns"><a href="#Index-Patterns" class="headerlink" title="Index Patterns"></a>Index Patterns</h2><p>This page lists every field in the logstash-alpha-* index and the field’s associated core type as recorded by Elasticsearch. To change a field type, use the Elasticsearch Mapping API </p>
+<img src="/2020/06/04/RESTful/index.png" class="">
+
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>挖掘出员工中最受欢迎的兴趣爱好：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GET /megacorp/employee/_search</span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;aggs&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;all_interests&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;terms&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="attr">&quot;field&quot;</span><span class="punctuation">:</span> <span class="string">&quot;interests&quot;</span> <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>组合查询<br>与过滤器一样， bool 查询也可以接受 must 、 must_not 和 should 参数下的多个查询语句。比如</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">GET /my_index/my_type/_search</span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;query&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;bool&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;must&quot;</span><span class="punctuation">:</span>     <span class="punctuation">&#123;</span> <span class="attr">&quot;match&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="attr">&quot;title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;quick&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;must_not&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="attr">&quot;match&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="attr">&quot;title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;lazy&quot;</span>  <span class="punctuation">&#125;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;should&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                  <span class="punctuation">&#123;</span> <span class="attr">&quot;match&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="attr">&quot;title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;brown&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">                  <span class="punctuation">&#123;</span> <span class="attr">&quot;match&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="attr">&quot;title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;dog&quot;</span>   <span class="punctuation">&#125;</span><span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>次日留存</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="title function_">morrowLoginRate</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// const querySignupParam = &#123;name: &#x27;game_sign_day_before&#x27;, regexp: true&#125;;</span></span><br><span class="line">    <span class="comment">// let querySignupData = this.generateQueryForLog(querySignupParam);</span></span><br><span class="line">    <span class="comment">// const signupBeforeDayData = await this.http.post(environment.ELK_URL + &quot;202*/_search&quot;,</span></span><br><span class="line">    <span class="comment">//   querySignupData</span></span><br><span class="line">    <span class="comment">// ).toPromise();</span></span><br><span class="line">    <span class="comment">// console.log(&#x27;signupBeforeDayData&#x27;, signupBeforeDayData);</span></span><br><span class="line"></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;this.signupDatas&#x27;</span>, <span class="variable language_">this</span>.<span class="property">resultDatas</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// const queryMorrowRate = &#123;name: &#x27;online_time&#x27;, regexp: false, createdOffsetDay: 1, aggs: &#123;unique_online_count: &#123;cardinality: &#123;field: &#x27;userId.keyword&#x27;&#125;&#125;&#125;&#125;;</span></span><br><span class="line">    <span class="keyword">const</span> queryMorrowRate = &#123;<span class="attr">name</span>: <span class="string">&#x27;morrow_data&#x27;</span>, <span class="attr">createdOffsetDay</span>: <span class="number">1</span>, <span class="attr">aggs</span>: &#123;<span class="attr">unique_online_count</span>: &#123;<span class="attr">cardinality</span>: &#123;<span class="attr">field</span>: <span class="string">&#x27;userId.keyword&#x27;</span>&#125;&#125;&#125;&#125;;</span><br><span class="line">    <span class="keyword">let</span> queryMorrowData = <span class="variable language_">this</span>.<span class="title function_">generateQueryForLog</span>(queryMorrowRate);</span><br><span class="line">    <span class="keyword">const</span> morrowData = <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="property">http</span>.<span class="title function_">post</span>(environment.<span class="property">ELK_URL</span> + <span class="string">&quot;202*/_search&quot;</span>,</span><br><span class="line">    queryMorrowData</span><br><span class="line">    ).<span class="title function_">toPromise</span>();</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;morrowData&#x27;</span>, morrowData);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> morrows = morrowData.<span class="property">aggregations</span>.<span class="property">count</span>.<span class="property">buckets</span>;</span><br><span class="line">    <span class="comment">// const befores = signupBeforeDayData.aggregations.count.buckets;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="variable language_">this</span>.<span class="property">resultDatas</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">      <span class="keyword">const</span> r = <span class="variable language_">this</span>.<span class="property">resultDatas</span>[i];</span><br><span class="line">      <span class="keyword">const</span> tomorrow = <span class="title function_">moment</span>(r.<span class="property">time</span>).<span class="title function_">add</span>(+<span class="number">1</span>, <span class="string">&#x27;days&#x27;</span>);</span><br><span class="line">      <span class="keyword">const</span> tomorrowMoment = <span class="title class_">OneDay</span>(tomorrow);</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; morrows.<span class="property">length</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">const</span> morrow = morrows[j];</span><br><span class="line">        <span class="keyword">if</span> (morrow.<span class="property">key_as_string</span> === tomorrowMoment) &#123;</span><br><span class="line">          <span class="keyword">const</span> rate = (morrow.<span class="property">unique_online_count</span>.<span class="property">value</span> / r.<span class="property">signup</span>) * <span class="number">100</span>;</span><br><span class="line">          <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;rate&#x27;</span>, rate, <span class="built_in">isNaN</span>(rate));</span><br><span class="line">          <span class="keyword">if</span> (!rate) &#123;</span><br><span class="line">            r.<span class="property">morrow_login_rate</span> = <span class="string">&#x27;-&#x27;</span>;</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            r.<span class="property">morrow_login_rate</span> = <span class="title class_">Math</span>.<span class="title function_">round</span>(rate) + <span class="string">&#x27;%&#x27;</span>;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;morrows +++++&#x27;</span>, <span class="variable language_">this</span>.<span class="property">resultDatas</span>);</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">loadTotalUser</span>();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/network/" rel="tag"># network</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/31/book/" rel="prev" title="book">
+      <i class="fa fa-chevron-left"></i> book
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/04/%E9%87%8D%E5%AD%A6%E5%89%8D%E7%AB%AF/" rel="next" title="重学前端">
+      重学前端 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E8%A7%84%E8%8C%83"><span class="nav-number">1.</span> <span class="nav-text">路径规范</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ELK"><span class="nav-number">2.</span> <span class="nav-text">ELK</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#base"><span class="nav-number">2.1.</span> <span class="nav-text">base</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hits"><span class="nav-number">2.1.1.</span> <span class="nav-text">hits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#took"><span class="nav-number">2.1.2.</span> <span class="nav-text">took</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shards"><span class="nav-number">2.1.3.</span> <span class="nav-text">shards</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#log%E4%BF%A1%E6%81%AF"><span class="nav-number">2.2.</span> <span class="nav-text">log信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="nav-number">2.3.</span> <span class="nav-text">基础语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%BB%E9%87%8F%E6%90%9C%E7%B4%A2"><span class="nav-number">2.3.1.</span> <span class="nav-text">轻量搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E8%A1%A8%E8%BE%BE%E5%BC%8F-%E6%90%9C%E7%B4%A2"><span class="nav-number">2.3.2.</span> <span class="nav-text">查询表达式 搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%96"><span class="nav-number">2.3.3.</span> <span class="nav-text">或</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%94"><span class="nav-number">2.3.4.</span> <span class="nav-text">且</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E"><span class="nav-number">2.3.5.</span> <span class="nav-text">非</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">2.4.</span> <span class="nav-text">查询表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E7%9A%84%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">2.4.1.</span> <span class="nav-text">复杂的表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E6%80%A7"><span class="nav-number">2.4.2.</span> <span class="nav-text">相关性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B2%BE%E5%87%86%E5%8C%B9%E9%85%8D"><span class="nav-number">2.4.3.</span> <span class="nav-text">精准匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%9A%E5%90%88"><span class="nav-number">2.4.4.</span> <span class="nav-text">聚合</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2"><span class="nav-number">2.5.</span> <span class="nav-text">搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A9%BA%E6%90%9C%E7%B4%A2"><span class="nav-number">2.5.1.</span> <span class="nav-text">空搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%B4%A2%E5%BC%95%EF%BC%8C%E5%A4%9A%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.5.2.</span> <span class="nav-text">多索引，多类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E9%A1%B5"><span class="nav-number">2.5.3.</span> <span class="nav-text">分页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%A0%E5%B0%84%E5%92%8C%E5%88%86%E6%9E%90"><span class="nav-number">2.5.4.</span> <span class="nav-text">映射和分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%E6%8A%98%E5%8F%A0"><span class="nav-number">2.5.5.</span> <span class="nav-text">字段折叠</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#term"><span class="nav-number">2.5.6.</span> <span class="nav-text">term</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#terms-%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.5.7.</span> <span class="nav-text">terms 查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%BA%A7%E6%8E%92%E5%BA%8F"><span class="nav-number">2.5.8.</span> <span class="nav-text">多级排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%88%99"><span class="nav-number">2.5.9.</span> <span class="nav-text">正则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F%EF%BC%8C%E4%B8%9C%E5%85%AB%E5%8C%BA"><span class="nav-number">2.5.10.</span> <span class="nav-text">日期，东八区</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E6%97%B6%E9%97%B4"><span class="nav-number">2.5.10.1.</span> <span class="nav-text">不同时间</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E6%96%87%E6%A1%A3%E6%95%B0%E7%9B%AE%E9%9D%9E%E9%9B%B6%E7%9A%84-buckets"><span class="nav-number">2.5.11.</span> <span class="nav-text">处理文档数目非零的 buckets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%BB%E9%87%8D"><span class="nav-number">2.5.12.</span> <span class="nav-text">去重</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Index-Patterns"><span class="nav-number">2.6.</span> <span class="nav-text">Index Patterns</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90"><span class="nav-number">2.7.</span> <span class="nav-text">分析</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">kil</p>
+  <div class="site-description" itemprop="description">心如止水，潜心修行</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kilfront" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kilfront" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kaifaweb@163.com" title="E-Mail → mailto:kaifaweb@163.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kil</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
