@@ -300,6 +300,12 @@ list filter(lambda x: x < b, a) #取出a中小于4的元素
 ### 字符串模版
 '%s 年的生肖是 %s' %(year, s)
 
+### 字符串替换
+```py
+my_string = 'abc;def;g'
+new_string = my_string.replace(';', '*;')
+```
+
 ## 数组
 ```py
 list = []
@@ -360,6 +366,12 @@ for item in arr:
 # 输出：
 # Alice
 # Bob
+```
+
+#### 
+```py
+json_result = [{table_name:1,table_comment:1}]
+json_data = {d['table_name']: d['table_comment'] for d in json_result}
 ```
 
 ## 函数

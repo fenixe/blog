@@ -107,3 +107,29 @@ num2 //[1,2,3]
 // 调用 split 方法后是一个数组，里面的元素是字符串，字符串要转回数字。
 // 把_当作是一个遍历后的val,然后再给个加就变成了数字了
 ```
+
+## 保存py文件
+```js
+saveScript() {
+  // 生成动态的 Python 脚本代码
+  const pythonCode = `
+    # 这是一个动态生成的 Python 脚本
+    print('Hello, World!')
+  `;
+
+  // 将脚本代码转换为 Blob 对象
+  const blob = new Blob([pythonCode], { type: 'text/plain' });
+
+  // 创建 URL 对象以下载文件
+  const url = URL.createObjectURL(blob);
+
+  // 创建链接并模拟点击以下载文件
+  const link = document.createElement('a');
+  link.download = 'my_script.py';
+  link.href = url;
+  link.click();
+
+  // 释放 URL 对象
+  URL.revokeObjectURL(url);
+}
+```
