@@ -188,6 +188,16 @@ Hello world!
 - 运行项目
   python main.py
 
+- 增加服务
+```py
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+  return {"Hello": "World"}
+```
 - 启一个服务，pip install uvicorn
   uvicorn main:app --reload
 
@@ -217,6 +227,55 @@ if __name__ == '__main__':
     # 关闭游标和数据库连接
     cursor.close()
     connect.close()
+```
+
+## gitignore
+```
+# Ignore compiled Python files
+*.pyc
+__pycache__/
+
+# Ignore the virtual environment folder
+venv/
+
+# Ignore local configuration files
+*.env
+
+# Ignore logs
+*.log
+logs/
+
+# Ignore package build and distribution files
+build/
+dist/
+*.egg-info/
+
+# Ignore cache and temporary files
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.swp
+*.cache
+*.coverage
+.coverage
+nosetests.xml
+coverage.xml
+htmlcov/
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Ignore database files
+*.db
+*.sqlite3
+
+# Ignore macOS metadata files
+.DS_Store
+
+# Ignore Windows Thumbs.db files
+Thumbs.db
 ```
 
 
@@ -406,6 +465,12 @@ random_str = "".join(random.choice(charset) for _ in range(16))
 
 # 打印字符串
 print(random_str)
+```
+
+## 执行py文件
+```py
+import subprocess
+subprocess.run(['python', 'test.py'], check=True)
 ```
 
 # fastapi

@@ -17,3 +17,8 @@ bigint 是 MySQL 中更大的整数类型，占用 8 个字节，可以表示的
 # Doc
 ## 查询某字段有几种值
 SELECT DISTINCT column_name FROM table_name;
+
+## 命令行导入sql脚本
+mysql -h 192.168.2.229 -u dev -p -P 3306
+mysql> USE database_name
+mysql> SOURCE /path/to/file.sql;
