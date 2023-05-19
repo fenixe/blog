@@ -86,6 +86,13 @@ attribute是HTML标签上的特性，它的值只能够是字符串；
 <input type="checkbox" name="love" value="" checked="checked" \>唱歌
 <input type="checkbox" name="love" value=""  \>跳舞
 ```
+### 视频
+```html
+<input
+  type="file"
+  accept="video/wmv, video/avi, video/mp4, video/flv, video/3gp, video/mov, video/mkv, video/vob"
+/>
+```
 
 ## frame
 frameset 弃用

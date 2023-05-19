@@ -7,6 +7,40 @@ tags:
 - vue3
 ---
 
+# BG
+为什么会有vue3，vue2面临了什么问题？
+vue1的问题：响应式数据过多，内存占用大。
+引出vue2，虚拟 DOM 来解决响应式数据过多的问题。
+Vue 3 很优秀的一个点，就是在虚拟 DOM 的静态标记上做到了极致，让静态的部分越过虚拟 DOM 的计算，真正做到了按需更新，很好的提高了性能。
+Vue3: 性能、扩展性和包的大小 都有升级
+
+Vue 2 响应式并不是真正意义上的代理，而是基于 Object.defineProperty() 实现的；
+这个 API 并不是代理，而是对某个属性进行拦截，所以有很多缺陷，比如：删除数据就无法监听，需要 $delete 等 API 辅助才能监听到。
+defineProperty 是拦截具体某个属性，Proxy 才是真正的“代理”。
+
+## vue2和vue3响应式系统
+|vue2|vue3|
+|:--|:--|
+|Object.defineProperty | Proxy |
+|实例被创建时，Vue 会递归遍历这个实例的所有属性，把它们都转换成 getter 和 setter，从而实现响应式。这个过程是通过 Object.defineProperty 来实现的。例如，当我们访问 Vue 实例的一个属性时，Vue 会自动调用这个属性的 getter 方法，从而触发依赖收集，当这个属性的值发生变化时，Vue 会自动调用它的 setter 方法，从而触发重新渲染|Proxy 可以代理整个对象，而不是像 Object.defineProperty 那样只能代理对象的一个属性，这使得 Vue3 在侦测数据变化的时候可以更加高效和精确。此外，Proxy 还可以捕获更多的操作，例如数组的变化，这使得 Vue3 的响应式系统可以更好地支持数组操作|
+
+## 自定义渲染器
+vue2所有模块都是揉在一起，不好扩展。
+vue3拆包，使用最近流行的 monorepo 管理方式，响应式、编译和运行时全部独立。渲染的逻辑也拆成了平台无关渲染逻辑和浏览器渲染 API 两部分。
+
+## 全部模块使用 TypeScript 重构
+类型系统带来了更方便的提示，并且让我们的代码能够更健壮。
+
+## Composition API 组合语法
+对Tree shaking很友好
+方便维护和复用
+{% asset_img options_vs_composition.png %}
+
+## 新组件
+Fragment: Vue 3 组件不再要求有一个唯一的根节点，清除了很多无用的占位 div。
+Teleport: 允许组件渲染在别的元素内，主要开发弹窗组件的时候特别有用。
+Suspense: 异步组件，更方便开发有异步请求的组件。
+
 # Base
 技术选型
 vue生态 + 工程化的最佳实践
@@ -300,6 +334,18 @@ mounted vs onMounted
 onMounted(()=>{
 })
 ```
+### vue2与vue3对比
+|vue2|vue3|描述|
+|:-- |:--|:--|
+|beforeCreate | beforeCreate | 在实例被创建之后，但还未完成数据观测和事件配置之前被调用 |
+|created | setup && created | 在 Vue2 中，created 生命周期方法会在实例完成数据观测和事件配置之后被调用。而在 Vue3 中，这个方法被拆分为两个阶段：setup 和 created。setup 方法会在组件实例创建之后立即被调用，它主要用于设置组件的响应式属性、引入其他模块或库，以及执行一些其他的准备工作。created 方法则会在 setup 方法执行完毕之后被调用，用于执行一些其他的初始化工作 |
+|beforeMount| beforeMount | 实例挂载之前被调用 |
+|mounted | onMounted | 在 Vue2 中，mounted 生命周期方法会在实例挂载之后被调用。而在 Vue3 中，这个方法被拆分为两个阶段：onBeforeMount 和 onMounted。onBeforeMount 方法会在组件挂载之前被调用，而 onMounted 方法则会在组件挂载完成之后被调用 |
+|beforeUpdate | onBeforeUpdate | 组件更新之前被调用 |
+|updated | onUpdated | 组件更新完成之后被调用 |
+|beforeDestroy | onBeforeUnmount | 组件销毁之前被调用 |
+|destroyed | onUnmounted | 组件销毁之后被调用 |
+|errorCaptured | onErrorCaptured | 组件内部发生错误时被调用 |
 
 # 响应式
 JavaScript变量是没有响应式概念的。js代码自上而下执行
@@ -389,3 +435,10 @@ updateDialog(item){
     this.dialogVisible = true;
 },
 ```
+
+## mark
+引入虚拟Dom后，一个组件一个Watcher，组件内部虚拟Dom，组件的量级不会大到diff时间超过16.6ms
+组件之间的数据更新，是通过响应式去通知，组件内部没有响应式的wathcer，而是通过虚拟Dom更新
+
+## Think
+Proxy 代表一种方向，就是框架会越来越多的拥抱浏览器的新特性。在 Proxy 普及之前，我们是没有办法完整的监听一个 JavaScript 对象的变化，只能使用 Object.defineProperty() 去实现一部分功能。前端框架利用浏览器的新特性来完善自己，才会让前端这个生态更繁荣，抛弃旧的浏览器是早晚的事。拥抱新技术。

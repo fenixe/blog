@@ -325,7 +325,15 @@ GitLens 在 Git 管理上有很多强大的功能，比如：
 ### Bracket Pair Colorizer 2：突出显示成对的括号【荐】
 Bracket Pair Colorizer 2插件：以不同颜色显示成对的括号，并用连线标注括号范围。
 另外，还有个Rainbow Brackets插件，也可以突出显示成对的括号。
-
+{% label blue@2023-05-17 %}
+此插件已内置
+`settings.json`
+```
+{
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs":"active"
+}
+```
 
 ### sftp：文件传输
 如果你需要将本地文件通过 ftp 的形式上传到局域网的服务器，可以安装sftp这个插件，很好用。在公司会经常用到。
@@ -474,3 +482,6 @@ ctrl+shift+p 唤出控制台，在搜索栏中输入 settings.json
 ## view-git-commit-log
 {% asset_img vscode-view-git-commit-log.png%}
 
+# Issues
+VScode在DOM中打入花括号会出现{ }}三个标签的错误
+打开设置  =》  搜索Closing Brackets  =》 找到 Auto Closing Brackets  =》 将aways改成beforeWhitespace。
