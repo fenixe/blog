@@ -53,3 +53,20 @@ ionic：文档不足且混乱，没有社区和生态。
 老技术的问题是，它很乏味：所有可能性都被探索过了，创造发挥的空间不大。很多程序员（尤其是新程序员）因此觉得，老技术展现不了技术能力，也不够好玩，新技术更有乐趣，对自己的提升更大。
 
 这种想法并没错，但前提是你的项目不需要长期维护，否则使用未经考验的新技术是非常冒险的。
+
+
+# PHP
+## PHPBrew
+版本管理
+## composer
+包管理
+brew install composer
+## run
+php think run
+## issues
+Error: php@7.3 has been disabled because it is a versioned formula
+
+brew tap shivammathur/php
+brew install shivammathur/php/php@7.3
+brew link php@7.3
+
