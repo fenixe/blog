@@ -70,3 +70,31 @@ brew tap shivammathur/php
 brew install shivammathur/php/php@7.3
 brew link php@7.3
 
+## 调试
+```html
+<div>{php} dump($r); {/php}</div>
+<div>{$r['id']}</div>
+```
+```php
+echo 'rows:' . $rows;
+```
+
+## thinkphp
+### 查询结果排序
+```php
+$list = Db::name('Task')->where(['delete_time'=> 0])
+->withoutField('content,md_content')
+->order('flow_status asc')
+->order('end_time asc')
+```
+
+### 数据处理
+```php
+if(request()->isAjax()){
+} else {
+     View::assign([ //用于向视图传递数据
+        'r_v_list' => $r_v_list,
+    ]);
+    return view(); //用于渲染视图并返回响应
+}
+```

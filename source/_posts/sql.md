@@ -22,3 +22,7 @@ SELECT DISTINCT column_name FROM table_name;
 mysql -h 192.168.2.229 -u dev -p -P 3306
 mysql> USE database_name
 mysql> SOURCE /path/to/file.sql;
+
+## 排序
+DESC 代表降序排列
+ASC 代表升序排列
