@@ -80,6 +80,8 @@ echo 'rows:' . $rows;
 ```
 
 ## thinkphp
+### run
+php think run
 ### 查询结果排序
 ```php
 $list = Db::name('Task')->where(['delete_time'=> 0])
@@ -97,4 +99,30 @@ if(request()->isAjax()){
     ]);
     return view(); //用于渲染视图并返回响应
 }
+```
+
+### 加请求参数
+```
+url: "/dashboard/index/release"
+where:{'sort':'priority'},
+
+if(isset($param['sort'])){
+    $sortStr = 'priority asc';
+}
+```
+
+### model 中初始化
+```
+public function getNewStatusAttr($value)
+    {
+        if($this->status == 2){
+            return 1;
+        }
+    }
+```
+
+## HTML 模版中操作
+### 判断
+```
+{eq name="变量名" value="指定值"}输出内容{/eq}
 ```

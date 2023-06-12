@@ -26,3 +26,18 @@ mysql> SOURCE /path/to/file.sql;
 ## 排序
 DESC 代表降序排列
 ASC 代表升序排列
+
+## 字段
+### 删除表中无用
+```sql
+ALTER TABLE dev_release_version DROP COLUMN client_ids, DROP COLUMN update_status;
+```
+
+### 添加
+```sql
+ALTER TABLE dev_release_version ADD COLUMN priority INT DEFAULT 10;
+
+ALTER TABLE dev_project ADD plan_hours DECIMAL(10,1) COMMENT '预估工时';
+
+ALTER TABLE dev_project ADD plan_str VARCHAR(255) COMMENT '预估工时';
+```
