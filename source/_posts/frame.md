@@ -56,6 +56,14 @@ ionic：文档不足且混乱，没有社区和生态。
 
 
 # PHP
+## install
+brew install php@7.3
+## issues
+Error: php@7.3 has been disabled because it is a versioned formula
+
+brew tap shivammathur/php
+brew install shivammathur/php/php@7.3
+brew link php@7.3
 ## PHPBrew
 版本管理
 ## composer
@@ -63,10 +71,3 @@ ionic：文档不足且混乱，没有社区和生态。
 brew install composer
 ## run
 php think run
-## issues
-Error: php@7.3 has been disabled because it is a versioned formula
-
-brew tap shivammathur/php
-brew install shivammathur/php/php@7.3
-brew link php@7.3
-
