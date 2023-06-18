@@ -18,7 +18,53 @@ bigint 是 MySQL 中更大的整数类型，占用 8 个字节，可以表示的
 ## 查询某字段有几种值
 SELECT DISTINCT column_name FROM table_name;
 
+### 多表查询
+```sql
+SELECT re.*
+FROM role_resource r, resource re
+WHERE r.resource_id = re.id
+  AND r.active = 1
+  AND re.active = 1
+  AND r.role_id IN (2)
+  AND re.pid = 0
+GROUP BY re.id
+ORDER BY re.weight ASC;
+```
+```xml
+<select id="selectRoleHaveResource" resultType="AdminResource">
+    select re.* from role_resource r,resource re where r.resource_id = re.id and r.active = 1 and re.active = 1 and
+    r.role_id in
+    <foreach collection="roleIds" open="(" item="item" separator="," close=")">
+        #{item}
+    </foreach>
+    <if test="type != null and type != '' and type != 'all'">
+        and re.type = #{type}
+    </if>
+    and re.pid = #{pid}
+    group by re.id order by re.weight asc
+</select>
+```
+
 ## 命令行导入sql脚本
 mysql -h 192.168.2.229 -u dev -p -P 3306
 mysql> USE database_name
 mysql> SOURCE /path/to/file.sql;
+
+## 排序
+DESC 代表降序排列
+ASC 代表升序排列
+
+## 字段
+### 删除表中无用
+```sql
+ALTER TABLE dev_release_version DROP COLUMN client_ids, DROP COLUMN update_status;
+```
+
+### 添加
+```sql
+ALTER TABLE dev_release_version ADD COLUMN priority INT DEFAULT 10;
+
+ALTER TABLE dev_project ADD plan_hours DECIMAL(10,1) COMMENT '预估工时';
+
+ALTER TABLE dev_project ADD plan_str VARCHAR(255) COMMENT '预估工时';
+```

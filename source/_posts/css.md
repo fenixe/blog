@@ -372,6 +372,17 @@ background-size: 35.625vh 11.71875vh;
 ### 水平垂直剧中
 retryEle.style.cssText = 'display: inline-block; padding: 6px 16px; background: #4d37b3; color: #ffffff; border-radius: 10px; position: absolute; left: 50%; transform: translateX(-50%); top: 50%;';
 
+## 垂直居中
+最多显示两行文本。一行文本的时候垂直居中，两行文本的时候超出部分 省略号。
+```css
+// 会有兼容问题，safari
+// 父级：display: flex; align-items: center;
+display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 2;
+overflow: hidden;
+```
+
 ## 无滚动条，列表
 顶部悬浮
 其余部分列表

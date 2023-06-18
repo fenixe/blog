@@ -144,6 +144,29 @@ width height
 <div (drop)="onDropPart($event)"></div>
 const f0 = e.dataTransfer.files[0];
 
+## 表格table
+```html
+<table>
+  <thead>
+    <tr>
+      <th rowspan="3">截止时间</th>
+			<th colspan="3">沟通阶段</th>
+    </tr>
+    <tr>
+      <th>负责人</th>
+      <th>截止时间</th>
+      <th>完成进度</th>
+    </tr>
+  </thead>
+  <tbody>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tbody>
+</table>
+```
+
 # 路径
 ## <base>：文档根 URL 元素
 HTML `<base>` 元素 指定用于一个文档中包含的所有相对 URL 的根 URL。一份中只能有一个 `<base>` 元素。

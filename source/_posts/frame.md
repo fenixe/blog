@@ -71,3 +71,66 @@ brew link php@7.3
 brew install composer
 ## run
 php think run
+## issues
+Error: php@7.3 has been disabled because it is a versioned formula
+
+brew tap shivammathur/php
+brew install shivammathur/php/php@7.3
+brew link php@7.3
+
+## 调试
+```html
+<div>{php} dump($r); {/php}</div>
+<div>{$r['id']}</div>
+```
+```php
+echo 'rows:' . $rows;
+```
+
+## thinkphp
+### run
+php think run
+### 查询结果排序
+```php
+$list = Db::name('Task')->where(['delete_time'=> 0])
+->withoutField('content,md_content')
+->order('flow_status asc')
+->order('end_time asc')
+```
+
+### 数据处理
+```php
+if(request()->isAjax()){
+} else {
+     View::assign([ //用于向视图传递数据
+        'r_v_list' => $r_v_list,
+    ]);
+    return view(); //用于渲染视图并返回响应
+}
+```
+
+### 加请求参数
+```
+url: "/dashboard/index/release"
+where:{'sort':'priority'},
+
+if(isset($param['sort'])){
+    $sortStr = 'priority asc';
+}
+```
+
+### model 中初始化
+```
+public function getNewStatusAttr($value)
+    {
+        if($this->status == 2){
+            return 1;
+        }
+    }
+```
+
+## HTML 模版中操作
+### 判断
+```
+{eq name="变量名" value="指定值"}输出内容{/eq}
+```
