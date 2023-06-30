@@ -1357,6 +1357,19 @@ created、methods、components 和 directives，将被合并为同一个对象�
 ### updated
 在组件因为一个响应式状态变更而更新其 DOM 树之后调用。
 
+## 初始化做特殊处理
+```vue
+isInitialized: false,
+function initialize() {
+    if (!isInitialized) {
+        // 在这里添加初始化代码
+        console.log('Initialization code goes here.');
+
+        isInitialized = true;
+    }
+}
+```
+
 # 系统的看 vue 官网 
 evan you：我想你会乐在其中
 ## fetch

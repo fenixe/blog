@@ -172,6 +172,17 @@ text-overflow: ellipsis; // 溢出用省略号显示
 white-space: nowrap; // 溢出不换行
 ```
 
+两行自适应
+```css
+-webkit-box-orient: vertical;
+max-height: 40px;
+line-height: 20px;
+overflow: hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+```
+
 ## 超出部分自动换行
 ``` css
 word-wrap: break-word;

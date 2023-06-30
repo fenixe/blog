@@ -129,6 +129,23 @@ public function getNewStatusAttr($value)
     }
 ```
 
+### sql
+``` php
+// 数据表中的"id"字段的值必须在$project_ids数组中
+->where([ ['id', 'in', $project_ids]]) 
+
+// 找出 $project_ids 中哪些元素不在 $r_project_ids 中
+array_diff($project_ids,$r_project_ids)
+
+// id不在$project_ids数组中的所有记录
+->where([['id', 'not in', $project_ids]])
+
+// 匹配 status 等于 1 或者 2 的记录
+['status', 'in', [1, 2]] 
+// 生成的sql语句
+status IN (1, 2)
+```
+
 ## HTML 模版中操作
 ### 判断
 ```
