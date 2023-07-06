@@ -310,6 +310,11 @@ object[key] = value
 ### 对象长度
 Object.getOwnPropertyNames(op_def.AvatarSlot).length
 
+### 判断是否为空对象
+if (Object.keys(obj1).length === 0) {
+  console.log('obj1是空对象');
+}
+
 ## url 解码
 decodeURIComponent('https%3A%2F%2Fosd-alpha.tooqing.com');
 

@@ -133,3 +133,12 @@ saveScript() {
   URL.revokeObjectURL(url);
 }
 ```
+
+## 0对于A，1对应B ，2对于C 依此类推
+```js
+function numberToLetter(number) {
+  // 将数字转换为字母
+  var letter = String.fromCharCode(number + 65);
+  return letter;
+}
+```

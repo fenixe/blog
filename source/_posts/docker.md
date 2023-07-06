@@ -60,5 +60,12 @@ CONTAINER ID   IMAGE   COMMAND          CREATED         STATUS        PORTS     
 d83cab80f13d   mongo   "/entrypoint.sh  3 seconds ago   Up 2 seconds   0.0.0.0:27017->27017/tcp   mongo
 ```
 
+## 创建并启动项目
+``` bash
+./build.sh
+chmod 777 build.sh
+docker-componse up
+```
+
 ## 官方镜像
 https://hub.docker.com/search?image_filter=official&q=
