@@ -69,3 +69,7 @@ docker-componse up
 
 ## 官方镜像
 https://hub.docker.com/search?image_filter=official&q=
+
+# ISSUES
+## docker Can't close tar writer: io: read/write on closed pipe
+把客户端打开
