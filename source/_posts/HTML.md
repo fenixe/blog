@@ -167,6 +167,11 @@ const f0 = e.dataTransfer.files[0];
 </table>
 ```
 
+## canvas
+### canvas无法对跨域的图片进行操作
+图片的url服务器已经设置了允许跨域*，为什么还会出现Uncaught DOMException: Failed to execute 'toBlob' on 'HTMLCanvasElement': Tainted canvases may not be exported。
+这个错误表示你的 HTMLCanvasElement 已经被 "污染"（tainted），不能再被导出为 Blob 对象。当一个 Canvas 有来自跨域的图像时，就会被标记为 "污染"。尽管你的服务器已经设置了允许所有跨域请求（Access-Control-Allow-Origin: *），但是在加载图像到 Canvas 时，你还需要确保图片的请求设置了 crossOrigin 属性。
+
 # 路径
 ## <base>：文档根 URL 元素
 HTML `<base>` 元素 指定用于一个文档中包含的所有相对 URL 的根 URL。一份中只能有一个 `<base>` 元素。

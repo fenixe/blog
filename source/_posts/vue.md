@@ -1370,6 +1370,22 @@ function initialize() {
 }
 ```
 
+# 架构
+## 环境变量
+https://cli.vuejs.org/zh/guide/mode-and-env.html#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F
+### 文件名
+```
+.env                # 在所有的环境中被载入
+.env.local          # 在所有的环境中被载入，但会被 git 忽略
+.env.[mode]         # 只在指定的模式中被载入
+.env.[mode].local   # 只在指定的模式中被载入，但会被 git 忽略
+```
+
+### 用法
+键=值
+VUE_APP_NOT_SECRET_CODE=some_value
+注：`VUE_APP_ 开头`
+
 # 系统的看 vue 官网 
 evan you：我想你会乐在其中
 ## fetch
