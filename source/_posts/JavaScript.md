@@ -1471,7 +1471,14 @@ js的一个子集
 
 ## 格式
 
-
+# 题目
+```js
+let num = 0;
+for(let i = 0; i < 100; i++){
+  num = num++;
+}
+console.log('num', num);
+```
 
 # utils
 

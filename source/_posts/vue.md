@@ -1370,6 +1370,24 @@ function initialize() {
 }
 ```
 
+## button 节流操作
+与uniapp https://www.uviewui.com/js/debounce.html
+```js
+deliveryEntry: throttle(function(type){
+  console.log('deliveryEntry', this.currentDay, type);
+  this.promiseFun();
+}, 2000, {trailing: false}),
+async promiseFun(){
+  const p = new Promise((resolve, reject)=>{
+    setTimeout(()=>{
+      resolve('ok');
+    }, 2000);
+  })
+  const res = await p;
+  console.log('res',res);
+},
+```
+
 # 架构
 ## 环境变量
 https://cli.vuejs.org/zh/guide/mode-and-env.html#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F
