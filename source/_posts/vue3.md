@@ -47,6 +47,9 @@ webpack原理是根据 import 依赖逻辑，形成一个依赖图，调用对�
 vite就是为了解决 时间资源的消耗问题。
 浏览器默认支持ES6的import语法，不需要全部预打包，只需把首页依赖的文件，依次通过网络请求去获取，对复杂项目秒级调试和热更新。
 
+### vite vs webpack
+{% asset_img vite.png %}
+
 # Base
 技术选型
 vue生态 + 工程化的最佳实践

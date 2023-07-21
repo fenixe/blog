@@ -142,3 +142,8 @@ function numberToLetter(number) {
   return letter;
 }
 ```
+
+# 其他
+## echarts
+双向柱形图
+https://www.makeapie.cn/echarts_content/x8YeVj-sL7.html
