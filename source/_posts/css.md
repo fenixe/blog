@@ -669,9 +669,16 @@ box-sizing: border-box;
 vue
 main.js 中
 
-# 特效
+# 解决方案
 ## 彩带
 https://www.kirilv.com/canvas-confetti/
+
+## 阴影,投影
+``` css
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+```
 
 # Future
 子网格（subgrid）、容器查询 和 父选择器 :has()
