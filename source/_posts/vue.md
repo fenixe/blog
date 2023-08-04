@@ -1296,6 +1296,35 @@ store.registerModule('myModule', {
         ├── cart.js       # 购物车模块
         └── products.js   # 产品模块
 ```
+``` sh
+├── public/                         # 公共资源目录
+│   ├── index.html                  # 应用入口 HTML 文件
+│   ├── favicon.ico                 # 网站图标
+├── src/                            # 应用源代码目录
+│   ├── assets/                     # 静态资源目录
+│   │   ├── images/                 # 图片资源目录
+│   │   ├── styles/                 # 样式资源目录
+│   ├── components/                 # 组件目录
+│   │   ├── common/                 # 公共组件目录
+│   │   ├── layout/                 # 布局组件目录
+│   │   ├── pages/                  # 页面组件目录
+│   ├── router/                     # 路由目录
+│   │   ├── index.js                # 路由入口文件
+│   ├── store/                      # Vuex 状态管理目录
+│   │   ├── index.js                # Vuex 入口文件
+│   │   ├── modules/                # Vuex 模块目录
+│   ├── utils/                      # 工具函数目录
+│   │   ├── request.js              # 网络请求函数
+│   ├── views/                      # 视图目录
+│   │   ├── Home.vue                # 首页视图
+│   ├── App.vue                     # 应用主视图
+│   ├── main.js                     # 应用入口 JS 文件
+├── .eslintrc.js                    # ESLint 配置文件
+├── babel.config.js                 # Babel 配置文件
+├── package.json                    # 项目配置文件
+├── README.md                       # 项目说明文件
+├── vue.config.js                   # Vue CLI 配置文件
+```
 
 # Vue实例
 ## 数据

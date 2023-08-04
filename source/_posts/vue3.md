@@ -102,6 +102,10 @@ pnpm i
 Progress: resolved 111, reused 111, downloaded 0, added 111, done
 reused 复用的模块
 
+### 启动项目
+pnpm install
+pnpm run dev
+
 ### 项目初始化
 删除app.vue里面的内容
 安装 vue 提示插件：volar

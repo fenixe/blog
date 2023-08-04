@@ -128,3 +128,5 @@ yarn cache clean
 ## cli
 ### 项目内全局安装
 pnpm i eslint -w
+
+pnpm install vue-router@4
