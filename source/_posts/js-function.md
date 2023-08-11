@@ -143,6 +143,24 @@ function numberToLetter(number) {
 }
 ```
 
+## 视频
+### 视频大小
+```js
+// input file 转 M
+const fileSize = file.size / (1024 * 1024);
+```
+
+### 视频时长
+```js
+let file = e.file;
+const video = document.createElement('video');
+video.src = URL.createObjectURL(file);
+video.addEventListener('loadedmetadata', ()=>{
+    console.log('视频长度：', video.duration + ' 秒');
+});
+```
+
+
 # 其他
 ## echarts
 双向柱形图

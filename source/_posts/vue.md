@@ -1516,6 +1516,8 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 const routes = [
+  // 动态导入（Dynamic Import）的方式(返回了一个函数)引入了 Home 组件，这是 ES6 模块的一个特性。动态导入可以在运行时异步地加载指定的模块，从而加快应用程序的启动速度。
+  {path: '/', component: () => import('../views/Home.vue')},
   {
     path: '',
     component: require('../components/HelloWorld.vue').default

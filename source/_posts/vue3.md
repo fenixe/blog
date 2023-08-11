@@ -186,6 +186,18 @@ app.config.errorHandler = (err)=>{
 }
 ```
 
+### 全局组件
+``` js
+// main.js
+app.component('Empty', Empty);
+```
+
+### 全局访问
+``` js
+// main.js
+app.config.globalProperties.$API = api;
+```
+
 ## api
 ### Options
 以“组件实例”的概念为中心 (this)
