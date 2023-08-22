@@ -147,6 +147,11 @@ bolder
 ## calc()
 calc() 此 CSS 函数允许在声明 CSS 属性值时执行一些计算。它可以用在如下场合：<length>、<frequency>, <angle>、<time>、<percentage>、<number>、或 <integer>。
 
+## object-fit
+图片和视频 适应容器 
+`<img> or <video></video>`
+object-fit: cover;
+
 # 浏览器兼容
 ## 前缀
 ``` css
@@ -156,6 +161,7 @@ calc() 此 CSS 函数允许在声明 CSS 属性值时执行一些计算。它可
 -o-transform:rotate(-3deg); /*为Opera*/    /*欧朋已经换webkit内核*/
 transform:rotate(-3deg);
 ```
+
 
 
 

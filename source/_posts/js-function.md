@@ -160,6 +160,11 @@ video.addEventListener('loadedmetadata', ()=>{
 });
 ```
 
+### 下载PDF
+```js
+// a4纸的尺寸（595.28,841.89）
+```
+
 
 # 其他
 ## echarts
