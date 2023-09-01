@@ -231,6 +231,9 @@ $ git reset commit_id
 ## 暂存
 我们有时会遇到这样的情况，正在dev分支开发新功能，做到一半时有人过来反馈一个bug，让马上解决，但是新功能做到了一半你又不想提交，这时就可以使用`git stash`命令先把当前进度保存起来，然后切换到另一个分支去修改bug，修改完提交后，再切回dev分支，使用`git stash pop`来恢复之前的进度继续开发新功能。
 
+git stash pop：从暂存区恢复最近的一次 stash，应用到工作目录，并删除该 stash。
+git stash apply：从暂存区恢复最近的一次 stash，应用到工作目录，但不删除该 stash。
+
 ## 清除已删除的分支
 ### git branch -a 
 命令可以查看所有本地分支和远程分支（git branch -r 可以只查看远程分支）

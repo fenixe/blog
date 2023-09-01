@@ -54,7 +54,7 @@ console.log(prms.toString());
 
 ## 格式化数字
 ```js
-number.toFixed(2) // 2: 可以自定义小数位
+number.toFixed(2) // 2: 可以自定义小数位，会四舍五入
 ```
 
 ## 定时器
