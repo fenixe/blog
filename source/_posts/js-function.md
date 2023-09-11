@@ -8,6 +8,10 @@ tags:
 ---
 
 # function
+## 排序
+数字最大在前
+item.options.sort((a, b) => b.num - a.num);
+不改变数组，可以使用toSorted()。
 ## 复制到粘贴板
 ``` js
 copy() {

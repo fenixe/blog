@@ -467,3 +467,27 @@ updateDialog(item){
 
 ## Think
 Proxy 代表一种方向，就是框架会越来越多的拥抱浏览器的新特性。在 Proxy 普及之前，我们是没有办法完整的监听一个 JavaScript 对象的变化，只能使用 Object.defineProperty() 去实现一部分功能。前端框架利用浏览器的新特性来完善自己，才会让前端这个生态更繁荣，抛弃旧的浏览器是早晚的事。拥抱新技术。
+
+## 不使用nodejs中，os 模块
+vue.config.js
+module.exports = defineConfig({
+  configureWebpack: {
+    resolve: {
+      fallback: {
+        fs: false,
+        path: false,
+        os: false,
+        querystring: false,
+        http: false,
+        https: false,
+        url: false,
+        'https-browserify': false,
+        stream: false,
+        zlib: false,
+        crypto: false,
+        timers: false
+      }
+    }
+  }
+})
+
