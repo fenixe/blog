@@ -746,7 +746,7 @@ console.log(newObj); // { a: 20, b: { c: 30} }
 这就是 `Object.assign()` 的陷阱。`Object.assign` 只是浅拷贝。 `newObj.b` 和 `obj.b` 都引用同一个对象，没有单独拷贝，而是复制了对该对象的引用。任何对对象属性的更改都适用于使用该对象的所有引用。
 
 ### 深拷贝
-
+JSON.parse(JSON.stringify(obj));
 
 ## 汉字排序
 ``` js

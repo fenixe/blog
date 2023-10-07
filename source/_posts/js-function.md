@@ -74,6 +74,51 @@ async getUrlBase64(urlRemote, ext) {
   }
 ```
 
+### url to blob
+safari 会出现跨域问题
+``` js
+// const imgDom = await this.URLtoImage(activeCover.url).catch(() => {});
+// if (!imgDom) return this.loadingStatus = false;
+// coverImgFile = await this.imageDomToFile(imgDom).catch(() => {});
+URLtoImage(url) {
+    return new Promise((resolve, reject) => {
+        let img = new Image();
+        img.crossOrigin = "Anonymous"; // 跨域
+        img.src = url;
+        img.onload = () => {
+            resolve(img);
+        };
+        img.onerror = () => {
+            this.$message.error("图片加载失败");
+            reject();
+        };
+    });
+},
+imageDomToFile(imgDom) {
+    return new Promise((resolve, reject) => {
+        let canvas = document.createElement("canvas");
+        let ctx = canvas.getContext("2d");
+        canvas.width = imgDom.width;
+        canvas.height = imgDom.height;
+        ctx.drawImage(imgDom, 0, 0);
+
+        canvas.toBlob((blob) => {
+            console.log("blob", blob);
+            if (!blob) {
+                this.$message.error("图片处理失败");
+                return reject();
+            }
+
+            const imgFile = new File([blob], "image.png", {
+                type: "image/png",
+            });
+            console.log("imgFile", imgFile);
+            resolve(imgFile);
+        }, "image/png");
+    });
+},
+```
+
 ## localDB
 ``` ts
 export const localStore = {
