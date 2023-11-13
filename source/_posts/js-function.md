@@ -219,3 +219,6 @@ video.addEventListener('loadedmetadata', ()=>{
 ## echarts
 双向柱形图
 https://www.makeapie.cn/echarts_content/x8YeVj-sL7.html
+
+范围
+`>（gt）、>=（gte）、<（lt）、<=（lte）、=（eq）、!=（ne、<>）、reg`
