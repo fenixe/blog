@@ -31,6 +31,9 @@ python.org download
 python3 -V
 pip3 -V
 
+## 查看安装的包
+pip show pandas
+
 ## 卸载
 删除Python 3.7 框架，打开终端，输入
 sudo rm -rf /Library/Frameworks/Python.framework/Versions/3.7
@@ -549,6 +552,41 @@ cv2是Python语言的一个计算机视觉库，用于图像处理和计算机�
 cv2库提供了常用的图像处理和计算机视觉算法，例如图像分割、目标检测、图像分类、视频分析等。它还提供了一些图像处理和计算机视觉的工具，例如图像显示、图像读取、图像保存等。
 
 使用Python的cv2包，开发者可以快速实现图像处理和计算机视觉功能，并且可以通过深度学习模型来提高算法的性能。
+
+## pandas
+简单例子
+```py
+# 创建一个字典，包含学生的姓名和年龄
+data = {'姓名': ['张三', '李四', '王五'],
+        '年龄': [20, 21, 19]}
+
+# 创建数据帧
+df = pd.DataFrame(data)
+
+# 打印数据帧
+print(df)
+
+# 输出
+姓名  年龄
+0  张三  20
+1  李四  21
+2  王五  19
+```
+
+## openpyxl
+```py
+from openpyxl import Workbook
+  # 创建一个工作簿对象
+  wb = Workbook()
+  # 在索引为0的位置创建一个名为mytest的sheet页
+  ws = wb.create_sheet('mytest',0)
+  # 对sheet页设置一个颜色（16位的RGB颜色）
+  ws.sheet_properties.tabColor = 'ff72BA'
+  # 将创建的工作簿保存为Mytest.xlsx
+  wb.save('Mytest.xlsx')
+  # 最后关闭文件
+  wb.close()
+```
 
 
 # Issuse

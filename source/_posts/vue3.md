@@ -443,6 +443,43 @@ console.log(double) // 打印4  有种自动变化的感觉
 </body>
 ```
 
+## 单页面引入Element UI
+```html
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@next"></script>
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css">
+    <!-- import JavaScript -->
+    <script src="https://unpkg.com/element-plus"></script>
+    <title>Element Plus demo</title>
+  </head>
+  <body>
+    <div id="app">
+      <el-button>{{ message }}</el-button>
+    </div>
+    <script>
+      const App = {
+        data() {
+          return {
+            message: "Hello Element Plus",
+          };
+        },
+      };
+      const app = Vue.createApp(App);
+       //引入全部 icon
+        for ([name, comp] of Object.entries(ElementPlusIconsVue)) {
+            app.component(name, comp);
+        }
+      app.use(ElementPlus);
+      app.mount("#app");
+    </script>
+  </body>
+</html>
+```
+
 ## 后台管理，更新记录
 ```js
 updateDialog(item){

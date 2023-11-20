@@ -557,7 +557,7 @@ build 分为两步：prepare + compile
 ### allow-navigation not set
 Internal navigation rejected: <allow-navigation not set> in Cordova on iOS
 解决办法：
-<allow-navigation href="*" /> 
+<allow-navigation href="*" />
 
 ### doc.find
 edit-config for ios usage descriptions: doc.find is not a function
