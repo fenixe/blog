@@ -357,3 +357,24 @@ Welcome to nginx!
 安全性与隐私 -> 允许从以下位置下载的应用 -> 任何来源
 如果 “任何来源”被隐藏，输入指令：
 sudo spctl --master-disable
+
+### 绕过安全验证（无法安装cocos 1.9.3）
+问题：无法打开（App的授权已撤销）
+删除软件上的安全验证信息，来达到绕过 MacOS 安全验证。
+``` bash
+sudo xattr -rd com.apple.quarantine /Users/qkil/Downloads/CocosCreator_v1.9.3_20180704.dmg
+```
+
+另外一种方法：重置签名
+```bash
+sudo codesign --force --deep --sign - <app-path>
+成功：<app-path>: replacing existing signature
+失败：<app-path>: resource fork,Finder information,or similar detritus not allowed
+# 先执行
+xattr -cr <app-path>
+# 再执行
+sudo codesign --force --deep --sign - <app-path>
+```
+
+### “CocosCreator”将对您的电脑造成伤害。您应该将它移到废纸篓
+解决：访达 -> 应用程序 xxx.App -> 右键 -> 显示简介 -> 勾选 “覆盖恶意软件保护”。
