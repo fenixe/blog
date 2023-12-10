@@ -488,6 +488,10 @@ import subprocess
 subprocess.run(['python', 'test.py'], check=True)
 ```
 
+## matplotlib画图
+mac下python matplotlib中文乱码解决方案
+plt.rcParams["font.family"] = 'Arial Unicode MS'
+
 # fastapi
 ## 文件处理
 image
