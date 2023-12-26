@@ -508,6 +508,11 @@ async def ocrTest(
         f.write(contents)
 ```
 
+# AI数据处理
+## pandas
+# merge 销量
+df_sales = df.groupby('年月').agg({'数量': 'sum'}).reset_index().rename(columns={'数量': '总数量'})
+
 # 研究
 ## NLP
 NLP：Natural Language Processing，自然语言处理
