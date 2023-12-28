@@ -220,6 +220,8 @@ jquery.slim.min.js  精简版本
 Command-Line Interface
 命令行界面
 
+# Token
+“通证”，“虚拟资产凭证”
 
 # UI/UX
 UI：user interface 用户界面
