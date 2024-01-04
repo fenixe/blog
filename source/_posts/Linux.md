@@ -427,6 +427,10 @@ The document has moved
 </BODY></HTML>
 ```
 
+补充：
+curl --proxy http://127.0.0.1:7890 www.google.com
+ping golang.org
+
 ### 色彩皮肤
 ``` zsh
 cat ~/.zshrc

@@ -34,6 +34,7 @@ seven：merge 本地；本地dev 分支需要拉一下
 git diff test.text
 
 # 配置
+
 ### ssh 密钥
 ```
 ssh-keygen
@@ -335,6 +336,14 @@ yarn add git+ssh://git@code.apowo.com:PixelPai/gamecore_pkt.git
 ci 里面加的是ssh的key 来通过gitlab的验证的 你请求的是https://code.apwo.com  如果是你本地 会在命令行中弹出 输入账号密码的提示 来通过http的验证
 那么问题来了 你要通过http来请求嘛 如果需要 你去研究一下 怎么通过gitlab 的access-token拉取代码 然后改下ci
 如果不需要 就改成通过git请求的；git+ssh
+
+## 丢包问题解决
+mac终端
+sudo vim /private/etc/hosts
+
+配置域名
+199.232.69.194 github.com
+13.229.188.59 github.global.ssl.fastly.net
 
 # 错误
 ### index.lock
