@@ -24,7 +24,10 @@ $ sudo docker run --name nginxvuemd -v /Users/niekaifa/test/vuem_data.conf:/etc/
 ```
 
 ## 删除容器
-docker rm 容器的名称或者 ID 
+docker rm 容器的名称或者 ID
+
+## 停止容器
+docker stop 容器的名称或者 ID
 
 ## 删除镜像
 docker rmi {image-id}
