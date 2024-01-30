@@ -22,3 +22,10 @@ Vite 旨在利用生态系统中的新进展解决上述问题：浏览器开始
 ## Jupyter Notebook
 pip install jupyter
 jupyter notebook
+
+# go
+## 安装
+https://go.dev/dl/
+
+## 版本号
+go version
