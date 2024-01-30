@@ -46,12 +46,13 @@ set softtabstop=4
 
 ## 第一步
 ### update
+更新软件包列表和系统软件包
 ``` BASH
 $ sudo apt update
+$ sudo apt upgrade
 ```
 
 如果比较慢，换国内源
-
 ``` BASH
 $ sudo ls /etc/apt/sources.list
   /etc/apt/sources.list
@@ -213,6 +214,9 @@ ls -all
 lsof -i:1080
 
 tar命令之--exclude参数 排除指定的文件或目录
+
+查看GPU
+nvidia-smi
 
 查看文件大小
 ``` zsh
@@ -780,3 +784,8 @@ console.log("东8区现在是：" + targetDate);
 # 备注
 telnet 指令
 ansible 自动化运维工具
+
+# Issues
+## Host key verification failed
+无法识别，删除之前的主机地址
+配置文件通常位于~/.ssh/known_hosts

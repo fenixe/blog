@@ -201,9 +201,15 @@ app = FastAPI()
 def read_root():
   return {"Hello": "World"}
 ```
-- 启一个服务，pip install uvicorn
+
+安装服务包
+pip install uvicorn
+
+- 启一个服务，
   uvicorn main:app --reload
 
+linux:
+uvicorn main:app --host '0.0.0.0' --port 8000 --reload
 
 ## 添加服务
 - pip install fastapi
@@ -463,7 +469,10 @@ def 函数名称():
 ## Missing dependencies for SOCKS support
 环境变量中则设置了 socks5 的代理; ~/.zshrc
 Python 本身在没有安装 pysocks 时并不支持 socks5 代理
-取消代理后，安装
+取消代理
+unset all_proxy && unset ALL_PROXY
+
+安装
 pip install pysocks
 
 
