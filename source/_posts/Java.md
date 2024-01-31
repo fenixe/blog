@@ -31,6 +31,56 @@ Hello World
 ## 数据放在内存中
 数据库对应地址修改，要重新跑一下项目
 
+## 包管理工具
+### Maven
+```xml
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-lang3</artifactId>
+    <version>3.11</version>
+</dependency>
+```
+
+#### pom.xml
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.example</groupId>
+  <artifactId>demo</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>Archetype - demo</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <encoding>UTF-8</encoding>
+    <java.version>1.8</java.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.11</version>
+    </dependency>
+  </dependencies>
+</project>
+```
+
+#### 强制安装
+mvn install -U
+在pom.xml文件，Maven，Reimport
+
+### Gradle
+```groovy
+dependencies {
+    implementation 'org.apache.commons:commons-lang3:3.11'
+}
+```
 
 ## 工具类/方法
 ### StringUtils

@@ -5,6 +5,19 @@ tags:
 ---
 
 # Base
+## demo
+```yaml
+# docker-compose.yaml
+version: '3'
+services:
+
+  web:
+    image: nginx:latest
+    ports:
+     - "8080:80"
+    volumes:
+     - ./mysite:/usr/share/nginx/html
+```
 ## CLI
 启动容器：docker start container_name 
 关闭容器：docker stop container_name
