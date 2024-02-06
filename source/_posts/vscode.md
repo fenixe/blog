@@ -225,6 +225,8 @@ Win用户按住快捷键 <span class="custom_red">F1<span>
 + **IDE**：code命令：启动 VS Code 软件
 
 + **编辑器**：code pathName/fileName命令：通过 VS Code 软件打开指定目录/指定文件。
+Mac配置code命令
+https://juejin.cn/post/6844903872989757447
 
 ### node 设置
 因为vscode用的zsh
