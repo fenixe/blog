@@ -46,6 +46,15 @@ nvm   command not found
 source ~/.nvm/nvm.sh
 ```
 
+### 服务器中安装
+1、等10分钟
+2、hosts中添加 ip
+vim /etc/hosts
+```
+# githubusercontent
+185.199.110.133 raw.githubusercontent.com
+```
+
 ## uninstall
 $ nvm use system
 $ npm uninstall -g a_module

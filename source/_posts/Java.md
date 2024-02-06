@@ -82,6 +82,10 @@ dependencies {
 }
 ```
 
+## spring boot指定配置文件
+IDEA
+Active Profiles:输入dev
+
 ## 工具类/方法
 ### StringUtils
 isNotBlank 
