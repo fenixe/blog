@@ -53,19 +53,19 @@ if (process.platform === "darwin") {
 > electron@8.2.1 postinstall /usr/local/lib/node_modules/electron
 > node install.js
 
-(node:6406) UnhandledPromiseRejectionWarning: HTTPError: Response code 404 (Not Found) for http://npm.taobao.org/mirrors/electron/9.1.0/electron-v8.2.1-darwin-x64.zip
+(node:6406) UnhandledPromiseRejectionWarning: HTTPError: Response code 404 (Not Found) for http://npmmirror.com/mirrors/electron/9.1.0/electron-v8.2.1-darwin-x64.zip
 
-HTTPError: Response code 404 (Not Found) for http://npm.taobao.org/mirrors/electron/8.2.1/electron-v9.1.0-darwin-x64.zip
+HTTPError: Response code 404 (Not Found) for http://npmmirror.com/mirrors/electron/8.2.1/electron-v9.1.0-darwin-x64.zip
 ```
 
 解决：
 I solved the problem, if you're using taobao mirror, you should config like this in your `~/.npmrc` file:
 ```
-electron_mirror=https://npm.taobao.org/mirrors/electron/
+electron_mirror=https://npmmirror.com/mirrors/electron/
 electron_custom_dir=7.0.0
 ```
 
-  1 electron_mirror=http://npm.taobao.org/mirrors/electron/
+  1 electron_mirror=http://npmmirror.com/mirrors/electron/
   2 electron_custom_dir=8.2.1
   3 //registry.npmjs.org/:_authToken=d1af3386-c8b9-433d-bd19-a1533fe4f0bd
 
@@ -73,6 +73,6 @@ electron_custom_dir=7.0.0
 node_modules/@electron/get/dist/cjs/artifact-utils.js
 ``` js
 // const BASE_URL = 'https://github.com/electron/electron/releases/download/';
-const BASE_URL = 'http://npm.taobao.org/mirrors/electron/';
+const BASE_URL = 'http://npmmirror.com/mirrors/electron/';
 ```
 node ./node_modules/electron/install.js

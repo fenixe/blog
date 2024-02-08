@@ -11,8 +11,14 @@ tags:
 历史版本：https://nodejs.org/zh-cn/download/releases/
 版本一览表：https://github.com/nodejs/Release
 
-## 查看当前镜像源
+
+## 查看设置
+npm config list
+
+### 查看当前镜像源
 npm config get registry
+
+
 
 # what
 JavaScript的服务器版本
@@ -130,6 +136,12 @@ npm —— nodejs package manager
 cnpm —— 企业npm
 yarn —— Facebook
 
+## 镜像
+官方：https://registry.npmjs.org/
+淘宝：http://npmmirror.com 
+http://registry.npmmirror.com
+
+
 ## package版本号
 波浪符号（~）：他会更新到当前minor version（也就是中间的那位数字）中最新的版本。放到我们的例子中就是：body-parser:~1.15.2，这个库会去匹配更新到1.15.x的最新版本，如果出了一个新的版本为1.16.0，则不会自动升级。波浪符号是曾经npm安装时候的默认符号，现在已经变为了插入符号。
 插入符号（^）：这个符号就显得非常的灵活了，他将会把当前库的版本更新到当前major version（也就是第一位数字）中最新的版本。放到我们的例子中就是：bluebird:^3.3.4，这个库会去匹配3.x.x中最新的版本，但是他不会自动更新到4.0.0。
@@ -167,6 +179,22 @@ This error stems from the fact that CRA tries to open your browser:
 In order to skip opening the browser, add
 BROWSER=none
 to your .env or .env.local file
+
+## 代理
+设置代理
+npm config set proxy http://proxy-server-address:port
+npm config set https-proxy https://proxy-server-address:port
+
+取消代理
+npm config delete proxy
+npm config delete https-proxy
+
+## 镜像
+官方镜像
+npm config set registry https://registry.npmjs.org/
+
+淘宝镜像
+npm config set registry https://registry.npmmirror.com/
 
 ## 包
 ### rimraf
@@ -499,7 +527,7 @@ Downloading electron-v9.1.0-darwin-x64.zip: [=----------------] 6% ETA: 42269.4 
 ```
 
 ### 解决办法
-npm config set electron_mirror http://npm.taobao.org/mirrors/electron/
+npm config set electron_mirror https://npmmirror.com/mirrors/electron/
 
 npm config set electron_custom_dir "8.1.1"
 

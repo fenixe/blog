@@ -10,7 +10,6 @@ tags:
 # docker-compose.yaml
 version: '3'
 services:
-
   web:
     image: nginx:latest
     ports:

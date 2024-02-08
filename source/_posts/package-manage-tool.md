@@ -61,9 +61,9 @@ $ yarn config get registry https://registry.yarnpkg.com
 
 换源
 ``` zsh
-$ yarn config set registry 'https://registry.npm.taobao.org'
+$ yarn config set registry 'http://registry.npmmirror.com'
 yarn config v1.22.4
-success Set "registry" to "https://registry.npm.taobao.org".
+success Set "registry" to "http://registry.npmmirror.com".
 ✨  Done in 0.03s.
 ```
 
