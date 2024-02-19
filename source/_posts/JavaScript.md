@@ -42,6 +42,10 @@ IIFE（立即调用函数表达式）
 })()
 ```
 
+## 检查对象是否具有指定的属性（用于对象和数组）
+attr in obj
+n in arr
+
 ## 处理 URL 查询字符串
 ```js
 var prms = new URLSearchParams({
