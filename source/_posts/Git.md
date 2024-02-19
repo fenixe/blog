@@ -33,8 +33,6 @@ seven：merge 本地；本地dev 分支需要拉一下
 ## 查看文件修改内容
 git diff test.text
 
-## test
-
 # 配置
 
 ### ssh 密钥
@@ -121,7 +119,9 @@ git commit -am 'str'命令只能提交已经追踪过且修改了的文件，新
 
 ## 版本回滚
 ### revert
+创建一个新的提交来撤销指定提交的更改。
 git revert HEAD^
+
 ### reset
 注意：回滚前先checkout 一个分支进行保留
 ``` zsh
