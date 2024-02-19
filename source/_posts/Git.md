@@ -33,6 +33,8 @@ seven：merge 本地；本地dev 分支需要拉一下
 ## 查看文件修改内容
 git diff test.text
 
+## test
+
 # 配置
 
 ### ssh 密钥
