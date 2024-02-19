@@ -628,26 +628,6 @@ from openpyxl import Workbook
 
 需要注意的是，线性回归的前提是自变量和因变量之间存在线性关系，且数据满足一些基本的假设条件，如线性性、独立性、常态性和同方差性等。在实际应用中，应该对数据进行适当的探索和验证这些假设条件。
 
-# FN
-## 提取文字
-``` py
-# pdf提取文字，但无法识别pdf中的图片
-import PyPDF2
-
-# 打开 PDF 文件
-with open('insert_img.pdf', 'rb') as file:
-    pdf = PyPDF2.PdfFileReader(file)
-
-    # 获取文档页数
-    pages = pdf.getNumPages()
-    print('pages', pages)
-
-    # 循环每一页，提取文本
-    for i in range(pages):
-        page = pdf.getPage(i)
-        text = page.extractText()
-        print(text)
-```
 
 # Issuse
 ## pycharm报错提示：无法加载文件\venv\Scripts\activate.ps1
