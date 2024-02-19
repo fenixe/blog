@@ -86,7 +86,7 @@ git  config  user.name  "xxxxx"
 git config --global http.https://github.com.proxy socks5://127.0.0.1:1080
 
 #取消代理
-git config --global --unset http.https://github.com.proxy)
+git config --global --unset http.https://github.com.proxy
 ```
 
 #### 仅为 GitHub 设置代理
@@ -346,6 +346,8 @@ sudo vim /private/etc/hosts
 配置域名
 199.232.69.194 github.com
 13.229.188.59 github.global.ssl.fastly.net
+
+【20240219更新：hosts地址会变，下一次又访问慢】
 
 # 错误
 ### index.lock
@@ -704,6 +706,8 @@ gitlab-runner restart
 
 ### 注册后 
 
+
+
 # git-flow
 brew install git-flow-avh
 
@@ -748,6 +752,7 @@ revert: 撤销以前的提交
 scope 用于说明提交的影响范围，内容根据具体项目而定。
 
 完成feature/auth分支
+``` zsh
 $ git flow feature finish auth
 Switched to branch 'develop'
 Updating e69b22c..f7f48e2
@@ -758,6 +763,7 @@ Fast-forward
  create mode 100644 # gitflow
  create mode 100644 README.md
 Deleted branch feature/auth (was f7f48e2).
+```
 
 Summary of actions:
 - The feature branch 'feature/auth' was merged into 'develop'
@@ -779,16 +785,18 @@ type 用于说明提交的类型：
 8. revert: 撤销以前的提交
 9. scope 用于说明提交的影响范围，内容根据具体项目而定。
 
+
 # 问题
 ## 提交代码，但github上的绿格子没有变绿
 - 检查下在本仓库上的帐号与github上是否一致
 - master分支
+
 ``` zsh
-# niekaifa @ Mac-mini in ~/ikyu/KilFront/vue-project on git:master o [15:58:05] 
+niekaifa @ Mac-mini in ~/ikyu/KilFront/vue-project on git:master o [15:58:05] 
 $ git config user.email                      
 kaifawebb@gmail.com
 
-# niekaifa @ Mac-mini in ~/ikyu/KilFront/vue-project on git:master o [15:58:02] C:130
+niekaifa @ Mac-mini in ~/ikyu/KilFront/vue-project on git:master o [15:58:02] C:130
 $ git config user.email "kaifawebb@gmail.com"
 ```
 
@@ -796,3 +804,10 @@ $ git config user.email "kaifawebb@gmail.com"
 We found a potential security vulnerability in one of your dependencies
 github上删除 package-lock.json
 
+## push慢
+https://v2ex.com/t/876241
+git config --global http.proxy socks5h://127.0.0.1:7890
+git config --global https.proxy socks5h://127.0.0.1:7890
+
+git 底层使用 libcurl 发送 http 请求，而 libcurl 的代理使用 socks5://时会在本地解析 DNS ，应该改成 socks5h://
+https://curl.se/libcurl/c/CURLOPT_PROXY.html
