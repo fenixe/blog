@@ -29,3 +29,15 @@ https://go.dev/dl/
 
 ## 版本号
 go version
+
+# xxl-job
+## 环境
+Maven3+ 【mvn -v】
+Jdk1.8+  【java -version】
+Mysql5.7+
+
+### Mysql版本
+``` bash
+mysql -u username -p
+SELECT VERSION();
+```

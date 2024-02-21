@@ -304,6 +304,10 @@ BuildVersion:   21D49
 - 数据展现技术
 - 数据分析，供角色者实现商业价值
 
+# JDBC
+Java DataBase Connectivity
+Java 数据库连接
+
 # 统计
 UV就是你一共进过几家服装店，PV就是你一共翻过多少衣服。
 ## UV
