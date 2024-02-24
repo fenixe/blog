@@ -27,6 +27,28 @@ copy() {
 }
 ```
 
+### 新方法
+```js
+async onCopy(){
+    try {
+        await navigator.clipboard.writeText('hello world');
+        console.log('Content copied to clipboard');
+        ElMessage({
+            message: "复制成功",
+            type: "success",
+            duration: 2000
+        })
+    } catch (err) {
+        console.error('Failed to copy: ', err);
+        ElMessage({
+            message: "复制失败，请手动复制链接",
+            type: "error",
+            duration: 2000
+        })
+    }
+}
+```
+
 ## 下载图片资源
 ``` js
 import * as JSZip from "jszip";
