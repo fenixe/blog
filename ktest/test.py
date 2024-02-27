@@ -1,0 +1,1 @@
+clickhouse client -h 192.168.2.143 --port 8123 -u root --password ethicall --database rpa

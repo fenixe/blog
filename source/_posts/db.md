@@ -18,3 +18,8 @@ docker run --name mysql -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql:late
 
 ## 删除
 系统偏好设置面板中可以看到之前安装的MySQL，此时若想卸载MySQL
+
+# ClickHouse
+## 安装
+curl -O 'https://builds.clickhouse.com/master/macos/clickhouse' && chmod a+x ./clickhouse
+./clickhouse client -h 192.168.2.143 --port 8123 -u default --password ethicall --database rpa

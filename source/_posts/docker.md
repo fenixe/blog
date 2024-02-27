@@ -42,6 +42,7 @@ docker rm 容器的名称或者 ID
 docker stop 容器的名称或者 ID
 
 ## 删除镜像
+docker images
 docker rmi {image-id}
 
 
