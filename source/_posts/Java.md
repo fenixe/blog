@@ -84,6 +84,7 @@ dependencies {
 
 ## spring boot指定配置文件
 IDEA
+Run > Edit Configurations
 Active Profiles:输入dev
 
 ## 工具类/方法

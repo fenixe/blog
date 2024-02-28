@@ -41,3 +41,16 @@ Mysql5.7+
 mysql -u username -p
 SELECT VERSION();
 ```
+
+## 日志
+----------- xxl-job job execute start -----------
+----------- Param:
+2024-02-27 02:00:00 [cn.eth.framework.logback.MdcLogAspect#jobAround]-[31]-[xxl-job, JobThread-25-1708970400043] mdc traceId: NC2ADPN1
+2024-02-27 02:00:05 [com.xxl.job.core.thread.JobThread#run]-[179]-[xxl-job, JobThread-25-1708970400043] 
+----------- xxl-job job execute end(finish) -----------
+
+
+# powerjob
+
+
+
