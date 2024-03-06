@@ -33,6 +33,25 @@ Hello World
 
 ## 包管理工具
 ### Maven
+#### maven compile
+将Java原文件编译成Class文件
+1、检查项目依赖：Maven 将检查项目的配置文件 pom.xml 中声明的依赖项，并确保所需的依赖已经下载到本地 Maven 仓库中。如果依赖尚未下载，Maven 将尝试从中央仓库或其他配置的仓库中下载它们。
+2、编译源代码：Maven 将查找项目中的源代码文件（通常位于 src/main/java 目录下），并将其编译成可执行的字节码文件。编译后的字节码文件通常位于 target/classes 目录下。
+3、处理资源文件：Maven 还会处理项目中的资源文件（例如配置文件、属性文件等），并将其复制到编译后的输出目录中（通常也是 target/classes 目录）。
+
+#### maven package
+打成jar包
+
+#### maven install
+把jar包安装到本地，执行所有的生命周期阶段（clean、compile、test、package、install）
+
+1、清理项目：Maven 首先会清理项目目录下的生成的构建文件和目录，以确保从一个干净的状态开始构建。
+2、编译源代码：Maven 将使用项目中的源代码（通常位于 src/main/java 目录下）进行编译，将源代码编译成可执行的字节码文件。
+3、执行单元测试：如果项目中包含单元测试（通常位于 src/test/java 目录下），Maven 将执行这些单元测试，以验证代码的正确性。
+4、打包生成可分发的格式：Maven 使用预定义的打包方式（例如 JAR、WAR、EAR 等）将项目的编译结果打包成可分发的格式。例如，对于 Java 项目，Maven 会将编译后的字节码文件打包成 JAR 文件。
+5、安装到本地仓库：最后，Maven 将生成的构建结果（例如 JAR 文件）安装到本地 Maven 仓库中。本地仓库位于你计算机上的 .m2 目录中。这样，其他基于 Maven 的项目可以引用并使用你的项目作为依赖。
+
+
 ```xml
 <dependency>
     <groupId>org.apache.commons</groupId>
