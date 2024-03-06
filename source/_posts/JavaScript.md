@@ -14,6 +14,38 @@ JavaScript是一种解释型语言，不是编译型语言。JavaScript代码在
 
 需要注意的是，与编译型语言相比，解释型语言的执行速度通常较慢，并且在出现语法错误或潜在问题时可能无法提供准确的错误信息。因此，在编写JavaScript代码时，需要注意代码的质量和可读性，以及对浏览器和Node.js的兼容性问题。
 
+## ECMAScript
+由欧洲计算机制造商协会（ECMA）国际标准化组织发布的官方标准的名称是ECMA-262。ECMAScript 1版发布于1997年。
+
+JavaScript是ECMAScript规范的实现。
+其他实现语言：ActionScript、JScript
+
+组织名：Ecma International
+
+尽管 JavaScript 和 JScript 与 ECMAScript 兼容，但包含超出 ECMAScript 的功能。
+
+组织全部标准：https://ecma-international.org/publications-and-standards/standards/
+ECMA-262 的最新更新日期是 每年6月
+
+Web 前端招聘的 JD 中，经常出现的 ES6，不仅仅是 ES2015 这个版本，而是指代 ES2015 和其后每年发布的 ECMAScript 版本。
+
+## TC39
+Technical Committee 39 ，制定 ECMAScript 标准的委员会。
+由各个主流浏览器厂商的代表构成。
+两个工作组：
+- TC39-TG1 工作组主要工作是通用 ECMAScript® 语言， 包括语法、语义、类库以及支持该语言的技术。
+- TC39-TG2 工作组 ECMAScript® 国际化 API 标准。
+
+各阶段的提案：https://github.com/tc39/proposals
+一旦提案到了第 4 阶段，那么它就可以使用了， ES 特性推出。
+
+### 各阶段
+Stage 0：代号“稻草人（strawman）”，草案阶段
+Stage 1：代号“提案（proposal）”， TC39 帮助阶段
+Stage 2：代号“草案（draft）”， 本阶段很有可能成为标准
+Stage 3：代号“候选（candidate）”， 已完成，需要从实现中获得反馈
+Stage 4：代号“结束（finished）”， 准备成为标准
+
 # 基础知识
 ## 基本数据类型
 primitive

@@ -26,8 +26,7 @@ open *QQ*
 ### 在xcode中打开
 open platforms/ios/UpdateDemo.xcodeproj
 
-### 查看端口占用
- lsof -i:8070
+ 
 
 # 系统更新
 {% asset_img mac_os.jpeg %}

@@ -9,8 +9,6 @@ tags:
 
 # 项目单词
 thumbnails 缩略图
-# CDN
-CDN是一个key（路由） ，value （内容）形式
 
 # model 和 module
 Model通常是指模型。这个模型也许是你需求分析出来的， 也许是你算法做出来的。 不过最大可能是MVC的网站，或者是GUI开发模式中的M里的那个模型。

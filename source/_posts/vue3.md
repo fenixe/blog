@@ -442,6 +442,8 @@ console.log(double) // 打印4  有种自动变化的感觉
     </script>
 </body>
 ```
+### CDN域名
+unpkg较稳定，https://ping.chinaz.com/测试
 
 ## 单页面引入Element UI
 ```html
