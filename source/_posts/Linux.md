@@ -213,6 +213,9 @@ ls -all
 查看端口
 lsof -i:1080
 
+根据PID关闭进程
+kill -9 20679
+
 tar命令之--exclude参数 排除指定的文件或目录
 
 查看GPU
