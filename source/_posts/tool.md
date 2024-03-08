@@ -51,6 +51,90 @@ SELECT VERSION();
 
 
 # powerjob
+{% asset_img powerjob01.png %}
 
+## processor
+### map 大任务拆分
+```java
+@Slf4j
+@Component
+public class MapProcessorDemo extends MapProcessor { //继承MapProcessor
+ 
+    private static final int batchSize = 100; //单批发送数据量
+    private static final int batchNum = 2; //一共2批，默认上限为200批，再多就要适当调整batchSize大小了
+ 
+    @Override
+    public ProcessResult process(TaskContext context) throws Exception {
+ 
+        if (isRootTask()) { //如果是根任务（说明map刚被调度到），则触发任务拆分
+            log.info("根任务，需要做任务拆分~");
+            List<SubTask> subTasks = Lists.newLinkedList();
+            for (int j = 0; j < batchNum; j++) {
+                SubTask subTask = new SubTask();
+                subTask.siteId = j;
+                subTask.itemIds = Lists.newLinkedList();
+                subTasks.add(subTask); //批次入集合
+                for (int i = 0; i < batchSize; i++) { //内部id集合，这里只是举例，实际业务场景可以是从db里获取的业务id集合
+                    subTask.itemIds.add(i);
+                }
+            }
+            return map(subTasks, "MAP_TEST_TASK"); //最后调用map，触发这些批次任务的执行
+        } else { //子任务，说明批次已做过拆分，此时被调度到时会触发下方逻辑
+            SubTask subTask = (SubTask) context.getSubTask(); //直接从上下文对象里拿到批次对象
+            log.info("子任务，拿到的批次实体为：{}", JSON.toJSONString(subTask));
+            return new ProcessResult(true, "RESULT:true");
+        }
+    }
+ 
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    private static class SubTask { //定义批次实体（业务方可自由发挥）
+        private Integer siteId; //批次id
+        private List<Integer> itemIds; //批次内部所携带的id（可以是我们自己的业务id）
+    }
+}
+```
 
+### mapReduce 大任务拆分与归并
+``` java
+@Slf4j
+@Component
+public class MapProcessorDemo extends MapProcessor { //继承MapProcessor
+ 
+    private static final int batchSize = 100; //单批发送数据量
+    private static final int batchNum = 2; //一共2批，默认上限为200批，再多就要适当调整batchSize大小了
+ 
+    @Override
+    public ProcessResult process(TaskContext context) throws Exception {
+ 
+        if (isRootTask()) { //如果是根任务（说明map刚被调度到），则触发任务拆分
+            log.info("根任务，需要做任务拆分~");
+            List<SubTask> subTasks = Lists.newLinkedList();
+            for (int j = 0; j < batchNum; j++) {
+                SubTask subTask = new SubTask();
+                subTask.siteId = j;
+                subTask.itemIds = Lists.newLinkedList();
+                subTasks.add(subTask); //批次入集合
+                for (int i = 0; i < batchSize; i++) { //内部id集合，这里只是举例，实际业务场景可以是从db里获取的业务id集合
+                    subTask.itemIds.add(i);
+                }
+            }
+            return map(subTasks, "MAP_TEST_TASK"); //最后调用map，触发这些批次任务的执行
+        } else { //子任务，说明批次已做过拆分，此时被调度到时会触发下方逻辑
+            SubTask subTask = (SubTask) context.getSubTask(); //直接从上下文对象里拿到批次对象
+            log.info("子任务，拿到的批次实体为：{}", JSON.toJSONString(subTask));
+            return new ProcessResult(true, "RESULT:true");
+        }
+    }
+ 
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    private static class SubTask { //定义批次实体（业务方可自由发挥）
+        private Integer siteId; //批次id
+        private List<Integer> itemIds; //批次内部所携带的id（可以是我们自己的业务id）
+    }
+}
+```
 
