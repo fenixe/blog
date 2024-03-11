@@ -200,6 +200,32 @@ Transaction
 </insert>
 ```
 
+MyBatis框架中，SQL语句根据传递参数动态更改结构
+```xml
+<select id="selectTag" resultType="Tag">
+    select * from tag
+    where 1=1
+    <if test="id != null">
+        and id != #{id}
+    </if>
+    order by id desc
+    limit 1
+</select>
+```
+
+MyBatis foreach 查询，转化成sql指令查询
+```xml
+select name from tag whereid = 1 and name in
+<foreach collection="names" open="(" item="item" separator="," close=")">
+    #{item}
+</foreach>
+```
+select name from tag where id = 1 and name in ('name1', 'name2', 'name3')
+
+MyBatis, selectByPrimaryKey 方法通常是由 MyBatis 框架中的 Mapper 接口提供的，它用于根据主键（Primary Key）检索数据库中的一条记录
+Bot bot = botMapper.selectByPrimaryKey(botId);
+SELECT * FROM bot_table WHERE id = ?;
+
 ## service
 ### interface
 ``` java
