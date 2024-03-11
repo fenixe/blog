@@ -45,6 +45,9 @@ docker stop 容器的名称或者 ID
 docker images
 docker rmi {image-id}
 
+## 验证端口映射
+docker port container_name_or_id
+
 
 ## 获取容器/镜像
 ```

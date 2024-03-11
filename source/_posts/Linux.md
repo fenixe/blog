@@ -115,7 +115,7 @@ $ wq!
 
 查找历史指令
 ``` BASH
-history |grep curl
+history | grep curl
 
 pm2 logs | grep -i "KEYWORD"
 ```
