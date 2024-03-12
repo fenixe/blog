@@ -192,6 +192,9 @@ git push origin master
 
 git rm -r --cached xxx.iml　　//-r 是递归的意思   当最后面是文件夹的时候有用
 
+### 从Git仓库中移除已经追踪的target目录，但保留本地的target目录（不删除本地文件）
+git rm -r --cached target
+
 ## 放弃修改
 ### 文件修改
 单个文件/文件夹
