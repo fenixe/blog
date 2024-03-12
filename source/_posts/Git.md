@@ -237,6 +237,15 @@ $ git reset commit_id
 git stash pop：从暂存区恢复最近的一次 stash，应用到工作目录，并删除该 stash。
 git stash apply：从暂存区恢复最近的一次 stash，应用到工作目录，但不删除该 stash。
 
+### 不小心在master分支写了代码，怎么切新分支
+```bash
+git add .
+git stash
+git checkout -b new_branch_name
+git stash pop
+```
+
+
 ## 清除已删除的分支
 ### git branch -a 
 命令可以查看所有本地分支和远程分支（git branch -r 可以只查看远程分支）

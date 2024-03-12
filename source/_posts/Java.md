@@ -31,6 +31,35 @@ Hello World
 ## 数据放在内存中
 数据库对应地址修改，要重新跑一下项目
 
+## 调用类
+### 调用静态方法
+```java
+public class MyClass {
+    public static void myStaticMethod() {
+        System.out.println("Hello from MyClass's static method!");
+    }
+}
+public class MainClass {
+    public static void main(String[] args) {
+        MyClass.myStaticMethod(); // 直接调用静态方法
+    }
+}
+```
+### 调用非静态方法
+```java
+public class MyClass {
+    public void myMethod() {
+        System.out.println("Hello from MyClass!");
+    }
+}
+public class MainClass {
+    public static void main(String[] args) {
+        MyClass myClassInstance = new MyClass();
+        myClassInstance.myMethod(); // 调用 myMethod
+    }
+}
+```
+
 ## 包管理工具
 ### Maven
 #### maven compile

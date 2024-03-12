@@ -5,6 +5,7 @@ categories:
 - network
 tag:
 - network
+- Elasticsearch
 ---
 
 # 路径规范
