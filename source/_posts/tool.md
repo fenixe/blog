@@ -138,3 +138,15 @@ public class MapProcessorDemo extends MapProcessor { //继承MapProcessor
 }
 ```
 
+# 阿里云
+## OSS
+Python判断文件是否存在
+```py
+# 填写Object的完整路径，Object完整路径中不能包含Bucket名称。
+exist = bucket.object_exists('exampleobject.txt')
+# 返回值为true表示文件存在，false表示文件不存在。
+if exist:
+    print('object exist')
+else:
+    print('object not exist')
+```
