@@ -173,11 +173,27 @@ request.name = " ki l " => request.name = "kil"
 ### 数据类型转换
 int -> Long
 10 -> 10L
+```java
+Integer myInteger = 100;
+Long myLong = myInteger.longValue();
+```
 
 ## 对象
 ### 判断
 equals() 方法接受一个对象作为参数，并返回一个布尔值，表示当前对象是否与参数对象相等。如果两个对象相等，那么 equals() 方法返回 true，否则返回 false。
 默认情况下，Java 中的对象比较都是基于引用比较的，也就是说，如果没有重写 equals() 方法，那么它默认的行为就是比较两个对象的地址是否相等。
+
+## 循环遍历
+``` java
+for (JsonNode jsonNode : arrayNode) {
+    // 获取数组中的每个JsonNode元素，你可以按需进行操作
+    String name = jsonNode.get("name").asText();
+    String value = jsonNode.get("value").asText();
+
+    // 打印获取的信息
+    System.out.println("Item Name: " + name + ", Value: " + value);
+}
+```
 
 ## 注释
 ### @Id
@@ -213,6 +229,40 @@ Transaction
 - Isolation：隔离性
 - Durability：持久性
 
+## 处理文件
+### json
+```xml
+<!-- 添加到你的pom.xml依赖中 -->
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.13.1</version>
+</dependency>
+```
+```java
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.JsonNode;
+
+import java.io.File;
+import java.io.IOException;
+
+public class JsonExample {
+    public static void main(String[] args) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            // 读取JSON文件并转换为JsonNode
+            JsonNode rootNode = mapper.readTree(new File("path/to/your/jsonfile.json"));
+            // 处理JsonNode或将其转换为POJO
+            // 假设我们只是打印这个JsonNode
+            System.out.println(rootNode.toString());
+            // 如果需要将修改后的JsonNode写回文件
+            mapper.writeValue(new File("path/to/your/output_jsonfile.json"), rootNode);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
 
 # Example
 ## mapper
@@ -325,8 +375,57 @@ Appearance & Beahvior -> System Settings -> HTTP Proxy
 创建项目
 mvn archetype:generate -DgroupId=com.example -DartifactId=myproject -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
 
+# Function
+## Nacos
+appid:
+  config: 
+    - ids: 1,2
+      accessKeyId: LTAI5tDEY414S
+``` java
+public static AliOssConfig.IdConfig findItemById(String id, List<AliOssConfig.IdConfig> dataList) {
+    log.info("id:{}", id);
+    for (AliOssConfig.IdConfig item : dataList) {
+        List<String> ids = item.getIds();
+        log.info("ids{}", ids);
+        if (ids.contains(id)) {
+            log.info("item{}", item);
+            return item;
+        }
+    }
+    return null;
+}
+```
+
 # Issues
 ## Java implements Serializable 什么意思
 Java中的Serializable接口是一个标记接口，用于指示一个类的对象可以被序列化为字节流并在网络上传输或存储在磁盘上。一个类只需要实现Serializable接口，就可以使它的对象可序列化。
 当一个类实现了Serializable接口，编写的Java代码可以使用对象输出流(ObjectOutputStream)将对象序列化为字节流，而对象输入流(ObjectInputStream)可以将字节流反序列化为原始对象。这个过程允许Java应用程序在网络上传输对象，或将对象永久存储在磁盘上以备将来使用。
 需要注意的是，实现Serializable接口的类可能会存在安全风险，因为它们允许对象在网络上传输或在磁盘上存储。因此，开发人员需要小心谨慎地处理序列化和反序列化的过程，以防止对程序的安全造成潜在的威胁。
+
+## Diamond types are not supported at this language level '7'
+File->project -> Modules -> Source -> Language Leve -> 8-Lambda,type annotation etc.
+File->project -> Project中 -> project Language Level -> 8-Lambda,type annotation etc.
+Preferences -> Build,execution,Deployment -> Compiler -> Java Compiler
+
+## try catch
+``` java
+public static void runTest() {
+    try {
+        System.out.println("run 1");
+        try {
+            System.out.println("run 2");
+            // 模拟一个错误情况
+            throw new Exception("这是一个测试异常");
+        } catch (Exception err) {
+            System.out.println("err 2" + err);
+        }
+        System.out.println("run 2 after");
+    } catch (Exception e){
+        System.out.println("err 1" + e);
+    }
+}
+run 1
+run 2
+err 2java.lang.Exception: 这是一个测试异常
+run 2 after
+```

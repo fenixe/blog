@@ -214,7 +214,9 @@ uvicorn main:app --host '0.0.0.0' --port 8000 --reload
 ## 添加服务
 - pip install fastapi
 
-## 连接数据库
+## 连接mysql数据库
+pip install pymysql
+同步数据库驱动，会阻塞执行它的线程直到查询完成并且结果返回。
 ```py
 if __name__ == '__main__':
  # 连接到 MySQL 数据库
@@ -237,6 +239,50 @@ if __name__ == '__main__':
     cursor.close()
     connect.close()
 ```
+
+### 动态sql的拼接
+#### 合法
+参数化查询
+```py
+sql = "SELECT vip, coin FROM user_asset WHERE uid=%s "
+# 可以使用数组和元组的方式传递参数
+cursor.execute(sql, [uid])
+```
+
+#### 非合法
+会有sql注入风险
+
+``` py
+# 1、%s占位符形式
+sql = "SELECT vip, coin FROM user_asset WHERE uid='%s' " % uid
+
+# 2、format形式
+sql = "SELECT vip, coin FROM user_asset WHERE uid='{}' ".format(uid)
+
+# 3、f string形式
+sql = f"SELECT vip, coin FROM user_asset WHERE uid='{uid}' "
+
+In [62]: uid = "'; delete FROM test_user_asset WHERE ''='"
+In [63]:  "SELECT vip, coin FROM user_asset WHERE uid='%s' " % uid
+Out[63]: "SELECT vip, coin FROM user_asset WHERE uid=''; delete FROM test_user_asset WHERE ''='' " # 极端恶意！删除全表记录
+```
+
+### 逻辑控制内容插入字符串
+```py
+if receive_status == 1:
+    update_receive_sql += ",result_file = %s"
+    receive_sql_params.append(json_file_name)
+```
+
+### 插入和更新
+```py
+cursor.execute(process_sql, [a])
+# 更改提交到数据库
+cnx.commit()
+# 相应数量的行被更新
+process_ret = cursor.rowcount
+```
+
 
 ## gitignore
 ```
@@ -393,6 +439,10 @@ else:
     print("数组不为空")
 ```
 
+## Object
+### JSON字符串
+json_string = json.dumps(data)
+
 ## 逻辑判断
 ### 条件语句
 ``` py
@@ -403,6 +453,22 @@ elif x == 'xyz':
   print('xyz')
 else:
   print('都不相等')
+
+# 是否有值，是否等于某值
+# 使用.get()方法，它在尝试访问一个可能不存在的键时不会抛出异常
+if biz_res and biz_res.get("code") == 200:
+    print("biz_res['code'] is 200.")
+else:
+    print("biz_res has no value or biz_res['code'] is not 200.")
+
+
+# 判断为False情况返回
+def check_oss_exist(oss_exist):
+    if not oss_exist:
+        # 当 oss_exist 为 False 时，执行以下语句
+        return "oss_exist is False, returning..."  
+    # 当 oss_exist 为 True 时，继续执行函数的其他部分
+    return "oss_exist is True, continued processing..."
 ```
 
 ### 循环语句
@@ -465,6 +531,37 @@ def 函数名称():
 ### 调用
 函数名称()
 
+## 异步任务
+### FastAPI 后台任务
+```py
+from fastapi import FastAPI, BackgroundTasks
+app = FastAPI()
+def method_a():
+    # 执行某些操作
+    print("Task is running in the background")
+@app.post("/start-task")
+async def start_task(background_tasks: BackgroundTasks):
+    background_tasks.add_task(method_a)
+    # 方法中带参数
+    background_tasks.add_task(processHandle, bizInfo, uuid1, table_row, table_field_names)
+    return {"message": "Task received and started"}
+```
+### 异步函数
+```py
+import asyncio
+from fastapi import FastAPI
+app = FastAPI()
+async def method_a():
+    # 异步执行某些操作
+    print("Task is running asynchronously")
+    await asyncio.sleep(5)  # 模拟异步操作
+    print("Task completed")
+@app.post("/start-task")
+async def start_task():
+    asyncio.create_task(method_a())  # 创建一个新的任务
+    return {"message": "Task received and started"}
+```
+
 # Issuse
 ## Missing dependencies for SOCKS support
 环境变量中则设置了 socks5 的代理; ~/.zshrc
@@ -475,8 +572,19 @@ unset all_proxy && unset ALL_PROXY
 安装
 pip install pysocks
 
+## 定时器
+``` py
+import threading
+def print_message():
+    print("This is a message from the timer!")
+# 创建一个定时器，指定5秒后执行print_message函数
+timer = threading.Timer(5.0, print_message)
+# 启动定时器
+timer.start()
+print("Timer has been set...")
+```
 
-# 轮子
+# 轮子 Tool
 ## 随机不重复字符串
 ``` py
 import random
@@ -501,7 +609,60 @@ subprocess.run(['python', 'test.py'], check=True)
 mac下python matplotlib中文乱码解决方案
 plt.rcParams["font.family"] = 'Arial Unicode MS'
 
+## uuid
+```py
+import uuid
+# 最常用的是UUID
+## UUID1（基于时间和节点（MAC地址）的UUID）
+uuid1 = uuid.uuid1()
+print(f"UUID1: {uuid1}")
+## UUID4（基于随机数的UUID）
+uuid4 = uuid.uuid4()
+print(f"UUID4: {uuid4}")
+# 通常在不需要跟踪对象创建时间和来源的情况下，建议使用uuid4，因为它完全是基于随机数的，能提供更好的唯一性保证。
+```
+
+## 格式化时间
+``` py
+from datetime import datetime
+# 获取当前时间
+now = datetime.now()
+# 格式化时间 - 注意这里的格式应该是 "yymmdd HH:MM:SS"
+formatted_time = now.strftime("%y%m%d %H:%M:%S")
+print(formatted_time)
+```
+
 # fastapi
+## mysql查询
+``` py
+@router.post("/record")
+async def record(no):
+    print("query record start ...")
+    cursor = None
+    output = {}
+    try:
+        # 1.检查业务编号表格字段映射
+        cursor = cnx.cursor()
+        biz_record_sql = "select * from a where no=%s"
+        cursor.execute(biz_record_sql, [no])
+        record_row = cursor.fetchone()
+        record_field_names = [i[0] for i in cursor.description]
+        output = dict(zip(record_field_names, record_row))
+        print("record_row", record_row)
+    except Exception as e:
+        print(f"error: {e}")
+        return return_error("查询解析记录异常")
+    finally:
+        # 关闭连接
+        cursor.close()
+    return return_vo(output)
+```
+
+## 是否在方法前加 async
+```py
+# 如果路由处理函数中需要进行异步操作，比如访问数据库、调用异步API、执行异步文件操作等，那么定义异步函数并使用 async def 是有必要的。
+# 如果路由处理函数只执行同步操作，并且这些操作非常快速，不会造成明显的阻塞
+```
 ## 文件处理
 image
 ```py
@@ -517,10 +678,43 @@ async def ocrTest(
         f.write(contents)
 ```
 
+## 请求参数校验
+``` py
+from pydantic import BaseModel, StringConstraints
+class BizInfo(BaseModel):
+    biz_no: Annotated[str, StringConstraints(min_length=1)]
+    des: str = "123"
+```
+
+## __init__.py文件
+`__init__.py`文件用作标识一个目录为Python包的角色。它可以被用来执行包的初始化代码，如包级别的变量设置、以及子模块的导入等。
+
+
 # AI数据处理
 ## pandas
-# merge 销量
+### merge 销量
 df_sales = df.groupby('年月').agg({'数量': 'sum'}).reset_index().rename(columns={'数量': '总数量'})
+
+### excel表格头映射
+```py
+# 假设你的Excel中文表头为'姓名'和'年龄'，英文对应为'Name'和'Age'。
+chinese_to_english = {
+    '姓名': 'Name',
+    '年龄': 'Age'
+    # 以此类推，其它列也进行相应的映射。
+}
+
+# 使用映射字典重命名DataFrame的列名。
+df.rename(columns=chinese_to_english, inplace=True)
+```
+
+### excel转为json
+```py
+df = pd.read_excel(file_path)
+df.rename(columns=combined_ret, inplace=True)
+file_json_path = f"./src/output/excel_json_files/{uuid4}.json"
+df.to_json(file_json_path, orient='records', lines=False)
+```
 
 # 研究
 ## NLP

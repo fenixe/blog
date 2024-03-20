@@ -35,6 +35,15 @@ shell 配置文件（.bash_profile, .bashrc 或 .zshrc 等），并删除任何�
 ## MacOS中查看
 mysql -V
 
+## 创建表
+```sql
+create table a (
+  id bigint auto_increment primary key,
+  no varchar(50) default '' not null unique comment 'no',
+  word varchar(300) default '' not null comment 'word'
+) comment 'b';
+```
+
 # ClickHouse
 ## 安装
 curl -O 'https://builds.clickhouse.com/master/macos/clickhouse' && chmod a+x ./clickhouse
