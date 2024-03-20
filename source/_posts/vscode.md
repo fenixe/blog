@@ -471,6 +471,45 @@ editor.detectIndentation 这项改成 false 就生效了
 插件：JS-CSS-HTML
 修改：indent-size: 2
 
+#### 2个空格好还是4个空格好
+在 Visual Studio Code（VSCode）中选择使用2个空格还是4个空格作为代码缩进主要取决于你使用的编程语言和团队的编程规范。
+不同的编程语言可能有不同的缩进约定：
+JavaScript/TypeScript：通常使用2个空格。
+Python：PEP 8指南推荐使用4个空格来提升可读性。
+Ruby：通社会使用2个空格。
+HTML/CSS：可以使用2个或4个空格，但应保持一致性。
+Java：通常使用4个空格。
+此外，具体项目或团队可能有自己的编码风格和约定，你应当遵循相关规定。比如，在一个团队项目中，统一代码风格是非常重要的，所以应该遵守团队的规范。
+在 VSCode 中，你可以很容易地为不同的文件类型设置不同的缩进：
+打开 设置 (Preferences) 菜单。
+搜索 Tab Size。
+为全局或特定语言更改缩进大小。
+也可以编辑 .editorconfig 文件（如果项目中包含），以保证不同编辑器和不同开发者之间的一致性。
+重要的是保持一致性。选择2个空格还是4个空格并不是绝对的好坏之分，关键在于一致地遵循某种规范。如果你是项目的主要开发者或开始新项目，可以选择自己偏好的设置，否则遵循项目或团队的现有约定。
+
+#### .editorconfig
+优先级比编辑器自身的设置要高，多人协作必备
+vscode需安装Editorconfig for vscode插件
+vue项目的配置
+``` conf
+# https://editorconfig.org
+
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.md]
+insert_final_newline = false
+trim_trailing_whitespace = false
+```
+
+
 ## 花括号回车，不自动换行缩紧，不另起新的一行
 ctrl+shift+p 唤出控制台，在搜索栏中输入 settings.json
 打开：Open User Settings(JSON)
