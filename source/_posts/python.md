@@ -286,6 +286,7 @@ process_ret = cursor.rowcount
 
 ## gitignore
 ```
+**/.DS_Store
 # Ignore compiled Python files
 *.pyc
 __pycache__/
@@ -439,6 +440,11 @@ else:
     print("数组不为空")
 ```
 
+## 字典
+字典是一种内置的数据类型，用于存储键值对（key-value pairs）。每个键（key）与一个值（value）相关联，你可以通过键来访问对应的值。字典在其他编程语言中可能被称为map、hashmaps或associative arrays。
+字典的每个键必须是唯一的，即不能有两个相同的键存在于同一个字典中。而值则可以重复，不同的键可以关联到相同的值。
+
+
 ## Object
 ### JSON字符串
 json_string = json.dumps(data)
@@ -469,6 +475,15 @@ def check_oss_exist(oss_exist):
         return "oss_exist is False, returning..."  
     # 当 oss_exist 为 True 时，继续执行函数的其他部分
     return "oss_exist is True, continued processing..."
+
+# 判断不等于200
+# 只有当状态码为200时才继续执行
+if response.status_code != 200:
+    print('下载失败，状态码：', response.status_code)
+    return
+
+# 判断用户是否传入有效值
+value = user_input if user_input else default_value
 ```
 
 ### 循环语句
@@ -664,6 +679,7 @@ async def record(no):
 # 如果路由处理函数只执行同步操作，并且这些操作非常快速，不会造成明显的阻塞
 ```
 ## 文件处理
+文件操作默认是同步的
 image
 ```py
 @router.post("/ocr-test",  name="test")
@@ -678,13 +694,48 @@ async def ocrTest(
         f.write(contents)
 ```
 
+### excel下载
+```py
+file_path = f"./src/output/oss_files/{uuid4}.xlsx"
+oss_path_ret = requests.get(bizInfo.oss_path)
+with open(file_path, 'wb') as file:
+    # 使用.iter_content()按块写入数据
+    for chunk in oss_path_ret.iter_content(chunk_size=65536):
+        file.write(chunk)
+print('OSS文件下载完成')
+```
+
+## 请求参数类型
+```py
+from fastapi import FastAPI, Body, Query
+app = FastAPI()
+@app.put("/items/{item_id}")
+# URL路径中有一个路径参数item_id，请求体中有一个item对象，URL查询字符串还有一个可选的查询参数q。
+async def update_item(item_id: int, item: Item = Body(...), q: str = Query(None)):
+    results = {"item_id": item_id, "item": item}
+    if q:
+        results.update({"q": q})
+    return results
+
+# Query
+async def test(q: str = Query(None, title="Query string"), s: str = Query(None)):
+```
+
 ## 请求参数校验
+pydantic 作为参数，没有使用Query、Body等明确声明，FastAPI默认会读取它作为JSON请求体（Body）参数。
 ``` py
 from pydantic import BaseModel, StringConstraints
 class BizInfo(BaseModel):
     biz_no: Annotated[str, StringConstraints(min_length=1)]
     des: str = "123"
 ```
+
+## 事务处理
+在Python中使用MySQL时，需要添加事务处理（即使用commit()和rollback()）的操作类型主要包括对数据库数据进行变更的SQL语句，这些操作一旦执行会修改数据库中的数据。通常包括以下几种：
+INSERT - 向表中插入新行。
+UPDATE - 更新表中的现有行。
+DELETE - 从表中删除行。
+REPLACE - 一个特殊的INSERT，如果在插入时遇到主键或唯一索引冲突，则先删除旧行，再插入新行。
 
 ## __init__.py文件
 `__init__.py`文件用作标识一个目录为Python包的角色。它可以被用来执行包的初始化代码，如包级别的变量设置、以及子模块的导入等。

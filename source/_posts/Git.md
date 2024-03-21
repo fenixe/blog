@@ -172,16 +172,6 @@ git status
 deleted:    test.txt
 
 ``` zsh
-$ git rm test.txt
-rm 'test.txt'
-
-$ git commit -m "remove test.txt"
-[master d46f35e] remove test.txt
- 1 file changed, 1 deletion(-)
- delete mode 100644 test.txt
-```
-
-``` zsh
 # 从上往下，这步可省略
 git rm -r --cached 文件/文件夹名称
 # 修改本地 .gitignore
