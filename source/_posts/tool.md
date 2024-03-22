@@ -150,3 +150,14 @@ if exist:
 else:
     print('object not exist')
 ```
+
+# PostMan/apiPost
+body 脚本
+``` js
+apt.setRequestBody(
+    {
+        "no": "test",
+        "param": JSON.stringify({"page":1,"pageSize":1})
+    }
+)
+```

@@ -476,6 +476,16 @@ def check_oss_exist(oss_exist):
     # 当 oss_exist 为 True 时，继续执行函数的其他部分
     return "oss_exist is True, continued processing..."
 
+# 判断文件不存在
+if not os.path.isfile(file_path):
+    print('文件不存在')
+# 检查文件是否存在
+if os.path.isfile(file_path):
+    os.remove(file_path)  # 删除文件
+    print(f'文件 {file_path} 已被删除。')
+else:
+    print(f'文件 {file_path} 不存在。')
+
 # 判断不等于200
 # 只有当状态码为200时才继续执行
 if response.status_code != 200:
