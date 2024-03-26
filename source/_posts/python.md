@@ -382,6 +382,7 @@ bool(123) //非0返回True
 
 ## int
 n += 1
+number = None  # 在if逻辑之外预先定义变量，并给予一个初始值
 
 ## 字符串
 ### 长度
@@ -426,6 +427,13 @@ new_string = my_string.replace(';', '*;')
 list = []
 list.append('X') #新增
 list.remove('X') #删除
+
+# 3.9
+rm_file(files: list[str]):
+
+# typing模块
+from typing import List
+def rm_file(files: List[str]):
 ``` 
 
 ### 判断一个数组为空
@@ -494,6 +502,18 @@ if response.status_code != 200:
 
 # 判断用户是否传入有效值
 value = user_input if user_input else default_value
+
+# 数据库查询
+result = cursor.fetchone()
+if result is None:
+
+results = cursor.fetchall()
+if not results:
+
+my_value = False
+my_value = {}
+if not my_value:
+    print("此条件为 False")
 ```
 
 ### 循环语句
