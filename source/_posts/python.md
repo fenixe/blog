@@ -677,6 +677,15 @@ formatted_time = now.strftime("%y%m%d %H:%M:%S")
 print(formatted_time)
 ```
 
+# mysql
+## insert
+```py
+# 1
+record_ret = cursor.rowcount
+# 57
+id = cursor.lastrowid
+```
+
 # fastapi
 ## mysql查询
 ``` py
@@ -733,6 +742,30 @@ with open(file_path, 'wb') as file:
     for chunk in oss_path_ret.iter_content(chunk_size=65536):
         file.write(chunk)
 print('OSS文件下载完成')
+```
+
+### URL下载
+```py
+# 1.判断url是否存在, 发送GET请求并获取响应
+url_res = requests.get(bizInfo.url)
+if url_res.status_code != 200:
+    logger.error(f"请求url未响应, url: {bizInfo.url}")
+    return return_error("请求url未响应, 请检查url有效性")
+
+# 判断是否是excel文件
+uuid4 = uuid.uuid4()
+file_path = f"./src/output/oss_files/{uuid4}.xlsx"
+# 下载url对应文件
+Tools.download_file(bizInfo.url, file_path)
+try:
+    load_workbook(file_path)
+    # Excel文件
+except InvalidFileException:
+    # 非Excel文件
+    logger.error(f"请求url非Excel文件, url: {bizInfo.url}")
+    Tools.rm_files([file_path])
+    return return_error("请求url非Excel文件, 请检查url对应资源")
+logger.info("url对应文件格式正确")
 ```
 
 ## 请求参数类型

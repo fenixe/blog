@@ -139,6 +139,27 @@ public class MapProcessorDemo extends MapProcessor { //继承MapProcessor
 ```
 
 # 阿里云
+## RAM用户
+STS 权限策略
+oss:PutObject 上传
+oss:GetObject 下载
+oss:* 完全控制权限
+```json
+{
+  "Version": "1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "oss:PutObject",
+      "Resource": [
+        "acs:oss:*:*:kfbtsts/src/*",
+        "acs:oss:*:*:kfbtsts/dest/*"
+      ]
+    }
+  ]
+}
+```
+sts服务接入点：https://help.aliyun.com/zh/ram/developer-reference/api-sts-2015-04-01-endpoint
 ## OSS
 Python判断文件是否存在
 ```py
@@ -160,4 +181,23 @@ apt.setRequestBody(
         "param": JSON.stringify({"page":1,"pageSize":1})
     }
 )
+```
+
+### Python操作
+```py
+auth = oss2.Auth(keyInfo["access_key_id"], keyInfo["access_key_secret"])
+# endpoint = keyInfo["cdn_domain"]
+endpoint = "https://oss-cn-nanjing.aliyuncs.com"
+bucket = keyInfo["bucket"]
+print("bucket", endpoint, bucket)
+ossBucketObject = oss2.Bucket(auth, endpoint, bucket)
+# 文件是否存在
+# oss_exist = ossBucketObject.object_exists("excel_json_files/2024-03/7ee308f0-a0a8-43f9-87d4-444deb67fad0")
+oss_exist = ossBucketObject.object_exists("src/001")
+print("oss_exist", oss_exist)
+
+# ossBucketObject.get_object_to_file("excel_json_files/2024-03/7ee308f0-a0a8-43f9-87d4-444deb67fad0", '1')
+# ossBucketObject.get_object_to_file("src/001", '1')
+
+# ossBucketObject.put_object_from_file('excel/202403/5', 'src/output/oss_files/55807928-ad68-44db-9a12-bb9391470e59.xlsx')
 ```
