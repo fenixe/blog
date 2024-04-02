@@ -283,6 +283,56 @@ cnx.commit()
 process_ret = cursor.rowcount
 ```
 
+### excel文件导入数据库
+7010条 3分钟
+```py
+@router.get("/test")
+async def test():
+    print("test ......")
+    local_excel_dir = "./src/output/oss_files/store_data_copy.xlsx"
+    cursor = None
+    try:
+        cursor = cnx.cursor()
+        df = pd.read_excel(local_excel_dir)
+        combined = {'省份':'province', '城市':'city', '名称':'name', '地址':'address', 'X,Y':'xy'}
+        df.rename(columns=combined, inplace=True)
+
+        # # 检查'name'列是否有重复的记录
+        # duplicate_rows = df[df.duplicated('name', keep=False)]
+        # print('duplicate_rows', duplicate_rows)
+
+        # # 如果有重复的记录，你可能需要决定如何处理它们
+        # # 例如，你可能想要删除重复的，仅保留第一次出现的记录
+        # if not duplicate_rows.empty:
+        #     print("发现重复记录：")
+        #     print(duplicate_rows)
+
+        insert_query = "insert into store(name,address,province,city,xy) values (%s,%s,%s,%s,%s)"
+        for index, row in df.iterrows():
+            cursor.execute(insert_query, (row['name'],row['address'],row['province'],row['city'],row['xy']))
+        # 提交事务
+        cnx.commit()
+        store_ret = cursor.rowcount
+        print(store_ret)
+        return return_vo(store_ret)
+    except Exception as e:
+        logger.error(f"创建store失败: {e}")
+        cnx.rollback()
+        return return_error("创建store异常")
+    finally:
+        if cursor:
+            cursor.close()
+```
+
+### excel更新
+```py
+update_sql = "update store set keyword=%s where name=%s"
+for index, row in df.iterrows():
+    # 判断是否为非空值
+    if pd.notnull(row['keyword']):
+        cursor.execute(update_sql, (row['keyword'],row['name']))
+```
+
 
 ## gitignore
 ```
