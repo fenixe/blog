@@ -418,6 +418,15 @@ bottom
 ```
 https://cloud.tencent.com/developer/article/1693100
 
+### HTML中使用组件
+```html
+<!-- 布局错乱 -->
+<el-table :data="tableData" style="width: 100%">
+    <el-table-column prop="date" label="Date" width="180" />
+</el-table>
+<!-- 如果你是直接在 DOM 中书写模板 (例如原生 <template> 元素的内容)，模板的编译需要遵从浏览器中 HTML 的解析行为。在这种情况下，你应该需要使用 kebab-case 形式并显式地关闭这些组件的标签。 -->
+<button-counter></button-counter>
+```
 
 
 
