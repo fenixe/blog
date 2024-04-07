@@ -456,11 +456,15 @@ unpkg较稳定，https://ping.chinaz.com/测试
     <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css">
     <!-- import JavaScript -->
     <script src="https://unpkg.com/element-plus"></script>
+    <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
     <title>Element Plus demo</title>
   </head>
   <body>
     <div id="app">
       <el-button>{{ message }}</el-button>
+      <el-table :data="datas" border stripe style="width: 100%">
+        <el-table-column prop="id" label="ID" width="100"></el-table-column>
+      </el-table>
     </div>
     <script>
       const App = {
@@ -469,12 +473,24 @@ unpkg较稳定，https://ping.chinaz.com/测试
             message: "Hello Element Plus",
           };
         },
+        methods:{
+            test(){
+                ElementPlus.ElMessage({
+                    message: "自定义坐标创建成功",
+                    type: "success",
+                    duration: 3000
+                })
+                axios.post('http://192.168.9.6:8080/coord/list', {id: String(id)}).then(res => {
+                    console.log(res);
+                })
+            }
+        }
       };
       const app = Vue.createApp(App);
        //引入全部 icon
-        for ([name, comp] of Object.entries(ElementPlusIconsVue)) {
-            app.component(name, comp);
-        }
+        // for ([name, comp] of Object.entries(ElementPlusIconsVue)) {
+        //     app.component(name, comp);
+        // }
       app.use(ElementPlus);
       app.mount("#app");
     </script>

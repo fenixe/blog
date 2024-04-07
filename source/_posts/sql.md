@@ -68,3 +68,31 @@ ALTER TABLE dev_project ADD plan_hours DECIMAL(10,1) COMMENT '预估工时';
 
 ALTER TABLE dev_project ADD plan_str VARCHAR(255) COMMENT '预估工时';
 ```
+
+## 查总数
+```sql
+# 查询store表1000条中status=2的总数
+SELECT COUNT(*)
+FROM (
+    SELECT * FROM store
+    ORDER BY id ASC
+    LIMIT 1000
+) AS subquery
+WHERE subquery.status = 2;
+```
+
+## 查ID后
+```sql
+SELECT * FROM store
+WHERE keyword IS NOT NULL AND keyword <> '' AND status = 1 AND id >= 5
+ORDER BY id ASC
+LIMIT 2;
+```
+
+## update更新
+把store表中的keyword字段值为“a”更改为“b”
+```sql
+UPDATE store
+SET keyword = 'b'
+WHERE keyword = 'a';
+```

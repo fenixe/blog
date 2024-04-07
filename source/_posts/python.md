@@ -446,6 +446,12 @@ len(str)
 '1' in '123'
 '0' not in '123'
 
+```py
+# 使用Python字符串方法检查keyword是否在name中，并且确保keyword不为空字符串
+if keyword and keyword in name:
+    print(f"Keyword '{keyword}' is found in name '{name}'.")
+```
+
 ### 分割
 data.split('|')
 
