@@ -197,6 +197,15 @@ for (JsonNode jsonNode : arrayNode) {
     // 打印获取的信息
     System.out.println("Item Name: " + name + ", Value: " + value);
 }
+
+// 最后一项
+for (int i = 0; i < arr.length; i++) {
+    if (i == arr.length - 1) {
+        System.out.println(arr[i] + " is the last element.");
+    } else {
+        System.out.println(arr[i]);
+    }
+}
 ```
 
 ## 注释
@@ -281,6 +290,17 @@ public class JsonExample {
 <insert id="createAdmin" useGeneratedKeys="true" keyProperty="admin.id">
     insert into admin (amid,mobile,pwd,real_name,salt,add_time,dept_id,email) VALUES (#{admin.amid} ,#{admin.mobile} ,#{admin.pwd} ,#{admin.realName} ,#{admin.salt} ,#{admin.addTime} ,#{admin.deptId} ,#{admin.email} )
 </insert>
+
+<update id="updateRecord" parameterType="map">
+    update biz_upload_record
+    <set>
+        <if test="status != null">
+            status=#{status},
+        </if>
+        update_time=#{updateTime}
+    </set>
+    where id=#{id}
+</update>
 ```
 
 MyBatis框架中，SQL语句根据传递参数动态更改结构

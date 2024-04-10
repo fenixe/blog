@@ -490,6 +490,14 @@ rm_file(files: list[str]):
 # typing模块
 from typing import List
 def rm_file(files: List[str]):
+
+# 长度
+len(arr)
+
+# 合并
+list1 = [1, 2, 3]
+list2 = [4, 5, 6]
+combined_list = list1 + list2
 ``` 
 
 ### 判断一个数组为空
@@ -503,6 +511,9 @@ if not arr:
 else:
     print("数组不为空")
 ```
+
+### 转字符串
+my_string = ','.join(my_list)
 
 ## 字典
 字典是一种内置的数据类型，用于存储键值对（key-value pairs）。每个键（key）与一个值（value）相关联，你可以通过键来访问对应的值。字典在其他编程语言中可能被称为map、hashmaps或associative arrays。
@@ -613,6 +624,9 @@ for item in arr:
 # 输出：
 # Alice
 # Bob
+
+for index, dir in enumerate(dirs, start=1):
+    print(f"Index: {index}, Directory: {dir}")
 ```
 
 #### 
@@ -884,6 +898,34 @@ df = pd.read_excel(file_path)
 df.rename(columns=combined_ret, inplace=True)
 file_json_path = f"./src/output/excel_json_files/{uuid4}.json"
 df.to_json(file_json_path, orient='records', lines=False)
+```
+
+```py
+df = pd.read_excel(local_excel_dir)
+num_rows = df.shape[0]
+logger.info(f"Excel总行数: {num_rows}")
+df.rename(columns=combined, inplace=True)
+
+# 定义每个JSON文件的行数
+rows_per_file = 10000
+# 计算需要多少个JSON文件
+num_files = math.ceil(num_rows / rows_per_file)
+
+# 分割DataFrame并写入JSON文件
+for i in range(num_files):
+    start_row = i * rows_per_file
+    end_row = start_row + rows_per_file
+    # 获取分割后的DataFrame片段
+    df_subset = df.iloc[start_row:end_row]
+    # 构造JSON格式的数据
+    json_data = {"columns": len(df.columns), "datas": df_subset.to_dict(orient='records')}
+    # 设置文件名并保存为JSON
+    json_file_name = f"{local_json_dir}_{i+1}.json"
+    with open(json_file_name, 'w') as fp:
+        json.dump(json_data, fp)
+
+    # 更新日志信息
+    logger.info(f"已导出 {json_file_name}")
 ```
 
 # 研究
