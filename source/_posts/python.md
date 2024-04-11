@@ -747,6 +747,20 @@ formatted_time = now.strftime("%y%m%d %H:%M:%S")
 print(formatted_time)
 ```
 
+# Nacos
+```yaml
+aliyun:
+  oss:
+    accessKeyId: 123
+```
+```py
+from nacos import NacosClient
+self.client = NacosClient(server_addresses=self.serverAddr, namespace=self.namespace)
+
+from src.utils.NacosUtils import NacosUtils
+aliyunOss = res["aliyun"]["oss"]
+```
+
 # mysql
 ## insert
 ```py

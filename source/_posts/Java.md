@@ -176,6 +176,9 @@ int -> Long
 ```java
 Integer myInteger = 100;
 Long myLong = myInteger.longValue();
+
+int number = Integer.parseInt(str);
+long number = Long.parseLong(str);
 ```
 
 ## 对象
@@ -417,6 +420,14 @@ public static AliOssConfig.IdConfig findItemById(String id, List<AliOssConfig.Id
         }
     }
     return null;
+}
+
+// config
+@Data
+@Component
+public class AliOssConfig {
+    @Value("${aliyun.oss.accessKeyId}")
+    private String accessKeyId;
 }
 ```
 
