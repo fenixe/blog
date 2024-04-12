@@ -11,6 +11,8 @@ tags:
 历史版本：https://nodejs.org/zh-cn/download/releases/
 版本一览表：https://github.com/nodejs/Release
 
+## 版本选择
+https://nodejs.org/en/download
 
 ## 查看设置
 npm config list
