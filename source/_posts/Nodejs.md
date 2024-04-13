@@ -13,6 +13,8 @@ tags:
 
 ## 版本选择
 https://nodejs.org/en/download
+版本规划表与不再维护的版本表
+https://github.com/nodejs/release?tab=readme-ov-file#release-schedule
 
 ## 查看设置
 npm config list
