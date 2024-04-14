@@ -10,6 +10,14 @@ tags:
 # Base
 构建跨平台 桌面应用 框架
 
+## 版本选择
+Electron 发行时间表
+https://www.electronjs.org/zh/docs/latest/tutorial/electron-timelines
+
+选择了26版本，此大版本不在更新，2024年2月20日终止。
+v26.6.10
+
+
 # MacOS
 ## 问题
 ### 复制功能
