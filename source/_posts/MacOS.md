@@ -26,7 +26,8 @@ open *QQ*
 ### 在xcode中打开
 open platforms/ios/UpdateDemo.xcodeproj
 
- 
+## 中文输入法无选择框
+pkill -f SCIM.app
 
 # 系统更新
 {% asset_img mac_os.jpeg %}

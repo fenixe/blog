@@ -332,6 +332,14 @@ MyBatis, selectByPrimaryKey 方法通常是由 MyBatis 框架中的 Mapper 接�
 Bot bot = botMapper.selectByPrimaryKey(botId);
 SELECT * FROM bot_table WHERE id = ?;
 
+### 事务回滚
+``` java
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+@Transactional //方法上
+TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+```
+
 ## service
 ### interface
 ``` java

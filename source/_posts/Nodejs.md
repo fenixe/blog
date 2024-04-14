@@ -137,8 +137,9 @@ cnpm —— 企业npm
 yarn —— Facebook
 
 ## 镜像
-官方：https://registry.npmjs.org/
-淘宝：http://npmmirror.com 
+官方默认包仓库：https://registry.npmjs.org/
+淘宝/阿里镜像源包
+web站点：http://npmmirror.com
 http://registry.npmmirror.com
 
 

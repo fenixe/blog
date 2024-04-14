@@ -69,6 +69,11 @@ electron_custom_dir=7.0.0
   2 electron_custom_dir=8.2.1
   3 //registry.npmjs.org/:_authToken=d1af3386-c8b9-433d-bd19-a1533fe4f0bd
 
+2024-04-14更新：
+设置 阿里镜像无法安装，
+最后设置electron_mirror成功
+npm config set electron_mirror https://npmmirror.com/mirrors/electron/
+
 #### Electron failed to install correctly, please delete node_modules/electron and try installing again
 node_modules/@electron/get/dist/cjs/artifact-utils.js
 ``` js
