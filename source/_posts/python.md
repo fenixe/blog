@@ -1041,6 +1041,15 @@ from openpyxl import Workbook
 $ env PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.9.15
 ```
 
+```py
+import webbrowser
+import os
+
+print("Hello, World!")
+filename = './test.html'
+webbrowser.open('file://' + os.path.realpath(filename))
+```
+
 
 # FN
 ## 提取文字
