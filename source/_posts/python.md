@@ -73,6 +73,12 @@ pip freeze > requirements.txt
 $ pip install -r requirements.txt
 ```
 
+## 目录中安装环境
+electron中使用
+https://pyloong.github.io/pythonic-project-guidelines/introduction/install/#112-python
+https://www.python.org/downloads/release/python-3915/
+XZ 文件
+
 ## pyenv
 Python版本管理
 
@@ -1025,6 +1031,16 @@ from openpyxl import Workbook
   # 最后关闭文件
   wb.close()
 ```
+
+## pyinstaller
+``` bash
+ * On Debian/Ubuntu, you would need to install Python development packages
+    * apt-get install python3-dev
+    * apt-get install python-dev
+    * If you're building Python by yourself, please rebuild your Python with `--enable-shared` (or, `--enable-framework` on Darwin)
+$ env PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.9.15
+```
+
 
 # FN
 ## 提取文字

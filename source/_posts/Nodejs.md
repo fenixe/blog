@@ -552,6 +552,49 @@ $ npm install electron -g
 updated 1 package in 27.249s
 ```
 
+# 多语言
+## 调用python
+https://github.com/extrabacon/python-shell
+```js
+const {PythonShell} = require('python-shell')
+
+let pythonPath;
+
+if (app.isPackaged) {
+    // 打包后的路径，相对于应用的资源目录
+    pythonPath = path.join(process.resourcesPath, 'Python-3.9.15', 'python.exe');
+} else {
+    // 开发时的路径
+    pythonPath = 'pyenv/Python-3.9.15/python.exe';
+}
+const pythonConfigOptions = {
+    mode: 'text',
+    pythonPath: pythonPath,
+    pythonOptions: ['-u'],
+};
+
+ // 调用python服务
+app.whenReady().then(() => {
+    console.log('PythonShell', PythonShell);
+    PythonShell.run('./test.py', pythonConfigOptions).then(msg => {
+        console.log('python finished.', msg);
+
+        // 在python服务成功启动后，创建客户端
+        createWindow()
+    }).catch(err => {
+        console.log('调用python服务失败: ', err);
+    })
+})
+
+// forge.config.js
+module.exports = {
+  packagerConfig: {
+    extraResource: ["pyenv/Python-3.9.15"],
+    asar: true,
+  },
+}
+```
+
 
 # 其他
 要理解node-gyp首先要知道什么是gyp(https://gyp.gsrc.io/index.md)。gyp其实是一个用来生成项目文件的工具，一开始是设计给chromium项目使用的，后来大家发现比较好用就用到了其他地方。生成项目文件后就可以调用GCC, vsbuild, xcode等编译平台来编译。至于为什么要有node-gyp，是由于node程序中需要调用一些其他语言编写的工具甚至是dll，需要先编译一下，否则就会有跨平台的问题，例如在windows上运行的软件copy到mac上就不能用了，但是如果源码支持，编译一下，在mac上还是可以用的。
