@@ -175,6 +175,10 @@ HTTP 协议是文本型的协议，所有内容都是字符串
 
 method: GET/POST
 
+#### 请求测试链接
+get：https://httpbin.org/get
+post: https://httpbin.org/post
+
 #### http协议 request
 {% asset_img request.png %}
 

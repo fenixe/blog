@@ -667,6 +667,13 @@ async def start_task(background_tasks: BackgroundTasks):
     background_tasks.add_task(processHandle, bizInfo, uuid1, table_row, table_field_names)
     return {"message": "Task received and started"}
 ```
+
+### 等待
+```py
+import time
+time.sleep(3)
+```
+
 ### 异步函数
 ```py
 import asyncio
@@ -1050,6 +1057,81 @@ filename = './test.html'
 webbrowser.open('file://' + os.path.realpath(filename))
 ```
 
+pyinstaller -w main.py
+
+### GUI
+pip install pyside6
+```py
+from threading import Thread
+from fastapi import FastAPI
+from uvicorn import Config, Server
+from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton
+import sys
+
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
+
+def start_api():
+    config = Config(app=app, host="0.0.0.0", port=8000)
+    server = Server(config)
+    server.run()
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle('FastAPI Server Controller')
+        self.setGeometry(100, 100, 200, 100)
+        self.start_button = QPushButton('Start Server', self)
+        self.start_button.clicked.connect(self.start_server_thread)
+        self.start_button.resize(200, 100)
+
+    def start_server_thread(self):
+        api_thread.start()
+        self.start_button.setEnabled(False)
+        self.start_button.setText('Server Running')
+
+if __name__ == "__main__":
+    qt_app = QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    # 使用线程来启动FastAPI服务
+    api_thread = Thread(target=start_api)
+    sys.exit(qt_app.exec())
+```
+
+#### 打开本地html文件
+```py
+from PySide6.QtWebEngineWidgets import QWebEngineView
+from PySide6.QtCore import QUrl
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super(MainWindow, self).__init__()
+        self.browser = QWebEngineView()
+
+        # Load local HTML file
+        # self.browser.load(QUrl.fromLocalFile("test.html"))
+        # self.setCentralWidget(self.browser)
+
+        # 获取当前工作目录
+        cwd = os.getcwd()
+        print("Current working directory:", cwd)
+        
+        # 指定文件路径 -- 方法1: 直接使用文件名（如果HTML文件和main.py在同一目录下）【不可行】
+        # file_path = "test.html"
+        
+        # 指定文件路径 -- 方法2: 使用绝对路径
+        file_path = os.path.join(cwd, "test.html")
+        
+        # 检查文件是否存在
+        if os.path.exists(file_path):
+            self.browser.load(QUrl.fromLocalFile(file_path))
+            self.setCentralWidget(self.browser)
+        else:
+            print("Error: File does not exist at the specified path", file_path)
+```
 
 # FN
 ## 提取文字
@@ -1148,6 +1230,18 @@ if __name__ == '__main__':
         catch_url_from_baidu(calcultaion_year, one_month)
 ```
 
+# 其他
+## Process 和 Thread 区别
+在Python中，Process和Thread都能用于实现并发编程，但是他们的使用场景和实现方式有所不同。
+进程（Process）:
+进程是操作系统进行资源分配和调度的基本单位。每个进程都有自己独立的内存空间和环境变量，进程之间的通信需要使用进程间通信（IPC）技术如管道，消息队列，信号量等。
+Python的multiprocessing模块提供了Process类来创建一个进程。在Python中，由于存在全局解释器锁（GIL）的问题，多线程无法利用多核CPU的优势。而使用多进程则可以实现并行计算，即在同一时间内利用多核CPU执行多个任务。
+
+线程（Thread）:
+线程是操作系统进行CPU调度的基本单位，一个进程可以包含多个线程，所有线程共享进程的内存空间和环境变量，因此线程之间的通信更简单，可以直接分享数据。
+Python的threading模块提供了Thread类来创建一个线程。由于全局解释器锁（GIL）的影响，在Python中，多线程主要适用于I/O密集型任务，例如文件操作，网络请求等，这是因为这些任务的主要时间在等待I/O操作，而不是在CPU计算。在等待的过程中，CPU可以切换到其他线程执行任务，这样就能提高程序的并发性。
+
+总的来说，Process和Thread都可以用来执行并发任务，但是由于Python的全局解释器锁（GIL）的存在，对于计算密集型任务，建议使用多进程。对于I/O密集型任务，可以使用多线程或者异步I/O模型（比如asyncio）。而且，Process和Thread之间的选择也应该根据具体需求和场景来决定。
 
 # Issuse
 ## pycharm报错提示：无法加载文件\venv\Scripts\activate.ps1
