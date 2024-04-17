@@ -390,6 +390,20 @@ htmlcov/
 Thumbs.db
 ```
 
+# windows安装
+下载
+https://www.python.org/downloads/windows/
+安装
+https://zhuanlan.zhihu.com/p/111168324
+
+PowerShell 激活虚拟环境
+PowerShell默认可能不允许执行外部脚本
+查看当前策略：Get-ExecutionPolicy
+如果返回 Restricted 或 AllSigned，你需要将其更改为 RemoteSigned 或 Unrestricted（请注意这可能对系统安全有影响）。以管理员权限开启 PowerShell，并执行：
+Set-ExecutionPolicy RemoteSigned
+
+然后：
+C:\path\to\env\Scripts\ activate 
 
 # 语法
 ## 目录
@@ -760,6 +774,24 @@ formatted_time = now.strftime("%y%m%d %H:%M:%S")
 print(formatted_time)
 ```
 
+## .env
+pip install python-dotenv
+.env
+```
+DB_HOST=
+DB_USER=
+DB_PASS=
+DB_NAME=
+DB_PORT=
+```
+```py
+from dotenv import load_dotenv
+
+load_dotenv()
+
+db_host = os.getenv('DB_HOST')
+```
+
 # Nacos
 ```yaml
 aliyun:
@@ -1103,6 +1135,7 @@ if __name__ == "__main__":
 ```
 
 #### 打开本地html文件
+QWebEngineView是一个基于Chromium的浏览器引擎，用于在Qt应用程序中嵌入网页。它可以显示来自互联网的网页，也可以渲染本地存储的HTML文件。QWebEngineView为Qt提供了现代的Web浏览能力，包括HTML5、CSS3和JavaScript的支持。
 ```py
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtCore import QUrl
@@ -1131,6 +1164,54 @@ class MainWindow(QMainWindow):
             self.setCentralWidget(self.browser)
         else:
             print("Error: File does not exist at the specified path", file_path)
+```
+
+#### 子线程和GUI+chromium
+```py
+from uvicorn import Config, Server
+from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtWebEngineWidgets import QWebEngineView
+from PySide6.QtCore import QUrl
+from multiprocessing import Process, Event
+import sys
+import os
+import signal
+def start_api(started_event):
+    config = Config(app=app, host="0.0.0.0", port=8020)
+    server = Server(config)
+    started_event.set()  # 设置请求的Event
+    server.run()
+
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super(MainWindow, self).__init__()
+        self.browser = QWebEngineView()
+
+        cwd = os.getcwd()
+        file_path = os.path.join(cwd, "dist/index.html")
+        self.browser.load(QUrl.fromLocalFile(file_path))
+        self.setCentralWidget(self.browser)
+
+    def closeEvent(self, event):
+        # 当窗口关闭时，发送SIGTERM信号到FastAPI服务进程
+        os.kill(api_process.pid, signal.SIGTERM)
+        event.accept()
+
+if __name__ == "__main__":
+    # 在子进程中启动FastAPI服务
+    started_event = Event()  # 创建一个事件对象
+    api_process = Process(target=start_api, args=(started_event,))
+    api_process.start()
+
+    started_event.wait()  # 等待事件被设置
+    print("FastAPI服务应该已经启动并设置了事件")
+
+    qt_app = QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+
+    sys.exit(qt_app.exec())
 ```
 
 # FN
@@ -1242,6 +1323,9 @@ Python的multiprocessing模块提供了Process类来创建一个进程。在Pyth
 Python的threading模块提供了Thread类来创建一个线程。由于全局解释器锁（GIL）的影响，在Python中，多线程主要适用于I/O密集型任务，例如文件操作，网络请求等，这是因为这些任务的主要时间在等待I/O操作，而不是在CPU计算。在等待的过程中，CPU可以切换到其他线程执行任务，这样就能提高程序的并发性。
 
 总的来说，Process和Thread都可以用来执行并发任务，但是由于Python的全局解释器锁（GIL）的存在，对于计算密集型任务，建议使用多进程。对于I/O密集型任务，可以使用多线程或者异步I/O模型（比如asyncio）。而且，Process和Thread之间的选择也应该根据具体需求和场景来决定。
+
+### 注意
+如果你决定使用 threading.Thread 来启动 FastAPI 服务而不是 multiprocessing.Process，你将不会遇到额外的客户端实例启动的问题，因为线程与进程有不同的行为——线程是在同一个进程空间内运行，不会创建新的进程。
 
 # Issuse
 ## pycharm报错提示：无法加载文件\venv\Scripts\activate.ps1

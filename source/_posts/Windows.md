@@ -12,6 +12,9 @@ tags:
 win + R 
 输入：winver
 
+## 编辑环境变量
+https://support.esri.com/zh-cn/knowledge-base/edit-an-environment-variable-1462478594981-000002146
+
 ## 指令
 ### 进入D盘
 ```
