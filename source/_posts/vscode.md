@@ -282,6 +282,11 @@ setting.json
 ### 关闭右侧预览
 code-首选项-设置,搜索"editor.minimap.enabled",默认值为打钩,我们只需要把钩去掉即可
 
+### 设置终端
+windows
+文件->首选项->设置，搜索：shell windows
+Terminal > Integrated > Default Profile: Windows
+
 ## VS Code 设置-高级进阶
 ### 文件对比
 VS Code 默认支持对比两个文件的内容。选中两个文件，然后右键选择「将已选项进行比较」即可

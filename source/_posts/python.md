@@ -25,6 +25,9 @@ pip install --upgrade pip
 
 安装了那些包
 pip list
+
+设置清华源：https://mirrors.tuna.tsinghua.edu.cn/help/pypi/
+
 ## 安装
 python.org download
 
@@ -405,6 +408,15 @@ Set-ExecutionPolicy RemoteSigned
 然后：
 C:\path\to\env\Scripts\ activate 
 
+## 激活虚拟环境
+``` bash
+# powerShell
+$ venv\Scripts\Activate.ps1
+
+# git bash
+$ source venv/Scripts/activate
+```
+
 # 语法
 ## 目录
 ```py
@@ -774,6 +786,20 @@ formatted_time = now.strftime("%y%m%d %H:%M:%S")
 print(formatted_time)
 ```
 
+## config.ini
+```ini
+[database]
+server = 192.168.1.1
+```
+```py
+from configparser import ConfigParser
+
+config = ConfigParser()
+config.read('config.ini')
+
+db_server = config.get('database', 'server')
+```
+
 ## .env
 pip install python-dotenv
 .env
@@ -791,6 +817,18 @@ load_dotenv()
 
 db_host = os.getenv('DB_HOST')
 ```
+
+## logging日志文件
+```py
+import logging
+
+logging.basicConfig(filename='application.log',
+                    level=logging.INFO,
+                    format='%(asctime)s - %(levelname)s - %(message)s',
+                    encoding='utf-8')
+
+logging.info('应用程序启动')
+```   
 
 # Nacos
 ```yaml
@@ -1091,6 +1129,12 @@ webbrowser.open('file://' + os.path.realpath(filename))
 
 pyinstaller -w main.py
 
+### 指令参数
+-i exe.ico, macos.icns
+--distpath out
+--add-data "config.ini:." "config.ini;."
+-w 不显示命令行窗口（控制台窗口）
+
 ### GUI
 pip install pyside6
 ```py
@@ -1214,6 +1258,16 @@ if __name__ == "__main__":
     sys.exit(qt_app.exec())
 ```
 
+#### windows控制台颜色乱码
+```
+[32mINFO[0m:     127.0.0.1:53140 - "[1mOPTIONS /list HTTP/1.1[0m" [32m200 OK[0m
+```
+```py
+# 解决办法
+import colorama
+colorama.init()
+```
+
 # FN
 ## 提取文字
 ``` py
@@ -1331,3 +1385,9 @@ Python的threading模块提供了Thread类来创建一个线程。由于全局�
 ## pycharm报错提示：无法加载文件\venv\Scripts\activate.ps1
 此系统上禁止运行脚本
 https://blog.csdn.net/freedomofu/article/details/126537492
+
+## pyinstaller报错
+uvicorn的Config配置启动信息，使用pyinstaller打包后出错。
+配置：config = Config(app=app, host="0.0.0.0", port=8020)
+错误信息：启动api服务失败: Unable to configure formatter 'default'
+解决办法：pyinstaller -w 参数去掉
