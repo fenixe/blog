@@ -378,3 +378,8 @@ sudo codesign --force --deep --sign - <app-path>
 
 ### “CocosCreator”将对您的电脑造成伤害。您应该将它移到废纸篓
 解决：访达 -> 应用程序 xxx.App -> 右键 -> 显示简介 -> 勾选 “覆盖恶意软件保护”。
+
+### 删除Microsoft AutoUpdate
+访达，“前往”——“前往文件夹”
+/Library/Application Support/Microsoft/
+直接删除文件夹“MAU2.0”
