@@ -306,15 +306,14 @@ async def test():
         combined = {'省份':'province', '城市':'city', '名称':'name', '地址':'address', 'X,Y':'xy'}
         df.rename(columns=combined, inplace=True)
 
-        # # 检查'name'列是否有重复的记录
-        # duplicate_rows = df[df.duplicated('name', keep=False)]
-        # print('duplicate_rows', duplicate_rows)
+        # 检查'name'列是否有重复的记录
+        duplicate_rows = df[df.duplicated('name', keep=False)]
+        if not duplicate_rows.empty:
+            print('duplicate_rows', duplicate_rows)
+            return
 
-        # # 如果有重复的记录，你可能需要决定如何处理它们
-        # # 例如，你可能想要删除重复的，仅保留第一次出现的记录
-        # if not duplicate_rows.empty:
-        #     print("发现重复记录：")
-        #     print(duplicate_rows)
+        # 空值处理
+        df = df.where(df.notnull(), '')
 
         insert_query = "insert into store(name,address,province,city,xy) values (%s,%s,%s,%s,%s)"
         for index, row in df.iterrows():
