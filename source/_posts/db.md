@@ -76,3 +76,9 @@ CREATE TABLE `reocrd` (
 ## 安装
 curl -O 'https://builds.clickhouse.com/master/macos/clickhouse' && chmod a+x ./clickhouse
 ./clickhouse client -h 192.168.2.143 --port 8123 -u default --password ethicall --database rpa
+
+
+# Redis
+## TTL
+Time To Live: 生存时间
+键不存在或未设置过期时间，则该命令返回 -1

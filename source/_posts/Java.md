@@ -410,6 +410,23 @@ Appearance & Beahvior -> System Settings -> HTTP Proxy
 创建项目
 mvn archetype:generate -DgroupId=com.example -DartifactId=myproject -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
 
+# FeignClient
+FeignClient是Spring Cloud中的一个非常强大的工具，其目的在于简化微服务之间的HTTP调用。
+
+特性：
+声明式的客户端：你可以通过Java接口以及注解来声明一个远程服务调用的客户端，而无需实现该接口。Feign会自动为你提供实现。
+简单的注解用法：使用Feign时，你只需要少量的注解，比如@FeignClient。在接口的方法中，你还可以使用Spring MVC的注解，如@RequestMapping，@PathVariable，@RequestParam等，来定义请求的URL、请求方法、参数等。
+集成了Ribbon和Hystrix：Feign自然地和Spring Cloud其他组件集成，包括服务发现（Eureka）、负载均衡（Ribbon）以及断路器（Hystrix）。这意味着你可以非常容易地实现服务的自动发现和调用的容错处理。
+自动编解码支持：Feign支持自动请求编码和响应解码，使得你可以直接在接口方法中使用Java对象作为参数和返回类型，Feign会自动将它们转换成HTTP请求体和从响应体中解析出结果。
+
+``` java
+@FeignClient(name = "user-service", fallback = UserFallback.class)
+public interface UserServiceClient {
+    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
+    User getUserById(@PathVariable("id") Long id);
+}
+```
+
 # Function
 ## Nacos
 appid:

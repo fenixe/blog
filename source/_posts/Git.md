@@ -103,6 +103,41 @@ Host github.com
     User git
     ProxyCommand nc -v -x 127.0.0.1:1086 %h %p
 
+## .gitconfig文件
+.gitconfig文件是Git的全局配置文件，它保留了关于Git行为和外观的设置。这些设置是针对当前用户的所有Git仓库有效的。
+文件通常位于主目录，例如在Linux或Mac系统中，其路径通常是 ~/ ，在Windows系统中，其路径通常是 C:\Users\你的用户名 。你可以使用命令行编辑这个文件，或者使用 git config --global 命令设置这个文件的内容。
+
+
+```.gitconfig
+# 用户信息：这包括你的用户名和邮箱地址，这些信息会用于所有的git提交操作
+[user]
+        name = Your Name
+        email = your.email@example.com
+
+# 别名：你可以在 .gitconfig 文件中定义命令的别名来简化命令行操作
+[alias]
+        st = status
+        co = checkout
+        ci = commit
+        br = branch
+# 这样，你就可以用 `git st` 来代替 `git status`。   
+
+# 默认的编辑器或比较工具：你可以在 .gitconfig 文件中定义默认使用的文本编辑器或者文件比较工具。
+[core]
+        editor = vim
+[diff]
+        tool = vsdiffmerge
+```
+
+### 全局.gitignore文件
+创建一个全局.gitignore文件：首先，你需要创建这个文件，并存放在你的主目录下，或者任何一个你能够记住的地方。例如，你可以创建一个文件路径为 ~/.gitignore_global。
+添加规则：在这个.gitignore_global文件中，按照正常的.gitignore规则添加你想要在所有仓库中忽略的文件或文件夹模式。
+配置Git使用这个文件作为全局.gitignore：接下来，你需要告诉Git使用你创建的这个文件作为全局忽略规则，通过运行以下命令：
+ git config --global core.excludesfile ~/.gitignore_global
+这会在你的 .gitconfig 文件添加相关设置，指定全局忽略文件的位置。执行这个命令后，.gitconfig 文件中会显示类似下面的配置：
+[core]
+    excludesfile = /path/to/your/.gitignore_global
+
 ## token
 gitlab import github   授权
 {% asset_img register.png%}
