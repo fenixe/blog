@@ -181,6 +181,52 @@ int number = Integer.parseInt(str);
 long number = Long.parseLong(str);
 ```
 
+## 数组
+### 声明数组并初始化
+```java
+// 可以改变大小的列表
+List<String> dates = new ArrayList<>(Arrays.asList("2024-04-25"));
+// 方法接收一个可变参数并将其转换为一个固定大小的列表。试图调用 add 或 remove 方法，将会抛出 UnsupportedOperationException。
+List<String> dates = Arrays.asList("2024-04-25", "2024-04-26");
+dates.add("2024-04-26");
+System.out.println(dates);
+```
+
+## 方法
+### 结构
+```java
+// 第一层：api层
+try {
+    return aService.fn(req);
+} catch (Exception e) {
+    log.error();
+    return R.fail();
+}
+
+// 第二层：service层
+public class aServiceImpl implements AService {
+    @Override
+    public R fn(){
+        try {
+            b.returned();
+        } catch (Exception e) {
+            // 抛出一个新的运行时异常的语句
+            throw new RuntimeException("除数不能为0");
+        }  
+    }
+}
+
+// 第三层：数据处理层
+@Repository
+@Slf4j
+public class CRepository {
+    @Transactional(rollbackFor = Exception.class)
+    public R returned() throws Exception {
+        throw new Exception("");
+    }
+}
+```
+
 ## 对象
 ### 判断
 equals() 方法接受一个对象作为参数，并返回一个布尔值，表示当前对象是否与参数对象相等。如果两个对象相等，那么 equals() 方法返回 true，否则返回 false。
@@ -235,6 +281,28 @@ private Long id;
 ```java
 @Pattern(message = "手机号格式不对", regexp = "^[1-9][0-9]{10}$")
 private String mobile;
+```
+
+### @Repository
+用来执行与数据库相关的操作的
+```java
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class UserRepository {
+    // ... 数据库操作方法，比如查询、插入、删除等
+}
+```
+
+###  @Transactional(rollbackFor = Exception.class)
+```java
+import org.springframework.transaction.annotation.Transactional;
+
+@Transactional(rollbackFor = Exception.class)
+public void updateUserData(User user) {
+    // 这里可以包含多个数据库操作
+    // 如果任何操作抛出Exception或其子类的异常，所有操作将被回滚
+}
 ```
 
 ## 数据库事务
