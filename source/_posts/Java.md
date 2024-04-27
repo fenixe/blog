@@ -181,6 +181,52 @@ int number = Integer.parseInt(str);
 long number = Long.parseLong(str);
 ```
 
+## 数组
+### 声明数组并初始化
+```java
+// 可以改变大小的列表
+List<String> dates = new ArrayList<>(Arrays.asList("2024-04-25"));
+// 方法接收一个可变参数并将其转换为一个固定大小的列表。试图调用 add 或 remove 方法，将会抛出 UnsupportedOperationException。
+List<String> dates = Arrays.asList("2024-04-25", "2024-04-26");
+dates.add("2024-04-26");
+System.out.println(dates);
+```
+
+## 方法
+### 结构
+```java
+// 第一层：api层
+try {
+    return aService.fn(req);
+} catch (Exception e) {
+    log.error();
+    return R.fail();
+}
+
+// 第二层：service层
+public class aServiceImpl implements AService {
+    @Override
+    public R fn(){
+        try {
+            b.returned();
+        } catch (Exception e) {
+            // 抛出一个新的运行时异常的语句
+            throw new RuntimeException("除数不能为0");
+        }  
+    }
+}
+
+// 第三层：数据处理层
+@Repository
+@Slf4j
+public class CRepository {
+    @Transactional(rollbackFor = Exception.class)
+    public R returned() throws Exception {
+        throw new Exception("");
+    }
+}
+```
+
 ## 对象
 ### 判断
 equals() 方法接受一个对象作为参数，并返回一个布尔值，表示当前对象是否与参数对象相等。如果两个对象相等，那么 equals() 方法返回 true，否则返回 false。
@@ -242,6 +288,29 @@ private String mobile;
 insert ignore into
 
 ### 事务
+### @Repository
+用来执行与数据库相关的操作的
+```java
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class UserRepository {
+    // ... 数据库操作方法，比如查询、插入、删除等
+}
+```
+
+###  @Transactional(rollbackFor = Exception.class)
+```java
+import org.springframework.transaction.annotation.Transactional;
+
+@Transactional(rollbackFor = Exception.class)
+public void updateUserData(User user) {
+    // 这里可以包含多个数据库操作
+    // 如果任何操作抛出Exception或其子类的异常，所有操作将被回滚
+}
+```
+
+### 数据库事务
 Transaction
 由若干个SQL语句构成的一个操作序列，数据库系统保证在一个事务中的所有SQL要么全部执行成功，要么全部不执行，具有ACID特性：
 - Atomicity：原子性
@@ -427,6 +496,23 @@ Appearance & Beahvior -> System Settings -> HTTP Proxy
 # Maven
 创建项目
 mvn archetype:generate -DgroupId=com.example -DartifactId=myproject -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+# FeignClient
+FeignClient是Spring Cloud中的一个非常强大的工具，其目的在于简化微服务之间的HTTP调用。
+
+特性：
+声明式的客户端：你可以通过Java接口以及注解来声明一个远程服务调用的客户端，而无需实现该接口。Feign会自动为你提供实现。
+简单的注解用法：使用Feign时，你只需要少量的注解，比如@FeignClient。在接口的方法中，你还可以使用Spring MVC的注解，如@RequestMapping，@PathVariable，@RequestParam等，来定义请求的URL、请求方法、参数等。
+集成了Ribbon和Hystrix：Feign自然地和Spring Cloud其他组件集成，包括服务发现（Eureka）、负载均衡（Ribbon）以及断路器（Hystrix）。这意味着你可以非常容易地实现服务的自动发现和调用的容错处理。
+自动编解码支持：Feign支持自动请求编码和响应解码，使得你可以直接在接口方法中使用Java对象作为参数和返回类型，Feign会自动将它们转换成HTTP请求体和从响应体中解析出结果。
+
+``` java
+@FeignClient(name = "user-service", fallback = UserFallback.class)
+public interface UserServiceClient {
+    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
+    User getUserById(@PathVariable("id") Long id);
+}
+```
 
 # Function
 ## Nacos

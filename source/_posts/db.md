@@ -79,3 +79,7 @@ curl -O 'https://builds.clickhouse.com/master/macos/clickhouse' && chmod a+x ./c
 
 # Redis
 一天是 86400 秒
+
+## TTL
+Time To Live: 生存时间
+键不存在或未设置过期时间，则该命令返回 -1
