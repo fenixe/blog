@@ -237,13 +237,31 @@ private Long id;
 private String mobile;
 ```
 
-## 数据库事务
+## 数据库
+### 考虑幂等
+insert ignore into
+
+### 事务
 Transaction
 由若干个SQL语句构成的一个操作序列，数据库系统保证在一个事务中的所有SQL要么全部执行成功，要么全部不执行，具有ACID特性：
 - Atomicity：原子性
 - Consistency：一致性
 - Isolation：隔离性
 - Durability：持久性
+
+## Redis
+### 存
+```java
+import org.springframework.data.redis.core.StringRedisTemplate;
+@Autowired
+private StringRedisTemplate stringRedisTemplate;
+String key = String.format(RedisKeyConsts.HOLIDAY_CACHE, day);
+stringRedisTemplate.opsForValue().set(key, "1", 50, TimeUnit.DAYS);
+String t = stringRedisTemplate.opsForValue().get(cacheKey);
+// 检查键 "key" 是否存在, 返回 boolean
+stringRedisTemplate.hasKey(ey);
+```
+
 
 ## 处理文件
 ### json

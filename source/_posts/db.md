@@ -76,3 +76,6 @@ CREATE TABLE `reocrd` (
 ## 安装
 curl -O 'https://builds.clickhouse.com/master/macos/clickhouse' && chmod a+x ./clickhouse
 ./clickhouse client -h 192.168.2.143 --port 8123 -u default --password ethicall --database rpa
+
+# Redis
+一天是 86400 秒
