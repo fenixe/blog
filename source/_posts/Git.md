@@ -138,6 +138,12 @@ Host github.com
 [core]
     excludesfile = /path/to/your/.gitignore_global
 
+```
+.DS_Store
+node_modules/
+target/
+```
+
 ## token
 gitlab import github   授权
 {% asset_img register.png%}

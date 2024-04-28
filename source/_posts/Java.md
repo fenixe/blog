@@ -20,6 +20,38 @@ $ javac HelloWorld.java
 $ java HelloWorld
 Hello World
 ```
+
+## spring boot指定配置文件
+IDEA
+Run > Edit Configurations
+Active Profiles:输入dev
+
+## 工具类/方法
+### StringUtils
+isNotBlank 
+StringUtils.isNotBlank(" ") = false
+
+isNotEmpty
+StringUtils.isNotEmpty(" ") = true
+
+### BeanConvertUtils
+BeanConvertUtils.trimBean(request);
+request.name = " ki l " => request.name = "kil"
+
+## 引入包
+在 项目的 service 目录下 的 pom.xml 插入配置文件，点击刷新
+``` xml
+<dependency>
+    <groupId>cn.eth.framework</groupId>
+    <artifactId>framework-jwt</artifactId>
+    <version>1.1.3.RELEASE</version>
+</dependency>
+```
+
+# 类
+数组内是相同的数据类型，类内部是多样的数据类型
+## 实例/对象（Instance/Object）
+
 ## 权限修饰符
 |           |  private |  default(默认权限，不写)  | protected | public |
 | :-------- | :--------:| :--: | :--: | :--: |
@@ -27,9 +59,6 @@ Hello World
 | 同包       |          |   Y   |  Y   |  Y   |
 | 子类       |          |       |  Y   |  Y   |
 | 所有类     |          |       |      |  Y   |
-
-## 数据放在内存中
-数据库对应地址修改，要重新跑一下项目
 
 ## 调用类
 ### 调用静态方法
@@ -60,18 +89,18 @@ public class MainClass {
 }
 ```
 
-## 包管理工具
-### Maven
-#### maven compile
+# 包管理工具
+## Maven
+### maven compile
 将Java原文件编译成Class文件
 1、检查项目依赖：Maven 将检查项目的配置文件 pom.xml 中声明的依赖项，并确保所需的依赖已经下载到本地 Maven 仓库中。如果依赖尚未下载，Maven 将尝试从中央仓库或其他配置的仓库中下载它们。
 2、编译源代码：Maven 将查找项目中的源代码文件（通常位于 src/main/java 目录下），并将其编译成可执行的字节码文件。编译后的字节码文件通常位于 target/classes 目录下。
 3、处理资源文件：Maven 还会处理项目中的资源文件（例如配置文件、属性文件等），并将其复制到编译后的输出目录中（通常也是 target/classes 目录）。
 
-#### maven package
+### maven package
 打成jar包
 
-#### maven install
+### maven install
 把jar包安装到本地，执行所有的生命周期阶段（clean、compile、test、package、install）
 
 1、清理项目：Maven 首先会清理项目目录下的生成的构建文件和目录，以确保从一个干净的状态开始构建。
@@ -89,7 +118,7 @@ public class MainClass {
 </dependency>
 ```
 
-#### pom.xml
+### pom.xml
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -119,42 +148,15 @@ public class MainClass {
 </project>
 ```
 
-#### 强制安装
+### 强制安装
 mvn install -U
 在pom.xml文件，Maven，Reimport
 
-### Gradle
+## Gradle
 ```groovy
 dependencies {
     implementation 'org.apache.commons:commons-lang3:3.11'
 }
-```
-
-## spring boot指定配置文件
-IDEA
-Run > Edit Configurations
-Active Profiles:输入dev
-
-## 工具类/方法
-### StringUtils
-isNotBlank 
-StringUtils.isNotBlank(" ") = false
-
-isNotEmpty
-StringUtils.isNotEmpty(" ") = true
-
-### BeanConvertUtils
-BeanConvertUtils.trimBean(request);
-request.name = " ki l " => request.name = "kil"
-
-## 引入包
-在 项目的 service 目录下 的 pom.xml 插入配置文件，点击刷新
-``` xml
-<dependency>
-    <groupId>cn.eth.framework</groupId>
-    <artifactId>framework-jwt</artifactId>
-    <version>1.1.3.RELEASE</version>
-</dependency>
 ```
 
 # Doc
@@ -257,38 +259,12 @@ for (int i = 0; i < arr.length; i++) {
 }
 ```
 
-## 注释
-### @Id
-声明一个属性将映射到数据库主键的字段
-数据库主键，指的是一个列或多列的组合，其值能唯一地标识表中的每一行
-
-### @GeneratedValue
-指示如何生成实体类的主键。主键是一个唯一标识实体的属性，每个实体类都必须有一个主键。
-参数
-- GenerationType.AUTO：让 JPA 自动选择适合数据库的主键生成策略，这是默认值。
-- GenerationType.IDENTITY：使用自增长字段生成主键，通常适用于 MySQL、SQL Server 等数据库。
-- GenerationType.SEQUENCE：使用序列生成主键，通常适用于 Oracle、PostgreSQL 等数据库。
-- GenerationType.TABLE：使用一个特定的数据库表来存储生成的主键值。
-```java
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private Long id;
-```
-
-### @Pattern
-对一个字符串类型的字段或参数进行验证，以确保它符合指定的正则表达式模式
-需要将一个字符串类型的正则表达式模式作为参数传递给它
-```java
-@Pattern(message = "手机号格式不对", regexp = "^[1-9][0-9]{10}$")
-private String mobile;
-```
-
 ## 数据库
 ### 考虑幂等
 insert ignore into
 
 ### 事务
-### @Repository
+#### @Repository
 用来执行与数据库相关的操作的
 ```java
 import org.springframework.stereotype.Repository;
@@ -299,7 +275,7 @@ public class UserRepository {
 }
 ```
 
-###  @Transactional(rollbackFor = Exception.class)
+#### 回滚 @Transactional(rollbackFor = Exception.class)
 ```java
 import org.springframework.transaction.annotation.Transactional;
 
@@ -309,14 +285,58 @@ public void updateUserData(User user) {
     // 如果任何操作抛出Exception或其子类的异常，所有操作将被回滚
 }
 ```
-
-### 数据库事务
 Transaction
 由若干个SQL语句构成的一个操作序列，数据库系统保证在一个事务中的所有SQL要么全部执行成功，要么全部不执行，具有ACID特性：
 - Atomicity：原子性
 - Consistency：一致性
 - Isolation：隔离性
 - Durability：持久性
+
+## 线程
+``` java
+private static final long REQUEST_INTERVAL_MILLIS = 1000L / 5;
+// 在请求循环中等待，聚合接口5QPS限制
+// for循环内会继续执行
+try {
+    Thread.sleep(REQUEST_INTERVAL_MILLIS);
+} catch (InterruptedException ie) {
+    Thread.currentThread().interrupt();
+}
+```
+
+## http请求
+### get请求
+``` java
+import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+
+@Slf4j
+@Component
+public class InnerHttpRequestUtils {
+    @Autowired
+    private RestTemplate restTemplate;
+
+    public JSONObject get(String url) {
+        try {
+            ResponseEntity<JSONObject> ret = restTemplate.getForEntity(url, JSONObject.class);
+            log.info("http get ret: {}", ret);
+            if (ret.getStatusCode().equals(HttpStatus.OK)) {
+                log.info("http get ret body: {}", ret.getBody());
+                return ret.getBody();
+            } else {
+                throw new RuntimeException("调用服务失败");
+            }
+        } catch (RuntimeException e) {
+            log.error("调用服务失败", e);
+            return null;
+        }
+    }
+}
+```
 
 ## Redis
 ### 存
@@ -331,6 +351,59 @@ String t = stringRedisTemplate.opsForValue().get(cacheKey);
 stringRedisTemplate.hasKey(ey);
 ```
 
+## Nacos
+appid:
+  config: 
+    - ids: 1,2
+      accessKeyId: LTAI5tDEY414S
+``` java
+public static AliOssConfig.IdConfig findItemById(String id, List<AliOssConfig.IdConfig> dataList) {
+    log.info("id:{}", id);
+    for (AliOssConfig.IdConfig item : dataList) {
+        List<String> ids = item.getIds();
+        log.info("ids{}", ids);
+        if (ids.contains(id)) {
+            log.info("item{}", item);
+            return item;
+        }
+    }
+    return null;
+}
+```
+
+### 由Spring管理，@Configuration注解定义的 bean
+``` java
+@Data
+@Configuration
+@ConfigurationProperties(prefix = "a.b")
+public class AProperties {
+```
+
+### service中使用
+```java
+// 方式一：推荐
+// 确保被注入的对象在构造后就不可改变，和@Autowired注解相比，它在编译时就能检查到依赖解决的问题。
+// 对于具有很多依赖的类，构造函数注入可能会产生过长的参数列表，这可能是一个需要考虑的问题。
+@AllArgsConstructor
+public class VacationsService {
+    private final AProperties aProperties;
+}
+
+// 方式二：
+@Autowired
+private AProperties aProperties;
+
+// 方式三：
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+@Data
+@Component
+@RefreshScope
+public class AliOssConfig {
+    @Value("${a.b}")
+    private String a;
+}
+
+```
 
 ## 处理文件
 ### json
@@ -365,6 +438,58 @@ public class JsonExample {
         }
     }
 }
+```
+
+# 注释
+## Spring注解
+@Component，@Service，@Repository，@Controller，@Configuration等注解定义的bean
+
+## Lombok库注解
+### @AllArgsConstructor
+自动生成一个全参数构造器。会自动拥有一个构造函数，这个构造函数包含了该类中的所有字段作为参数，从而避免手动编写繁琐的构造器代码。
+```java
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+public class ExampleClass {
+    private int fieldA;
+    private String fieldB;
+    // 其他字段...
+}
+// Lombok会为ExampleClass自动生成如下构造器：
+public ExampleClass(int fieldA, String fieldB /* 其他字段... */) {
+    this.fieldA = fieldA;
+    this.fieldB = fieldB;
+    // 其他字段的初始化...
+}
+// 在实例化ExampleClass对象时，传入所有必需的参数：
+ExampleClass example = new ExampleClass(42, "The answer");
+```
+
+
+## @Id
+声明一个属性将映射到数据库主键的字段
+数据库主键，指的是一个列或多列的组合，其值能唯一地标识表中的每一行
+
+## @GeneratedValue
+指示如何生成实体类的主键。主键是一个唯一标识实体的属性，每个实体类都必须有一个主键。
+参数
+- GenerationType.AUTO：让 JPA 自动选择适合数据库的主键生成策略，这是默认值。
+- GenerationType.IDENTITY：使用自增长字段生成主键，通常适用于 MySQL、SQL Server 等数据库。
+- GenerationType.SEQUENCE：使用序列生成主键，通常适用于 Oracle、PostgreSQL 等数据库。
+- GenerationType.TABLE：使用一个特定的数据库表来存储生成的主键值。
+```java
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private Long id;
+```
+
+## @Pattern
+对一个字符串类型的字段或参数进行验证，以确保它符合指定的正则表达式模式
+需要将一个字符串类型的正则表达式模式作为参数传递给它
+```java
+@Pattern(message = "手机号格式不对", regexp = "^[1-9][0-9]{10}$")
+private String mobile;
 ```
 
 # Example
@@ -514,34 +639,8 @@ public interface UserServiceClient {
 }
 ```
 
-# Function
-## Nacos
-appid:
-  config: 
-    - ids: 1,2
-      accessKeyId: LTAI5tDEY414S
-``` java
-public static AliOssConfig.IdConfig findItemById(String id, List<AliOssConfig.IdConfig> dataList) {
-    log.info("id:{}", id);
-    for (AliOssConfig.IdConfig item : dataList) {
-        List<String> ids = item.getIds();
-        log.info("ids{}", ids);
-        if (ids.contains(id)) {
-            log.info("item{}", item);
-            return item;
-        }
-    }
-    return null;
-}
-
-// config
-@Data
-@Component
-public class AliOssConfig {
-    @Value("${aliyun.oss.accessKeyId}")
-    private String accessKeyId;
-}
-```
+# Swagger
+http://localhost:8080/doc.html
 
 # Issues
 ## Java implements Serializable 什么意思
@@ -575,4 +674,12 @@ run 1
 run 2
 err 2java.lang.Exception: 这是一个测试异常
 run 2 after
+```
+
+## idea maven工程的module的Language Level总是自动变到5
+``` xml
+<properties>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
+</properties>
 ```

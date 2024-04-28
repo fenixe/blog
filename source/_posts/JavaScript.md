@@ -56,6 +56,9 @@ ECMA-262 的最新更新日期是 每年6月
 
 Web 前端招聘的 JD 中，经常出现的 ES6，不仅仅是 ES2015 这个版本，而是指代 ES2015 和其后每年发布的 ECMAScript 版本。
 
+### 历代版本新特性
+https://juejin.cn/post/7109378925964296223
+
 ## TC39
 Technical Committee 39 ，制定 ECMAScript 标准的委员会。
 由各个主流浏览器厂商的代表构成。
