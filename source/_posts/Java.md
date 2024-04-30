@@ -293,6 +293,28 @@ for (int i = 0; i < arr.length; i++) {
 }
 ```
 
+## 关键字
+### final
+最终的, 不可更改的。
+通过限制变化，增加稳定性和安全性。
+```java
+// 1.修饰变量
+final int i = 42; // 这个变量i不能再被赋值了
+
+// 2.修饰方法
+public class SuperClass {
+    // 该方法是最终方法，不能被子类重写
+    public final void show() {
+        System.out.println("This is a final method.");
+    }
+}
+
+// 3.修饰类
+// 这个类不能被继承
+public final class ConstantClass {
+}
+```
+
 ## 数据库
 ### 考虑幂等
 insert ignore into
@@ -339,7 +361,24 @@ try {
 ```
 
 ## http请求
-### get请求
+### RestTemplate
+```java
+// 负载均衡
+@LoadBalanced
+@Bean
+public RestTemplate loadBalanced1() {
+    return new RestTemplate();
+}
+
+// 默认优先选择 
+@Primary
+@Bean
+public RestTemplate restTemplate() {
+    return new RestTemplate();
+}
+```
+
+#### get请求
 ``` java
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
@@ -477,13 +516,18 @@ public class JsonExample {
 # 注释
 ## Spring注解
 @Component，@Service，@Repository，@Controller，@Configuration等注解定义的bean
+### @Autowired
+Spring 会在上下文中自动查找匹配的依赖对象，并将其注入到被标注的字段、构造方法或者方法参数中。
+不推荐：https://stackoverflow.com/questions/39890849/what-exactly-is-field-injection-and-how-to-avoid-it
+推荐：构造器注入（它强制依赖在对象创建时就必须提供，使得类的依赖关系更加明显，也更容易实现不可变性和进行单元测试。）
 
 ## Lombok库注解
+### @Data
+自动生成toString、equals、hashCode、getter和setter方法
 ### @AllArgsConstructor
 自动生成一个全参数构造器。会自动拥有一个构造函数，这个构造函数包含了该类中的所有字段作为参数，从而避免手动编写繁琐的构造器代码。
 ```java
 import lombok.AllArgsConstructor;
-
 @AllArgsConstructor
 public class ExampleClass {
     private int fieldA;
@@ -500,6 +544,14 @@ public ExampleClass(int fieldA, String fieldB /* 其他字段... */) {
 ExampleClass example = new ExampleClass(42, "The answer");
 ```
 
+注意：@Value注入会失效，原因时因为@Value注解是通过对象的set方法赋值的，构造方法的执行还在set方法之前，所以在构造方法中使用变量会变量为null。
+
+### @RequiredArgsConstructor
+仅为那些被标注为@NonNull或者是final的字段生成构造函数。
+
+### @NoArgsConstructor
+生成无参构造函数。
+如果你不手动提供构造方法，编译器会默认生成一个无参构造方法。但是，如果你手动提供了带参构造方法，编译器就不再生成无参构造方法。@NoArgsConstructor 解决了这个问题，它会在编译时生成一个无参构造方法，确保你的类可以在没有提供参数的情况下实例化。
 
 ## @Id
 声明一个属性将映射到数据库主键的字段

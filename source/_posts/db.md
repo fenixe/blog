@@ -72,6 +72,10 @@ CREATE TABLE `reocrd` (
 - COMMENT='记录'在创建表的最后，提供了这个表的注释信息，这里表示表的用途或描述是“记录”。
 所以，在您的表中，存在两个索引：主键索引（基于id字段）和普通索引idx_reocrd_no（基于no字段）。
 
+## sql脚本的导入导出
+导入：navicat中，点击库，右击，运行SQL文件。
+导出：navicat中，点击表，右击，导出sql文件。
+
 # ClickHouse
 ## 安装
 curl -O 'https://builds.clickhouse.com/master/macos/clickhouse' && chmod a+x ./clickhouse
