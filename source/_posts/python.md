@@ -612,6 +612,15 @@ my_value = False
 my_value = {}
 if not my_value:
     print("此条件为 False")
+
+# 某属性
+# 获取result字段的内容
+result = data.get("result")
+# 如果result为空或不存在
+if not result:
+    print("Result字段为空或不存在。")
+else:
+    print("使用有效的result：", result)
 ```
 
 ### 循环语句

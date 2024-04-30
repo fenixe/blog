@@ -87,3 +87,30 @@ curl -O 'https://builds.clickhouse.com/master/macos/clickhouse' && chmod a+x ./c
 ## TTL
 Time To Live: 生存时间
 键不存在或未设置过期时间，则该命令返回 -1
+
+## 支持的存储类型
+1. Strings（字符串）
+String 是Redis中最基本的类型，它可以包含任何形式的数据，比如文本数据、数字或者是二进制数据，字符串类型的值最大能支持512MB。
+2. Lists（列表）
+Redis的List是简单的字符串列表，它按照插入顺序排序。你可以在列表的头部或尾部添加元素，这使得List特别适合实现如消息队列等功能。
+3. Sets（集合）
+Sets是字符串的集合，不允许有重复的成员。Redis中的Sets是无序的，你可以非常快速地进行添加、删除、查找操作，还可以进行集合之间的操作，如并集、交集、差集。
+4. Sorted Sets（有序集合）
+Sorted Sets也是字符串的集合，但每个字符串元素都关联了一个称为score的浮点数值，能够根据这个score进行元素的全局排序。这允许你进行快速的元素插入和删除，并能取得一个范围的元素列表。
+5. Hashes（哈希）
+Hashes是field-value（字段-值）对的集合，是字符串字段和字符串值之间的映射。适合用于存储对象。
+6. Bitmaps（位图）
+Bitmap实际上是字符串类型，它通过提供二进制位存取操作的接口来进行高效的位级操作。
+7. HyperLogLogs（基数统计类型）
+HyperLogLog是用于进行基数统计的算法，Redis对这个算法做了高度优化，能在非常小的空间内进行非常大数量的唯一元素计数。
+8. Streams（流）
+Redis Streams是Redis 5.0引入的新的数据类型，它可以存储多个键值对的序列，这些键值对被称为消息。它是构建消息队列、日志应用非常有用的一种数据类型。
+9. Geospatial indexes（地理空间索引）
+Redis提供的Geospatial是一种数据类型，支持存储地理位置信息并执行诸如计算两个地点之间距离、查找在给定范围内的地点等操作。
+每种数据类型针对不同的应用场景和需求有着不同的命令和特性，使得Redis成为一种非常灵活的内存存储系统，适用于多种不同场景的数据管理和分析任务。
+
+## 插入
+stringRedisTemplate.opsForList().leftPush("myList", "Hello");
+leftPush方法是opsForList()返回的操作类中的一个方法，用于将一个或多个值插入到列表的头部。如果列表不存在，一个新的列表会被创建出来，之后再进行推送操作。这个方法的命名中的"left"意味着插入操作是在列表的左端执行，相对地，还有一个rightPush方法用于在列表的右端插入元素。
+
+stringRedisTemplate.opsForList().leftPushAll("myList", messages);
