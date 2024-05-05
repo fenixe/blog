@@ -263,6 +263,16 @@ public class CRepository {
 }
 ```
 
+### 方法参数
+```java
+public static List<String> getList(Integer num) {
+    // 检查num是否为null
+    if (num != null) {
+    }
+    // 你的其它逻辑
+}
+```
+
 ## 对象
 ### 判断
 equals() 方法接受一个对象作为参数，并返回一个布尔值，表示当前对象是否与参数对象相等。如果两个对象相等，那么 equals() 方法返回 true，否则返回 false。
@@ -629,6 +639,13 @@ select name from tag where id = 1 and name in ('name1', 'name2', 'name3')
 MyBatis, selectByPrimaryKey 方法通常是由 MyBatis 框架中的 Mapper 接口提供的，它用于根据主键（Primary Key）检索数据库中的一条记录
 Bot bot = botMapper.selectByPrimaryKey(botId);
 SELECT * FROM bot_table WHERE id = ?;
+
+```xml
+select * from holiday_record where query_date in
+<foreach collection="days" item="day" open="(" separator="," close=")">
+    #{day}
+</foreach>
+```
 
 ### 事务回滚
 ``` java
