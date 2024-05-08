@@ -220,6 +220,10 @@ long number = Long.parseLong(str);
 ## 数组
 ### 声明数组并初始化
 ```java
+// 固定大小的
+String[] datas
+System.out.println(Arrays.toString(data));
+
 // 可以改变大小的列表
 List<String> dates = new ArrayList<>(Arrays.asList("2024-04-25"));
 // 方法接收一个可变参数并将其转换为一个固定大小的列表。试图调用 add 或 remove 方法，将会抛出 UnsupportedOperationException。
@@ -227,6 +231,9 @@ List<String> dates = Arrays.asList("2024-04-25", "2024-04-26");
 dates.add("2024-04-26");
 System.out.println(dates);
 ```
+
+### asList
+Arrays.asList() 是一个 Java 的静态方法，它可以把一个数组或者多个参数转换成一个 List 集合。
 
 ## 方法
 ### 结构
@@ -271,6 +278,20 @@ public static List<String> getList(Integer num) {
     }
     // 你的其它逻辑
 }
+```
+
+## Enum
+```java
+public enum StatusEnum {
+    成功("1"),
+    失败("2"),
+    ;
+    public final String code;
+    StatusEnum(String code) {
+        this.code = code;
+    }
+}
+StatusEnum.成功.code
 ```
 
 ## 对象
@@ -405,6 +426,7 @@ public class InnerHttpRequestUtils {
 
     public JSONObject get(String url) {
         try {
+            // 同步的, 会阻塞当前的执行线程
             ResponseEntity<JSONObject> ret = restTemplate.getForEntity(url, JSONObject.class);
             log.info("http get ret: {}", ret);
             if (ret.getStatusCode().equals(HttpStatus.OK)) {
@@ -523,13 +545,31 @@ public class JsonExample {
 }
 ```
 
-# 注释
+# 注解
 ## Spring注解
 @Component，@Service，@Repository，@Controller，@Configuration等注解定义的bean
 ### @Autowired
 Spring 会在上下文中自动查找匹配的依赖对象，并将其注入到被标注的字段、构造方法或者方法参数中。
 不推荐：https://stackoverflow.com/questions/39890849/what-exactly-is-field-injection-and-how-to-avoid-it
 推荐：构造器注入（它强制依赖在对象创建时就必须提供，使得类的依赖关系更加明显，也更容易实现不可变性和进行单元测试。）
+
+### @ConfigurationProperties(prefix = "abc")
+属性类用于绑定配置信息：
+```java
+@Data
+public class AbcProperties {
+    // 规则文件和决策表的路径(多个目录使用逗号分割)
+    private AC a;
+    @Data
+    public static class AC {
+        private String b;
+    }
+}
+```
+
+### @EnableConfigurationProperties
+使使用 @ConfigurationProperties 注解的类生效。
+如果一个配置类只配置@ConfigurationProperties注解，而没有使用@Component，那么在IOC容器中是获取不到properties 配置文件转化的bean。
 
 ## Lombok库注解
 ### @Data
@@ -587,6 +627,11 @@ private Long id;
 @Pattern(message = "手机号格式不对", regexp = "^[1-9][0-9]{10}$")
 private String mobile;
 ```
+
+## @MapperScan
+import tk.mybatis.spring.annotation.MapperScan;
+@MapperScan 是一个 MyBatis 提供的注解，它用于指定要扫描的 Mapper 接口所在的包，以便 Spring 容器在启动时自动检测并注册这些 Mapper 接口为 Spring 管理的 Bean，无需手动为每个 Mapper 接口添加 @Mapper 注解。
+例如，当你在Spring Boot应用的配置类上使用 @MapperScan(basePackages = "cn.eth.lxjkapi.mapper") 注解时，MyBatis 将会自动扫描 cn.eth.lxjkapi.mapper 包及其子包下的所有接口。对于这些接口，如果它们被识别为 Mapper 接口（通常是因为它们继承了一个或多个标记了 MyBatis 的 @Mapper 注解的父接口），MyBatis 将会自动将这些接口注册为 Bean，让你能够在 Spring 应用中自动注入和使用这些 Mapper。
 
 # Example
 ## mapper
@@ -705,6 +750,19 @@ public class Adm {
         }
      }
 }
+```
+
+# Tool
+## uuid
+UUID.randomUUID()
+
+## Time
+```java
+Date now = new Date();
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+String formattedDate = sdf.format(now);
+
+String today = DateFormatUtils.format(new Date(), "yyyy-MM-dd");
 ```
 
 # IDEA

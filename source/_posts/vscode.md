@@ -528,6 +528,10 @@ ctrl+shift+p 唤出控制台，在搜索栏中输入 settings.json
 ## view-git-commit-log
 {% asset_img vscode-view-git-commit-log.png%}
 
+# IDEA
+## plugins
+### GitToolBox
+
 # Issues
 VScode在DOM中打入花括号会出现{ }}三个标签的错误
 打开设置  =》  搜索Closing Brackets  =》 找到 Auto Closing Brackets  =》 将aways改成beforeWhitespace。

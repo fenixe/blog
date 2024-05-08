@@ -90,10 +90,11 @@ methods: {
 
 # 编辑器快捷键（vscode、idea）
 c + x: 剪切。表示`cut`。可以在一行的任意位置，剪切一行。与复制不同的是会删掉内容。
-c + b: 打开默认浏览器`browser`
+c + b: 复制块
 c + n: 新建文本
 c + q: 退出程序`quit`
-
+c + d: 删除
+c + g: 打开默认浏览器google
 
 
 
