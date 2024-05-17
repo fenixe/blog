@@ -220,6 +220,9 @@ long number = Long.parseLong(str);
 ## 数组
 ### 声明数组并初始化
 ```java
+// 空数组
+Collections.emptyList()
+
 // 固定大小的
 String[] datas
 System.out.println(Arrays.toString(data));
@@ -234,6 +237,30 @@ System.out.println(dates);
 
 ### asList
 Arrays.asList() 是一个 Java 的静态方法，它可以把一个数组或者多个参数转换成一个 List 集合。
+
+### 数据处理
+```java
+// 提取ids
+List<Integer> ids = list.stream().map(Res::getId).collect(Collectors.toList());
+
+// 安照父元素，进行分组
+Map<Integer, List<Tag>> tagMap = tags.stream()
+                .collect(Collectors.groupingBy(Tag::getPid));
+// groupingBy 方法接收一个函数作为参数，它将作为分组的键。
+
+// tags数组归到主list
+// 分组tags
+Map<Integer, List<Map<String, Object>>> groupedTags = tags.stream()
+        .collect(Collectors.groupingBy(tag -> (Integer) tag.get("pid")));
+
+// 遍历list，并添加tags
+list = list.stream().map(item -> {
+    Integer id = (Integer) item.get("id");
+    List<Map<String, Object>> matchingTags = groupedTags.getOrDefault(id, new ArrayList<>());
+    item.put("tags", matchingTags);
+    return item;
+}).collect(Collectors.toList());
+```
 
 ## 方法
 ### 结构
@@ -571,6 +598,40 @@ public class AbcProperties {
 使使用 @ConfigurationProperties 注解的类生效。
 如果一个配置类只配置@ConfigurationProperties注解，而没有使用@Component，那么在IOC容器中是获取不到properties 配置文件转化的bean。
 
+### @RestController
+一个类级别的注解，用于标记一个控制器类，表明这个类是用于处理 HTTP 请求的。@RestController 是 @Controller 和 @ResponseBody 两个注解的合成注解。
+这个类中的所有方法的返回值都将自动包装为 HTTP 响应的正文，就无需再在每个方法上使用 @ResponseBody 注解了。
+特别适合于创建 RESTful API
+```java
+@RestController
+@RequestMapping("/users")
+public class UserController {
+    @GetMapping("/{id}")
+    public User getUser(@PathVariable String id) {
+        // 查询并返回用户，用户对象会自动转化为 JSON 格式的 HTTP 响应正文
+    }
+}
+```
+
+### @RestControllerAdvice
+是一个用于整个应用程序控制器层的全局配置类
+组合注解，由@ControllerAdvice、@ResponseBody组成，而@ControllerAdvice继承了@Component，因此@RestControllerAdvice本质上是个Component，用于定义@ExceptionHandler，@InitBinder和@ModelAttribute方法，适用于所有使用@RequestMapping方法。
+
+### @Order
+@Order(Ordered.HIGHEST_PRECEDENCE)
+定义了组件的加载顺序，Ordered.HIGHEST_PRECEDENCE 是 Spring Framework 提供的一个常量，表示最高优先级。
+
+### @ExceptionHandler
+@ExceptionHandler({MethodArgumentNotValidException.class})
+Spring 框架的一部分，它处理了MethodArgumentNotValidException，这个异常通常在使用了 @Valid 或 @Validated 的对象参数验证失败时抛出。
+
+### ResponseStatus
+@ResponseStatus(HttpStatus.OK)
+设置 HTTP 响应的状态码的。这里设置为 HttpStatus.OK表示响应的 HTTP 状态是 200，也就是请求已成功。
+
+### @ResponseBody
+@ResponseBody注解表示该方法的返回结果直接写入 HTTP 响应体中，而不是通过视图解析器处理。
+
 ## Lombok库注解
 ### @Data
 自动生成toString、equals、hashCode、getter和setter方法
@@ -632,6 +693,75 @@ private String mobile;
 import tk.mybatis.spring.annotation.MapperScan;
 @MapperScan 是一个 MyBatis 提供的注解，它用于指定要扫描的 Mapper 接口所在的包，以便 Spring 容器在启动时自动检测并注册这些 Mapper 接口为 Spring 管理的 Bean，无需手动为每个 Mapper 接口添加 @Mapper 注解。
 例如，当你在Spring Boot应用的配置类上使用 @MapperScan(basePackages = "cn.eth.lxjkapi.mapper") 注解时，MyBatis 将会自动扫描 cn.eth.lxjkapi.mapper 包及其子包下的所有接口。对于这些接口，如果它们被识别为 Mapper 接口（通常是因为它们继承了一个或多个标记了 MyBatis 的 @Mapper 注解的父接口），MyBatis 将会自动将这些接口注册为 Bean，让你能够在 Spring 应用中自动注入和使用这些 Mapper。
+
+## swagger注释
+```java
+@Api(tags = "项目")
+@ApiOperation(value = "项目列表")
+
+@Data
+@ApiModel("详情入参")
+public class Request {
+    @ApiModelProperty("ID")
+    @NotNull(message = "id不能为空")
+    private Long id;
+}
+@ApiModel("详情")
+public class Response {
+    @ApiModelProperty("返回的id")
+    private Long id;
+}
+```
+
+## javax.validation
+### @Validated
+可以作用在类上
+对@Valid 的封装
+可以进行分组验证
+```java
+//分组接口 1
+public interface InsertGroup {
+}
+//分组接口 2
+public class UpdateGroup {
+}
+
+@Data
+@NoArgsConstructor
+public class TestRequest {
+    @Null(message = "无需传id",groups = InsertGroup.class)
+    @NotBlank(message = "必须传入id",groups = UpdateGroup.class)
+    private String id;   
+}
+```
+
+### @Valid
+方法、属性（包括枚举中的常量）、构造函数、方法的形参上。
+用在对象前，触发对象内部各个字段的验证。支持嵌套验证。
+嵌套对象 和 集合对象，需要添加注解
+```java
+public R<Response> detail(@Valid @RequestBody Request request) 
+
+@Data
+public class UserBean {
+    @NotNull
+    private AddressBean address;
+
+    @ApiModelProperty("标签")
+    @Valid
+    @Size(min = 1, max = 4, message = "标签数量异常")
+    private List<ProjectTag> Tags;
+}
+
+
+```
+
+### 字段校验
+@NotNull 是一个常用的字段验证注解，用于确认字段不应为 null。可以判断空字符串
+@NotEmpty: 这个注解用于集合、数组、Map、以及字符串类型的字段，确保被注解的字段不为 null 且不为空（对于字符串，长度必须大于0）。
+@NotBlank: 这个注解专用于 String 类型，确保被注解的字段不为 null，除此之外还要至少包含一个非空白字符。
+
+
 
 # Example
 ## mapper
@@ -723,6 +853,12 @@ public class AdminServiceImpl implements AdminService {
         return R.ok(GlobalRetCode.成功.code, msg: ok, data: null);
     }
 }
+
+// 分页插件
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+Page<Object> page = PageHelper.startPage(request.getPage(), request.getPageSize());
+return new BasePageResponse<>((int)page.getTotal(), ret);
 ```
 
 ## Route

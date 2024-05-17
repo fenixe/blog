@@ -7,6 +7,28 @@ tags:
 - code
 ---
 
+# Base
+## 存储单位
+在计算机科学中，“字节”是数据存储的基本单位，且其大小是标准的：一个字节由8位（bits）组成。因此，在基本层面上，计算机里只有一种字节（byte），其由8个二进制位组成。
+然而，描述数据大小时，我们通常会使用更大的单位来表示较大的数据量。这些单位是基于字节的，并且按照一定的规模来递增，通常是按照1024的规模来递增，因为计算机是按照二进制来运行的。以下是一些常见的单位及其与字节之间的关系：
+1 Byte (B) = 8 bits (比特)
+1 Kilobyte (KB) = 1024 Bytes
+1 Megabyte (MB) = 1024 Kilobytes
+1 Gigabyte (GB) = 1024 Megabytes
+1 Terabyte (TB) = 1024 Gigabytes
+1 Petabyte (PB) = 1024 Terabytes
+1 Exabyte (EB) = 1024 Petabytes
+1 Zettabyte (ZB) = 1024 Exabytes
+1 Yottabyte (YB) = 1024 Zettabytes
+注意，有两个标准被使用来描述数据大小：IEC（国际电工委员会）和SI（国际单位制）。IEC使用1024作为递增基数，如上所示，而SI使用1000作为递增基数。这导致了一些混淆，因为硬盘制造商通常使用SI标准来标记容量，而操作系统则可能使用IEC标准。
+为了消除歧义，IEC引入了一些特殊的单位，比如用“Kibibyte (KiB)”代替“Kilobyte (KB)”表示1024字节，但在实际使用中，“Kilobyte”这个词常常用来表示1024字节。
+
+### 10MB转换为字节
+使用最常见的定义，也就是以1024为基数（根据IEC标准）：
+1 Megabyte (MB) = 1,024 Kilobytes (KB)1 Kilobyte (KB) = 1,024 Bytes (B)
+所以，10 Megabytes (MB) = 10 * 1,024 * 1,024 = 10,485,760 Bytes
+因此，10MB转换为字节就是10,485,760字节。
+
 # 调试
 获取授权url
 Method: post

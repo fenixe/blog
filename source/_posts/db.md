@@ -13,6 +13,11 @@ docker run -d -p 27017:27017 --name mongodb mongo:latest
 
 
 # Mysql
+## doc
+### 排序
+降序：order by id desc
+升序：order by id asc
+
 ## docker
 docker run --name mysql -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql:latest
 
