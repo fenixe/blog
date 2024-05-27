@@ -416,6 +416,9 @@ try {
 } catch (InterruptedException ie) {
     Thread.currentThread().interrupt();
 }
+
+log.info("后台标签导入任务开始执行...");
+Thread.sleep(5000);
 ```
 
 ## http请求
@@ -757,6 +760,7 @@ public class UserBean {
 ```
 
 ### 字段校验
+#### 字符
 @NotNull 是一个常用的字段验证注解，用于确认字段不应为 null。可以判断空字符串
 @NotEmpty: 这个注解用于集合、数组、Map、以及字符串类型的字段，确保被注解的字段不为 null 且不为空（对于字符串，长度必须大于0）。
 @NotBlank: 这个注解专用于 String 类型，确保被注解的字段不为 null，除此之外还要至少包含一个非空白字符。

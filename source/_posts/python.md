@@ -966,6 +966,16 @@ from pydantic import BaseModel, StringConstraints
 class BizInfo(BaseModel):
     biz_no: Annotated[str, StringConstraints(min_length=1)]
     des: str = "123"
+
+class RecordRequest(BaseModel):
+    # id: Annotated[Union[str, int], constr(min_length=1)]
+    id: Union[str, int]
+
+    @validator('id')
+    def check_id(cls, v):
+        if isinstance(v, str) and len(v) == 0:
+            raise ValueError('id 不能为空！')
+        return v
 ```
 
 ## 事务处理
