@@ -1009,10 +1009,22 @@ df.rename(columns=chinese_to_english, inplace=True)
 
 ### excel转为json
 ```py
-df = pd.read_excel(file_path)
+# value值全部设为字符串
+df = pd.read_excel(file_path, dtype=str)
+# 表头映射
 df.rename(columns=combined_ret, inplace=True)
-file_json_path = f"./src/output/excel_json_files/{uuid4}.json"
-df.to_json(file_json_path, orient='records', lines=False)
+# file_json_path = f"./src/output/excel_json_files/{uuid4}.json"
+# df.to_json(file_json_path, orient='records', lines=False)
+
+# 获取分割后的DataFrame片段
+df_subset = df.iloc[start_row:end_row]
+# 将所有的NaN值替换为空字符串
+df_subset_filled = df_subset.fillna('')
+# 构造JSON格式的数据
+json_data = {"total": total_rows, "row": df_subset_filled.shape[0], "datas": df_subset_filled.to_dict(orient='records')}
+
+with open(local_json_file, 'w') as fp:
+    json.dump(json_data, fp, ensure_ascii=False)
 ```
 
 ```py

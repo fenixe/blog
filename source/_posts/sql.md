@@ -15,6 +15,10 @@ bigint 是 MySQL 中更大的整数类型，占用 8 个字节，可以表示的
 因此，如果您需要存储较大的整数，或者需要确保整数类型的数值不会超出范围，可以使用 bigint 类型。但是，需要注意的是，bigint 类型所占用的存储空间更大，可能会占用更多的磁盘空间，并且在进行查询和排序时可能会比 int 类型更慢。因此，在选择数据类型时需要根据具体的场景和需求进行权衡和选择。
 
 # Doc
+## 数据类型
+decimal：表示定点数
+存储精确的数值，比如金融数据，其中需要精确的小数点及小数点后的数值。这与float或double的浮点数类型不同，后者可能会引入舍入误差。
+
 ## 查询某字段有几种值
 SELECT DISTINCT column_name FROM table_name;
 
@@ -53,6 +57,11 @@ mysql> SOURCE /path/to/file.sql;
 ## 排序
 DESC 代表降序排列
 ASC 代表升序排列
+
+### 单表按ID降序
+select * from user order by id desc;
+
+多表用表别称
 
 ## 字段
 ### 删除表中无用

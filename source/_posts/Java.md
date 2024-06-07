@@ -200,11 +200,42 @@ dependencies {
 - 浮点型 float a = 3.14
 - 字符类型 char zh = "中"
 - 布尔类型 boolean b1 = true
+- double，精度损失
 
 引用类型
 - 字符串 String s = "hello"
     final修饰符，常量
 - 数组 int[] a = new int[]{1,2} , 简写 int[] a = {1,2}
+
+### 字符串
+```java
+// 正则匹配
+input.matches("[a-zA-Z]+")
+// 一个字符是否是字母
+Character.isLetter(ch)
+```
+
+### int类型
+基本数据类型int的比较，通常使用==操作符。
+Integer类的equals方法确实可以用来比较两个Integer对象的值是否相等。
+
+### BigDecimal类型
+BigDecimal: 是一个不可变的、任意精度的有符号十进制数。高精度，比如货币计算时。
+sql定义字段：`longitude` decimal(10,7)
+表示：最多可以存储10位数字，其中7位是小数部分。
+通常支持任意位数的小数部分
+
+
+### 布尔类型
+boolean是Java的基本数据类型，它只有两个可能的值：true或false。它不是一个对象，它的内存占用也更小，因为它直接存储值。
+```java
+boolean exists = true; // 或者 false
+```
+Boolean是boolean的包装类。它是java.lang.Boolean类的一个实例，这个类提供了很多方法，例如将字符串转换成布尔值。Boolean对象可以是null，true或false。
+```java
+Boolean exists = Boolean.TRUE;  // 或者 Boolean.FALSE 或者 null
+```
+
 
 ### 数据类型转换
 int -> Long
@@ -472,6 +503,8 @@ public class InnerHttpRequestUtils {
     }
 }
 ```
+
+getForObject方法直接返回请求响应的主体（Body），它将响应体映射到你提供的类类型上。如果你只关心响应内容而不关心其它响应元数据（如状态码和头部）
 
 ## Redis
 ### 存
@@ -765,7 +798,13 @@ public class UserBean {
 @NotEmpty: 这个注解用于集合、数组、Map、以及字符串类型的字段，确保被注解的字段不为 null 且不为空（对于字符串，长度必须大于0）。
 @NotBlank: 这个注解专用于 String 类型，确保被注解的字段不为 null，除此之外还要至少包含一个非空白字符。
 
-
+# MyBatis
+## updateByPrimaryKeySelective
+Mapper接口中的一个方法，通常用于更新数据库表中的记录。
+会基于主键更新那些非null的字段。这意味着，只有在传入的对象中非null的属性才会被更新到数据库中对应主键的记录里，其他的字段则保持原值不变。这样做的好处是可以避免覆盖那些我们不想改变的、或者我们没有提供新值的字段。
+```java
+int updateByPrimaryKeySelective(实体类名称 record);
+```
 
 # Example
 ## mapper
