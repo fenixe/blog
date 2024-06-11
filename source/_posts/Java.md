@@ -209,10 +209,23 @@ dependencies {
 
 ### 字符串
 ```java
+// 转Integer, 两种
+int number = Integer.parseInt(numberAsString);
+Integer number = Integer.valueOf(numberAsString);
+
+
 // 正则匹配
 input.matches("[a-zA-Z]+")
 // 一个字符是否是字母
 Character.isLetter(ch)
+
+import org.apache.commons.lang.StringUtils;
+String str1 = null;
+String str2 = "";
+String str3 = " ";
+boolean isStr1Empty = StringUtils.isEmpty(str1); // true，因为str1是null
+boolean isStr2Empty = StringUtils.isEmpty(str2); // true，因为str2长度为0
+boolean isStr3Empty = StringUtils.isEmpty(str3); // false，因为str3包含一个空格字符
 ```
 
 ### int类型
@@ -291,6 +304,34 @@ list = list.stream().map(item -> {
     item.put("tags", matchingTags);
     return item;
 }).collect(Collectors.toList());
+```
+
+### stream操作
+stream操作分为中间操作（intermediate operations）和终端操作（terminal operations）。
+中间操作仅仅在终端操作触发时才会执行。
+
+- .collect(Collectors.toList()) — 收集结果到一个新的列表
+- .forEach(System.out::println) — 对每个元素执行给定的操作
+- .count() — 返回stream中元素的总数
+
+```java
+exportTerminals.stream().map(o -> {
+  o.setType();
+}).collect(Collectors.toList());
+```
+
+### 是否在数组中
+``` java
+// 数组：[{name:a},{name:b}]。我现在有一个name：x，如何判断name ：x 有没有在其中中
+Map<String, String> map1 = new HashMap<>();
+map1.put("name", "a");
+Map<String, String> map2 = new HashMap<>();
+map2.put("name", "b");
+List<Map<String, String>> listOfMaps = Arrays.asList(map1, map2);
+
+String nameToCheck = "x";
+boolean exists = listOfMaps.stream().anyMatch(map -> nameToCheck.equals(map.get("name")));
+System.out.println("Does name exist in the array? " + exists);
 ```
 
 ## 方法
@@ -409,6 +450,8 @@ public final class ConstantClass {
 insert ignore into
 
 ### 事务
+`事务`是一组操作的集合，它是一个不可分割的工作单位，这些操作 要么同时成功，要么同时失败。
+
 #### @Repository
 用来执行与数据库相关的操作的
 ```java
@@ -417,6 +460,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserRepository {
     // ... 数据库操作方法，比如查询、插入、删除等
+
+    int i = 1/0 // 模拟抛出异常
 }
 ```
 
@@ -863,6 +908,13 @@ select * from holiday_record where query_date in
 <foreach collection="days" item="day" open="(" separator="," close=")">
     #{day}
 </foreach>
+```
+
+```xml
+<!-- status 等于 0 情况 -->
+<if test="request.status != null and request.status != '' or request.status == 0">
+    and status = #{request.status}
+</if>
 ```
 
 ### 事务回滚

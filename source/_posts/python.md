@@ -1020,10 +1020,11 @@ df.rename(columns=combined_ret, inplace=True)
 df_subset = df.iloc[start_row:end_row]
 # 将所有的NaN值替换为空字符串
 df_subset_filled = df_subset.fillna('')
-# 构造JSON格式的数据
+# 构造JSON格式的数据。 to_dict方法：DataFrame转换为字典
 json_data = {"total": total_rows, "row": df_subset_filled.shape[0], "datas": df_subset_filled.to_dict(orient='records')}
 
 with open(local_json_file, 'w') as fp:
+    # 当ensure_ascii设置为False时, 直接使用UTF-8编码写入中文字符, 而不是将它们转换为Unicode转义序列。
     json.dump(json_data, fp, ensure_ascii=False)
 ```
 

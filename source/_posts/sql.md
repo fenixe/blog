@@ -49,6 +49,9 @@ ORDER BY re.weight ASC;
 </select>
 ```
 
+inner join : 只返回两个表中联结字段相等的行
+left join : 返回包括左表中的所有记录和右表中联结字段相等的记录
+
 ## 命令行导入sql脚本
 mysql -h 192.168.2.229 -u dev -p -P 3306
 mysql> USE database_name
