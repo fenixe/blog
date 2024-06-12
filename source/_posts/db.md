@@ -14,6 +14,14 @@ docker run -d -p 27017:27017 --name mongodb mongo:latest
 
 # Mysql
 ## doc
+### 创建库
+create schema terminal;
+
+### 删除表内数据
+empty table是清空表里的数据
+truncate table是删除表,然后再创建这张表 
+意义:对于主索引自动增加的情况, empty清表后, 新添加的行数据依然在上次的值上增加。而truncate则会重新从1开始
+
 ### 排序
 降序：order by id desc
 升序：order by id asc
@@ -22,6 +30,26 @@ docker run -d -p 27017:27017 --name mongodb mongo:latest
 docker run --name mysql -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql:latest
 
 docker run -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql
+
+### 登录
+```bash
+# 帮助
+$ mysql --help
+
+# 登录
+$ mysql -u root -p
+123456
+
+# 显示数据库列表
+mysql> SHOW DATABASES;
+
+# 默认模式
+mysql> select @@sql_mode;
+ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+
+# 改为work，少一个 NO_AUTO_CREATE_USER
+mysql> SET GLOBAL sql_mode = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+```
 
 ## 删除
 系统偏好设置面板中可以看到之前安装的MySQL，此时若想卸载MySQL
