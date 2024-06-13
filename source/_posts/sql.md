@@ -81,7 +81,8 @@ ALTER TABLE dev_project ADD plan_hours DECIMAL(10,1) COMMENT '预估工时';
 ALTER TABLE dev_project ADD plan_str VARCHAR(255) COMMENT '预估工时';
 ```
 
-## 查总数
+## 查
+### 总数
 ```sql
 # 查询store表1000条中status=2的总数
 SELECT COUNT(*)
@@ -93,12 +94,19 @@ FROM (
 WHERE subquery.status = 2;
 ```
 
-## 查ID后
+### 查ID后
 ```sql
 SELECT * FROM store
 WHERE keyword IS NOT NULL AND keyword <> '' AND status = 1 AND id >= 5
 ORDER BY id ASC
 LIMIT 2;
+```
+
+### 计数一次
+```sql
+SELECT COUNT(DISTINCT t.id)
+FROM terminal_svk t
+INNER JOIN baidu_location b ON t.id = b.pid;
 ```
 
 ## update更新
@@ -107,6 +115,24 @@ LIMIT 2;
 UPDATE store
 SET keyword = 'b'
 WHERE keyword = 'a';
+```
+
+### null值处理
+```sql
+UPDATE terminal_svk t
+INNER JOIN store s ON t.`name` = s.`name` AND s.`status` = 2
+INNER JOIN baidu_location b ON s.sub_id = b.id
+SET t.`status` = 3, 
+    t.coord = s.coord, 
+    t.sub_id = s.sub_id, 
+    t.tel = IFNULL(t.tel, b.tel);
+```
+### 空字符串处理
+```sql
+UPDATE terminal_temp t
+INNER JOIN baidu_location_temp b ON t.sub_id = b.id
+SET t.`status` = 3, 
+    t.tel = CASE WHEN t.tel = '' THEN b.tel ELSE t.tel END;
 ```
 
 ## 修改表配置

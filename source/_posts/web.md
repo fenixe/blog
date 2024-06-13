@@ -123,6 +123,7 @@ PoW （Proof of Work）工作量证明可以解决上述的两个问题，
 
 # Hyperledger Fabric
 区块链是一个共享的，通过智能合约更新的多副本交易系统，同时这个系统通过协作共识机制保证了网络中所有账本副本的同步。
+https://blog.csdn.net/xiaohanshasha/article/details/122574705
 
 ## 部署生产网络
 https://hyperledger-fabric.readthedocs.io/en/release-2.3/deployment_guide_overview.html

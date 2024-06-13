@@ -331,8 +331,17 @@ brew services reload nginx
 http://localhost:8080/
 Welcome to nginx! 
 
-## issues
-### MacBook M1 brew安装其他软件遇到问题（Error: Cannot install in Homebrew on ARM processor in Intel default prefix (/usr/local)!）的处理方法
+# Tools
+## Microsoft remote desktop
+传输mac和windows之间的文件
+https://blog.csdn.net/Xuxiuyun0611/article/details/94432230
+{% asset_img img_rd_0.png %}
+{% asset_img img_rd_1.png %}
+{% asset_img img_rd_2.png %}
+
+
+# issues
+## MacBook M1 brew安装其他软件遇到问题（Error: Cannot install in Homebrew on ARM processor in Intel default prefix (/usr/local)!）的处理方法
 
 打开Finder-> 打开应用程序->打开实用工具->终端
 找到终端.app(找到自己用的终端，或者iTerm)，显示简介，把使用 Rosetta打开勾选上，然后重启终端，再运行brew install ，
@@ -351,14 +360,14 @@ Welcome to nginx!
 "msgMobile": null,
 "status": "NoSubmit"
 
-### 打不开xxx,因为Apple无法检查其是否包含恶意软件
+## 打不开xxx,因为Apple无法检查其是否包含恶意软件
 {% asset_img software.jpg %}
 
 安全性与隐私 -> 允许从以下位置下载的应用 -> 任何来源
 如果 “任何来源”被隐藏，输入指令：
 sudo spctl --master-disable
 
-### 绕过安全验证（无法安装cocos 1.9.3）
+## 绕过安全验证（无法安装cocos 1.9.3）
 问题：无法打开（App的授权已撤销）
 删除软件上的安全验证信息，来达到绕过 MacOS 安全验证。
 ``` bash
@@ -376,10 +385,10 @@ xattr -cr <app-path>
 sudo codesign --force --deep --sign - <app-path>
 ```
 
-### “CocosCreator”将对您的电脑造成伤害。您应该将它移到废纸篓
+## “CocosCreator”将对您的电脑造成伤害。您应该将它移到废纸篓
 解决：访达 -> 应用程序 xxx.App -> 右键 -> 显示简介 -> 勾选 “覆盖恶意软件保护”。
 
-### 删除Microsoft AutoUpdate
+## 删除Microsoft AutoUpdate
 访达，“前往”——“前往文件夹”
 /Library/Application Support/Microsoft/
 直接删除文件夹“MAU2.0”

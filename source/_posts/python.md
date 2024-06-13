@@ -566,6 +566,24 @@ elif x == 'xyz':
 else:
   print('都不相等')
 
+# if not语句用于检查一个条件是否为False。它可以是直接的布尔值True或False，也可以是任何Python数据类型。因为Python中的值都有一个隐含的布尔值，称为其"Truthiness"。
+# 1、布尔值False本身
+flag = False
+if not flag:
+    print("Flag is false")
+# 2、数值0（包括整数0、浮点数0.0，以及其他数值类型的0，如0j）
+num = 0
+if not num:
+    print("Number is zero")
+# 3、空序列和集合，包括""(空字符串), [](空列表), ()(空元组), {}(空字典), set()(空集合)
+lst = []
+if not lst:
+    print("List is empty")
+# 4、None，Python中的“空”或“无”的指示符:
+nothing = None
+if not nothing:
+    print("Nothing is None")
+
 # 是否有值，是否等于某值
 # 使用.get()方法，它在尝试访问一个可能不存在的键时不会抛出异常
 if biz_res and biz_res.get("code") == 200:
@@ -647,6 +665,10 @@ while True:
 ``` py
 for 迭代变量 in 可迭代对象：
   代码块
+    # 跳过本次循环
+    continue
+    # 终止循环
+    break
 
 for s in [1,2,3]:
   print(s)
@@ -859,6 +881,12 @@ aliyunOss = res["aliyun"]["oss"]
 record_ret = cursor.rowcount
 # 57
 id = cursor.lastrowid
+```
+
+## select
+### 不为空
+```py
+query = f"SELECT id,keyword,tel FROM {table_name} WHERE keyword IS NOT NULL AND keyword <> '' AND status=1 limit {batch_size}"
 ```
 
 # fastapi
