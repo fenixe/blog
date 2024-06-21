@@ -101,6 +101,7 @@ $ touch test.text
 创建文件夹
 ``` BASH
 $ mkdir usr
+$ mkdir -p # 允许mkdir创建多级目录路径
 ```
 
 移动文件 ｜ 重命名文件：mv 文件名 修改后的文件名

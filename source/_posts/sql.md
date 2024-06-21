@@ -109,6 +109,11 @@ FROM terminal_svk t
 INNER JOIN baidu_location b ON t.id = b.pid;
 ```
 
+### 时间范围
+```sql
+SELECT NOW() - INTERVAL 30 DAY;
+```
+
 ## update更新
 把store表中的keyword字段值为“a”更改为“b”
 ```sql
@@ -133,6 +138,13 @@ UPDATE terminal_temp t
 INNER JOIN baidu_location_temp b ON t.sub_id = b.id
 SET t.`status` = 3, 
     t.tel = CASE WHEN t.tel = '' THEN b.tel ELSE t.tel END;
+```
+
+## 同步数据
+```sql
+-- 如果遇到eth_no已经存在，而且设置了 UNIQUE KEY `uni_user_eth_no` (`eth_no`) 。一个都不会插入成功。
+INSERT INTO user_data (eth_no,create_time,level)
+SELECT eth_no,add_time,0 FROM ma_user;
 ```
 
 ## 修改表配置

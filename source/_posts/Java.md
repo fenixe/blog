@@ -266,6 +266,7 @@ long number = Long.parseLong(str);
 ```java
 // 空数组
 Collections.emptyList()
+CollectionUtils.isEmpty(standardIds)
 
 // 固定大小的
 String[] datas
@@ -285,7 +286,7 @@ Arrays.asList() 是一个 Java 的静态方法，它可以把一个数组或者�
 ### 数据处理
 ```java
 // 提取ids
-List<Integer> ids = list.stream().map(Res::getId).collect(Collectors.toList());
+List<Integer> ids = list.stream().map(ResClass::getId).collect(Collectors.toList());
 
 // 安照父元素，进行分组
 Map<Integer, List<Tag>> tagMap = tags.stream()
@@ -419,6 +420,37 @@ for (int i = 0; i < arr.length; i++) {
         System.out.println(arr[i] + " is the last element.");
     } else {
         System.out.println(arr[i]);
+    }
+}
+```
+
+### 无限循环
+```java
+while (true) {
+    // 你的代码逻辑
+
+    // 检查是否满足终止条件
+    if (检查终止条件) {
+        break; // 终止循环
+    }
+}
+int counter = 0;
+while (true) {
+    System.out.println("Counter: " + counter);
+    counter++;
+
+    // 当计数器达到5时终止循环
+    if (counter >= 5) {
+        break;
+    }
+}
+
+for (;;) {
+    // 执行你的代码
+
+    // 如果满足终止条件
+    if (检查终止条件) {
+        break; // 跳出循环
     }
 }
 ```
