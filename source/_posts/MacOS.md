@@ -9,6 +9,15 @@ tags:
 ---
 
 # Base
+## .zshrc
+```zsh
+# 设置
+export OPENAI_API_KEY='your-api-key-here'
+
+# 验证
+echo $OPENAI_API_KEY
+```
+
 ## 工作区设置
 ### 鼠标
 大屏幕，鼠标跟踪速度调高一点。

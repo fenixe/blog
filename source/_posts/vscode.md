@@ -492,7 +492,26 @@ Java：通常使用4个空格。
 也可以编辑 .editorconfig 文件（如果项目中包含），以保证不同编辑器和不同开发者之间的一致性。
 重要的是保持一致性。选择2个空格还是4个空格并不是绝对的好坏之分，关键在于一致地遵循某种规范。如果你是项目的主要开发者或开始新项目，可以选择自己偏好的设置，否则遵循项目或团队的现有约定。
 
-#### .editorconfig
+
+## 花括号回车，不自动换行缩紧，不另起新的一行
+ctrl+shift+p 唤出控制台，在搜索栏中输入 settings.json
+打开：Open User Settings(JSON)
+删除空配置参数："editor.language.brackets": []
+
+## 赋印象笔记快捷键
+| Mac快捷键 | 作用  |
+| :--- | :--- |
+| Ctrl + comd + k | 删除线  |
+
+## view-git-commit-log
+{% asset_img vscode-view-git-commit-log.png%}
+
+# IDEA
+## plugins
+### GitToolBox
+
+# EditorConfig文件
+在项目根目录下创建一个.editorconfig文件。
 优先级比编辑器自身的设置要高，多人协作必备
 vscode需安装Editorconfig for vscode插件
 vue项目的配置
@@ -514,23 +533,43 @@ insert_final_newline = false
 trim_trailing_whitespace = false
 ```
 
+## 前端项目
+``` conf
+# EditorConfig is awesome: https://EditorConfig.org
 
-## 花括号回车，不自动换行缩紧，不另起新的一行
-ctrl+shift+p 唤出控制台，在搜索栏中输入 settings.json
-打开：Open User Settings(JSON)
-删除空配置参数："editor.language.brackets": []
+# top-most EditorConfig file
+root = true
 
-## 赋印象笔记快捷键
-| Mac快捷键 | 作用  |
-| :--- | :--- |
-| Ctrl + comd + k | 删除线  |
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+insert_final_newline = true
 
-## view-git-commit-log
-{% asset_img vscode-view-git-commit-log.png%}
+# Matches multiple files with brace expansion notation
+# Set default charset
+[*.{js,jsx,ts,tsx,html,css,sass}]
+charset = utf-8
+indent_style = space
+indent_size = 2
+```
 
-# IDEA
-## plugins
-### GitToolBox
+## Python项目
+``` conf
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+# Python files
+[*.py]
+charset = utf-8
+indent_style = space
+indent_size = 4
+```
+
 
 # Issues
 VScode在DOM中打入花括号会出现{ }}三个标签的错误

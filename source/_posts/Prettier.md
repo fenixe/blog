@@ -24,8 +24,15 @@ yarn add prettier --dev --exact
 {% asset_img insert.png %}
 
 
-
-
+# 项目配置
+vue项目配置
+``` json
+{
+  "semi": false,
+  "singleQuote": true,
+  "arrowParens": "avoid"
+}
+```
 
 
 
