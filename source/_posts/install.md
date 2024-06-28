@@ -8,7 +8,7 @@ tags:
 - Yarn
 ---
 
-## nodejs
+# nodejs
 Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效。Node.js 的包管理器 npm，是全球最大的开源库生态系统。
 ### win
 下载nodejs https://nodejs.org/zh-cn/
@@ -36,7 +36,27 @@ Acquire::http::Proxy "http://user:pwd@192.168.1.1:8080";
 $ sudo rm /etc/apt/apt.conf.d/proxy.conf
 ```
 
-## Yarn
+## node_modules
+### node-sass
+[node-sass](https://github.com/sass/node-sass)
+NodeJS  | Supported node-sass version | Node Module
+--------|-----------------------------|------------
+Node 20 | 9.0+                        | 115
+Node 19 | 8.0+                        | 111
+Node 18 | 8.0+                        | 108
+Node 17 | 7.0+, <8.0                  | 102
+Node 16 | 6.0+                        | 93
+Node 15 | 5.0+, <7.0                  | 88
+Node 14 | 4.14+, <9.0                 | 83
+Node 13 | 4.13+, <5.0                 | 79
+Node 12 | 4.12+, <8.0                 | 72
+Node 11 | 4.10+, <5.0                 | 67
+Node 10 | 4.9+, <6.0                  | 64
+Node 8  | 4.5.3+, <5.0                | 57
+Node <8 | <5.0                        | <57
+
+
+# Yarn
 ### linux
 [安装地址](https://yarn.bootcss.com/docs/install/#debian-stable)
 ``` BASH

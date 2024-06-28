@@ -519,9 +519,6 @@ export class CartService {
 - package.json 里面的依赖版本，不要使用～，锁死版本号；～的话，会解析最新版本，会导致每个人机器上都不一样
 - ng g c UserMng 驼峰法则会自动展开变成中划线
 
-# 坑
-- node-sass
-
 # 教程
 ## Angular 核心概念
 - 集成开发环境@angular/cli

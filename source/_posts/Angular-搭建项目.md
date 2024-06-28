@@ -323,9 +323,6 @@ ng update @angular/core@^9.1.0 --force
 ## 修改
 ViewChild => @ViewChild('foo', {static: false}) foo !: ElementRef;
 
-## 重新安装
-node-sass
-
 ## 卸载
 @angular/cdk@8.0.0
 
