@@ -626,6 +626,23 @@ methods: {
 2.2.0+ 的版本里，当在组件上使用 v-for 时，key 现在是必须的。
 
 ## 事件处理
+### 监听回车事件
+```html
+<input type="text" @keyup.enter="handleEnter">
+
+<!-- esc事件 -->
+<input type="text" @keyup.esc="handleEsc">
+
+<!-- el-input -->
+<input type="text" @keydown.enter.native.prevent="handleEnter">
+handleEnter(event) {
+  if (event.shiftKey) {
+    // Shift + Enter 被按下，手动添加一个换行符
+  } else {
+    // 仅 Enter 被按下，发送消息
+  }
+},
+```
 ### 事件修饰符
 #### .stop 阻止单击事件继续传播，防止冒泡
 <a v-on:click.stop="doThis"></a>
@@ -1620,6 +1637,29 @@ module.exports = {
     // parser: 'babel-eslint'
   },
 }
+
+# 依赖库
+## 渲染 markdown
+``` vue
+<template>
+	<div v-html="markdown.render('### 一')"></div>
+</template>
+import MarkdownIt from 'markdown-it';
+const markdown = new MarkdownIt()
+```
+
+## markdown编辑器
+``` vue
+<MdEditor v-model="pdfContents[index].prelim_text" class="md-custom"/>
+import MdEditor from 'md-editor-v3';
+import 'md-editor-v3/lib/style.css';
+components:{
+  MdEditor
+},
+.md-custom {
+  height: 1120px;
+}
+```
 
 # 问题
 ## Uncaught SyntaxError: Unexpected token <

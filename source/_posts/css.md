@@ -176,6 +176,9 @@ align-items: baseline;
 overflow: hidden; // 超出的文本隐藏
 text-overflow: ellipsis; // 溢出用省略号显示
 white-space: nowrap; // 溢出不换行
+
+/* msg 中 /n 换行 */
+white-space: pre-wrap;
 ```
 
 两行自适应
