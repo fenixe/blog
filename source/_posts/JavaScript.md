@@ -422,6 +422,15 @@ window.innerHeight
 alert( window.innerWidth ); // 整个窗口的宽度
 alert( document.documentElement.clientWidth ); // 减去滚动条宽度后的窗口宽度
 
+### 滚动到顶部
+```js
+// 平滑滚动到页面顶部
+window.scrollTo({
+  top: 0,
+  behavior: 'smooth'
+});
+```
+
 ### addEventListener
 ```js
 function setLaunch() {
