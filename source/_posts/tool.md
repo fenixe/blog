@@ -268,3 +268,12 @@ print("oss_exist", oss_exist)
 
 # ossBucketObject.put_object_from_file('excel/202403/5', 'src/output/oss_files/55807928-ad68-44db-9a12-bb9391470e59.xlsx')
 ```
+
+# k8s
+问题：
+Failed to create pod sandbox: rpc error: code = Unknown desc = failed to get sandbox image "k8s.gcr.io/pause:3.6": failed to pull image "k8s.gcr.io/pause:3.6": failed to pull and unpack image "k8s.gcr.io/pause:3.6": failed to resolve reference "k8s.gcr.io/pause:3.6": failed to do request: Head "https://k8s.gcr.io/v2/pause/manifests/3.6": dial tcp 173.194.174.82:443: i/o timeout
+
+Spug登录
+crictl pull registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.6
+ctr -n k8s.io i tag registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.6 k8s.gcr.io/pause:3.6
+

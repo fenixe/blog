@@ -395,6 +395,10 @@ StatusEnum.成功.code
 ```
 
 ## 对象
+```java
+Map params = new HashMap<String, String>();
+params.put("doctor_name", taskRecord.getDoctorName());
+```
 ### 判断
 equals() 方法接受一个对象作为参数，并返回一个布尔值，表示当前对象是否与参数对象相等。如果两个对象相等，那么 equals() 方法返回 true，否则返回 false。
 默认情况下，Java 中的对象比较都是基于引用比较的，也就是说，如果没有重写 equals() 方法，那么它默认的行为就是比较两个对象的地址是否相等。
@@ -820,7 +824,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 @Data
 @ApiModel("详情入参")
 public class Request {
-    @ApiModelProperty("ID")
+    @ApiModelProperty(value = "ID", , required = true)
     @NotNull(message = "id不能为空")
     private Long id;
 }
@@ -1019,6 +1023,9 @@ public class Adm {
      }
 }
 ```
+
+# 消息队列
+消息队列（Message Queue，简称MQ）是用于在分布式系统中实现异步通信的一种机制。它允许不同的系统或服务之间通过消息进行通信，而不需要直接调用彼此的API。这种机制可以帮助解耦系统，提高系统的可扩展性和可靠性。
 
 # Tool
 ## uuid
