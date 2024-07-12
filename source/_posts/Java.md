@@ -697,6 +697,13 @@ public class JsonExample {
 # 注解
 ## Spring注解
 @Component，@Service，@Repository，@Controller，@Configuration等注解定义的bean
+### @Configuration
+标记一个类作为 Java 配置类。
+
+#### 定义 Bean
+这个配置类通常包含一个或多个 @Bean 方法，这些方法会被 Spring 容器调用，以便在应用程序上下文中注册和管理 Spring Bean。
+在配置类中，可以使用 @Bean 注解来定义 Bean。每个 @Bean 方法将返回一个对象，该对象会被 Spring 容器管理。
+
 ### @Autowired
 Spring 会在上下文中自动查找匹配的依赖对象，并将其注入到被标注的字段、构造方法或者方法参数中。
 不推荐：https://stackoverflow.com/questions/39890849/what-exactly-is-field-injection-and-how-to-avoid-it
