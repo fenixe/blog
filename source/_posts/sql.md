@@ -21,7 +21,8 @@ decimal：表示定点数
 存储精确的数值，比如金融数据，其中需要精确的小数点及小数点后的数值。这与float或double的浮点数类型不同，后者可能会引入舍入误差。
 
 ## 查询某字段有几种值
-SELECT DISTINCT column_name FROM table_name;
+SELECT DISTINCT column_name
+FROM table_name;
 
 ### 多表查询
 ```sql

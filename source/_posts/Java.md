@@ -507,6 +507,8 @@ public class UserRepository {
 ```
 
 #### 回滚 @Transactional(rollbackFor = Exception.class)
+为什么在 biz 目录中使用 @Transactional
+biz 目录通常包含业务逻辑层的代码，负责处理应用程序的核心业务操作。这些操作通常需要多个数据库操作来完成，因此事务管理在这里显得尤为重要。使用 @Transactional 可以确保这些操作的一致性和完整性。
 ```java
 import org.springframework.transaction.annotation.Transactional;
 
@@ -522,6 +524,25 @@ Transaction
 - Consistency：一致性
 - Isolation：隔离性
 - Durability：持久性
+
+```java
+@Service
+@Transactional(rollbackFor = {Exception.class, RuntimeException.class})
+public class BannerBiz {
+
+    @Resource
+    private PostActivityMapper postActivityMapper;
+
+    @Resource
+    private BannerConfigMapper bannerConfigMapper;
+
+    public void updateBanner(BannerConfigUpdateRequest request) {
+
+        postActivityMapper.update(request.getStatus());
+        bannerConfigMapper.updateBannerConfig(request);
+    }
+}
+```
 
 ## 线程
 ``` java
