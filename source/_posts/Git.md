@@ -854,3 +854,11 @@ git config --global https.proxy socks5h://127.0.0.1:7890
 
 git 底层使用 libcurl 发送 http 请求，而 libcurl 的代理使用 socks5://时会在本地解析 DNS ，应该改成 socks5h://
 https://curl.se/libcurl/c/CURLOPT_PROXY.html
+
+## 主机密钥被更改
+It is also possible that a host key has just been changed.
+The fingerprint for the RSA key sent by the remote host is
+remove with:
+ssh-keygen -f "/home/kil/.ssh/known_hosts" -R "github.com"
+
+删除主机根目录 .ssh文件下的 known_hosts

@@ -439,5 +439,5 @@ server {
 ## [error] open() "/usr/local/var/run/nginx.pid" failed (2: No such file or directory)
 ssl
 找到nginx.conf的文件夹目录，然后运行
-nginx -c /usr/local/etc/nginx/nginx.conf命令
+nginx -c /etc/nginx/nginx.conf命令
 再运行nginx -s reload
