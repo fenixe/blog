@@ -279,6 +279,13 @@ git checkout -b new_branch_name
 git stash pop
 ```
 
+#### 切分支
+没提交
+git checkout -b new
+git add .
+git commit - m ''
+git push origin new 
+
 
 ## 清除已删除的分支
 ### git branch -a 

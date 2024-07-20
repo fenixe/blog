@@ -267,6 +267,9 @@ diff是Unix系统的一个很重要的工具程序。
 computed: 计算属性
 computer: 计算机
 
+# Servlet
+Servlet = Service + Applet，表示小服务程序
+
 # 数量
 k是千、万是10k。M是兆（即百万）。
 

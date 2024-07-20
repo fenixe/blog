@@ -42,6 +42,73 @@ mysql -u username -p
 SELECT VERSION();
 ```
 
+## 例子
+### job设置
+1、注释（增加可读性）
+2、外层 try catch 增加健壮性
+3、支持自定义传参
+4、过程封装service，可移植性
+``` java
+/**
+ * 任务描述：用户等级初始化
+ * 调度类型：NONE
+ * 手动执行一次：
+ *      1.传参：用户惠药号，多个英文逗号隔开
+ *      2.无传参：每次查询50个待初始化的用户
+ */
+
+@Profile(value = {"job"})
+@Slf4j
+@Component
+public class UserLevelInitJob {
+    @Autowired
+    private UserDataService userDataService;
+
+    @XxlJob("userLevelInitJob")
+    public void initJob() {
+        log.info("开始执行 用户等级初始化任务");
+        try {
+            String jobParam = XxlJobHelper.getJobParam();
+            log.info("userLevelInitJob jobParam: {}", jobParam);
+            XxlJobHelper.log("userLevelInitJob jobParam: {}", jobParam);
+            userDataService.initLevel(jobParam);
+            log.info("用户等级初始化任务 执行结束");
+        } catch (Exception e) {
+            log.error("执行 用户等级初始化任务 异常", e);
+        }
+    }
+}
+```
+
+### job对于业务处理服务
+```java
+// 如果 jobParam 是空白字符, 初始化所有数据
+if (jobParam == null || jobParam.trim().isEmpty()) {
+    while (true) {
+        List<UserData> users = userDataMapper.batchSelectInitUser();
+        if (CollectionUtils.isEmpty(users)) {
+            log.info("暂无待初始化用户等级记录");
+            break;
+        }
+        List<UserData> userList = setUserLevel(users);
+        if (userList == null) { // 对第三方服务异常 做处理。如果服务不通，直接终止job
+            log.info("调用服务失败，退出用户等级初始化 job");
+            break;
+        }
+        userDataMapper.updateUserList(userList);
+    }
+} else {}
+```
+
+### 公共模块
+```java
+// 异常处理
+if (ObjectUtil.isEmpty(response)) {
+    log.info("调用lb-user服务失败");
+    return null;
+}
+```
+
 ## 日志
 ----------- xxl-job job execute start -----------
 ----------- Param:
@@ -201,3 +268,12 @@ print("oss_exist", oss_exist)
 
 # ossBucketObject.put_object_from_file('excel/202403/5', 'src/output/oss_files/55807928-ad68-44db-9a12-bb9391470e59.xlsx')
 ```
+
+# k8s
+问题：
+Failed to create pod sandbox: rpc error: code = Unknown desc = failed to get sandbox image "k8s.gcr.io/pause:3.6": failed to pull image "k8s.gcr.io/pause:3.6": failed to pull and unpack image "k8s.gcr.io/pause:3.6": failed to resolve reference "k8s.gcr.io/pause:3.6": failed to do request: Head "https://k8s.gcr.io/v2/pause/manifests/3.6": dial tcp 173.194.174.82:443: i/o timeout
+
+Spug登录
+crictl pull registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.6
+ctr -n k8s.io i tag registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.6 k8s.gcr.io/pause:3.6
+

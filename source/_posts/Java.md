@@ -395,9 +395,18 @@ StatusEnum.成功.code
 ```
 
 ## 对象
+```java
+Map params = new HashMap<String, String>();
+params.put("doctor_name", taskRecord.getDoctorName());
+```
 ### 判断
 equals() 方法接受一个对象作为参数，并返回一个布尔值，表示当前对象是否与参数对象相等。如果两个对象相等，那么 equals() 方法返回 true，否则返回 false。
 默认情况下，Java 中的对象比较都是基于引用比较的，也就是说，如果没有重写 equals() 方法，那么它默认的行为就是比较两个对象的地址是否相等。
+
+### JSON 转匹配类型
+```java
+OssStsTokenResponse ossStsTokenResponse = JSON.parseObject(JSON.toJSONString(response.get("data")), OssStsTokenResponse.class);
+```
 
 ## var
 10以上版本
@@ -498,6 +507,8 @@ public class UserRepository {
 ```
 
 #### 回滚 @Transactional(rollbackFor = Exception.class)
+为什么在 biz 目录中使用 @Transactional
+biz 目录通常包含业务逻辑层的代码，负责处理应用程序的核心业务操作。这些操作通常需要多个数据库操作来完成，因此事务管理在这里显得尤为重要。使用 @Transactional 可以确保这些操作的一致性和完整性。
 ```java
 import org.springframework.transaction.annotation.Transactional;
 
@@ -513,6 +524,25 @@ Transaction
 - Consistency：一致性
 - Isolation：隔离性
 - Durability：持久性
+
+```java
+@Service
+@Transactional(rollbackFor = {Exception.class, RuntimeException.class})
+public class BannerBiz {
+
+    @Resource
+    private PostActivityMapper postActivityMapper;
+
+    @Resource
+    private BannerConfigMapper bannerConfigMapper;
+
+    public void updateBanner(BannerConfigUpdateRequest request) {
+
+        postActivityMapper.update(request.getStatus());
+        bannerConfigMapper.updateBannerConfig(request);
+    }
+}
+```
 
 ## 线程
 ``` java
@@ -688,6 +718,13 @@ public class JsonExample {
 # 注解
 ## Spring注解
 @Component，@Service，@Repository，@Controller，@Configuration等注解定义的bean
+### @Configuration
+标记一个类作为 Java 配置类。
+
+#### 定义 Bean
+这个配置类通常包含一个或多个 @Bean 方法，这些方法会被 Spring 容器调用，以便在应用程序上下文中注册和管理 Spring Bean。
+在配置类中，可以使用 @Bean 注解来定义 Bean。每个 @Bean 方法将返回一个对象，该对象会被 Spring 容器管理。
+
 ### @Autowired
 Spring 会在上下文中自动查找匹配的依赖对象，并将其注入到被标注的字段、构造方法或者方法参数中。
 不推荐：https://stackoverflow.com/questions/39890849/what-exactly-is-field-injection-and-how-to-avoid-it
@@ -815,7 +852,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 @Data
 @ApiModel("详情入参")
 public class Request {
-    @ApiModelProperty("ID")
+    @ApiModelProperty(value = "ID", , required = true)
     @NotNull(message = "id不能为空")
     private Long id;
 }
@@ -1014,6 +1051,9 @@ public class Adm {
      }
 }
 ```
+
+# 消息队列
+消息队列（Message Queue，简称MQ）是用于在分布式系统中实现异步通信的一种机制。它允许不同的系统或服务之间通过消息进行通信，而不需要直接调用彼此的API。这种机制可以帮助解耦系统，提高系统的可扩展性和可靠性。
 
 # Tool
 ## uuid

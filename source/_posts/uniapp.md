@@ -72,6 +72,19 @@ uni.navigateTo({
 });
 ```
 
+### 默认路由
+pages.json
+```json
+"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/new/home",
+			"style": {
+				"navigationBarTitleText": "购买好药"
+			}
+		},
+]
+```
+
 ## page
 ```json
 "path": "",

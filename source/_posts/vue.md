@@ -1661,6 +1661,10 @@ components:{
 }
 ```
 
+## PDF预览
+[vue-pdf-embed](https://blog.csdn.net/qq_45897239/article/details/136080318)
+https://juejin.cn/post/7105933034771185701
+
 # 问题
 ## Uncaught SyntaxError: Unexpected token <
 [stackoverflow](https://stackoverflow.com/questions/51210795/vue-cli-uncaught-syntaxerror-unexpected-token)

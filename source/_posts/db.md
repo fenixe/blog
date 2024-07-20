@@ -17,6 +17,12 @@ docker run -d -p 27017:27017 --name mongodb mongo:latest
 ### 创建库
 create schema terminal;
 
+### 更新表
+```sql
+ALTER TABLE terminal
+ADD COLUMN customer_code VARCHAR(50) NOT NULL DEFAULT '' COMMENT '客户编码';
+```
+
 ### 删除表内数据
 empty table是清空表里的数据
 truncate table是删除表,然后再创建这张表 

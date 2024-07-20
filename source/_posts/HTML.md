@@ -56,6 +56,52 @@ view_window、view_frame、_blank、_self、_parent、_top
 ## favico缓存破坏
 <link rel="icon" href="/favicon.ico?v=2" />    
 
+## script标签
+### 同步加载（Synchronous）
+同步加载是最传统的加载方式，浏览器会停止页面解析直到脚本完全加载和执行完毕。
+缺点是，如果脚本文件很大或网络延迟，页面的加载时间会增加，影响用户体验。
+```html
+<script src="path/to/your-script.js"></script>
+```
+
+### 异步加载（Asynchronous）
+异步加载允许浏览器并行下载脚本，而不会阻塞页面的解析。
+脚本文件会并行下载，但一下载完立即执行，无法保证脚本加载顺序。
+```html
+<script async src="path/to/your-script.js"></script>
+```
+适合场景：
+第三方脚本：例如广告脚本、用户追踪和分析工具（如 Google Analytics）。这些脚本通常和页面主要内容无直接依赖关系，因此采用异步加载可以减少对页面渲染速度的影响。
+不依赖DOM的脚本：生效时机不敏感的功能性脚本，比如初始化一些后台服务、预加载某些资源。
+优化首屏加载速度：对于优化页面加载性能至关重要的场合，采用异步加载可以使用户尽快看到首屏内容，提高页面响应速度。
+
+使用 async 适合不依赖于其他脚本和页面DOM的第三方脚本加载，如广告、追踪脚本等。
+
+### 延迟加载（Defer）
+延迟加载让脚本在文档解析完毕后、触发 DOMContentLoaded 事件前执行，适合非紧急的脚本。
+脚本会并行下载，但会按照在文档中出现的顺序执行。
+```html
+<script defer src="path/to/your-script.js"></script>
+```
+适合场景：
+依赖DOM的脚本：如果脚本需要等到整个页面DOM结构加载完毕后才能执行，例如操作 DOM 元素的脚本，延迟加载是更合适的选择。
+保证执行顺序的脚本：如果页面中有多个 JavaScript 文件相互依赖，需要按照特定顺序执行，defer 能保证脚本按照在页面中出现的顺序执行，这是 async 属性无法保证的。
+提高网页可交互速度：对于影响网页功能但不影响网页结构展示的脚本，使用 defer 可以使网页在加载过程中更快地呈现给用户，等到全部元素正确布局和渲染后再执行 JavaScript，提升了用户体验。
+
+使用 defer 适合确保脚本执行顺序和依赖DOM加载完成的情况，特别是包含多个脚本需要按顺序执行的大型应用。
+
+### 动态加载（Dynamic Loading）
+完全控制脚本的加载时机、方式，通常用于实现更高级的加载策略，如懒加载。
+```js
+var script = document.createElement('script');
+script.src = "path/to/your-script.js";
+document.head.appendChild(script);
+```
+
+### 第三方库
+RequireJS、SystemJS 等模块加载器或构建工具（如 webpack、Rollup）来管理和优化资源加载。
+
+
 ## label
 HTML <label> 元素（标签）表示用户界面中某个元素的说明。
 
