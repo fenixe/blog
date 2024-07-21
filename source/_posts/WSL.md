@@ -7,6 +7,15 @@ tags:
 - WSL
 ---
 
+# Base
+## 指令
+内核版本号
+uname -r
+
+系统版本号
+sudo lsb_release -a
+
+
 ## 效果
 {% asset_img seven_pc.png %}
 

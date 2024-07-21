@@ -27,6 +27,9 @@ pip install --upgrade pip
 pip list
 
 设置清华源：https://mirrors.tuna.tsinghua.edu.cn/help/pypi/
+pip install fastapi i https://mirrors.tuna.tsinghua.edu.cn/help/pypi/
+
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn selenium
 
 ## 安装
 python.org download
@@ -863,6 +866,12 @@ logging.basicConfig(filename='application.log',
 
 logging.info('应用程序启动')
 ```   
+
+## 打开浏览器
+```py
+from selenium import webdriver
+driver = webdriver.Edge()
+```
 
 # Nacos
 ```yaml
