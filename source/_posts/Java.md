@@ -486,6 +486,13 @@ public final class ConstantClass {
 }
 ```
 
+## 时间
+```java
+import org.apache.commons.lang3.time.DateFormatUtils;
+import java.util.Date;
+String currentTime = DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss");
+```
+
 ## 数据库
 ### 考虑幂等
 insert ignore into
@@ -541,6 +548,20 @@ public class BannerBiz {
         postActivityMapper.update(request.getStatus());
         bannerConfigMapper.updateBannerConfig(request);
     }
+}
+```
+
+### 唯一约束
+确保列 a 和列 b 的组合值在表中是唯一的:
+UNIQUE KEY uniq_ab (a,b)
+``` java
+try {
+} catch (DuplicateKeyException e) {
+    // 添加重复异常捕获
+    return R.fail("名称重复");
+} catch (Exception e) {
+    log.info("添加异常", e);
+    return R.fail("添加失败");
 }
 ```
 

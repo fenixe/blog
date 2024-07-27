@@ -763,7 +763,14 @@ unset all_proxy && unset ALL_PROXY
 安装
 pip install pysocks
 
-## 定时器
+## 时间
+### 时间戳
+秒级
+```py
+import time
+timestamp_in_seconds = int(time.time())
+```
+### 定时器
 ``` py
 import threading
 def print_message():
@@ -1339,6 +1346,91 @@ if __name__ == "__main__":
 import colorama
 colorama.init()
 ```
+
+## pycryptodome
+加密包
+要改，项目中的 venv/lib/python3.9/site-packages/
+crypto -> Crypto
+
+PyCryptodome 是一个用于加密和解密的Python库，提供了多种加密算法的实现，包括AES（高级加密标准）。在使用AES加密时，AES.new() 方法是创建一个AES加密对象的主要方法。这个方法需要传入几个关键参数：加密密钥（key）和加密向量（IV，Initialization Vector），具体参数取决于所选择的模式（mode）。
+
+AES.new() 方法
+AES.new() 方法用于创建一个新的AES加密对象。其基本语法如下：
+
+```py
+from Crypto.Cipher import AES
+cipher = AES.new(key, mode, iv)
+```
+
+参数解释
+key（密钥）：
+
+类型：字节串（bytes）
+长度：AES支持三种密钥长度：16字节（128位），24字节（192位），和32字节（256位）。
+作用：密钥用于加密和解密数据，是加密过程中的核心秘密。
+mode（模式）：
+
+类型：常量，表示AES的工作模式。
+常见模式：
+AES.MODE_ECB：电子密码本模式（不推荐，因为它不使用IV，容易受到多种攻击）。
+AES.MODE_CBC：密码分组链接模式（需要IV）。
+AES.MODE_CFB：密码反馈模式（需要IV）。
+AES.MODE_OFB：输出反馈模式（需要IV）。
+AES.MODE_CTR：计数器模式（不需要IV，但需要nonce）。
+AES.MODE_GCM：Galois/Counter模式（需要IV，提供认证）。
+iv（初始化向量）：
+
+类型：字节串（bytes）
+长度：通常与块大小相同，即16字节（128位）。
+作用：IV用于确保相同的明文块在不同的加密操作中生成不同的密文，增加安全性。
+注意：IV必须是唯一的，但不需要保密。对于一些模式（如CTR），可以使用nonce代替IV。
+
+例子
+```py
+import hashlib
+import json
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad
+import time
+
+def hex_encode(string):
+    return ''.join(format(ord(char), '02x') for char in string)
+
+content = json.dumps({
+    "appSecret": "000"
+})  # 加密原文
+key = '000'.encode('utf-8')  # 加密 key
+iv = '000'.encode('utf-8')  # 加密向量
+
+# AES-256-CBC 加密
+cipher = AES.new(key, AES.MODE_CBC, iv)
+encrypted = cipher.encrypt(pad(content.encode('utf-8'), AES.block_size))
+
+# Hex 编码
+hex_encrypted = hex_encode(encrypted.decode('latin1'))
+
+print(hex_encrypted)  # 输出结果
+
+# 生成签名
+appKey = '000'  # appkey 值莲藕提供
+nonce = '1006148241'  # 动态获取
+# timestamp = '1721966058'  # 动态获取
+print('====================')
+timestamp = int(time.time())  # 动态获取
+# print(timestamp)
+
+sign_string = f'appKey={appKey}&content={hex_encrypted}&nonce={nonce}&timestamp={timestamp}'
+# print(sign_string)
+# print('----------------------')
+sign = hashlib.sha1(sign_string.encode('utf-8')).hexdigest().upper()
+
+print(sign)  # 输出签名
+
+print('---->->-->--->----->-------')
+url_string = f'https://test/Token?nonce={nonce}&timestamp={timestamp}&sign={sign}'
+print(url_string)
+```
+
 
 # FN
 ## 提取文字

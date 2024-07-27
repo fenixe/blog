@@ -184,11 +184,54 @@ OAUTH协议为用户资源的授权提供了一个安全的、开放而又简易
 toy-
 
 # 序列化
+将对象转换为 JSON 字符串。
+将对象转换为 JSON 格式的字符串，以便存储或传输。
 我们把变量从内存中变成可存储或传输的过程称之为序列化
 在Python中叫pickling，在其他语言中也被称之为serialization，marshalling，flattening等等，都是一个意思。
 序列化之后，就可以把序列化后的内容写入磁盘，或者通过网络传输到别的机器上。
 # 反序列化
+将 JSON 字符串转换为对象。
 反过来，把变量内容从序列化的对象重新读到内存里称之为反序列化，即unpickling。
+
+## 例子
+### JS
+```js
+// 创建一个 JavaScript 对象
+const obj = {
+    name: "Alice",
+    age: 30,
+    city: "New York",
+    interests: ["reading", "traveling", "coding"]
+};
+
+// 序列化：将对象转换为 JSON 字符串
+const jsonString = JSON.stringify(obj);
+console.log("JSON String:", jsonString);
+
+// 反序列化：将 JSON 字符串转换为对象
+const parsedObj = JSON.parse(jsonString);
+console.log("Parsed Object:", parsedObj);
+```
+
+```py
+import json
+
+# 创建一个 Python 字典
+obj = {
+    "name": "Alice",
+    "age": 30,
+    "city": "New York",
+    "interests": ["reading", "traveling", "coding"]
+}
+
+# 序列化：将字典转换为 JSON 字符串
+json_string = json.dumps(obj)
+print("JSON String:", json_string)
+
+# 反序列化：将 JSON 字符串转换为字典
+parsed_obj = json.loads(json_string)
+print("Parsed Object:", parsed_obj)
+```
 
 # GC
 CG原为Computer Graphics
@@ -294,6 +337,9 @@ URL是URI的子集。URL是以描述人的位置来唯一确定一个人的。
 # PRC
 RPC代表远程过程调用（Remote Procedure Call）。RPC是一种通过网络从远程计算机程序上请求服务的协议，而无需了解底层网络技术的细节。RPC协议允许开发者直接调用另一台计算机上的程序，就像是在本地调用一样，使得开发分布式系统更为简单。
 客户端将通过远程过程调用请求用户信息服务（用户的rpc）。
+
+# IM
+实时通信 Instant Messaging
 
 # 计算机
 ## 处理器架构
