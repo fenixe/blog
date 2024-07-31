@@ -5,14 +5,32 @@ tags:
 ---
 
 # Base
+## tinyint
+占用 1 个字节（8 位）
+取值范围
+有符号 (SIGNED，默认) TINYINT：取值范围是 -128 到 127。
+无符号 (UNSIGNED) TINYINT：取值范围是 0 到 255。
+
+TINYINT(1) 中的 (1) 仅仅是一个显示宽度提示，不影响实际存储的数值范围。存入 10，并且取出来的值仍然是 10。
+
 ## mysql 中 字段的 type值，int 与 bigint 的区别
 在 MySQL 中，int 和 bigint 都是整数类型，但它们的区别在于所占用的存储空间大小和能够表示的范围。
 
-int 是 MySQL 中常用的整数类型，占用 4 个字节，可以表示的范围是从 -2147483648 到 2147483647，即约 -21 亿到 21 亿之间的整数。
+int 是 MySQL 中常用的整数类型，占用 4 个字节(32位)，可以表示的范围是从 -2147483648 到 2147483647，即约 -21 亿到 21 亿之间的整数。
+有符号 (SIGNED) INT：取值范围是 -2,147,483,648 到 2,147,483,647。
+无符号 (UNSIGNED) INT：取值范围是 0 到 4,294,967,295。
 
 bigint 是 MySQL 中更大的整数类型，占用 8 个字节，可以表示的范围是从 -9223372036854775808 到 9223372036854775807，即约 -922 万亿到 922 万亿之间的整数。
 
 因此，如果您需要存储较大的整数，或者需要确保整数类型的数值不会超出范围，可以使用 bigint 类型。但是，需要注意的是，bigint 类型所占用的存储空间更大，可能会占用更多的磁盘空间，并且在进行查询和排序时可能会比 int 类型更慢。因此，在选择数据类型时需要根据具体的场景和需求进行权衡和选择。
+
+## varchar
+VARCHAR(255)：这是一个常见的选择，因为它在大多数情况下足够使用，并且只需要一个字节的长度前缀。
+VARCHAR(256)：如果你确实需要存储超过 255 个字符的内容，那么选择 VARCHAR(256) 是合理的，但需要注意它会使用两个字节的长度前缀。
+
+# 表名
+收货地址：user_delivery_addresses
+品牌公司：BrandCompany
 
 # Doc
 union 联合查询会去重
@@ -82,6 +100,17 @@ ALTER TABLE dev_project ADD plan_hours DECIMAL(10,1) COMMENT '预估工时';
 
 ALTER TABLE dev_project ADD plan_str VARCHAR(255) COMMENT '预估工时';
 ```
+
+## 增
+### 两种情况
+```sql
+`usage_type` tinyint(1) NOT NULL DEFAULT '1' COMMENT '使用方式：1-指定开始结束时间，2-指定领取后有效期'
+`usage_start_time` datetime DEFAULT '0000-00-00 00:00:00' COMMENT '惠票使用开始时间',
+`usage_end_time` datetime DEFAULT '0000-00-00 00:00:00' COMMENT '惠票使用结束时间',
+`usage_valid_days` int(3) DEFAULT '0' COMMENT '领取后有效期天数',
+```
+
+## 
 
 ## 查
 ### 总数

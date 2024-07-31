@@ -252,18 +252,6 @@ yyyy-MM-dd'T'HH:mm:ss.SSSZ
 2、单例类必须自己创建自己的唯一实例。
 3、单例类必须给所有其他对象提供这一实例。
 
-# CPU
-CPU的这两大架构：ARM和X86
-ARM
-ARM64是CPU构架的一种，通常用于手机、平板等CPU，目前笔记本电脑也会采用ARM64构架的CPU。
-x86
-x86是CPU构架的一种，通常用于笔记本电脑、台式电脑、服务器、超级计算机。
-# amd64 & arm64
-芯片架构
-amd64 电脑，arm64 手机
-
-arm：太早
-
 # SDK
 软件开发工具包 (Software development kit)
 
