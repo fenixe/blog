@@ -13,6 +13,8 @@ tags:
 
 TINYINT(1) 中的 (1) 仅仅是一个显示宽度提示，不影响实际存储的数值范围。存入 10，并且取出来的值仍然是 10。
 
+显示宽度在某些情况下可以与 ZEROFILL 一起使用，来在显示时填充零。例如，TINYINT(2) ZEROFILL 会将值 5 显示为 05。
+
 ## mysql 中 字段的 type值，int 与 bigint 的区别
 在 MySQL 中，int 和 bigint 都是整数类型，但它们的区别在于所占用的存储空间大小和能够表示的范围。
 
@@ -27,6 +29,48 @@ bigint 是 MySQL 中更大的整数类型，占用 8 个字节，可以表示的
 ## varchar
 VARCHAR(255)：这是一个常见的选择，因为它在大多数情况下足够使用，并且只需要一个字节的长度前缀。
 VARCHAR(256)：如果你确实需要存储超过 255 个字符的内容，那么选择 VARCHAR(256) 是合理的，但需要注意它会使用两个字节的长度前缀。
+
+## 可控长度
+```
+在 MySQL 中，除了 `VARCHAR` 之外，还有其他几种数据类型也可以控制长度。以下是一些常见的数据类型及其长度控制方式：
+
+### 字符串类型
+1. **CHAR(n)**: 固定长度字符串。`n` 表示字符串的长度，范围是 0 到 255。例如，`CHAR(10)` 表示一个固定长度为 10 的字符串，不足的部分会用空格填充。
+
+2. **VARCHAR(n)**: 可变长度字符串。`n` 表示字符串的最大长度，范围是 0 到 65535。例如，`VARCHAR(255)` 表示一个最大长度为 255 的字符串。
+
+3. **TEXT** 类型及其变种:
+   - **TINYTEXT**: 最大长度 255 字节。
+   - **TEXT**: 最大长度 65,535 字节。
+   - **MEDIUMTEXT**: 最大长度 16,777,215 字节。
+   - **LONGTEXT**: 最大长度 4,294,967,295 字节。
+
+### 数值类型
+虽然数值类型的长度定义主要用于显示宽度，但在某些情况下也可以控制长度：
+
+1. **DECIMAL(M, D)**: 定点数。`M` 表示总位数，`D` 表示小数位数。例如，`DECIMAL(5, 2)` 表示一个总位数为 5，小数位数为 2 的定点数。
+
+2. **FLOAT(M, D)** 和 **DOUBLE(M, D)**: 浮点数。`M` 表示总位数，`D` 表示小数位数。例如，`FLOAT(7, 4)` 表示一个总位数为 7，小数位数为 4 的浮点数。
+
+### 日期和时间类型
+日期和时间类型通常不直接控制长度，但可以通过格式化来控制显示长度：
+
+1. **DATE**: 存储日期值，格式为 `YYYY-MM-DD`。
+2. **DATETIME**: 存储日期和时间值，格式为 `YYYY-MM-DD HH:MM:SS`。
+3. **TIMESTAMP**: 存储时间戳，格式为 `YYYY-MM-DD HH:MM:SS`。
+4. **TIME**: 存储时间值，格式为 `HH:MM:SS`。
+5. **YEAR**: 存储年份值，格式为 `YYYY`。
+
+### 枚举和集合类型
+1. **ENUM('value1', 'value2', ...)**: 枚举类型，存储一个从预定义值列表中选择的单一值。
+2. **SET('value1', 'value2', ...)**: 集合类型，存储一个从预定义值列表中选择的多个值的组合。
+
+### 二进制类型
+1. **BINARY(n)**: 固定长度二进制字符串。`n` 表示字符串的长度。
+2. **VARBINARY(n)**: 可变长度二进制字符串。`n` 表示字符串的最大长度。
+
+这些数据类型在定义时可以通过指定长度来控制存储和显示的格式。选择合适的数据类型和长度可以优化数据库的性能和存储效率。
+```
 
 # 表名
 收货地址：user_delivery_addresses
@@ -145,12 +189,24 @@ INNER JOIN baidu_location b ON t.id = b.pid;
 SELECT NOW() - INTERVAL 30 DAY;
 ```
 
+### 查询某列去重
+```sql
+SELECT DISTINCT business
+FROM baidu_coord;
+```
+
 ## update更新
 把store表中的keyword字段值为“a”更改为“b”
 ```sql
 UPDATE store
 SET keyword = 'b'
 WHERE keyword = 'a';
+```
+
+## 更新comment
+```sql
+ALTER TABLE baidu_coord
+MODIFY COLUMN type tinyint(1) NOT NULL DEFAULT '1' COMMENT '类型：1-商品，2-活动，3-惠票';
 ```
 
 ### null值处理
