@@ -213,6 +213,7 @@ dependencies {
 int number = Integer.parseInt(numberAsString);
 Integer number = Integer.valueOf(numberAsString);
 
+String dir = String.format("%s%s/%s/%s", directory, formattedDate, extensionDir, UUID.randomUUID());
 
 // 正则匹配
 input.matches("[a-zA-Z]+")
@@ -415,6 +416,8 @@ StatusEnum.成功.code
 
 ## 对象
 ```java
+String str = obj.toString();
+
 Map params = new HashMap<String, String>();
 params.put("doctor_name", taskRecord.getDoctorName());
 ```
@@ -601,6 +604,7 @@ Thread.sleep(5000);
 
 ## http请求
 ### RestTemplate
+公共API接口，微服务内的应用
 ```java
 // 负载均衡
 @LoadBalanced
@@ -1024,12 +1028,21 @@ public interface GoodsTagMapper extends MyMapper<GoodsTag> {}
 
 // mapper 自带方法
 Mapper.insertSelective(record) // 只会插入非空字段
+// 必需设置主键
+public class CompanyInviter implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 record.getId(); // 是否封装了
 
 Mapper.insertList // 会插入null
 
 Mapper.insertUseGeneratedKeys(record)
 Long generatedId = fileProcessRecord.getId();
+
+Record record = Mapper.selectOne(new Record() {{
+    setPhone(request.getPhone());
+}});
 ```
 
 ``` xml
@@ -1175,6 +1188,23 @@ public class GoodsBrandCompanyCreateRequest {
 }
 ```
 
+## 全局拦截器
+```java
+@Configuration
+public class WebConfiguretion implements WebMvcConfigurer {
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(authInteceptor()).addPathPatterns("/api/**");
+    }
+
+    @Bean
+    public AuthInteceptor authInteceptor() {
+        return new AuthInteceptor();
+    }
+}
+```
+
 # 消息队列
 消息队列（Message Queue，简称MQ）是用于在分布式系统中实现异步通信的一种机制。它允许不同的系统或服务之间通过消息进行通信，而不需要直接调用彼此的API。这种机制可以帮助解耦系统，提高系统的可扩展性和可靠性。
 
@@ -1208,7 +1238,16 @@ Appearance & Beahvior -> System Settings -> HTTP Proxy
 配置后，check 按钮
 
 # Maven
-创建项目
+## 基础
+maven有两部分组成
+服务器端，maven repo
+仓库里每个 jar 包，都有唯一的id。这个id由三部分组成：group id，artifact id 和 version
+maven会把下载好的 artifact 放在本地的文件夹，叫 local repo
+
+客户端
+项目中会把 jar包的id加入到自己的依赖。maven的依赖是传递的，发布本地jar包到 maven repo，自动依赖所有。
+
+## 创建项目
 mvn archetype:generate -DgroupId=com.example -DartifactId=myproject -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
 
 # FeignClient

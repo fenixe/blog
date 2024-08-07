@@ -100,6 +100,11 @@ third
 十六进制（hex）：一种基数为16的数字系统，使用0-9和A-F表示。
 字节（byte）：由8个二进制位组成，可以表示0到255的值。在十六进制中，一个字节可以表示为两个十六进制字符。
 
+## 变量名
+```java
+String xApiUrl = "https://www.baidu.com/api/x";
+```
+
 # 调试
 获取授权url
 Method: post
