@@ -48,6 +48,17 @@ request.name = " ki l " => request.name = "kil"
 </dependency>
 ```
 
+## bootstrap.yaml 文件
+用于以下几种情况：
+1、Spring Cloud Config：当使用Spring Cloud Config时，bootstrap.yaml文件通常用于配置应用程序从配置服务器获取配置的相关信息。因为这些配置需要在应用程序启动的早期阶段加载，所以放在bootstrap.yaml中。
+
+2、早期初始化配置：某些配置需要在应用程序启动的早期阶段加载，例如加密/解密配置、应用程序名称、环境配置等。这些配置通常放在bootstrap.yaml中。
+
+3、分布式配置：在分布式系统中，bootstrap.yaml文件可以用于配置服务发现、配置中心等需要在应用程序启动时就加载的配置。
+
+### 加载顺序
+Spring Boot在启动时会首先加载bootstrap.yaml文件，然后再加载application.yaml文件。
+
 # 类
 数组内是相同的数据类型，类内部是多样的数据类型
 ## 实例/对象（Instance/Object）
@@ -125,6 +136,18 @@ public class MainClass {
 
 # 包管理工具
 ## Maven
+### 基础
+maven有两部分组成
+服务器端，maven repo
+仓库里每个 jar 包，都有唯一的id。这个id由三部分组成：group id，artifact id 和 version
+maven会把下载好的 artifact 放在本地的文件夹，叫 local repo
+
+客户端
+项目中会把 jar包的id加入到自己的依赖。maven的依赖是传递的，发布本地jar包到 maven repo，自动依赖所有。
+
+### 创建项目
+mvn archetype:generate -DgroupId=com.example -DartifactId=myproject -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
 ### maven compile
 将Java原文件编译成Class文件
 1、检查项目依赖：Maven 将检查项目的配置文件 pom.xml 中声明的依赖项，并确保所需的依赖已经下载到本地 Maven 仓库中。如果依赖尚未下载，Maven 将尝试从中央仓库或其他配置的仓库中下载它们。
@@ -516,6 +539,62 @@ String currentTime = DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss");
 ```
 
 ## 数据库
+### 连接
+```
+spring.datasource.driver-class-name: com.mysql.cj.jdbc.Driver
+spring.datasource.url: jdbc:mysql://127.0.0.1:3306?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+spring.datasource.username: root
+spring.datasource.password: 123
+spring.datasource.druid.initial-size: 10
+spring.datasource.druid.min-idle: 5
+spring.datasource.druid.max-active: 20
+spring.datasource.druid.max-wait: 60000
+spring.datasource.druid.time-between-eviction-runs-millis: 60000
+spring.datasource.druid.min-evictable-idle-time-millis: 30000
+spring.datasource.druid.test-on-borrow: false
+spring.datasource.druid.test-while-idle: true
+spring.datasource.druid.validation-query: select 'x'
+spring.datasource.druid.validation-query-timeout: 60000
+```
+
+查询是否连接成功
+```java
+// 方法一：JdbcTemplate
+@Autowired
+private JdbcTemplate jdbcTemplate;
+
+@RequestMapping("/hello")
+public String hello(@RequestParam(name = "name", defaultValue = "unknown user") String name) {
+    System.out.println(smsStatus);
+    System.out.println(aiUrl);
+
+    // 为1 成功连接
+    Integer result = jdbcTemplate.queryForObject("SELECT 1", Integer.class);
+    System.out.println(result);
+    return "Hello " + name;
+}
+
+// 方法二： JPA Repository
+// 假设一个简单的实体类 User 和对应的 UserRepository。
+
+@Entity
+public class User {
+    @Id
+    private Long id;
+    private String name;
+}
+
+import org.springframework.data.jpa.repository.JpaRepository;
+public interface UserRepository extends JpaRepository<User, Long> {
+}
+
+// 在控制器中使用 UserRepository
+@Autowired
+private UserRepository userRepository;
+
+long count = userRepository.count();
+```
+
 ### 考虑幂等
 insert ignore into
 
@@ -722,6 +801,56 @@ public class AliOssConfig {
     private String a;
 }
 
+```
+
+## 环境配置
+Spring boot项目
+resources目录下增加文件
+- application.yml
+- application-dev.yml
+- application-prod.yml
+
+```yml
+# application.yml
+spring:
+  profiles:
+    active: dev  # 默认激活的配置文件，可以在启动时覆盖
+
+
+# application-dev.yml
+sms:
+  test: true
+
+share:
+  url: https://d.x.cn
+
+
+# application-prod.yml
+sms:
+  test: false
+
+share:
+  url: https://prod.x.cn
+```
+
+### 使用
+```java
+@Controller
+public class BasicController {
+    @Value("${sms.test}")
+    private Boolean smsStatus;
+    @Value("${share.url}")
+    private String aiUrl;
+
+    // http://127.0.0.1:8080/hello?name=lisi
+    @RequestMapping("/hello")
+    @ResponseBody
+    public String hello(@RequestParam(name = "name", defaultValue = "unknown user") String name) {
+        System.out.println(smsStatus);
+        System.out.println(aiUrl);
+        return "Hello " + name;
+    }
+}
 ```
 
 ## 处理文件
@@ -956,6 +1085,20 @@ public class UserBean {
     @NotNull(message = "惠票内容不能为空")
     @Valid // 嵌套字段上使用 @Valid 注解
     private CouponTicketCreateRequest ticketInfo;
+
+    @ApiModelProperty("手机号")
+    @NotBlank(message = "请填写手机号")
+    private String mobile;
+
+    @NotNull(message = "优惠值不能为空")
+    @Positive(message = "优惠值必须为正数")
+    @ApiModelProperty("优惠值")
+    @Range(min = 1, max = 999999999, message = "优惠值必须介于{min}-{max}之间")
+    private Integer discount;
+
+    @ApiModelProperty("商品标签类型：1-类目标签，2-科室标签，3-功能标签，4-数据标签")
+    @NotNull(message = "类型不能为空")
+    @Range(min = 1, max = 4, message = "类型不合法")
 ```
 #### 字符
 @NotNull 是一个常用的字段验证注解，用于确认字段不应为 null。可以判断空字符串
@@ -1208,9 +1351,20 @@ public class WebConfiguretion implements WebMvcConfigurer {
 # 消息队列
 消息队列（Message Queue，简称MQ）是用于在分布式系统中实现异步通信的一种机制。它允许不同的系统或服务之间通过消息进行通信，而不需要直接调用彼此的API。这种机制可以帮助解耦系统，提高系统的可扩展性和可靠性。
 
-# Tool
+# Utils
 ## uuid
 UUID.randomUUID()
+
+## ulid
+```java
+<dependency>
+  <groupId>com.github.f4b6a3</groupId>
+  <artifactId>ulid-creator</artifactId>
+  <version>5.2.3</version>
+</dependency>
+
+Ulid ulid = UlidCreator.getMonotonicUlid();
+```
 
 ## Time
 当前时间
@@ -1222,6 +1376,9 @@ String formattedDate = sdf.format(now);
 import org.apache.commons.lang3.time.DateFormatUtils;
 String currentTime = DateFormatUtils.format(new Date(), "yyyy-MM-dd");
 ```
+
+
+
 
 # IDEA
 ## 替换
@@ -1237,18 +1394,24 @@ shift + alt + 鼠标左键
 Appearance & Beahvior -> System Settings -> HTTP Proxy
 配置后，check 按钮
 
-# Maven
-## 基础
-maven有两部分组成
-服务器端，maven repo
-仓库里每个 jar 包，都有唯一的id。这个id由三部分组成：group id，artifact id 和 version
-maven会把下载好的 artifact 放在本地的文件夹，叫 local repo
+## 新建创建 Spring Initializr项目
+创建Spring boot项目
+JDK 1.8 就是 Java 8
+Java最低只能选17问题
+修改Server URL 为：https://start.aliyun.com/
 
-客户端
-项目中会把 jar包的id加入到自己的依赖。maven的依赖是传递的，发布本地jar包到 maven repo，自动依赖所有。
+### 选择依赖
+Spring Web：用于构建 Web 应用程序。
+Spring Data JPA：用于数据访问。
+Spring Boot DevTools：用于开发时的热部署。
+Thymeleaf：用于模板引擎。
+Spring Security：用于安全性。
+MySQL Driver：用于 MySQL 数据库连接。
 
-## 创建项目
-mvn archetype:generate -DgroupId=com.example -DartifactId=myproject -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+### 访问应用程序
+启动 Application.java 文件
+http://localhost:8080
+
 
 # FeignClient
 FeignClient是Spring Cloud中的一个非常强大的工具，其目的在于简化微服务之间的HTTP调用。
@@ -1310,4 +1473,65 @@ run 2 after
     <maven.compiler.source>8</maven.compiler.source>
     <maven.compiler.target>8</maven.compiler.target>
 </properties>
+```
+
+## Failed to configure a DataSource: 'url' attribute is not specified and no embedded
+排除DataSourceAutoConfiguration的自动配置
+```java
+@SpringBootApplication(exclude= {DataSourceAutoConfiguration.class})
+//@SpringBootApplication
+public class SpringenvApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(SpringenvApplication.class, args);
+    }
+}
+```
+
+## no main manifest attribute, in /app.jar 
+https://stackoverflow.com/questions/9689793/cant-execute-jar-file-no-main-manifest-attribute
+## docker启动报错： Exception in thread "main" java.lang.NoClassDefFoundError: org/springframework/boot/SpringApplication
+Maven 配置中可以看出，你已经配置了 spring-boot-maven-plugin，但你设置了 <skip>true</skip>，这会跳过 Spring Boot 插件的执行，导致生成的 JAR 文件中没有包含 Spring Boot 的依赖项。
+
+``` xml
+<build>
+    <finalName>app</finalName>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+            <configuration>
+                <source>1.8</source>
+                <target>1.8</target>
+                <encoding>UTF-8</encoding>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.0.2</version>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <addClasspath>true</addClasspath>
+                        <classpathPrefix>lib/</classpathPrefix>
+                        <mainClass>com.example.springenv.SpringenvApplication</mainClass>
+                    </manifest>
+                </archive>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <version>${spring-boot.version}</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>repackage</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
 ```

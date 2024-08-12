@@ -37,7 +37,9 @@ python.org download
 python3 -V
 pip3 -V
 
-## 查看安装的包
+## 包管理
+https://pypi.org/
+### 查看安装的包
 pip show pandas
 
 ## 卸载

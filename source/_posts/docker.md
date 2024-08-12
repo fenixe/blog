@@ -89,6 +89,70 @@ docker-componse up
 ## 官方镜像
 https://hub.docker.com/search?image_filter=official&q=
 
+# Java项目 docker 打包
+## 项目根目录创建 Dockerfile 文件
+```
+FROM openjdk:8-jdk-alpine
+VOLUME /tmp
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+RUN apk add --no-cache tzdata bash  ttf-dejavu fontconfig \
+	&& fc-cache --force
+RUN echo "Asia/Shanghai" > /etc/timezone
+ADD target/app.jar app.jar
+RUN sh -c 'touch /*.jar'
+EXPOSE 8080
+ENV apmOpts=""
+ENTRYPOINT ["sh", "-c", "java $apmOpts -Djava.security.egd=file:/dev/./urandom -jar /app.jar"]
+```
+
+## 构建 Spring Boot 项目
+mvn clean
+mvn package
+
+## 构建 docker 镜像
+docker build -t my-spring-boot-app .
+
+## 运行 docker 容器
+docker run -p 8080:8080 my-spring-boot-app
+
+## 使用 docker-compose.yml
+```yml
+version: '3.8'
+
+services:
+  api-dev:
+    container_name: spring-api-dev
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    restart: always
+
+  api-prod:
+    container_name: spring-api-prod
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    restart: always
+```
+
+### 创建容器
+docker-compose build
+
+### 指定环境变量
+```zsh
+$ docker-compose up --build api-dev
+spring-api-dev  | true
+spring-api-dev  | https://d.x.cn
+
+$ docker-compose up --build api-prod 
+spring-api-prod  | false
+spring-api-prod  | https://p.x.cn
+```
+
 # ISSUES
 ## docker Can't close tar writer: io: read/write on closed pipe
 把客户端打开

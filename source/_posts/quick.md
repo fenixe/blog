@@ -96,6 +96,7 @@ c + q: 退出程序`quit`
 c + d: 删除  
 c + g: 打开默认浏览器google  
 c + m: 打开markdown预览  
+c + u: 转到使用/引用 usages
 
 点进方法后  
 c + alt + <- : 返回上一引用  

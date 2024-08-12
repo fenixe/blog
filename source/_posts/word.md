@@ -329,6 +329,33 @@ RPC代表远程过程调用（Remote Procedure Call）。RPC是一种通过网�
 # IM
 实时通信 Instant Messaging
 
+# Util 和 Tool 的区别
+“Util”是“utility”的缩写
+特点：
+1. 软件和编程相关：常用于描述软件中的实用程序或库。
+2. 功能性：通常提供特定的功能或服务，如文件管理、系统监控、数据处理等。
+3. 辅助性：通常是辅助工具，用于支持主要应用程序或系统。
+示例：
+- Unix/Linux Utilities：如grep、awk、sed等命令行工具。
+- Java Util Package：如java.util.List、java.util.Map等集合框架。
+
+“Tool”是一个更广泛的词，指的是任何用于执行任务或工作的物理或虚拟设备。
+特点：
+1. 广泛应用：可以指物理工具，也可以指软件工具。
+2. 多功能性：可以用于各种不同的任务和工作。
+3. 独立性：通常是独立的工具，可以单独使用。
+示例：
+- 物理工具：锤子、螺丝刀、钳子等。
+- 软件工具：Visual Studio、Eclipse、Photoshop等。
+
+# Instagram Engineering
+Instagram 工程团队
+Stories from the people who build @Instagram
+来自构建者的故事
+
+# spec
+specification 的简写：规格，规范，明细单，说明书；明确说明，详述
+
 # 计算机
 ## 处理器架构
 ### ARM
