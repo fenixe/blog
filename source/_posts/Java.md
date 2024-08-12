@@ -221,6 +221,7 @@ dependencies {
 int number = Integer.parseInt(numberAsString);
 Integer number = Integer.valueOf(numberAsString);
 
+String dir = String.format("%s%s/%s/%s", directory, formattedDate, extensionDir, UUID.randomUUID());
 
 // 正则匹配
 input.matches("[a-zA-Z]+")
@@ -234,6 +235,12 @@ String str3 = " ";
 boolean isStr1Empty = StringUtils.isEmpty(str1); // true，因为str1是null
 boolean isStr2Empty = StringUtils.isEmpty(str2); // true，因为str2长度为0
 boolean isStr3Empty = StringUtils.isEmpty(str3); // false，因为str3包含一个空格字符
+
+Set<String> provinceIdSet = new HashSet<>(Arrays.asList(areaConfig.getProvinceIds().split(",")));
+String[] requestProvinceIds = request.getProvinceIds().split(",");
+for(String id: requestProvinceIds) {
+    return false;
+}
 ```
 
 ### int类型
@@ -267,6 +274,14 @@ Long myLong = myInteger.longValue();
 
 int number = Integer.parseInt(str);
 long number = Long.parseLong(str);
+
+// 转换到固定类型
+GoodsCouponBgListResponse row = BeanUtil.copyProperties(coupon, GoodsCouponBgListResponse.class);
+// 忽略id，name
+BeanUtil.copyProperties(request.getTicketInfo(), existingCouponTicket, "id", "name");
+
+BeanUtil.copyProperties(coupon, couponRes);
+GoodsCouponBgListResponse couponRes = new GoodsCouponBgListResponse();
 ```
 
 ## 数组
@@ -295,11 +310,16 @@ Arrays.asList() 是一个 Java 的静态方法，它可以把一个数组或者�
 ```java
 // 提取ids
 List<Integer> ids = list.stream().map(ResClass::getId).collect(Collectors.toList());
+List<Long> provinceIds = Arrays.stream(areaConfig.getProvinceIds().split(",")).map(o->Long.valueOf(o)).collect(Collectors.toList());
 
 // 安照父元素，进行分组
 Map<Integer, List<Tag>> tagMap = tags.stream()
                 .collect(Collectors.groupingBy(Tag::getPid));
 // groupingBy 方法接收一个函数作为参数，它将作为分组的键。
+
+// 一对一
+Map<Long, RegionResponse> regionMap = regionList.stream().collect(Collectors.toMap(RegionResponse::getId, region -> region));
+
 
 // tags数组归到主list
 // 分组tags
@@ -404,6 +424,8 @@ StatusEnum.成功.code
 
 ## 对象
 ```java
+String str = obj.toString();
+
 Map params = new HashMap<String, String>();
 params.put("doctor_name", taskRecord.getDoctorName());
 ```
@@ -590,6 +612,7 @@ Thread.sleep(5000);
 
 ## http请求
 ### RestTemplate
+公共API接口，微服务内的应用
 ```java
 // 负载均衡
 @LoadBalanced
@@ -875,8 +898,8 @@ import tk.mybatis.spring.annotation.MapperScan;
 
 ## swagger注释
 ```java
-@Api(tags = "项目")
-@ApiOperation(value = "项目列表")
+@Api(tags = "项目") // 必填tags
+@ApiOperation(value = "项目列表") // 选填valus
 
 @Data
 @ApiModel("详情入参")
@@ -936,6 +959,12 @@ public class UserBean {
 ```
 
 ### 字段校验
+``` java
+    @ApiModelProperty("惠票内容信息")
+    @NotNull(message = "惠票内容不能为空")
+    @Valid // 嵌套字段上使用 @Valid 注解
+    private CouponTicketCreateRequest ticketInfo;
+```
 #### 字符
 @NotNull 是一个常用的字段验证注解，用于确认字段不应为 null。可以判断空字符串
 @NotEmpty: 这个注解用于集合、数组、Map、以及字符串类型的字段，确保被注解的字段不为 null 且不为空（对于字符串，长度必须大于0）。
@@ -949,8 +978,81 @@ Mapper接口中的一个方法，通常用于更新数据库表中的记录。
 int updateByPrimaryKeySelective(实体类名称 record);
 ```
 
+## selectByPrimaryKey
+Mapper.selectByPrimaryKey(request.getId());
+
 # Example
+## entity
+```
+这段 Java 代码定义了一个名为 `GoodsTag` 的类，该类使用了一些注解来指定其在持久化上下文中的行为。让我们逐行解释这段代码：
+
+javax.persistence  Java Persistence API (JPA) 的核心包，扩展包
+
+@Table(name = "goods_tag")
+@Data
+public class GoodsTag implements Serializable {
+    @Id // 主键（Primary Key）: 使用 @Id 注解标记实体类的主键字段。
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //生成策略（Generation Strategies）: 使用 @GeneratedValue 注解定义主键的生成策略。
+    private Long id;
+}
+
+### 逐行解释
+
+1. **`@Table(name = "goods_tag")`**:
+   - 这是一个 JPA 注解，来自 `javax.persistence` 包。
+   - 它用于指定实体类对应的数据库表名。
+   - 在这个例子中，`GoodsTag` 类对应的数据库表名是 `goods_tag`。
+
+2. **`@Data`**:
+   - 这是一个 Lombok 注解，来自 `lombok` 包。
+   - Lombok 是一个 Java 库，可以通过注解自动生成常见的样板代码（如 getter、setter、toString、equals、hashCode 方法等）。
+   - `@Data` 注解是一个综合注解，相当于同时使用了 `@Getter`, `@Setter`, `@ToString`, `@EqualsAndHashCode`, 和 `@RequiredArgsConstructor` 注解。
+   - 使用这个注解，可以减少大量的样板代码，提高开发效率。
+
+3. **`public class GoodsTag implements Serializable {}`**:
+   - 这是一个普通的 Java 类声明。
+   - `GoodsTag` 是类的名称。
+   - `implements Serializable` 表示这个类实现了 `Serializable` 接口。
+   - `Serializable` 接口是 Java 标准库中的一个接口，用于指示一个类的对象可以被序列化（即转换为字节流，以便保存到文件或通过网络传输）。
+   - 实现 `Serializable` 接口通常是为了支持对象的持久化或远程传输。
+
+### 总结
+
+这段代码定义了一个名为 `GoodsTag` 的实体类，该类：
+
+- 对应数据库中的 `goods_tag` 表（通过 `@Table` 注解）。
+- 自动生成了 getter、setter、toString、equals、hashCode 等方法（通过 `@Data` 注解）。
+- 实现了 `Serializable` 接口，使其对象可以被序列化。
+
+这是一个典型的 JPA 实体类定义，结合了 Lombok 库来减少样板代码，从而提高开发效率和代码可读性。
+```
+
 ## mapper
+```java
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface GoodsTagMapper extends MyMapper<GoodsTag> {}
+
+// mapper 自带方法
+Mapper.insertSelective(record) // 只会插入非空字段
+// 必需设置主键
+public class CompanyInviter implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+record.getId(); // 是否封装了
+
+Mapper.insertList // 会插入null
+
+Mapper.insertUseGeneratedKeys(record)
+Long generatedId = fileProcessRecord.getId();
+
+Record record = Mapper.selectOne(new Record() {{
+    setPhone(request.getPhone());
+}});
+```
+
 ``` xml
 <insert id="insertAdminRole">
     insert into admin_role (admin_id,role_id,create_time,update_time) VALUES
@@ -1081,6 +1183,36 @@ public class Adm {
 }
 ```
 
+## Request
+```java
+@Data
+@ApiModel("商品品牌厂家创建")
+public class GoodsBrandCompanyCreateRequest {
+
+    @ApiModelProperty("品牌厂家名称")
+    @NotBlank(message = "品牌厂家不能为空")
+    @Length(max = 50, message = "品牌厂家名称不能超过{max}字符")
+    private String name;
+}
+```
+
+## 全局拦截器
+```java
+@Configuration
+public class WebConfiguretion implements WebMvcConfigurer {
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(authInteceptor()).addPathPatterns("/api/**");
+    }
+
+    @Bean
+    public AuthInteceptor authInteceptor() {
+        return new AuthInteceptor();
+    }
+}
+```
+
 # 消息队列
 消息队列（Message Queue，简称MQ）是用于在分布式系统中实现异步通信的一种机制。它允许不同的系统或服务之间通过消息进行通信，而不需要直接调用彼此的API。这种机制可以帮助解耦系统，提高系统的可扩展性和可靠性。
 
@@ -1089,12 +1221,14 @@ public class Adm {
 UUID.randomUUID()
 
 ## Time
+当前时间
 ```java
 Date now = new Date();
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
 String formattedDate = sdf.format(now);
 
-String today = DateFormatUtils.format(new Date(), "yyyy-MM-dd");
+import org.apache.commons.lang3.time.DateFormatUtils;
+String currentTime = DateFormatUtils.format(new Date(), "yyyy-MM-dd");
 ```
 
 # IDEA
@@ -1112,7 +1246,16 @@ Appearance & Beahvior -> System Settings -> HTTP Proxy
 配置后，check 按钮
 
 # Maven
-创建项目
+## 基础
+maven有两部分组成
+服务器端，maven repo
+仓库里每个 jar 包，都有唯一的id。这个id由三部分组成：group id，artifact id 和 version
+maven会把下载好的 artifact 放在本地的文件夹，叫 local repo
+
+客户端
+项目中会把 jar包的id加入到自己的依赖。maven的依赖是传递的，发布本地jar包到 maven repo，自动依赖所有。
+
+## 创建项目
 mvn archetype:generate -DgroupId=com.example -DartifactId=myproject -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
 
 # FeignClient
