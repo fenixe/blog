@@ -115,6 +115,7 @@ ORDER BY re.weight ASC;
 
 inner join : 只返回两个表中联结字段相等的行
 left join : 返回包括左表中的所有记录和右表中联结字段相等的记录
+right join : 返回包括右表中的所有记录和左表中满足连接条件的记录。如果左表中没有匹配的记录，结果集中的左表字段将包含 NULL。
 
 ## 命令行导入sql脚本
 mysql -h 192.168.2.229 -u dev -p -P 3306
@@ -193,6 +194,11 @@ SELECT NOW() - INTERVAL 30 DAY;
 ```sql
 SELECT DISTINCT business
 FROM baidu_coord;
+```
+
+### 英文逗号隔开的字段查询
+```sql
+select * from config where status = 1 and support_type = 1 and FIND_IN_SET(#{provinceId}, province_ids) limit 1
 ```
 
 ## update更新

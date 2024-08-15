@@ -175,6 +175,10 @@ HTTP 协议是文本型的协议，所有内容都是字符串
 
 method: GET/POST
 
+#### 请求头
+Content-Type：application/json
+Content-Type 头部字段用于指示请求体的媒体类型。application/json 表示请求体的数据格式是 JSON。
+
 #### 请求测试链接
 get：https://httpbin.org/get
 post: https://httpbin.org/post

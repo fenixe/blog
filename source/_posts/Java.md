@@ -275,6 +275,22 @@ BigDecimal: 是一个不可变的、任意精度的有符号十进制数。高�
 sql定义字段：`longitude` decimal(10,7)
 表示：最多可以存储10位数字，其中7位是小数部分。
 通常支持任意位数的小数部分
+```java
+        BigDecimal goodsWeight = new BigDecimal("1.1");
+        Long goodsNum = 1L;
+        BigDecimal totalWeight = goodsWeight.multiply(new BigDecimal(goodsNum));
+        System.out.println(totalWeight);
+
+        Integer initKg = 1;
+        BigDecimal initPrice = new BigDecimal("6");
+        System.out.println(totalWeight.compareTo(new BigDecimal(initKg)) > 0);
+
+        BigDecimal exceedWeight = totalWeight.subtract(BigDecimal.valueOf(initKg));
+        System.out.println(exceedWeight);
+
+        BigDecimal add = goodsWeight.add(new BigDecimal("1"));
+        System.out.println(add);
+```
 
 
 ### 布尔类型
@@ -343,6 +359,10 @@ Map<Integer, List<Tag>> tagMap = tags.stream()
 // 一对一
 Map<Long, RegionResponse> regionMap = regionList.stream().collect(Collectors.toMap(RegionResponse::getId, region -> region));
 
+// 多过滤一
+List<ExpressAreaConfigCreateRequest> areaNotSupportList = reqAreaList.stream()
+                .filter(o -> ExpressAreaConfig.SupportTypeEnum.不.code.equals(o.getSupportType()))
+                .collect(Collectors.toList());
 
 // tags数组归到主list
 // 分组tags
@@ -356,6 +376,28 @@ list = list.stream().map(item -> {
     item.put("tags", matchingTags);
     return item;
 }).collect(Collectors.toList());
+
+// 是否有supportType = 0的项。
+[{
+"provinceIds": "14,15,16",
+"supportType": 0
+},{
+"provinceIds": "1",
+"supportType": 1
+}]
+boolean hasSupportTypeZero = areaConfigList.stream().anyMatch(o -> ExpressAreaConfig.SupportTypeEnum.不送达.code.equals(o.getSupportType()));
+
+// initKg,initPrice,addKg,addPrice 相同判断
+log.info("起步价：{}, 增加价：{}", request.getInitPrice(), request.getAddPrice());
+log.info("起步价类型：{}, 增加价类型：{}", request.getInitPrice().getClass(), request.getAddPrice().getClass());
+boolean hasSame = areaConfigList.stream()
+        .peek(o -> log.info("起步价判断：{}, 增加价判断：{}", o.getInitPrice().compareTo(request.getInitPrice()) == 0, o.getAddPrice().compareTo(request.getAddPrice()) == 0))
+        .anyMatch(o -> o.getInitKg().equals(request.getInitKg()) && o.getInitPrice().compareTo(request.getInitPrice()) == 0
+        && o.getAddKg().equals(request.getAddKg()) && o.getAddPrice().compareTo(request.getAddPrice()) == 0);
+if (hasSame) {
+    return R.ok(GlobalRetCode.请求参数验证有误.code, "已存在相同配置", null);
+}
+
 ```
 
 ### stream操作
@@ -995,6 +1037,9 @@ ExampleClass example = new ExampleClass(42, "The answer");
 生成无参构造函数。
 如果你不手动提供构造方法，编译器会默认生成一个无参构造方法。但是，如果你手动提供了带参构造方法，编译器就不再生成无参构造方法。@NoArgsConstructor 解决了这个问题，它会在编译时生成一个无参构造方法，确保你的类可以在没有提供参数的情况下实例化。
 
+### @EqualsAndHashCode(callSuper = true)
+System.out.println(cat1.equals(cat2));//当callSuper属性为true时，返回false，反之则返回false
+
 ## @Id
 声明一个属性将映射到数据库主键的字段
 数据库主键，指的是一个列或多列的组合，其值能唯一地标识表中的每一行
@@ -1385,7 +1430,14 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 String currentTime = DateFormatUtils.format(new Date(), "yyyy-MM-dd");
 ```
 
-
+## equals
+```java
+// 两个null为true，字符串/数字都正常
+import java.util.Objects;
+if(!Objects.equals(request.getCode(), redisCode)){
+    return R.fail("验证码错误");
+}
+```
 
 
 # IDEA
