@@ -984,7 +984,7 @@ public class AbcProperties {
 
 ### @RestController
 一个类级别的注解，用于标记一个控制器类，表明这个类是用于处理 HTTP 请求的。@RestController 是 @Controller 和 @ResponseBody 两个注解的合成注解。
-这个类中的所有方法的返回值都将自动包装为 HTTP 响应的正文，就无需再在每个方法上使用 @ResponseBody 注解了。
+这个类中的所有方法的返回值都将自动包装JSON或XML为 HTTP 响应的正文，就无需再在每个方法上使用 @ResponseBody 注解了。
 特别适合于创建 RESTful API
 ```java
 @RestController
@@ -996,6 +996,10 @@ public class UserController {
     }
 }
 ```
+
+### @Controller 
+注解标记的类则是传统的控制器类。它用于处理客户端发起的请求，并负责返回适当的视图（View）作为响应。在使用 @Controller 注解的类中，通常需要在方法上使用 @ResponseBody 注解来指示该方法的返回值要作为响应的主体内容，而不是解析为视图。
+
 
 ### @RestControllerAdvice
 是一个用于整个应用程序控制器层的全局配置类
@@ -1466,6 +1470,7 @@ Appearance & Beahvior -> System Settings -> HTTP Proxy
 配置后，check 按钮
 
 ## 新建创建 Spring Initializr项目
+[阿里云原生应用脚手架](https://start.aliyun.com/)
 创建Spring boot项目
 JDK 1.8 就是 Java 8
 Java最低只能选17问题
