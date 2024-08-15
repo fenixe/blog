@@ -408,6 +408,17 @@ public static List<String> getList(Integer num) {
 }
 ```
 
+### Lambda表达式
+(parameters) -> expression
+```java
+List<String> list = Arrays.asList("apple", "orange", "banana");
+// filter 方法使用了一个 Lambda 表达式来筛选以 "a" 开头的字符串
+list.stream()
+    .filter(s -> s.startsWith("a"))
+    .forEach(System.out::println);
+```
+
+
 ## Enum
 ```java
 public enum StatusEnum {
