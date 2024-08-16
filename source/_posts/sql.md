@@ -201,6 +201,12 @@ FROM baidu_coord;
 select * from config where status = 1 and support_type = 1 and FIND_IN_SET(#{provinceId}, province_ids) limit 1
 ```
 
+### 最大最小
+```sql
+select max(id) from l
+select min(id) from l
+```
+
 ## update更新
 把store表中的keyword字段值为“a”更改为“b”
 ```sql
