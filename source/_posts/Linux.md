@@ -167,6 +167,15 @@ find | grep luoluo
 which nginx
 ```
 
+查看非隐藏文件
+ls
+
+显示所有文件（包含隐藏文件）
+ls -all
+
+查看非隐藏文件
+ll
+
 查看文件下所有文件
 ``` zsh
 ll -la ~/
@@ -207,9 +216,6 @@ a
 
 打开当前文件
 open .
-
-显示所有文件（包含隐藏文件）
-ls -all
 
 查看端口
 lsof -i:1080

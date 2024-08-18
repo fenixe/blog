@@ -19,7 +19,13 @@ public class HelloWorld {
 $ javac HelloWorld.java 
 $ java HelloWorld
 Hello World
+
+# 启动一个jar包
+java -jar hellospring-0.0.1-SNAPSHOT.jar
 ```
+
+## Bean
+Bean简单来讲就是由Spring容器创建并托管的实例。
 
 ## spring boot指定配置文件
 IDEA
@@ -145,6 +151,11 @@ maven会把下载好的 artifact 放在本地的文件夹，叫 local repo
 客户端
 项目中会把 jar包的id加入到自己的依赖。maven的依赖是传递的，发布本地jar包到 maven repo，自动依赖所有。
 
+### 打包
+``` zsh
+mvn clean package -Dmaven.test.skip
+```
+
 ### 创建项目
 mvn archetype:generate -DgroupId=com.example -DartifactId=myproject -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
 
@@ -203,6 +214,50 @@ mvn archetype:generate -DgroupId=com.example -DartifactId=myproject -DarchetypeA
     </dependency>
   </dependencies>
 </project>
+```
+
+### 自己的parent
+``` xml
+<parent>
+    <artifactId>framework-dependencies</artifactId>
+    <groupId>cn.eth.framework</groupId>
+    <version>1.1.6.RELEASE</version>
+</parent>
+```
+
+### 不使用parent
+使用dependencyManagement，实现parent功能
+``` xml
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-dependencies</artifactId>
+            <version>${spring-boot.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+
+<!-- == -->
+
+<parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-dependencies</artifactId>
+    <version>${spring-boot.version}</version>
+    <relativePath/>
+</parent>
+
+<!-- 生成一个可执行的 jar包 -->
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+    </plugins>
+</build>
 ```
 
 ### 强制安装
@@ -1610,4 +1665,35 @@ Maven 配置中可以看出，你已经配置了 spring-boot-maven-plugin，但�
         </plugin>
     </plugins>
 </build>
+
+```
+
+## 没有主清单属性
+$ java -jar hellospring-0.0.1-SNAPSHOT.jar 
+hellospring-0.0.1-SNAPSHOT.jar中没有主清单属性
+``` xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <version>${spring-boot.version}</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>repackage</goal>
+                    </goals>
+                </execution>
+            </executions>
+         </plugin>
+    </plugins>
+</build>
+```
+
+## No serializer
+Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.http.converter.HttpMessageConversionException: Type definition error: [simple type, class com.kaifaweb.hellojdbc.demos.entity.Test]; nested exception is com.fasterxml.jackson.databind.exc.InvalidDefinitionException: No serializer found for class com.kaifaweb.hellojdbc.demos.entity.Test and no properties discovered to create BeanSerializer (to avoid exception, disable SerializationFeature.FAIL_ON_EMPTY_BEANS) (through reference chain: java.util.ArrayList[0])] with root cause
+
+``` java
+@Data
+public class Test implements Serializable {}
 ```
