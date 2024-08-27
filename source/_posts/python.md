@@ -1557,3 +1557,29 @@ uvicorn的Config配置启动信息，使用pyinstaller打包后出错。
 配置：config = Config(app=app, host="0.0.0.0", port=8020)
 错误信息：启动api服务失败: Unable to configure formatter 'default'
 解决办法：pyinstaller -w 参数去掉
+
+## Index(['name'], dtype='object')
+```py
+import pandas as pd
+
+# 示例数据
+data = {
+    'name': ['Alice', 'Bob', 'Alice', 'Charlie', 'Bob'],
+    'age': [25, 30, 25, 35, 30]
+}
+
+# 创建 DataFrame
+df = pd.DataFrame(data)
+
+# 打印列名
+print("Columns:", df.columns)
+
+# 打印前几行数据
+print("DataFrame head:\n", df.head())
+
+# 清理列名
+df.columns = df.columns.str.strip()
+
+# 使用 duplicated 方法
+print("Duplicated rows:\n", df.duplicated(subset=['name'], keep=False))
+```

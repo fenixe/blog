@@ -385,11 +385,12 @@ GoodsCouponBgListResponse couponRes = new GoodsCouponBgListResponse();
 Collections.emptyList()
 CollectionUtils.isEmpty(standardIds)
 
-// 固定大小的
+// 固定大小的数组
 String[] datas
+User[] users
 System.out.println(Arrays.toString(data));
 
-// 可以改变大小的列表
+// 可以改变大小的列表（集合）
 List<String> dates = new ArrayList<>(Arrays.asList("2024-04-25"));
 // 方法接收一个可变参数并将其转换为一个固定大小的列表。试图调用 add 或 remove 方法，将会抛出 UnsupportedOperationException。
 List<String> dates = Arrays.asList("2024-04-25", "2024-04-26");
@@ -404,33 +405,25 @@ Arrays.asList() 是一个 Java 的静态方法，它可以把一个数组或者�
 ```java
 // 提取ids
 List<Integer> ids = list.stream().map(ResClass::getId).collect(Collectors.toList());
-List<Long> provinceIds = Arrays.stream(areaConfig.getProvinceIds().split(",")).map(o->Long.valueOf(o)).collect(Collectors.toList());
+List<Long> pLongList = Arrays.stream(pIds.split(",")).map(Long::parseLong).collect(Collectors.toList());
 
-// 安照父元素，进行分组
+// 按照父元素，进行分组，一对多
 Map<Integer, List<Tag>> tagMap = tags.stream()
                 .collect(Collectors.groupingBy(Tag::getPid));
 // groupingBy 方法接收一个函数作为参数，它将作为分组的键。
+// 输出：{1=[Tag(pid=1, n=a), Tag(pid=1, n=d)], 3=[Tag(pid=3, n=b), Tag(pid=3, n=c)]}
 
 // 一对一
 Map<Long, RegionResponse> regionMap = regionList.stream().collect(Collectors.toMap(RegionResponse::getId, region -> region));
+Map<Integer, User> userMap = Arrays.stream(users).collect(Collectors.toMap(User::getId, user -> user));
+System.out.println(userMap.get(1));
 
-// 多过滤一
+// 筛选/过滤
 List<ExpressAreaConfigCreateRequest> areaNotSupportList = reqAreaList.stream()
                 .filter(o -> ExpressAreaConfig.SupportTypeEnum.不.code.equals(o.getSupportType()))
                 .collect(Collectors.toList());
+List<User> filterUserList = Arrays.stream(users).filter(user -> user.getId() == 3).collect(Collectors.toList());
 
-// tags数组归到主list
-// 分组tags
-Map<Integer, List<Map<String, Object>>> groupedTags = tags.stream()
-        .collect(Collectors.groupingBy(tag -> (Integer) tag.get("pid")));
-
-// 遍历list，并添加tags
-list = list.stream().map(item -> {
-    Integer id = (Integer) item.get("id");
-    List<Map<String, Object>> matchingTags = groupedTags.getOrDefault(id, new ArrayList<>());
-    item.put("tags", matchingTags);
-    return item;
-}).collect(Collectors.toList());
 
 // 是否有supportType = 0的项。
 [{
@@ -453,15 +446,57 @@ if (hasSame) {
     return R.ok(GlobalRetCode.请求参数验证有误.code, "已存在相同配置", null);
 }
 
+// 数组转字符串，用"；"连接
+List<String> goodsNames = Arrays.asList("Apple", "Banana", "Cherry");
+String result = String.join(";", goodsNames);
+
+// Set 和 List 查找：contains
+// Set不允许重复 O(1)更快，List允许重复 O(n)较慢
+List<String> Nos = new ArrayList<>();
+Set<String> NosSet = new HashSet<>(Nos);
+NosSet.contains(No)
+
+// ids是否都在AuditRecords中
+Set<String> orderAuditRecordNos = new HashSet<>();
+for (OrderAuditRecord record : orderAuditRecords) {
+    orderAuditRecordNos.add(record.getOrderNo());
+}
+for (String orderNo : orderNos) {
+    if (!orderAuditRecordNos.contains(orderNo)) {
+        log.info("批量审核记录不存在，订单编号：{}", orderNo);
+    }
+}
 ```
 
 ### stream操作
+对数据源（如集合、数组等）进行操作
+```java
+// 从集合创建 Stream
+List<String> list = Arrays.asList("a", "b", "c");
+Stream<String> streamFromList = list.stream();
+
+// 从数组创建 Stream
+String[] array = {"a", "b", "c"};
+Stream<String> streamFromArray = Arrays.stream(array);
+
+// 使用 Stream.of 创建 Stream
+Stream<String> streamOf = Stream.of("a", "b", "c");
+```
+
 stream操作分为中间操作（intermediate operations）和终端操作（terminal operations）。
 中间操作仅仅在终端操作触发时才会执行。
 
 - .collect(Collectors.toList()) — 收集结果到一个新的列表
 - .forEach(System.out::println) — 对每个元素执行给定的操作
 - .count() — 返回stream中元素的总数
+- .filter() 筛选
+- .map() 元素转换另一种形式
+- .reduce() 组成一个结果
+- .sorted() 对元素进行排序
+- .anyMatch() 有一个符合
+- .allMatch() 全部符合
+- .noneMatch() 都不符合
+- .peek() 对流中的每个元素执行一个操作（可以是获取、修改或打印等），而不影响流的整体处理流程
 
 ```java
 exportTerminals.stream().map(o -> {
@@ -764,6 +799,13 @@ public class BannerBiz {
 
         postActivityMapper.update(request.getStatus());
         bannerConfigMapper.updateBannerConfig(request);
+
+        log.info("审核记录ID：{}", orderAuditRecord.getId());
+        if (orderAuditRecord.getId() == null) {
+            orderAuditRecordMapper.insertSelective(orderAuditRecord);
+        } else {
+            orderAuditRecordMapper.updateByPrimaryKeySelective(orderAuditRecord);
+        }
     }
 }
 ```
@@ -1697,3 +1739,7 @@ Servlet.service() for servlet [dispatcherServlet] in context with path [] threw 
 @Data
 public class Test implements Serializable {}
 ```
+
+## IDEA提示 It's possible to extract method returning 'orderAuditRecords' from a long surrounding method。
+代码如下：orderAuditRecord.setRefusalReason("");
+可以从一个较长的方法中提取一个返回 orderAuditRecords 的方法。这通常是为了提高代码的可读性和可维护性。
