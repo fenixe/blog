@@ -190,6 +190,16 @@ INNER JOIN baidu_location b ON t.id = b.pid;
 SELECT NOW() - INTERVAL 30 DAY;
 ```
 
+### 过期时间记录
+```sql
+
+UPDATE ad_content
+SET status = 0
+WHERE expired_time IS NOT NULL
+  AND expired_time != '0000-00-00 00:00:00'
+  AND expired_time < NOW();
+```
+
 ### 查询某列去重
 ```sql
 SELECT DISTINCT business

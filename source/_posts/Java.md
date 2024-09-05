@@ -27,6 +27,12 @@ java -jar hellospring-0.0.1-SNAPSHOT.jar
 ## Bean
 Bean简单来讲就是由Spring容器创建并托管的实例。
 
+```java
+Bean转map
+Map<String, Object> param = BeanUtil.beanToMap(request);
+log.info("region list param: {}", JSON.toJSONString(param));
+```
+
 ## spring boot指定配置文件
 IDEA
 Run > Edit Configurations
@@ -150,6 +156,15 @@ maven会把下载好的 artifact 放在本地的文件夹，叫 local repo
 
 客户端
 项目中会把 jar包的id加入到自己的依赖。maven的依赖是传递的，发布本地jar包到 maven repo，自动依赖所有。
+
+### 重新依赖
+没找到方法
+powerJobClient.fetchWorkflowInstanceFailPage();
+~/.m2/repository/tech -> ~/.m2/repository/tech2
+tech2 2024年2月28日
+tech 2024年9月2日
+mvn clean
+刷新，Reload All Maven Projects
 
 ### 打包
 ``` zsh
@@ -319,9 +334,15 @@ String[] requestProvinceIds = request.getProvinceIds().split(",");
 for(String id: requestProvinceIds) {
     return false;
 }
+
+// 判断一个字符串是否为 null、空字符串或仅包含空白字符。
+import org.apache.commons.lang3.StringUtils;
+StringUtils.isBlank(request.getDepartmentIds())
 ```
 
 ### int类型
+除法向下取整
+
 基本数据类型int的比较，通常使用==操作符。
 Integer类的equals方法确实可以用来比较两个Integer对象的值是否相等。
 
@@ -379,6 +400,7 @@ GoodsCouponBgListResponse couponRes = new GoodsCouponBgListResponse();
 ```
 
 ## 数组
+subList(start, end)取得的是下标为start到end-1的元素,不包含下标为end的元素.
 ### 声明数组并初始化
 ```java
 // 空数组
@@ -518,7 +540,7 @@ boolean exists = listOfMaps.stream().anyMatch(map -> nameToCheck.equals(map.get(
 System.out.println("Does name exist in the array? " + exists);
 ```
 
-## 方法
+## 方法FN
 ### 结构
 ```java
 // 第一层：api层
@@ -573,6 +595,9 @@ list.stream()
     .forEach(System.out::println);
 ```
 
+## Math
+min() 方法用于返回两个参数中的最小值。
+end = Math.min(0 + 3, 9) = 3
 
 ## Enum
 ```java
@@ -1117,6 +1142,9 @@ Spring 框架的一部分，它处理了MethodArgumentNotValidException，这个
 ### @ResponseBody
 @ResponseBody注解表示该方法的返回结果直接写入 HTTP 响应体中，而不是通过视图解析器处理。
 
+### @RefreshScope
+Spring Cloud 中的一个注解，用于标记一个 Spring Bean，使其能够在运行时动态刷新配置。
+
 ## Lombok库注解
 ### @Data
 自动生成toString、equals、hashCode、getter和setter方法
@@ -1551,6 +1579,20 @@ if(!Objects.equals(request.getCode(), redisCode)){
 }
 ```
 
+## 批量处理
+```java
+List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
+int batchSize = 3;
+int totalSize = list.size();
+int batchCount = (totalSize + batchSize - 1) / batchSize;
+System.out.println(batchCount);
+for (int i = 0; i < batchCount; i++) {
+    int start = i * batchSize;
+    int end = Math.min(start + batchSize, totalSize);
+    List<Integer> subList = list.subList(start, end);
+    System.out.println(subList);
+}
+```
 
 # IDEA
 ## 替换
