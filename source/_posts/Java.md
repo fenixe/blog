@@ -338,6 +338,10 @@ for(String id: requestProvinceIds) {
 // 判断一个字符串是否为 null、空字符串或仅包含空白字符。
 import org.apache.commons.lang3.StringUtils;
 StringUtils.isBlank(request.getDepartmentIds())
+
+// 字符只能是数字
+String No = "6867576";
+boolean isNumeric = StringUtils.isNumeric(No);
 ```
 
 ### int类型
@@ -368,6 +372,22 @@ sql定义字段：`longitude` decimal(10,7)
         System.out.println(add);
 ```
 
+#### compareTo
+```java
+compareTo 方法用于比较两个 BigDecimal 对象的大小。
+如果调用对象小于参数对象，compareTo 方法返回 -1。
+如果调用对象等于参数对象，compareTo 方法返回 0。
+如果调用对象大于参数对象，compareTo 方法返回 1。
+```
+
+#### 向下取整
+```java
+NumberUtil.round(9.9, 0, RoundingMode.DOWN).longValue();
+```
+NumberUtil.round 是一个静态方法，用于对数字进行舍入。
+参数 9.9 是要舍入的数字。
+参数 0 表示舍入到小数点后0位（即整数部分）。
+RoundingMode.DOWN 表示向下舍入（即截断小数部分）。
 
 ### 布尔类型
 boolean是Java的基本数据类型，它只有两个可能的值：true或false。它不是一个对象，它的内存占用也更小，因为它直接存储值。
@@ -524,6 +544,13 @@ stream操作分为中间操作（intermediate operations）和终端操作（ter
 exportTerminals.stream().map(o -> {
   o.setType();
 }).collect(Collectors.toList());
+
+// json文件转数组
+List<Map<String, String>> datas = jsonRes.getDatas();
+List<String> values = datas.stream()
+        .flatMap(map -> map.values().stream())
+        .collect(Collectors.toList());
+ethNos.addAll(values);
 ```
 
 ### 是否在数组中
@@ -1299,15 +1326,78 @@ public class UserBean {
 @NotBlank: 这个注解专用于 String 类型，确保被注解的字段不为 null，除此之外还要至少包含一个非空白字符。
 
 # MyBatis
-## updateByPrimaryKeySelective
+## mapper
+### updateByPrimaryKeySelective
 Mapper接口中的一个方法，通常用于更新数据库表中的记录。
 会基于主键更新那些非null的字段。这意味着，只有在传入的对象中非null的属性才会被更新到数据库中对应主键的记录里，其他的字段则保持原值不变。这样做的好处是可以避免覆盖那些我们不想改变的、或者我们没有提供新值的字段。
 ```java
 int updateByPrimaryKeySelective(实体类名称 record);
 ```
 
-## selectByPrimaryKey
+### selectByPrimaryKey
 Mapper.selectByPrimaryKey(request.getId());
+
+### 批量更新判断记录条数
+```java
+int affectedRows = myMapper.batchUpdateAuditPassByIds(ids);
+if (affectedRows == ids.size()) {
+    System.out.println("Batch update successful. All records updated.");
+}
+UPDATE your_table
+    SET audit_status = 'PASS'
+    WHERE id IN
+```
+
+### MapKey
+```java
+@MapKey("ItemId")
+Map<Long, Item> selectMapByItem(String no);
+```
+
+## sql
+### 排序
+```xml
+<select id="bgList" resultType="test">
+    SELECT * FROM test
+    ORDER BY
+    <choose>
+        <when test="request.sortType == 1">
+            o.id DESC
+        </when>
+        <when test="request.sortType == 2">
+            o.id ASC
+        </when>
+        <otherwise>
+            o.id DESC
+        </otherwise>
+    </choose>
+</select>
+```
+
+### 时间区间
+```xml
+<if test="request.startTime != null and request.startTime != ''">
+    and o.add_time > #{request.startTime}
+</if>
+<if test="request.endTime != null and request.endTime != ''">
+    and #{request.endTime} > o.add_time
+</if>
+```
+
+### 多条件查询
+```xml
+<if test="(a != null and a != '') or (b != null and b != '') or (c != null and c != '')">
+    AND o.id IN (
+        SELECT DISTINCT o2.id
+        FROM order_info o2
+        <where>
+            <if test="(request.a != null and request.a != '')">
+                AND t.name LIKE concat('%', #{request.a}, '%')
+            </if>
+        </where>
+    )
+</if>
+```
 
 # Example
 ## entity
@@ -1570,6 +1660,27 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 String currentTime = DateFormatUtils.format(new Date(), "yyyy-MM-dd");
 ```
 
+### 其他时间
+```java
+// 预计发货时间
+if (ret.getShippingTime() == null) {
+    // orderItems中每项有 sendOutType，0:当日，1:24小时，2:48小时。找出最小的一项
+    Integer sendOutType = items.stream().map(OrderInfoItemBgDetailResponse::getSendOutType).min(Integer::compareTo).orElse(0);
+    // 当sendOutType为0时，当天的23:59:59。等于1或2加对应天数
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTime(ret.getAddTime());
+    if (sendOutType == 0) {
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        calendar.set(Calendar.MILLISECOND, 999);
+    } else {
+        calendar.add(Calendar.DAY_OF_MONTH, sendOutType);
+    }
+    ret.setPredictShippingTime(DateFormatUtils.format(calendar.getTime(), "yyyy-MM-dd HH:mm:ss"));
+}
+```
+
 ## equals
 ```java
 // 两个null为true，字符串/数字都正常
@@ -1591,6 +1702,115 @@ for (int i = 0; i < batchCount; i++) {
     int end = Math.min(start + batchSize, totalSize);
     List<Integer> subList = list.subList(start, end);
     System.out.println(subList);
+}
+```
+
+## 逗号处理
+```java
+// 逗号拼接
+String notSupportProvinceIds = notSupportList.stream().map(ExpressAreaConfig::getProvinceId).map(Objects::toString).collect(Collectors.joining(","));
+// 逗号转数组
+List<Long> provinceIds = Arrays.stream(area.getProvinceIds().split(",")).map(o->Long.valueOf(o)).collect(Collectors.toList());
+
+// 分号拼接
+List<String> names = new ArrayList<>();
+String.join("；", names)
+```
+
+## 排除
+```java
+List<String> failExpressNos = new ArrayList<>();
+Set<String> failExpressNoSet = new HashSet<>(failExpressNos);
+// 创建一个新的列表来存储成功的快递单号
+List<String> successExpressNos = new ArrayList<>();
+// 遍历 expressNoList，将不在 failExpressNoSet 中的元素添加到 successExpressNos 中
+for (ExpressInfoRequest expressInfo : request.getExpressList()) {
+    if (!failExpressNoSet.contains(expressInfo.getExpressNo())) {
+        successExpressNos.add(expressInfo.getExpressNo());
+    }
+}
+```
+
+## 分批插入
+```java
+public void batchInsertAdGroupWhitelist(Long adGroupId, List<String> nos) {
+    // 根据ethNos的长度，进行每5000个一次的批量插入
+    int batchSize = 5000;
+    int totalSize = nos.size();
+    int batchCount = (totalSize + batchSize - 1) / batchSize;
+    log.info("AdBiz 广告群组白名单批量插入, 总条数: {}, 每批次条数: {}, 批次数: {}", totalSize, batchSize, batchCount);
+
+    for (int i = 0; i < batchCount; i++) {
+        int start = i * batchSize;
+        int end = Math.min(start + batchSize, totalSize);
+        List<String> batchList = nos.subList(start, end);
+        adGroupWhitelistMapper.batchInsert(adGroupId, batchList);
+    }
+}
+```
+
+## 分批处理
+```java
+Long maxId = logisticsPushRespMapper.selectMaxId();
+if (null == maxId) {
+    maxId = 0L;
+}
+Long minId = 0L;
+
+int size = 300;
+
+List<LogisticsPushResp> list = logisticsPushRespMapper.selectByRange(minId, maxId, size);
+while (!CollectionUtils.isEmpty(list)) {
+    for (LogisticsPushResp push : list) {
+        minId = push.getId();
+        // 业务处理
+    }
+    list = logisticsPushRespMapper.selectByRange(minId, maxId, size);
+}
+
+// 分批查询待收货状态：PENDING_RECEIPT 的订单
+Long maxId = orderInfoMapper.selectPendingReceiptMaxId();
+log.info("待收货订单最大ID: {}", maxId);
+if (maxId == null) {
+    return;
+}
+Long minId = orderInfoMapper.selectPendingReceiptMinId();
+log.info("待收货订单最小ID: {}", minId);
+if (minId == null) {
+    return;
+}
+Integer batchSize = 300;
+while (minId <= maxId) {
+    List<OrderInfo> orderInfoList = orderInfoMapper.batchSelectPendingReceiptRange(minId, maxId, batchSize);
+    log.info("分批查询待收货订单数量: {}", orderInfoList.size());
+    if (CollectionUtils.isEmpty(orderInfoList)) {
+        break;
+    }
+    // 业务处理
+    minId = orderInfoList.get(orderInfoList.size() - 1).getId() + 1;
+    log.info("下一轮循环的最小ID: {}", minId);
+}
+```
+
+## 数据按部分字段合并
+```java
+// 过滤出 support_type = 1的所有记录
+List<ExpressAreaConfig> supportList = areaConfigList.stream().filter(item -> item.getSupportType().equals(ExpressAreaConfig.SupportTypeEnum.送达.code)).collect(Collectors.toList());
+
+Map<ExpressAreaConfigPrice, List<ExpressAreaConfig>> groupedSupportList = new HashMap<>();
+for (ExpressAreaConfig record: supportList) {
+    ExpressAreaConfigPrice key = new ExpressAreaConfigPrice(record.getInitKg(), record.getInitPrice(), record.getAddKg(), record.getAddPrice());
+    groupedSupportList.computeIfAbsent(key, k -> new ArrayList<>()).add(record);
+}
+// 将分组后的记录转换为列表
+List<List<ExpressAreaConfig>> result = new ArrayList<>(groupedSupportList.values());
+for (List<ExpressAreaConfig> group : result) {
+    String supportProvinceIds = group.stream().map(ExpressAreaConfig::getProvinceId).map(Objects::toString).collect(Collectors.joining(","));
+    ExpressAreaConfigListResponse areaConfigResponse = new ExpressAreaConfigListResponse();
+    areaConfigResponse.setProvinceIds(supportProvinceIds);
+    areaConfigResponse.setSupportType(ExpressAreaConfig.SupportTypeEnum.送达.code);
+    areaConfigResponse.setInitKg(group.get(0).getInitKg());
+    areaConfigListResponses.add(areaConfigResponse);
 }
 ```
 
@@ -1626,6 +1846,10 @@ MySQL Driver：用于 MySQL 数据库连接。
 ### 访问应用程序
 启动 Application.java 文件
 http://localhost:8080
+
+## 安装插件
+默认无法访问安装
+Settings -> HTTP Proxy Settings -> Auto-detect proxy settings -> 配置网址：https://plugins.jetbrains.com/idea
 
 
 # FeignClient
