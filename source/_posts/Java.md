@@ -27,6 +27,12 @@ java -jar hellospring-0.0.1-SNAPSHOT.jar
 ## Bean
 Bean简单来讲就是由Spring容器创建并托管的实例。
 
+```java
+Bean转map
+Map<String, Object> param = BeanUtil.beanToMap(request);
+log.info("region list param: {}", JSON.toJSONString(param));
+```
+
 ## spring boot指定配置文件
 IDEA
 Run > Edit Configurations
@@ -150,6 +156,15 @@ maven会把下载好的 artifact 放在本地的文件夹，叫 local repo
 
 客户端
 项目中会把 jar包的id加入到自己的依赖。maven的依赖是传递的，发布本地jar包到 maven repo，自动依赖所有。
+
+### 重新依赖
+没找到方法
+powerJobClient.fetchWorkflowInstanceFailPage();
+~/.m2/repository/tech -> ~/.m2/repository/tech2
+tech2 2024年2月28日
+tech 2024年9月2日
+mvn clean
+刷新，Reload All Maven Projects
 
 ### 打包
 ``` zsh
@@ -319,9 +334,19 @@ String[] requestProvinceIds = request.getProvinceIds().split(",");
 for(String id: requestProvinceIds) {
     return false;
 }
+
+// 判断一个字符串是否为 null、空字符串或仅包含空白字符。
+import org.apache.commons.lang3.StringUtils;
+StringUtils.isBlank(request.getDepartmentIds())
+
+// 字符只能是数字
+String No = "6867576";
+boolean isNumeric = StringUtils.isNumeric(No);
 ```
 
 ### int类型
+除法向下取整
+
 基本数据类型int的比较，通常使用==操作符。
 Integer类的equals方法确实可以用来比较两个Integer对象的值是否相等。
 
@@ -347,6 +372,22 @@ sql定义字段：`longitude` decimal(10,7)
         System.out.println(add);
 ```
 
+#### compareTo
+```java
+compareTo 方法用于比较两个 BigDecimal 对象的大小。
+如果调用对象小于参数对象，compareTo 方法返回 -1。
+如果调用对象等于参数对象，compareTo 方法返回 0。
+如果调用对象大于参数对象，compareTo 方法返回 1。
+```
+
+#### 向下取整
+```java
+NumberUtil.round(9.9, 0, RoundingMode.DOWN).longValue();
+```
+NumberUtil.round 是一个静态方法，用于对数字进行舍入。
+参数 9.9 是要舍入的数字。
+参数 0 表示舍入到小数点后0位（即整数部分）。
+RoundingMode.DOWN 表示向下舍入（即截断小数部分）。
 
 ### 布尔类型
 boolean是Java的基本数据类型，它只有两个可能的值：true或false。它不是一个对象，它的内存占用也更小，因为它直接存储值。
@@ -379,17 +420,19 @@ GoodsCouponBgListResponse couponRes = new GoodsCouponBgListResponse();
 ```
 
 ## 数组
+subList(start, end)取得的是下标为start到end-1的元素,不包含下标为end的元素.
 ### 声明数组并初始化
 ```java
 // 空数组
 Collections.emptyList()
 CollectionUtils.isEmpty(standardIds)
 
-// 固定大小的
+// 固定大小的数组
 String[] datas
+User[] users
 System.out.println(Arrays.toString(data));
 
-// 可以改变大小的列表
+// 可以改变大小的列表（集合）
 List<String> dates = new ArrayList<>(Arrays.asList("2024-04-25"));
 // 方法接收一个可变参数并将其转换为一个固定大小的列表。试图调用 add 或 remove 方法，将会抛出 UnsupportedOperationException。
 List<String> dates = Arrays.asList("2024-04-25", "2024-04-26");
@@ -404,33 +447,25 @@ Arrays.asList() 是一个 Java 的静态方法，它可以把一个数组或者�
 ```java
 // 提取ids
 List<Integer> ids = list.stream().map(ResClass::getId).collect(Collectors.toList());
-List<Long> provinceIds = Arrays.stream(areaConfig.getProvinceIds().split(",")).map(o->Long.valueOf(o)).collect(Collectors.toList());
+List<Long> pLongList = Arrays.stream(pIds.split(",")).map(Long::parseLong).collect(Collectors.toList());
 
-// 安照父元素，进行分组
+// 按照父元素，进行分组，一对多
 Map<Integer, List<Tag>> tagMap = tags.stream()
                 .collect(Collectors.groupingBy(Tag::getPid));
 // groupingBy 方法接收一个函数作为参数，它将作为分组的键。
+// 输出：{1=[Tag(pid=1, n=a), Tag(pid=1, n=d)], 3=[Tag(pid=3, n=b), Tag(pid=3, n=c)]}
 
 // 一对一
 Map<Long, RegionResponse> regionMap = regionList.stream().collect(Collectors.toMap(RegionResponse::getId, region -> region));
+Map<Integer, User> userMap = Arrays.stream(users).collect(Collectors.toMap(User::getId, user -> user));
+System.out.println(userMap.get(1));
 
-// 多过滤一
+// 筛选/过滤
 List<ExpressAreaConfigCreateRequest> areaNotSupportList = reqAreaList.stream()
                 .filter(o -> ExpressAreaConfig.SupportTypeEnum.不.code.equals(o.getSupportType()))
                 .collect(Collectors.toList());
+List<User> filterUserList = Arrays.stream(users).filter(user -> user.getId() == 3).collect(Collectors.toList());
 
-// tags数组归到主list
-// 分组tags
-Map<Integer, List<Map<String, Object>>> groupedTags = tags.stream()
-        .collect(Collectors.groupingBy(tag -> (Integer) tag.get("pid")));
-
-// 遍历list，并添加tags
-list = list.stream().map(item -> {
-    Integer id = (Integer) item.get("id");
-    List<Map<String, Object>> matchingTags = groupedTags.getOrDefault(id, new ArrayList<>());
-    item.put("tags", matchingTags);
-    return item;
-}).collect(Collectors.toList());
 
 // 是否有supportType = 0的项。
 [{
@@ -453,20 +488,69 @@ if (hasSame) {
     return R.ok(GlobalRetCode.请求参数验证有误.code, "已存在相同配置", null);
 }
 
+// 数组转字符串，用"；"连接
+List<String> goodsNames = Arrays.asList("Apple", "Banana", "Cherry");
+String result = String.join(";", goodsNames);
+
+// Set 和 List 查找：contains
+// Set不允许重复 O(1)更快，List允许重复 O(n)较慢
+List<String> Nos = new ArrayList<>();
+Set<String> NosSet = new HashSet<>(Nos);
+NosSet.contains(No)
+
+// ids是否都在AuditRecords中
+Set<String> orderAuditRecordNos = new HashSet<>();
+for (OrderAuditRecord record : orderAuditRecords) {
+    orderAuditRecordNos.add(record.getOrderNo());
+}
+for (String orderNo : orderNos) {
+    if (!orderAuditRecordNos.contains(orderNo)) {
+        log.info("批量审核记录不存在，订单编号：{}", orderNo);
+    }
+}
 ```
 
 ### stream操作
+对数据源（如集合、数组等）进行操作
+```java
+// 从集合创建 Stream
+List<String> list = Arrays.asList("a", "b", "c");
+Stream<String> streamFromList = list.stream();
+
+// 从数组创建 Stream
+String[] array = {"a", "b", "c"};
+Stream<String> streamFromArray = Arrays.stream(array);
+
+// 使用 Stream.of 创建 Stream
+Stream<String> streamOf = Stream.of("a", "b", "c");
+```
+
 stream操作分为中间操作（intermediate operations）和终端操作（terminal operations）。
 中间操作仅仅在终端操作触发时才会执行。
 
 - .collect(Collectors.toList()) — 收集结果到一个新的列表
 - .forEach(System.out::println) — 对每个元素执行给定的操作
 - .count() — 返回stream中元素的总数
+- .filter() 筛选
+- .map() 元素转换另一种形式
+- .reduce() 组成一个结果
+- .sorted() 对元素进行排序
+- .anyMatch() 有一个符合
+- .allMatch() 全部符合
+- .noneMatch() 都不符合
+- .peek() 对流中的每个元素执行一个操作（可以是获取、修改或打印等），而不影响流的整体处理流程
 
 ```java
 exportTerminals.stream().map(o -> {
   o.setType();
 }).collect(Collectors.toList());
+
+// json文件转数组
+List<Map<String, String>> datas = jsonRes.getDatas();
+List<String> values = datas.stream()
+        .flatMap(map -> map.values().stream())
+        .collect(Collectors.toList());
+ethNos.addAll(values);
 ```
 
 ### 是否在数组中
@@ -483,7 +567,7 @@ boolean exists = listOfMaps.stream().anyMatch(map -> nameToCheck.equals(map.get(
 System.out.println("Does name exist in the array? " + exists);
 ```
 
-## 方法
+## 方法FN
 ### 结构
 ```java
 // 第一层：api层
@@ -538,6 +622,9 @@ list.stream()
     .forEach(System.out::println);
 ```
 
+## Math
+min() 方法用于返回两个参数中的最小值。
+end = Math.min(0 + 3, 9) = 3
 
 ## Enum
 ```java
@@ -764,6 +851,13 @@ public class BannerBiz {
 
         postActivityMapper.update(request.getStatus());
         bannerConfigMapper.updateBannerConfig(request);
+
+        log.info("审核记录ID：{}", orderAuditRecord.getId());
+        if (orderAuditRecord.getId() == null) {
+            orderAuditRecordMapper.insertSelective(orderAuditRecord);
+        } else {
+            orderAuditRecordMapper.updateByPrimaryKeySelective(orderAuditRecord);
+        }
     }
 }
 ```
@@ -1075,6 +1169,9 @@ Spring 框架的一部分，它处理了MethodArgumentNotValidException，这个
 ### @ResponseBody
 @ResponseBody注解表示该方法的返回结果直接写入 HTTP 响应体中，而不是通过视图解析器处理。
 
+### @RefreshScope
+Spring Cloud 中的一个注解，用于标记一个 Spring Bean，使其能够在运行时动态刷新配置。
+
 ## Lombok库注解
 ### @Data
 自动生成toString、equals、hashCode、getter和setter方法
@@ -1229,15 +1326,78 @@ public class UserBean {
 @NotBlank: 这个注解专用于 String 类型，确保被注解的字段不为 null，除此之外还要至少包含一个非空白字符。
 
 # MyBatis
-## updateByPrimaryKeySelective
+## mapper
+### updateByPrimaryKeySelective
 Mapper接口中的一个方法，通常用于更新数据库表中的记录。
 会基于主键更新那些非null的字段。这意味着，只有在传入的对象中非null的属性才会被更新到数据库中对应主键的记录里，其他的字段则保持原值不变。这样做的好处是可以避免覆盖那些我们不想改变的、或者我们没有提供新值的字段。
 ```java
 int updateByPrimaryKeySelective(实体类名称 record);
 ```
 
-## selectByPrimaryKey
+### selectByPrimaryKey
 Mapper.selectByPrimaryKey(request.getId());
+
+### 批量更新判断记录条数
+```java
+int affectedRows = myMapper.batchUpdateAuditPassByIds(ids);
+if (affectedRows == ids.size()) {
+    System.out.println("Batch update successful. All records updated.");
+}
+UPDATE your_table
+    SET audit_status = 'PASS'
+    WHERE id IN
+```
+
+### MapKey
+```java
+@MapKey("ItemId")
+Map<Long, Item> selectMapByItem(String no);
+```
+
+## sql
+### 排序
+```xml
+<select id="bgList" resultType="test">
+    SELECT * FROM test
+    ORDER BY
+    <choose>
+        <when test="request.sortType == 1">
+            o.id DESC
+        </when>
+        <when test="request.sortType == 2">
+            o.id ASC
+        </when>
+        <otherwise>
+            o.id DESC
+        </otherwise>
+    </choose>
+</select>
+```
+
+### 时间区间
+```xml
+<if test="request.startTime != null and request.startTime != ''">
+    and o.add_time > #{request.startTime}
+</if>
+<if test="request.endTime != null and request.endTime != ''">
+    and #{request.endTime} > o.add_time
+</if>
+```
+
+### 多条件查询
+```xml
+<if test="(a != null and a != '') or (b != null and b != '') or (c != null and c != '')">
+    AND o.id IN (
+        SELECT DISTINCT o2.id
+        FROM order_info o2
+        <where>
+            <if test="(request.a != null and request.a != '')">
+                AND t.name LIKE concat('%', #{request.a}, '%')
+            </if>
+        </where>
+    )
+</if>
+```
 
 # Example
 ## entity
@@ -1500,6 +1660,27 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 String currentTime = DateFormatUtils.format(new Date(), "yyyy-MM-dd");
 ```
 
+### 其他时间
+```java
+// 预计发货时间
+if (ret.getShippingTime() == null) {
+    // orderItems中每项有 sendOutType，0:当日，1:24小时，2:48小时。找出最小的一项
+    Integer sendOutType = items.stream().map(OrderInfoItemBgDetailResponse::getSendOutType).min(Integer::compareTo).orElse(0);
+    // 当sendOutType为0时，当天的23:59:59。等于1或2加对应天数
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTime(ret.getAddTime());
+    if (sendOutType == 0) {
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        calendar.set(Calendar.MILLISECOND, 999);
+    } else {
+        calendar.add(Calendar.DAY_OF_MONTH, sendOutType);
+    }
+    ret.setPredictShippingTime(DateFormatUtils.format(calendar.getTime(), "yyyy-MM-dd HH:mm:ss"));
+}
+```
+
 ## equals
 ```java
 // 两个null为true，字符串/数字都正常
@@ -1509,6 +1690,129 @@ if(!Objects.equals(request.getCode(), redisCode)){
 }
 ```
 
+## 批量处理
+```java
+List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
+int batchSize = 3;
+int totalSize = list.size();
+int batchCount = (totalSize + batchSize - 1) / batchSize;
+System.out.println(batchCount);
+for (int i = 0; i < batchCount; i++) {
+    int start = i * batchSize;
+    int end = Math.min(start + batchSize, totalSize);
+    List<Integer> subList = list.subList(start, end);
+    System.out.println(subList);
+}
+```
+
+## 逗号处理
+```java
+// 逗号拼接
+String notSupportProvinceIds = notSupportList.stream().map(ExpressAreaConfig::getProvinceId).map(Objects::toString).collect(Collectors.joining(","));
+// 逗号转数组
+List<Long> provinceIds = Arrays.stream(area.getProvinceIds().split(",")).map(o->Long.valueOf(o)).collect(Collectors.toList());
+
+// 分号拼接
+List<String> names = new ArrayList<>();
+String.join("；", names)
+```
+
+## 排除
+```java
+List<String> failExpressNos = new ArrayList<>();
+Set<String> failExpressNoSet = new HashSet<>(failExpressNos);
+// 创建一个新的列表来存储成功的快递单号
+List<String> successExpressNos = new ArrayList<>();
+// 遍历 expressNoList，将不在 failExpressNoSet 中的元素添加到 successExpressNos 中
+for (ExpressInfoRequest expressInfo : request.getExpressList()) {
+    if (!failExpressNoSet.contains(expressInfo.getExpressNo())) {
+        successExpressNos.add(expressInfo.getExpressNo());
+    }
+}
+```
+
+## 分批插入
+```java
+public void batchInsertAdGroupWhitelist(Long adGroupId, List<String> nos) {
+    // 根据ethNos的长度，进行每5000个一次的批量插入
+    int batchSize = 5000;
+    int totalSize = nos.size();
+    int batchCount = (totalSize + batchSize - 1) / batchSize;
+    log.info("AdBiz 广告群组白名单批量插入, 总条数: {}, 每批次条数: {}, 批次数: {}", totalSize, batchSize, batchCount);
+
+    for (int i = 0; i < batchCount; i++) {
+        int start = i * batchSize;
+        int end = Math.min(start + batchSize, totalSize);
+        List<String> batchList = nos.subList(start, end);
+        adGroupWhitelistMapper.batchInsert(adGroupId, batchList);
+    }
+}
+```
+
+## 分批处理
+```java
+Long maxId = logisticsPushRespMapper.selectMaxId();
+if (null == maxId) {
+    maxId = 0L;
+}
+Long minId = 0L;
+
+int size = 300;
+
+List<LogisticsPushResp> list = logisticsPushRespMapper.selectByRange(minId, maxId, size);
+while (!CollectionUtils.isEmpty(list)) {
+    for (LogisticsPushResp push : list) {
+        minId = push.getId();
+        // 业务处理
+    }
+    list = logisticsPushRespMapper.selectByRange(minId, maxId, size);
+}
+
+// 分批查询待收货状态：PENDING_RECEIPT 的订单
+Long maxId = orderInfoMapper.selectPendingReceiptMaxId();
+log.info("待收货订单最大ID: {}", maxId);
+if (maxId == null) {
+    return;
+}
+Long minId = orderInfoMapper.selectPendingReceiptMinId();
+log.info("待收货订单最小ID: {}", minId);
+if (minId == null) {
+    return;
+}
+Integer batchSize = 300;
+while (minId <= maxId) {
+    List<OrderInfo> orderInfoList = orderInfoMapper.batchSelectPendingReceiptRange(minId, maxId, batchSize);
+    log.info("分批查询待收货订单数量: {}", orderInfoList.size());
+    if (CollectionUtils.isEmpty(orderInfoList)) {
+        break;
+    }
+    // 业务处理
+    minId = orderInfoList.get(orderInfoList.size() - 1).getId() + 1;
+    log.info("下一轮循环的最小ID: {}", minId);
+}
+```
+
+## 数据按部分字段合并
+```java
+// 过滤出 support_type = 1的所有记录
+List<ExpressAreaConfig> supportList = areaConfigList.stream().filter(item -> item.getSupportType().equals(ExpressAreaConfig.SupportTypeEnum.送达.code)).collect(Collectors.toList());
+
+Map<ExpressAreaConfigPrice, List<ExpressAreaConfig>> groupedSupportList = new HashMap<>();
+for (ExpressAreaConfig record: supportList) {
+    ExpressAreaConfigPrice key = new ExpressAreaConfigPrice(record.getInitKg(), record.getInitPrice(), record.getAddKg(), record.getAddPrice());
+    groupedSupportList.computeIfAbsent(key, k -> new ArrayList<>()).add(record);
+}
+// 将分组后的记录转换为列表
+List<List<ExpressAreaConfig>> result = new ArrayList<>(groupedSupportList.values());
+for (List<ExpressAreaConfig> group : result) {
+    String supportProvinceIds = group.stream().map(ExpressAreaConfig::getProvinceId).map(Objects::toString).collect(Collectors.joining(","));
+    ExpressAreaConfigListResponse areaConfigResponse = new ExpressAreaConfigListResponse();
+    areaConfigResponse.setProvinceIds(supportProvinceIds);
+    areaConfigResponse.setSupportType(ExpressAreaConfig.SupportTypeEnum.送达.code);
+    areaConfigResponse.setInitKg(group.get(0).getInitKg());
+    areaConfigListResponses.add(areaConfigResponse);
+}
+```
 
 # IDEA
 ## 替换
@@ -1542,6 +1846,10 @@ MySQL Driver：用于 MySQL 数据库连接。
 ### 访问应用程序
 启动 Application.java 文件
 http://localhost:8080
+
+## 安装插件
+默认无法访问安装
+Settings -> HTTP Proxy Settings -> Auto-detect proxy settings -> 配置网址：https://plugins.jetbrains.com/idea
 
 
 # FeignClient
@@ -1697,3 +2005,7 @@ Servlet.service() for servlet [dispatcherServlet] in context with path [] threw 
 @Data
 public class Test implements Serializable {}
 ```
+
+## IDEA提示 It's possible to extract method returning 'orderAuditRecords' from a long surrounding method。
+代码如下：orderAuditRecord.setRefusalReason("");
+可以从一个较长的方法中提取一个返回 orderAuditRecords 的方法。这通常是为了提高代码的可读性和可维护性。

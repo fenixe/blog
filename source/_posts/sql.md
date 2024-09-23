@@ -82,6 +82,12 @@ union 联合查询会去重
 decimal：表示定点数
 存储精确的数值，比如金融数据，其中需要精确的小数点及小数点后的数值。这与float或double的浮点数类型不同，后者可能会引入舍入误差。
 
+## 索引
+`KEY` 关键字用于定义索引。索引是一种数据库对象，用于提高查询速度。索引可以显著提高查询性能，特别是在大表上。
+KEY 是 INDEX 的同义词，用于创建索引。
+idx_user_username
+当你在 username 列上创建索引时，数据库会创建一个数据结构（通常是 B-tree 或其他类型的树），以便更快地查找、插入、更新和删除基于 order_no 列的记录。
+
 ## 查询某字段有几种值
 SELECT DISTINCT column_name
 FROM table_name;
@@ -155,7 +161,12 @@ ALTER TABLE dev_project ADD plan_str VARCHAR(255) COMMENT '预估工时';
 `usage_valid_days` int(3) DEFAULT '0' COMMENT '领取后有效期天数',
 ```
 
-## 
+### 增多条
+```sql
+INSERT INTO `area_config` (`province_id`, `support_type`, `init_kg`, `init_price`, `add_kg`, `add_price`, `create_time`) VALUES
+(13, 1, 1, 12, 1, 8, '2024-08-15 15:00:00'),
+(29, 1, 1, 12, 1, 8, '2024-08-15 15:00:00'),
+```
 
 ## 查
 ### 总数
@@ -190,6 +201,16 @@ INNER JOIN baidu_location b ON t.id = b.pid;
 SELECT NOW() - INTERVAL 30 DAY;
 ```
 
+### 过期时间记录
+```sql
+-- 只需要传一个 9999
+UPDATE ad_content
+SET status = 0
+WHERE expired_time IS NOT NULL
+  AND expired_time != '0000-00-00 00:00:00'
+  AND expired_time < NOW();
+```
+
 ### 查询某列去重
 ```sql
 SELECT DISTINCT business
@@ -205,6 +226,58 @@ select * from config where status = 1 and support_type = 1 and FIND_IN_SET(#{pro
 ```sql
 select max(id) from l
 select min(id) from l
+```
+
+### 总数
+选择哪种 SQL 查询取决于你具体的需求：
+
+1. **`SELECT COUNT(DISTINCT o.id) AS total_count FROM order_info o`**:
+   - **用途**: 这个查询用于计算 `order_info` 表中唯一 `id` 的数量。如果 `id` 字段可能包含重复值，并且你只想计算唯一的订单数量，这个查询是合适的。
+   - **性能**: 由于需要去重，性能可能会比简单的 `COUNT(*)` 查询稍差，特别是在 `id` 字段上没有索引的情况下。
+
+2. **`SELECT COUNT(*) FROM order_info o`**:
+   - **用途**: 这个查询用于计算 `order_info` 表中的总行数。如果你只需要知道表中的总记录数，而不关心是否有重复的 `id`，这个查询是合适的。
+   - **性能**: 这个查询通常比 `COUNT(DISTINCT o.id)` 更快，因为它不需要去重操作。数据库只需要扫描表中的所有行并计数。
+
+### 选择依据
+- **如果你需要计算唯一订单的数量**（即 `id` 字段可能有重复值），使用 `COUNT(DISTINCT o.id)`。
+- **如果你只需要计算表中的总行数**，使用 `COUNT(*)`。
+
+```sql
+-- 在这种情况下，使用 COUNT(*) 也是可以的，但需要确保查询的逻辑与原始查询保持一致。由于原始查询中使用了 GROUP BY，我们需要在计算总条数时保留分组逻辑。
+SELECT
+    COUNT(DISTINCT o.order_no) AS total_count
+FROM
+    order_info o
+
+SELECT
+    COUNT(*) AS total_count
+FROM (
+    SELECT
+        o.id
+    FROM
+        order_info o
+    GROUP BY
+        o.order_no
+) AS subquery;
+```
+
+### 不要用 JSON_ARRAYAGG 会导致崩溃
+```sql
+SELECT
+    o.id,
+    JSON_ARRAYAGG(
+        JSON_OBJECT(
+            'item_id', oi.id
+        )
+    ) AS orderItemsStr
+FROM
+    order_info o
+```
+```java
+// 接收 json_arrayagg
+response.setOrderItems(JSONArray.parseArray(response.getOrderItemsStr(), OrderInfoItemBgDetailResponse.class));
+response.setOrderItemsStr("");
 ```
 
 ## update更新
