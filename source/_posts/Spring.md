@@ -110,6 +110,26 @@ public class UserBiz {
 
 @Repository 注解是 Spring 提供的，用于标记数据访问层的组件。虽然你可以在 MyBatis 的 Mapper 接口上使用 @Repository 注解，但这不是最佳实践，因为它并不能让 MyBatis 自动识别和扫描这些接口。
 
+## JPA
+Java Persistence API : Java持久层API
+### 实体
+- @Entity 、@MappedSuperclass
+- @Table(name)
+
+### 主键
+- @Id
+    - @GeneratedValue(strategy, generator)
+    - @SequenceGenerator(name, sequenceName)
+
+## Project Lombok
+- @Data
+包含：@Getter / @Setter / @ToString
+
+- @NoargsConstructor
+- @RequiredArgsConstructor
+- @AllArgsConstructor
+
+
 # Spring Cloud
 高可用的应用程序
 简化了分布式系统的开发
