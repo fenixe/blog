@@ -152,8 +152,6 @@ gitlab import github   授权
 git配置
 git config --list
 
-测试文本：修复tags/v1.0.0 bug
-
 ## 提交
 git commit -am "some str"
 git push
@@ -164,6 +162,32 @@ git commit -am 'str'命令只能提交已经追踪过且修改了的文件，新
 标签可以标记特定的代码版本
 git tag v1.0.0
 git push origin v1.0.0
+
+### 处理上传环境bug
+bg：已经合并了功能分支到master，只是还没有部署。这时候生产上有bug了，如何处理。
+通过使用 Git 标签（tag）来处理生产环境的 bug 修复是一种常见且有效的方法。标签可以帮助你标记特定的代码版本，并在需要时快速回滚到这些版本。
+```zsh
+# 生产分支，切一个tag标签
+git tag v1.0.0
+git push origin v1.0.0
+
+# 创建新的修复分支
+git checkout tags/v1.0.0 -b hotfix/bug-fix
+# 修复bug后
+git add .
+git commit -m "Fix production bug"
+# 创建新的标签并部署
+git tag v1.0.1
+git push origin v1.0.1
+
+# 部署 v1.0.1 标签到生产环境。
+
+# 合并修复到 master
+git checkout master
+git pull origin master
+git merge hotfix/bug-fix
+git push origin master
+```
 
 ## 版本回滚
 ### revert
