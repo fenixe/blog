@@ -158,6 +158,11 @@ git push
 
 git commit -am 'str'命令只能提交已经追踪过且修改了的文件，新增文件就必须使用git add . && git commit -m 命令；
 
+## 标签
+标签可以标记特定的代码版本
+git tag v1.0.0
+git push origin v1.0.0
+
 ## 版本回滚
 ### revert
 创建一个新的提交来撤销指定提交的更改。
