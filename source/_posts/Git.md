@@ -152,6 +152,8 @@ gitlab import github   授权
 git配置
 git config --list
 
+测试文本：修复tags/v1.0.0 bug
+
 ## 提交
 git commit -am "some str"
 git push
