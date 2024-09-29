@@ -197,7 +197,7 @@ mvn archetype:generate -DgroupId=com.example -DartifactId=myproject -DarchetypeA
 <dependency>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-lang3</artifactId>
-    <version>3.11</version>
+    <version>3.10</version>
 </dependency>
 ```
 
@@ -355,21 +355,26 @@ BigDecimal: 是一个不可变的、任意精度的有符号十进制数。高�
 sql定义字段：`longitude` decimal(10,7)
 表示：最多可以存储10位数字，其中7位是小数部分。
 通常支持任意位数的小数部分
+
 ```java
-        BigDecimal goodsWeight = new BigDecimal("1.1");
-        Long goodsNum = 1L;
-        BigDecimal totalWeight = goodsWeight.multiply(new BigDecimal(goodsNum));
-        System.out.println(totalWeight);
+// 创建
+new BigDecimal("1.1")
+BigDecimal.valueOf(2)
 
-        Integer initKg = 1;
-        BigDecimal initPrice = new BigDecimal("6");
-        System.out.println(totalWeight.compareTo(new BigDecimal(initKg)) > 0);
+BigDecimal goodsWeight = new BigDecimal("1.1");
+Long goodsNum = 1L;
+BigDecimal totalWeight = goodsWeight.multiply(new BigDecimal(goodsNum)); // 乘法
+System.out.println(totalWeight);
 
-        BigDecimal exceedWeight = totalWeight.subtract(BigDecimal.valueOf(initKg));
-        System.out.println(exceedWeight);
+Integer initKg = 1;
+BigDecimal initPrice = new BigDecimal("6");
+System.out.println(totalWeight.compareTo(new BigDecimal(initKg)) > 0);
 
-        BigDecimal add = goodsWeight.add(new BigDecimal("1"));
-        System.out.println(add);
+BigDecimal exceedWeight = totalWeight.subtract(BigDecimal.valueOf(initKg)); // 减法
+System.out.println(exceedWeight);
+
+BigDecimal add = goodsWeight.add(new BigDecimal("1")); // 加法
+System.out.println(add);
 ```
 
 #### compareTo
@@ -388,6 +393,14 @@ NumberUtil.round 是一个静态方法，用于对数字进行舍入。
 参数 9.9 是要舍入的数字。
 参数 0 表示舍入到小数点后0位（即整数部分）。
 RoundingMode.DOWN 表示向下舍入（即截断小数部分）。
+
+#### 向上取整
+```java
+// 快递费
+BigDecimal exceedWeight = new BigDecimal("24.2");
+BigDecimal exceedWeightCopies = exceedWeight.divide(BigDecimal.valueOf(2), 0, BigDecimal.ROUND_UP); // 除法
+System.out.println(exceedWeightCopies);
+```
 
 ### 布尔类型
 boolean是Java的基本数据类型，它只有两个可能的值：true或false。它不是一个对象，它的内存占用也更小，因为它直接存储值。
@@ -425,6 +438,8 @@ subList(start, end)取得的是下标为start到end-1的元素,不包含下标�
 ```java
 // 空数组
 Collections.emptyList()
+// 只有一个元素的数组
+Collections.singletonList(Enum.SUC)
 CollectionUtils.isEmpty(standardIds)
 
 // 固定大小的数组
@@ -454,6 +469,8 @@ Map<Integer, List<Tag>> tagMap = tags.stream()
                 .collect(Collectors.groupingBy(Tag::getPid));
 // groupingBy 方法接收一个函数作为参数，它将作为分组的键。
 // 输出：{1=[Tag(pid=1, n=a), Tag(pid=1, n=d)], 3=[Tag(pid=3, n=b), Tag(pid=3, n=c)]}
+List<String> list = Arrays.asList("a", "bb", "cc", "ddd");
+Map<Integer, List<String>> map = list.stream().collect(Collectors.groupingBy(String::length));
 
 // 一对一
 Map<Long, RegionResponse> regionMap = regionList.stream().collect(Collectors.toMap(RegionResponse::getId, region -> region));
@@ -523,6 +540,9 @@ Stream<String> streamFromArray = Arrays.stream(array);
 
 // 使用 Stream.of 创建 Stream
 Stream<String> streamOf = Stream.of("a", "b", "c");
+
+// 找出最小的一项
+int sendOutType = items.stream().map(OrderInfoItemBgDetailResponse::getSendOutType).min(Integer::compareTo).orElse(0);
 ```
 
 stream操作分为中间操作（intermediate operations）和终端操作（terminal operations）。
@@ -565,6 +585,11 @@ List<Map<String, String>> listOfMaps = Arrays.asList(map1, map2);
 String nameToCheck = "x";
 boolean exists = listOfMaps.stream().anyMatch(map -> nameToCheck.equals(map.get("name")));
 System.out.println("Does name exist in the array? " + exists);
+```
+
+### 数组转listResponse类型
+```java
+List<UserBgListResponse> rows = BeanUtil.copyToList(userInfoList, UserBgListResponse.class);
 ```
 
 ## 方法FN
@@ -1662,10 +1687,11 @@ String currentTime = DateFormatUtils.format(new Date(), "yyyy-MM-dd");
 
 ### 其他时间
 ```java
+import org.apache.commons.lang3.time.DateFormatUtils;
 // 预计发货时间
 if (ret.getShippingTime() == null) {
     // orderItems中每项有 sendOutType，0:当日，1:24小时，2:48小时。找出最小的一项
-    Integer sendOutType = items.stream().map(OrderInfoItemBgDetailResponse::getSendOutType).min(Integer::compareTo).orElse(0);
+    int sendOutType = items.stream().map(OrderInfoItemBgDetailResponse::getSendOutType).min(Integer::compareTo).orElse(0);
     // 当sendOutType为0时，当天的23:59:59。等于1或2加对应天数
     Calendar calendar = Calendar.getInstance();
     calendar.setTime(ret.getAddTime());
