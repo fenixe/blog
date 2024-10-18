@@ -53,6 +53,9 @@ this.updateSelectedTool(ToolBtnsEvent.BRUSH);
 ## 动画
 elementNode -> animations -> animationData[] 
 
+## 快速打出System.out.println()
+sout
+
 # data
 ``` ts
 export default class Metadata {

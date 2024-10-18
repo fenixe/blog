@@ -5,6 +5,15 @@ tags: Java
 ---
 
 # Base
+Java是一种强类型语言，这意味着每个变量都必须声明其类型。
+## 变量
+- 变量的声明和初始化
+- 变量的类型
+- 变量的作用域
+- 常亮
+  final int CONSTANT_VAR = 100;
+- 变量命名规则
+
 ## 执行命令
 文件名要与类名一致，区分大小写
 ```java
@@ -296,19 +305,101 @@ dependencies {
 
 # Doc
 ## 数据类型
-基本数据类型
-- 整型 int x = 1
-- 浮点型 float a = 3.14
-- 字符类型 char zh = "中"
-- 布尔类型 boolean b1 = true
-- double，精度损失
+8种基本数据类型
+- 整数类型
+  * byte：8位，范围从 -128 到 127
+  * short：16位，范围从 -32,768 到 32,767
+  * int：32位，范围从 -2^31 到 2^31-1
+  * long：64位，范围从 -2^63 到 2^63-1
+
+- 浮点类型
+  * float：32位，单精度
+  * double：64位，双精度
+
+- 字符类型
+  * char：16位，存储单个字符，使用Unicode编码
+
+- 布尔类型
+  * boolean: 只有两个值：true 和 false
+
 
 引用类型
+引用数据类型包括类、接口、数组和枚举。引用数据类型的变量存储的是对象的引用（地址），而不是对象本身。
 - 字符串 String s = "hello"
     final修饰符，常量
-- 数组 int[] a = new int[]{1,2} , 简写 int[] a = {1,2}
+- 数组 
+```java
+// 简单初始化
+int[] a = {1,2} // 声明并初始化数组
+
+// 使用 new 关键字的初始化
+int[] a = new int[]{1,2} , 
+int[] intArray;
+intArray = new int[]{1, 2, 3}; // 可以在声明之后的任何地方初始化数组
+```
+
+引用数据类型特点
+- 存储引用：引用数据类型的变量存储的是对象的引用，而不是对象本身。
+- 多态性：引用数据类型支持多态性，一个接口类型的引用可以指向任何实现该接口的对象。
+- 方法调用：通过引用数据类型的变量，可以调用对象的方法。
+
+### 浮点类型
+- float：32 位，单精度，范围约为 1.4E-45 到 3.4E+38。
+- double：64 位，双精度，范围约为 4.9E-324 到 1.8E+308。
+
+f 或 F 是一个后缀，用于表示一个浮点数字面量是 float 类型。默认情况下，Java 中的小数（如 0.1）被认为是 double 类型。如果你想明确表示一个数是 float 类型，就需要在数字后面加上 f 或 F。
+
+```java
+// 默认是 double 类型
+double doubleNumber = 0.1;
+System.out.println("Double number: " + doubleNumber);
+
+// 明确表示为 float 类型
+float floatNumber = 0.1f;
+System.out.println("Float number: " + floatNumber);
+
+Double number: 0.1
+Float number: 0.1
+
+// 精度丢失问题
+0.1 + 0.2 = 0.30000000000000004
+```
 
 ### 字符串
+#### String 类
+String 类是不可变的，这意味着一旦创建了字符串对象，它的值就不能改变。任何对字符串的修改都会创建一个新的字符串对象，而不是修改原来的对象。
+
+#### 字符串的创建
+字面量方式
+```java
+String str = "hello world";
+```
+这种方式直接在代码中使用字符串字面量。Java会在字符串池（String Pool）中查找是否已经存在相同内容的字符串对象。如果存在，则返回该对象的引用；如果不存在，则创建一个新的字符串对象并放入字符串池中。
+
+使用 `new` 关键字
+```java
+String str = new String("hello world");
+```
+这种方式显式地创建一个新的字符串对象，不管字符串池中是否已经存在相同内容的字符串对象。
+
+#### 字符串池（String Pool）
+字符串池是Java中一个特殊的内存区域，用于存储字符串字面量。字符串池的主要目的是为了节省内存和提高性能。通过字符串池，Java可以确保相同内容的字符串字面量只存储一份。
+
+#### 字符串的不可变性
+```java
+String str = "hello";
+str = "world";
+```
+在这个例子中，str 最初引用的是内容为 "hello" 的字符串对象。当我们将 str 重新赋值为 "world" 时，实际上是创建了一个新的字符串对象 "world"，并让 str 引用这个新对象，而原来的 "hello" 对象仍然存在于字符串池中（如果没有其他引用指向它，它将被垃圾回收）。
+
+#### 常用的字符串操作
+长度：str.length()
+拼接：str.concat(" world") 或 str + " world"
+子字符串：str.substring(0, 5)
+字符查找：str.charAt(1)
+字符串比较：str.equals("hello") 或 str.equalsIgnoreCase("HELLO")
+字符串替换：str.replace('h', 'H')
+字符串分割：str.split(" ")
 ```java
 // 转Integer, 两种
 int number = Integer.parseInt(numberAsString);
@@ -369,56 +460,7 @@ int randomInt = (int) (Math.random() * 10);
 ```
 
 ### BigDecimal类型
-BigDecimal: 是一个不可变的、任意精度的有符号十进制数。高精度，比如货币计算时。
-sql定义字段：`longitude` decimal(10,7)
-表示：最多可以存储10位数字，其中7位是小数部分。
-通常支持任意位数的小数部分
 
-```java
-// 创建
-new BigDecimal("1.1")
-BigDecimal.valueOf(2)
-
-BigDecimal goodsWeight = new BigDecimal("1.1");
-Long goodsNum = 1L;
-BigDecimal totalWeight = goodsWeight.multiply(new BigDecimal(goodsNum)); // 乘法
-System.out.println(totalWeight);
-
-Integer initKg = 1;
-BigDecimal initPrice = new BigDecimal("6");
-System.out.println(totalWeight.compareTo(new BigDecimal(initKg)) > 0);
-
-BigDecimal exceedWeight = totalWeight.subtract(BigDecimal.valueOf(initKg)); // 减法
-System.out.println(exceedWeight);
-
-BigDecimal add = goodsWeight.add(new BigDecimal("1")); // 加法
-System.out.println(add);
-```
-
-#### compareTo
-```java
-compareTo 方法用于比较两个 BigDecimal 对象的大小。
-如果调用对象小于参数对象，compareTo 方法返回 -1。
-如果调用对象等于参数对象，compareTo 方法返回 0。
-如果调用对象大于参数对象，compareTo 方法返回 1。
-```
-
-#### 向下取整
-```java
-NumberUtil.round(9.9, 0, RoundingMode.DOWN).longValue();
-```
-NumberUtil.round 是一个静态方法，用于对数字进行舍入。
-参数 9.9 是要舍入的数字。
-参数 0 表示舍入到小数点后0位（即整数部分）。
-RoundingMode.DOWN 表示向下舍入（即截断小数部分）。
-
-#### 向上取整
-```java
-// 快递费
-BigDecimal exceedWeight = new BigDecimal("24.2");
-BigDecimal exceedWeightCopies = exceedWeight.divide(BigDecimal.valueOf(2), 0, BigDecimal.ROUND_UP); // 除法，除以0会报错
-System.out.println(exceedWeightCopies);
-```
 
 ### 布尔类型
 boolean是Java的基本数据类型，它只有两个可能的值：true或false。它不是一个对象，它的内存占用也更小，因为它直接存储值。
@@ -448,6 +490,66 @@ BeanUtil.copyProperties(request.getTicketInfo(), existingCouponTicket, "id", "na
 
 BeanUtil.copyProperties(coupon, couponRes);
 GoodsCouponBgListResponse couponRes = new GoodsCouponBgListResponse();
+```
+
+## 引用数据类型
+### 类（Classes）
+#### BigDecimal 高精度计算类
+位于 java.math 包中。
+BigDecimal: 是一个不可变的、任意精度的有符号十进制数。高精度，比如货币计算时。
+sql定义字段：`longitude` decimal(10,7)
+表示：最多可以存储10位数字，其中7位是小数部分。
+通常支持任意位数的小数部分
+
+```java
+// 创建
+new BigDecimal("1.1")
+BigDecimal.valueOf(2)
+
+BigDecimal goodsWeight = new BigDecimal("1.1");
+Long goodsNum = 1L;
+BigDecimal totalWeight = goodsWeight.multiply(new BigDecimal(goodsNum)); // 乘法
+System.out.println(totalWeight);
+
+Integer initKg = 1;
+BigDecimal initPrice = new BigDecimal("6");
+// 比较
+System.out.println(totalWeight.compareTo(new BigDecimal(initKg)) > 0);
+
+BigDecimal exceedWeight = totalWeight.subtract(BigDecimal.valueOf(initKg)); // 减法
+System.out.println(exceedWeight);
+
+BigDecimal add = goodsWeight.add(new BigDecimal("1")); // 加法
+System.out.println(add);
+
+// 除法
+BigDecimal quotient = bd1.divide(bd2, BigDecimal.ROUND_HALF_UP);
+System.out.println("Quotient: " + quotient);
+```
+
+#### compareTo
+```java
+compareTo 方法用于比较两个 BigDecimal 对象的大小。
+如果调用对象小于参数对象，compareTo 方法返回 -1。
+如果调用对象等于参数对象，compareTo 方法返回 0。
+如果调用对象大于参数对象，compareTo 方法返回 1。
+```
+
+#### 向下取整
+```java
+NumberUtil.round(9.9, 0, RoundingMode.DOWN).longValue();
+```
+NumberUtil.round 是一个静态方法，用于对数字进行舍入。
+参数 9.9 是要舍入的数字。
+参数 0 表示舍入到小数点后0位（即整数部分）。
+RoundingMode.DOWN 表示向下舍入（即截断小数部分）。
+
+#### 向上取整
+```java
+// 快递费
+BigDecimal exceedWeight = new BigDecimal("24.2");
+BigDecimal exceedWeightCopies = exceedWeight.divide(BigDecimal.valueOf(2), 0, BigDecimal.ROUND_UP); // 除法，除以0会报错
+System.out.println(exceedWeightCopies);
 ```
 
 ## 数组
@@ -755,6 +857,20 @@ for (;;) {
 }
 ```
 
+### 标签（Label）
+标签可以与 break 和 continue 语句一起使用，以控制多层循环。
+```java
+outerLoop:
+for (int n = 0; n < 5; n++) {
+    for (int o = 0; o < 5; o++) {
+        if (o == 3) {
+            break outerLoop; // 终止外层循环
+        }
+        System.out.println("n = " + n + ", o = " + o);
+    }
+}
+```
+
 ## 关键字
 ### final
 最终的, 不可更改的。
@@ -783,6 +899,78 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import java.util.Date;
 String currentTime = DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss");
 ```
+
+### 比较
+- 优先使用 isAfter 方法：如果你在使用 Java 8 及以上版本，推荐使用新的日期时间 API 和 isAfter 方法。新的 API 更现代化，设计更好，代码更清晰和安全。
+- 使用 after 方法：如果你使用的是旧的 Date 类，并且只需要简单的时间比较，after 方法是一个不错的选择。
+- 使用 compareTo 方法：如果你需要进行复杂的比较逻辑或排序，compareTo 方法提供了更灵活的返回值，可以满足`多种`(if>0 - else if<0 - else=)需求。
+
+### Calendar
+```java
+// 加一天
+Calendar calendar = Calendar.getInstance();
+calendar.setTime(new Date());
+calendar.add(Calendar.DAY_OF_MONTH, 1);
+Date tomorrow = calendar.getTime();
+
+// 设置某天的结束时间
+calendar.set(Calendar.YEAR, 2024);
+calendar.set(Calendar.MONTH, Calendar.SEPTEMBER); // 注意：月份从0开始，0表示1月
+calendar.set(Calendar.DAY_OF_MONTH, 30);
+// 设置时间为23:59:59
+calendar.set(Calendar.HOUR_OF_DAY, 23);
+calendar.set(Calendar.MINUTE, 59);
+calendar.set(Calendar.SECOND, 59);
+
+// 如果是当前时间，就不需要下面这样设置了，因为 getInstance() 方法已经初始化为当前时间。
+calendar.setTime(new Date());
+```
+
+## 常用类库
+### Set
+Set 是一种集合接口，它继承自 Collection 接口。Set 的特点是其元素是无序的，并且不允许包含重复的元素。
+#### HashSet
+HashSet 是最常用的 Set 实现类，基于哈希表实现。它不保证集合的迭代顺序，顺序可能与插入顺序不同，甚至可能随时间变化。
+```java
+Set<String> hashSet = new HashSet<>();
+hashSet.add("Apple");
+hashSet.add("Banana");
+hashSet.add("Orange");
+hashSet.add("Apple"); // 重复元素不会被添加
+
+for (String fruit : hashSet) {
+    System.out.println(fruit);
+}
+```
+
+#### LinkedHashSet
+LinkedHashSet 是 HashSet 的子类，具有可预知的迭代顺序。它维护一个双向链表，记录元素的插入顺序，因此迭代时会按插入顺序返回元素。
+```java
+Set<String> linkedHashSet = new LinkedHashSet<>();
+linkedHashSet.add("Apple");
+linkedHashSet.add("Banana");
+linkedHashSet.add("Orange");
+linkedHashSet.add("Apple"); // 重复元素不会被添加
+
+for (String fruit : linkedHashSet) {
+    System.out.println(fruit);
+}
+```
+
+#### TreeSet
+TreeSet 是基于红黑树实现的 Set，它保证元素的自然顺序（或根据提供的比较器排序）。TreeSet 的性能比 HashSet 稍差，但它提供了排序功能。
+
+#### EnumSet
+EnumSet 是一个专门为枚举类型设计的 Set 实现。它比其他 Set 实现更高效，但只能用于枚举类型。
+
+#### 常用操作
+- add(E e)：将指定的元素添加到集合中（如果该元素尚不存在）。
+- remove(Object o)：从集合中移除指定的元素（如果存在）。
+- contains(Object o)：如果集合包含指定的元素，则返回 true。
+- size()：返回集合中的元素数量。
+- isEmpty()：如果集合不包含任何元素，则返回 true。
+- clear()：移除集合中的所有元素。
+- iterator()：返回集合中元素的迭代器。
 
 ## 数据库
 ### 连接
