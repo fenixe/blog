@@ -77,7 +77,6 @@ VARCHAR(256)：如果你确实需要存储超过 255 个字符的内容，那么
 品牌公司：BrandCompany
 
 # Doc
-union 联合查询会去重
 ## 数据类型
 decimal：表示定点数
 存储精确的数值，比如金融数据，其中需要精确的小数点及小数点后的数值。这与float或double的浮点数类型不同，后者可能会引入舍入误差。
@@ -279,6 +278,23 @@ FROM
 response.setOrderItems(JSONArray.parseArray(response.getOrderItemsStr(), OrderInfoItemBgDetailResponse.class));
 response.setOrderItemsStr("");
 ```
+
+### 合并查询/联合查询
+- 去重: 默认情况下，UNION 会去除重复的行。如果你想保留所有重复的行，可以使用 UNION ALL。
+- 列数和数据类型: 所有参与 UNION 的查询必须有相同数量的列，并且相应列的数据类型必须兼容。
+- 排序: 如果需要对结果进行排序，可以在最后一个 SELECT 语句之后使用 ORDER BY。注意，ORDER BY 只能应用于整个结果集，而不是单个查询。
+```sql
+SELECT column1, column2 FROM table1
+UNION
+SELECT column1, column2 FROM table2;
+
+-- 保留重复的行
+SELECT name, department FROM employees
+UNION ALL
+SELECT name, department FROM managers;
+
+```
+
 
 ## update更新
 把store表中的keyword字段值为“a”更改为“b”

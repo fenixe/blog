@@ -189,6 +189,11 @@ git merge hotfix/bug-fix
 git push origin master
 ```
 
+## 切换到指定commit ID
+```zsh
+git checkout <commit-id>
+```
+
 ## 版本回滚
 ### revert
 创建一个新的提交来撤销指定提交的更改。

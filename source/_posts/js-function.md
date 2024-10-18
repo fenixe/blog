@@ -236,6 +236,18 @@ video.addEventListener('loadedmetadata', ()=>{
 // a4纸的尺寸（595.28,841.89）
 ```
 
+## 获取url中的参数
+```js
+function getUrlParameters(param) {
+    const params = new URLSearchParams(window.location.search);
+    const paramValue = params.get(param);
+    return paramValue;
+}
+
+// 使用示例
+const paramValue = getUrlParameters();
+console.log('paramValue:', paramValue);
+```
 
 # 其他
 ## echarts

@@ -344,11 +344,29 @@ String No = "6867576";
 boolean isNumeric = StringUtils.isNumeric(No);
 ```
 
+#### 去除空格
+```java
+// 去除首尾
+str.trim()
+// 去除全部
+StringUtils.deleteWhitespace(str)
+str.replaceAll("\\s+", "");
+```
+
 ### int类型
 除法向下取整
 
 基本数据类型int的比较，通常使用==操作符。
 Integer类的equals方法确实可以用来比较两个Integer对象的值是否相等。
+
+#### 随机数
+```java
+// 生成一个 0 到 9 之间的随机整数
+Random random = new Random();
+float randomFloat = random.nextFloat();
+
+int randomInt = (int) (Math.random() * 10);
+```
 
 ### BigDecimal类型
 BigDecimal: 是一个不可变的、任意精度的有符号十进制数。高精度，比如货币计算时。
@@ -398,7 +416,7 @@ RoundingMode.DOWN 表示向下舍入（即截断小数部分）。
 ```java
 // 快递费
 BigDecimal exceedWeight = new BigDecimal("24.2");
-BigDecimal exceedWeightCopies = exceedWeight.divide(BigDecimal.valueOf(2), 0, BigDecimal.ROUND_UP); // 除法
+BigDecimal exceedWeightCopies = exceedWeight.divide(BigDecimal.valueOf(2), 0, BigDecimal.ROUND_UP); // 除法，除以0会报错
 System.out.println(exceedWeightCopies);
 ```
 
@@ -901,6 +919,28 @@ try {
 }
 ```
 
+### DB中无效时间
+SELECT @@sql_mode; lxjk
+STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+
+根据你提供的 MySQL SQL 模式配置，STRICT_TRANS_TABLES 是一个严格模式，它会在插入或更新无效日期（如 '0000-00-00 00:00:00'）时抛出错误，而不是将其转换为 null。因此，直接依赖 SQL 模式配置来处理无效日期并不是一个可行的解决方案。
+
+处理无效日期的推荐方法
+为了确保在查询时将无效日期（如 '0000-00-00 00:00:00'）转换为 null，你需要在 JDBC 驱动的连接 URL 中配置 zeroDateTimeBehavior 参数。
+
+配置 zeroDateTimeBehavior
+在你的数据库连接 URL 中添加 zeroDateTimeBehavior=convertToNull 参数，这样可以将无效日期转换为 null。
+
+示例配置
+假设你的数据库连接 URL 是：
+
+<JAVA>
+jdbc:mysql://localhost:3306/your_database
+你可以修改为：
+
+<JAVA>
+jdbc:mysql://localhost:3306/your_database?zeroDateTimeBehavior=convertToNull
+
 ## 线程
 ``` java
 private static final long REQUEST_INTERVAL_MILLIS = 1000L / 5;
@@ -1088,6 +1128,49 @@ public class BasicController {
 }
 ```
 
+## 项目中集成HTML页面
+在 Java Spring 项目中，你可以通过以下步骤将一个 HTML 页面集成到项目中，并在启动项目时访问它：
+
+### 步骤
+
+1. **创建资源目录**:
+   - 在 `src/main/resources` 下创建一个名为 `static` 的目录（如果没有的话）。
+
+2. **添加 HTML 页面**:
+   - 将你的 HTML 文件放入 `src/main/resources/static` 目录中。例如，将文件命名为 `index.html`。
+
+3. **访问 HTML 页面**:
+   - 启动你的 Spring Boot 应用程序。
+   - 在浏览器中访问 `http://localhost:8080/index.html`。
+
+### 示例项目结构
+
+```
+your-project
+│
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── com.example.demo
+│   │   │       └── DemoApplication.java
+│   │   └── resources
+│   │       ├── static
+│   │       │   └── index.html
+│   │       └── application.properties
+│   └── test
+│       └── java
+│           └── com.example.demo
+│               └── DemoApplicationTests.java
+└── pom.xml
+```
+
+### 说明
+
+- **`static` 目录**: Spring Boot 默认会将 `src/main/resources/static` 目录中的静态资源（如 HTML、CSS、JavaScript 文件）自动映射到根路径下。
+- **访问路径**: 你可以通过 `http://localhost:8080/index.html` 访问你的 HTML 页面。
+
+这样设置后，你的 HTML 页面就可以在启动 Spring Boot 项目时通过指定的 URL 访问了。
+
 ## 处理文件
 ### json
 ```xml
@@ -1256,6 +1339,12 @@ private Long id;
 @Pattern(message = "手机号格式不对", regexp = "^[1-9][0-9]{10}$")
 private String mobile;
 ```
+
+## @RepeatSubmit
+防止重复提交
+@PostMapping("/audit")
+@ApiOperation(value = "订单审核")
+@RepeatSubmit(expireSeconds = REPEATSUBMIT_EXPIRE_TIME)
 
 ## @MapperScan
 import tk.mybatis.spring.annotation.MapperScan;
@@ -1707,6 +1796,10 @@ if (ret.getShippingTime() == null) {
 }
 ```
 
+#### 时间前后
+// 当前时间 在 （订单签收时间 + 7天） 之后。自动收货。
+if (now.after(autoReceiptedTime)) 
+
 ## equals
 ```java
 // 两个null为true，字符串/数字都正常
@@ -1840,6 +1933,7 @@ for (List<ExpressAreaConfig> group : result) {
 }
 ```
 
+
 # IDEA
 ## 替换
 全局
@@ -1897,6 +1991,62 @@ public interface UserServiceClient {
 
 # Swagger
 http://localhost:8080/doc.html
+
+# 第三方联调
+## 阿里云视频点播
+解密服务器，返回密钥
+```java
+//官方demo，返回base64decode之后的密钥
+OutputStream responseBody = httpExchange.getResponseBody();
+responseBody.write(key);
+responseBody.close();
+
+//Spring中调整为
+byte[] key = decrypt(ciphertext);
+return ResponseEntity.ok(key);
+```
+
+## 发邮件
+```
+spring.mail.host=smtp.example.com
+spring.mail.port=465
+spring.mail.username=your_email@example.com
+spring.mail.password=your_password
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=false
+spring.mail.properties.mail.smtp.ssl.enable=true
+spring.mail.properties.mail.smtp.ssl.enable.socketFactory.class=com.sun.mail.util.MailSSLSocketFactory
+```
+```java
+public class EmailBizImpl implements EmailBiz {
+    @Autowired
+    private JavaMailSender javaMailSender;
+
+    @Value("${spring.mail.username}")
+    private String username;
+
+    /**
+     * 发送邮件
+     *
+     * @param toEmail
+     * @param subject
+     * @param text
+     */
+    @Override
+    public void sendEmail(String toEmail, String subject, String text) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        // 发送者邮箱地址
+        message.setFrom(username);
+        // 收件人邮箱地址
+        message.setTo(toEmail);
+        // 邮件主题
+        message.setSubject(subject);
+        // 邮件内容
+        message.setText(text);
+        javaMailSender.send(message);
+    }
+}
+```
 
 # Issues
 ## Java implements Serializable 什么意思
