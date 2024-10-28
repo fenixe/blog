@@ -405,6 +405,38 @@ module.exports = {
 
 ### 代码质量管理eslint
 
+### 代码混淆
+```js
+"devDependencies": {
+  "webpack-obfuscator": "^3.5.1"
+},
+const WebpackObfuscator = require('webpack-obfuscator');
+vue.config.js
+module.exports = defineConfig({
+    configureWebpack: {
+        plugins: [
+            new WebpackObfuscator({
+                compact: process.env.NODE_ENV === 'production',
+                debugProtection: process.env.NODE_ENV === 'production',
+                disableConsoleOutput: process.env.NODE_ENV === 'production',
+                }, ['js/!(app.**.js)']
+            )
+        ],
+    }
+})
+```
+效果
+```js
+(function anonymous(
+) {
+debugger
+})
+app.js
+(function(_0xb285b0, _0x3ac2e7) {
+    var _0x3168f8 = a0_0x1e6c
+      , _0x58079f = _0xb285b0();
+```
+
 ### 代码测试jest
 jest-webpack的作者不再维护这个库
 .babelrc

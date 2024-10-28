@@ -136,3 +136,13 @@ https://hyperledger-fabric.readthedocs.io/en/release-2.3/deployment_guide_overvi
 解决办法：
 修改：将./test-network/script/createChannel.sh第40行长标志改为osnadmin channel join --channelID
 
+
+# 专业术语
+## 拨测
+在网络通信中，"拨测"通常指的是通过模拟用户访问的方式，对网络服务进行测试和监控。这种测试可以帮助识别网络性能问题、服务可用性以及响应时间等。拨测通常用于：
+
+- 监控服务可用性：确保服务在不同时间和地点都能正常访问。
+- 性能测试：测量响应时间和数据传输速度。
+- 故障排查：通过定期测试，及时发现和解决潜在的网络问题。
+
+https://boce.aliyun.com/detect/http

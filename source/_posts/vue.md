@@ -1650,6 +1650,9 @@ const markdown = new MarkdownIt()
 
 ## markdown编辑器
 ``` vue
+package.json
+"md-editor-v3": "2.11.2"
+
 <MdEditor v-model="pdfContents[index].prelim_text" class="md-custom"/>
 import MdEditor from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
