@@ -308,6 +308,9 @@ WHERE keyword = 'a';
 ```sql
 ALTER TABLE baidu_coord
 MODIFY COLUMN type tinyint(1) NOT NULL DEFAULT '1' COMMENT '类型：1-商品，2-活动，3-惠票';
+
+ALTER TABLE biz_upload_record
+MODIFY COLUMN eth_no varchar(24) NOT NULL DEFAULT '' COMMENT '医时号';
 ```
 
 ### null值处理
@@ -326,6 +329,12 @@ UPDATE terminal_temp t
 INNER JOIN baidu_location_temp b ON t.sub_id = b.id
 SET t.`status` = 3, 
     t.tel = CASE WHEN t.tel = '' THEN b.tel ELSE t.tel END;
+```
+
+## 删除表字段
+```sql
+ALTER TABLE logistics_detail
+DROP COLUMN order_no;
 ```
 
 ## 同步数据

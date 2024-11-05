@@ -97,11 +97,13 @@ public class UserBiz {
 
 与Bean注入相关的注解
 - @Autowired
-    上下文中按照类型做查找注入进来
+    上下文中按照类型做查找注入进来。
+    Spring 框架中的注解，默认按类型注入
 - @Qualifier
     多个同类型的，@Autowired有歧义，容器会找错，指定Bean的名字
 - @Resource
-    根据名字注入
+    根据名字注入。
+    Java 中用于依赖注入的注解，通常用于标记一个字段或方法，以便容器在运行时为其注入依赖对象。它是 Java EE（现 Jakarta EE）中的一部分，也可以在 Spring 框架中使用。
 - @Value
     注入常量，@Value(${}) spel表达式，找到上下文配置的一些东西
 
@@ -127,7 +129,16 @@ Java Persistence API : Java持久层API
 
 - @NoargsConstructor
 - @RequiredArgsConstructor
-- @AllArgsConstructor
+- @
+
+##  JavaBeans 规范
+```
+我在Biz层注入了 domain。
+domain中我的变量：private final boolean hasWhitelistDoctor;
+为什么在Biz层调用多了一个is ：domain.isHasWhitelistDoctor()
+```
+对于非布尔类型的属性，getter 方法通常以 get 开头。例如，getName()
+对于布尔类型的属性，getter 方法通常以 is 开头。例如，isActive()
 
 
 # Spring Cloud

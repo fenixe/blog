@@ -138,6 +138,11 @@ attribute是HTML标签上的特性，它的值只能够是字符串；
   type="file"
   accept="video/wmv, video/avi, video/mp4, video/flv, video/3gp, video/mov, video/mkv, video/vob"
 />
+
+<video width="640" height="360" controls poster="path/to/cover-image.jpg">
+  <source src="path/to/video.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 ```
 
 ## frame

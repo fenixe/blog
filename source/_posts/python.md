@@ -31,6 +31,8 @@ pip install fastapi i https://mirrors.tuna.tsinghua.edu.cn/help/pypi/
 
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn selenium
 
+阿里云源：https://mirrors.aliyun.com/pypi/simple
+
 ## 安装
 python.org download
 
@@ -716,6 +718,23 @@ def 函数名称():
 
 ### 调用
 函数名称()
+
+## 关键字
+### with
+Python 中的 with 语句用于异常处理，封装了 try…except…finally 编码范式，提高了易用性。
+with 语句使代码更清晰、更具可读性， 它简化了文件流等公共资源的管理。
+```py
+# try…except…finally
+file = open('./test_runoob.txt', 'w')
+try:
+    file.write('hello world')
+finally:
+    file.close()
+
+# with 关键字
+with open('./test_runoob.txt', 'w') as file:
+    file.write('hello world !')
+```
 
 ## 异步任务
 ### FastAPI 后台任务

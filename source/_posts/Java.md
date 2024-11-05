@@ -454,6 +454,7 @@ Integer类的equals方法确实可以用来比较两个Integer对象的值是否
 ```java
 // 生成一个 0 到 9 之间的随机整数
 Random random = new Random();
+int fandomInt = random.nextInt(10);
 float randomFloat = random.nextFloat();
 
 int randomInt = (int) (Math.random() * 10);
@@ -648,6 +649,7 @@ for (String orderNo : orderNos) {
 ```
 
 ### stream操作
+提供了一种函数式编程风格的操作集合数据的方式，允许开发者以声明式的方式处理数据。
 对数据源（如集合、数组等）进行操作
 ```java
 // 从集合创建 Stream
@@ -668,17 +670,24 @@ int sendOutType = items.stream().map(OrderInfoItemBgDetailResponse::getSendOutTy
 stream操作分为中间操作（intermediate operations）和终端操作（terminal operations）。
 中间操作仅仅在终端操作触发时才会执行。
 
-- .collect(Collectors.toList()) — 收集结果到一个新的列表
-- .forEach(System.out::println) — 对每个元素执行给定的操作
-- .count() — 返回stream中元素的总数
-- .filter() 筛选
-- .map() 元素转换另一种形式
-- .reduce() 组成一个结果
-- .sorted() 对元素进行排序
-- .anyMatch() 有一个符合
+中间操作：返回一个新的 Stream，允许链式调用。这些操作是惰性执行的，只有在终端操作调用时才会执行。常见的中间操作包括：
+- filter(Predicate<? super T> predicate): 筛选符合条件的元素。
+- map(Function<? super T, ? extends R> mapper): 将元素转换为另一种形式。
+- flatMap(Function<? super T, ? extends Stream<? extends R>> mapper): 将每个元素转换为一个流，并将这些流合并为一个流。
+- distinct(): 去除重复元素。
+- sorted(): 对元素进行排序。
+
+终端操作：触发流的处理，并返回一个结果。常见的终端操作包括：
+- collect(Collector<? super T, A, R> collector): 将流的元素收集到某种结果中，如列表、集合等。
+- forEach(Consumer<? super T> action): 对每个元素执行操作。
+- reduce(BinaryOperator<T> accumulator): 将流的元素组合成一个单一的值。
+- count(): 返回流中元素的数量。
+- anyMatch(Predicate<? super T> predicate): 判断是否有任意一个元素匹配给定的条件。
 - .allMatch() 全部符合
 - .noneMatch() 都不符合
 - .peek() 对流中的每个元素执行一个操作（可以是获取、修改或打印等），而不影响流的整体处理流程
+
+
 
 ```java
 exportTerminals.stream().map(o -> {
@@ -691,6 +700,15 @@ List<String> values = datas.stream()
         .flatMap(map -> map.values().stream())
         .collect(Collectors.toList());
 ethNos.addAll(values);
+
+// 去重、去除空白、判断非空和判断是否为数字字符
+doctorList.stream()
+    .flatMap(map -> map.values().stream())
+    .map(String::trim) // 去除空白
+    .filter(StringUtils::isNotEmpty) // 判断非空
+    .filter(StringUtils::isNumeric) // 判断是否为数字字符
+    .distinct() // 去重
+    .collect(Collectors.toList());
 ```
 
 ### 是否在数组中
@@ -711,6 +729,10 @@ System.out.println("Does name exist in the array? " + exists);
 ```java
 List<UserBgListResponse> rows = BeanUtil.copyToList(userInfoList, UserBgListResponse.class);
 ```
+
+### 数组使用异常
+Exception in thread "main" java.lang.IndexOutOfBoundsException: toIndex = 10
+ethNos.subList(start, end); ethNos只有1 。 end = 4
 
 ## 方法FN
 ### 结构
@@ -759,6 +781,7 @@ public static List<String> getList(Integer num) {
 
 ### Lambda表达式
 (parameters) -> expression
+(parameters) -> { statements; }
 ```java
 List<String> list = Arrays.asList("apple", "orange", "banana");
 // filter 方法使用了一个 Lambda 表达式来筛选以 "a" 开头的字符串
@@ -870,6 +893,23 @@ for (int n = 0; n < 5; n++) {
     }
 }
 ```
+
+### 循环中注意
+IDEA提示：String concatenation '+=' in loop 
+使用 += 运算符在循环中进行字符串连接可能会导致性能问题。每次使用 += 进行字符串连接时，都会创建一个新的 String 对象，因为 String 是不可变的。这在循环中反复执行时，可能会导致不必要的内存分配和垃圾回收，从而影响性能。
+为了解决这个问题，建议使用 StringBuilder 或 StringBuffer 来进行字符串连接。这些类是可变的，并且提供了更高效的字符串操作方法。
+```java
+// 使用 StringBuilder 进行高效的字符串连接
+StringBuilder sb = new StringBuilder();
+
+for (String word : words) {
+    sb.append(word).append(" "); // 在每个单词后面加一个空格
+}
+
+// 将 StringBuilder 转换为 String
+String result = sb.toString().trim(); // 去掉最后一个多余的空格
+```
+
 
 ## 关键字
 ### final
@@ -1199,6 +1239,39 @@ public class InnerHttpRequestUtils {
 
 getForObject方法直接返回请求响应的主体（Body），它将响应体映射到你提供的类类型上。如果你只关心响应内容而不关心其它响应元数据（如状态码和头部）
 
+## 异步
+```java
+// 方法一
+CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+    // 任务逻辑
+    System.out.println("异步任务正在执行");
+});
+
+// 方法二
+import org.springframework.scheduling.annotation.Async;
+    @Async
+    public void goodsTag(Long id, String url) {
+    }
+```
+
+## 异常捕获
+```java
+@Slf4j
+@RestControllerAdvice
+@Order(Ordered.HIGHEST_PRECEDENCE)
+public class GlobalExceptionHandler {
+    /**
+     * 请求参数Long类型，传入String类型，异常捕获
+     */
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ResponseBody
+    public R handleHttpMessageNotReadable(HttpMessageNotReadableException ex) {
+        log.info("请求体格式错误: {}", ex.getMessage());
+        return R.ok(GlobalRetCode.错误请求.code, "请求体格式错误", null);
+    }
+}
+```
+
 ## Redis
 ### 存
 ```java
@@ -1211,6 +1284,10 @@ String t = stringRedisTemplate.opsForValue().get(cacheKey);
 // 检查键 "key" 是否存在, 返回 boolean
 stringRedisTemplate.hasKey(ey);
 ```
+
+### 取
+#### 取部分
+stringRedisTemplate.opsForList().range(redisKey, startNum, startNum + pageSize);
 
 ## Nacos
 appid:
@@ -1558,6 +1635,44 @@ public class Response {
 }
 ```
 
+### @ApiModelProperty
+`@ApiModelProperty` 注解用于描述模型属性，通常用于生成 Swagger 文档。以下是常用参数及其含义：
+
+1. **`value`**: 
+   - 描述属性的含义或用途。
+
+2. **`name`**: 
+   - 指定属性的名称，默认是字段名。
+
+3. **`dataType`**: 
+   - 指定属性的数据类型，默认是字段的类型。
+
+4. **`required`**: 
+   - 指定属性是否为必需，默认为 `false`。
+
+5. **`example`**: 
+   - 提供属性的示例值。
+
+6. **`allowableValues`**: 
+   - 指定属性的允许值范围或枚举值。
+
+7. **`position`**: 
+   - 指定属性在模型中的排序位置。
+
+8. **`notes`**: 
+   - 提供关于属性的附加说明。
+
+9. **`access`**: 
+   - 指定属性的访问权限（如只读）。
+
+10. **`hidden`**: 
+    - 指定属性是否在文档中隐藏，默认为 `false`。
+
+这些参数帮助生成更详细和准确的 API 文档。
+```java
+@ApiModelProperty(value = "账号", example = "example@mail.com", required = true, dataType = "String")
+```
+
 ## javax.validation
 ### @Validated
 可以作用在类上
@@ -1626,6 +1741,42 @@ public class UserBean {
 @NotNull 是一个常用的字段验证注解，用于确认字段不应为 null。可以判断空字符串
 @NotEmpty: 这个注解用于集合、数组、Map、以及字符串类型的字段，确保被注解的字段不为 null 且不为空（对于字符串，长度必须大于0）。
 @NotBlank: 这个注解专用于 String 类型，确保被注解的字段不为 null，除此之外还要至少包含一个非空白字符。
+
+## @RestControllerAdvice
+Spring 框架中的一个注解，用于集中处理 REST 控制器中的异常。它结合了 @ControllerAdvice 和 @ResponseBody 的功能，专门用于 RESTful 风格的应用程序。
+功能和用途
+全局异常处理：可以定义一个类来处理应用程序中所有 REST 控制器的异常。
+数据绑定和验证：可以在请求数据绑定和验证过程中进行全局处理。
+全局数据预处理：可以在请求到达控制器之前或响应返回客户端之前进行数据预处理。
+```java
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<String> handleResourceNotFound(ResourceNotFoundException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleGeneralException(Exception ex) {
+        return new ResponseEntity<>("An error occurred", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}
+```
+@ExceptionHandler：用于定义具体异常的处理方法。
+自动转换为 JSON：由于 @RestControllerAdvice 包含 @ResponseBody，返回的对象会自动转换为 JSON 格式。
+全局适用：可以在应用程序中定义一个或多个 @RestControllerAdvice 类，以便集中管理异常处理逻辑。
+
+## @Order(Ordered.HIGHEST_PRECEDENCE)
+Spring 框架中的一个注解，用于指定组件的执行顺序。它通常用于排序过滤器、拦截器、切面等。
+@Order 注解用于定义组件的优先级，数值越小，优先级越高。
+Ordered.HIGHEST_PRECEDENCE：这是一个常量，值为 Integer.MIN_VALUE，表示最高优先级。
+
 
 # MyBatis
 ## mapper
@@ -1763,7 +1914,7 @@ public class CompanyInviter implements Serializable {
     private Long id;
 record.getId(); // 是否封装了
 
-Mapper.insertList // 会插入null
+Mapper.insertList // 会插入null 。参数空数组会报错
 
 Mapper.insertUseGeneratedKeys(record)
 Long generatedId = fileProcessRecord.getId();
