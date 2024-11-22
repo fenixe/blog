@@ -31,6 +31,9 @@ pip install fastapi i https://mirrors.tuna.tsinghua.edu.cn/help/pypi/
 
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn selenium
 
+安装文件内第三方库
+pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+
 阿里云源：https://mirrors.aliyun.com/pypi/simple
 
 ## 安装

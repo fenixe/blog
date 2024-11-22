@@ -23,14 +23,40 @@ ALTER TABLE terminal
 ADD COLUMN customer_code VARCHAR(50) NOT NULL DEFAULT '' COMMENT '客户编码';
 ```
 
+### 删除表唯一约束
+```
+ALTER TABLE goods_coupon
+DROP INDEX uniq_name;
+```
+
 ### 删除表内数据
 empty table是清空表里的数据
 truncate table是删除表,然后再创建这张表 
 意义:对于主索引自动增加的情况, empty清表后, 新添加的行数据依然在上次的值上增加。而truncate则会重新从1开始
 
+```sql
+delete
+from ad_group_whitelist
+where ad_group_id = 38;
+```
+
 ### 排序
 降序：order by id desc
 升序：order by id asc
+
+## 事务
+更新表无法提交
+``` sql
+ALTER TABLE biz_upload_record
+MODIFY COLUMN no varchar(20) NOT NULL DEFAULT '' COMMENT '号';
+ALTER TABLE biz_upload_record
+MODIFY COLUMN result_file varchar(2000) NOT NULL DEFAULT '' COMMENT '解析后的文件,多个文件逗号连接';
+
+-- 排查
+SELECT * FROM INFORMATION_SCHEMA.INNODB_TRX;
+SELECT * FROM INFORMATION_SCHEMA.PROCESSLIST WHERE ID = 2820630;
+```
+
 
 ## docker
 docker run --name mysql -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql:latest
@@ -110,6 +136,27 @@ CREATE TABLE `reocrd` (
 - DEFAULT CHARSET=utf8mb4指定了表的默认字符集是utf8mb4，这是一个支持存储unicode字符的字符集，它可以存储任何可能出现的字符（包括Emoji表情）。
 - COMMENT='记录'在创建表的最后，提供了这个表的注释信息，这里表示表的用途或描述是“记录”。
 所以，在您的表中，存在两个索引：主键索引（基于id字段）和普通索引idx_reocrd_no（基于no字段）。
+
+
+在 SQL 中，KEY idx_logis_detail_time (time) USING BTREE 是一个用于定义索引的语法，通常出现在创建或修改表的语句中，特别是在 MySQL 数据库中。让我们逐步解析这段语句：
+KEY：
+在 MySQL 中，KEY 是 INDEX 的同义词，用于定义一个索引。索引是数据库中用于加速数据检索的结构。
+idx_logis_detail_time：
+这是索引的名称。为索引命名有助于在数据库管理和优化时识别和引用它。通常，索引名称会反映它所作用的列或其用途。
+
+(time)：
+这是索引所作用的列名。在这个例子中，索引是基于 time 列创建的。索引会加速对 time 列的查询操作，尤其是在 WHERE 子句中使用 time 进行过滤时。
+USING BTREE：
+这指定了索引的类型。在 MySQL 中，BTREE 是默认的索引类型，适用于大多数情况。B-tree 索引适合用于范围查询、排序和等值查询。
+B-tree 索引通过维护一个平衡树结构来加速数据检索，通常在处理大量数据时表现良好。
+
+使用场景
+查询优化：创建索引的主要目的是提高查询性能。对于频繁在 WHERE 子句中使用的列，创建索引可以显著减少查询时间。
+排序和分组：如果查询中涉及对 time 列的排序或分组，B-tree 索引也能提高效率。
+注意事项
+索引开销：虽然索引可以加速查询，但它们也会增加写操作（如 INSERT、UPDATE、DELETE）的开销，因为数据库需要维护索引结构。
+选择性：索引在高选择性列上效果最好，即列中不同值的数量较多。对于低选择性列（如布尔值），索引的效果可能不明显。
+存储空间：索引会占用额外的存储空间，因此在创建索引时需要权衡性能提升和存储开销。
 
 ## sql脚本的导入导出
 导入：navicat中，点击库，右击，运行SQL文件。

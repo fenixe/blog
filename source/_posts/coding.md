@@ -27,6 +27,7 @@ tags:
 
 ### 10MB转换为字节
 1M = 1024k = 1024 * 1024字节 = 1048576字节。
+10485760 b = 10 Mb
 
 使用最常见的定义，也就是以1024为基数（根据IEC标准）：
 1 Megabyte (MB) = 1,024 Kilobytes (KB)1 Kilobyte (KB) = 1,024 Bytes (B)

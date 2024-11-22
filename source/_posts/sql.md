@@ -168,6 +168,9 @@ INSERT INTO `area_config` (`province_id`, `support_type`, `init_kg`, `init_price
 ```
 
 ## 查
+```sql
+SELECT * FROM user_data WHERE no = '7997119' OR no = '8021178'
+```
 ### 总数
 ```sql
 # 查询store表1000条中status=2的总数
@@ -304,6 +307,13 @@ SET keyword = 'b'
 WHERE keyword = 'a';
 ```
 
+更新id范围内的记录
+```sql
+UPDATE baidu_coord
+SET business = 'olm20mg7t'
+WHERE id BETWEEN 182811 AND 183085;
+```
+
 ## 更新comment
 ```sql
 ALTER TABLE baidu_coord
@@ -335,6 +345,13 @@ SET t.`status` = 3,
 ```sql
 ALTER TABLE logistics_detail
 DROP COLUMN order_no;
+```
+
+## 删除记录
+```sql
+delete
+from terminal
+where id > 43550
 ```
 
 ## 同步数据

@@ -711,6 +711,34 @@ doctorList.stream()
     .collect(Collectors.toList());
 ```
 
+#### Collectors.groupingBy
+```java
+// 按类目分组
+Map<String, List<Product>> prodMap= prodList.stream().collect(Collectors.groupingBy(Product::getCategory));
+
+// 按几个属性拼接分组
+Map<String, List<Product>> prodMap = prodList.stream().collect(Collectors.groupingBy(item -> item.getCategory() + "_" + item.getName()));
+
+// 按不同条件分组
+Map<String, List<Product>> prodMap= prodList.stream().collect(Collectors.groupingBy(item -> {
+	if(item.getNum() < 3) {
+		return "3";
+	}else {
+		return "other";
+	}
+}));
+
+// 按子组收集数据
+Map<String, Long> prodMap = prodList.stream().collect(Collectors.groupingBy(Product::getCategory, Collectors.counting()));
+
+// 求和
+Map<String, Integer> prodMap = prodList.stream().collect(Collectors.groupingBy(Product::getCategory, Collectors.summingInt(Product::getNum)));
+
+// 联合其他收集器
+Map<String, Set<String>> prodMap = prodList.stream().collect(Collectors.groupingBy(Product::getCategory, Collectors.mapping(Product::getName, Collectors.toSet())));
+//{"啤酒":["青岛啤酒","百威啤酒"],"零食":["面包","饼干","月饼"]}
+```
+
 ### 是否在数组中
 ``` java
 // 数组：[{name:a},{name:b}]。我现在有一个name：x，如何判断name ：x 有没有在其中中
@@ -794,6 +822,8 @@ list.stream()
 min() 方法用于返回两个参数中的最小值。
 end = Math.min(0 + 3, 9) = 3
 
+max() 返回两个参数中的最大值
+
 ## Enum
 ```java
 public enum StatusEnum {
@@ -827,6 +857,9 @@ OssStsTokenResponse ossStsTokenResponse = JSON.parseObject(JSON.toJSONString(res
 ## var
 10以上版本
 类型推断的关键字，该关键字允许你不用显示声明变量的类型，编译器会自动根据右边表达式的返回值来推断变量的类型。
+
+## 运算
+除法，余数会被丢弃
 
 ## 循环遍历
 ``` java
@@ -910,6 +943,17 @@ for (String word : words) {
 String result = sb.toString().trim(); // 去掉最后一个多余的空格
 ```
 
+### 分批执行
+```java
+int batchSize = 2000;
+int totalSize = 5000;
+int batchCount = (totalSize + batchSize - 1) / batchSize;
+for (int i = 0; i < batchCount; i++) {
+    int start = i * batchSize;
+    int end = Math.min(start + batchSize, totalSize);
+    List<String> batchList = ids.subList(start, end);
+}
+```
 
 ## 关键字
 ### final
@@ -961,9 +1005,36 @@ calendar.set(Calendar.DAY_OF_MONTH, 30);
 calendar.set(Calendar.HOUR_OF_DAY, 23);
 calendar.set(Calendar.MINUTE, 59);
 calendar.set(Calendar.SECOND, 59);
+// 会比仅设置59秒要晚
+calendar.set(Calendar.MILLISECOND, 999);
 
 // 如果是当前时间，就不需要下面这样设置了，因为 getInstance() 方法已经初始化为当前时间。
 calendar.setTime(new Date());
+```
+
+### hutool DateUtil
+```java
+Date end2 = DateUtil.endOfDay(now);
+Date tomorrow2 = DateUtil.offsetDay(now, 1);
+```
+
+### 解析(字符串转时间)
+```java
+String dateString = "2024-09-23 14:37:21";
+SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 格式需要匹配
+try {
+    Date date = formatter.parse(dateString);
+    System.out.println("Date object: " + date);
+} catch (ParseException e) {
+    e.printStackTrace();
+}
+
+Date someday2 = DateUtil.parse("2024-09-23 14:37:21");
+```
+
+### 格式化
+```java
+DateUtil.format(date, "yyyyMMdd")
 ```
 
 ## 常用类库
@@ -981,6 +1052,10 @@ hashSet.add("Apple"); // 重复元素不会被添加
 for (String fruit : hashSet) {
     System.out.println(fruit);
 }
+
+// 当你将一个List传递给HashSet的构造函数时，HashSet会自动去除重复的元素。
+List<Tag> tags = Arrays.asList(t1, t2, t3, t4, t5);
+Set<Tag> setList = new HashSet<>(tags);
 ```
 
 #### LinkedHashSet
@@ -1469,6 +1544,8 @@ public class JsonExample {
         }
     }
 }
+
+JSONObject backParam = JSON.parseObject(""); // backParam 为 null
 ```
 
 # 注解
