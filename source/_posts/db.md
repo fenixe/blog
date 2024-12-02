@@ -57,6 +57,8 @@ SELECT * FROM INFORMATION_SCHEMA.INNODB_TRX;
 SELECT * FROM INFORMATION_SCHEMA.PROCESSLIST WHERE ID = 2820630;
 ```
 
+COMMAND = Sleep 表示该连接当前处于空闲状态，正在等待新的命令或查询。这通常发生在客户端与数据库服务器之间的连接已经建立，但当前没有任何活动的查询正在执行的情况下。
+
 
 ## docker
 docker run --name mysql -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql:latest
@@ -161,6 +163,10 @@ B-tree 索引通过维护一个平衡树结构来加速数据检索，通常在�
 ## sql脚本的导入导出
 导入：navicat中，点击库，右击，运行SQL文件。
 导出：navicat中，点击表，右击，导出sql文件。
+
+## 其他
+报错：Duplicate entry '6760391' for key 'uniq_ethno' 
+违反了数据库中定义的唯一性约束
 
 # ClickHouse
 ## 安装

@@ -149,6 +149,10 @@ ALTER TABLE dev_release_version ADD COLUMN priority INT DEFAULT 10;
 ALTER TABLE dev_project ADD plan_hours DECIMAL(10,1) COMMENT '预估工时';
 
 ALTER TABLE dev_project ADD plan_str VARCHAR(255) COMMENT '预估工时';
+
+-- 添加唯一键
+ALTER TABLE banner_config
+ADD CONSTRAINT uniq_banner_title UNIQUE (title);
 ```
 
 ## 增
@@ -263,6 +267,8 @@ FROM (
         o.order_no
 ) AS subquery;
 ```
+#### SELECT COUNT(1) 和 SELECT COUNT(*)
+选择 COUNT(*) 可以确保代码的通用性和可读性，同时在性能上与 COUNT(1) 没有显著差异。
 
 ### 不要用 JSON_ARRAYAGG 会导致崩溃
 ```sql
@@ -295,7 +301,52 @@ SELECT column1, column2 FROM table2;
 SELECT name, department FROM employees
 UNION ALL
 SELECT name, department FROM managers;
+```
 
+### 查询重复数据
+```sql
+-- 查询 logistics 表中 status 等于 1 且 order_no 重复两次以上的数据
+SELECT order_no
+FROM logistics
+WHERE status = 1
+GROUP BY order_no
+HAVING COUNT(order_no) > 1;
+
+-- 获取这些重复 order_no 对应的完整记录，可以将上述查询作为子查询来使用：
+SELECT *
+FROM logistics
+WHERE status = 1
+AND order_no IN (
+    SELECT order_no
+    FROM logistics
+    WHERE status = 1
+    GROUP BY order_no
+    HAVING COUNT(order_no) > 1
+);
+
+```
+
+### 排序
+```sql
+SELECT gc.*
+FROM goods_coupon gc
+LEFT JOIN coupon_ticket ct ON gc.id = ct.coupon_id AND gc.type = 3
+ORDER BY 
+    CASE 
+        WHEN gc.status = 1 THEN 0
+        WHEN gc.status = 0 AND gc.type = 3 AND ct.receive_end_time > NOW() THEN 1
+        WHEN gc.status = 0 AND (gc.type = 1 OR gc.type = 2) THEN 2
+        ELSE 3
+    END,
+    gc.id DESC;
+```
+
+### 增量查数据
+```sql
+--基于时间戳
+SELECT * FROM my_table WHERE updated_at > '2024-11-20 00:00:00';
+--基于自增 ID
+SELECT * FROM my_table WHERE id > 1000;
 ```
 
 

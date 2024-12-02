@@ -512,6 +512,9 @@ Long goodsNum = 1L;
 BigDecimal totalWeight = goodsWeight.multiply(new BigDecimal(goodsNum)); // 乘法
 System.out.println(totalWeight);
 
+// 使用 BigDecimal.valueOf
+BigDecimal bigDecimalValue = BigDecimal.valueOf(longValue);
+
 Integer initKg = 1;
 BigDecimal initPrice = new BigDecimal("6");
 // 比较
@@ -551,6 +554,14 @@ RoundingMode.DOWN 表示向下舍入（即截断小数部分）。
 BigDecimal exceedWeight = new BigDecimal("24.2");
 BigDecimal exceedWeightCopies = exceedWeight.divide(BigDecimal.valueOf(2), 0, BigDecimal.ROUND_UP); // 除法，除以0会报错
 System.out.println(exceedWeightCopies);
+```
+
+### 四舍五入
+```java
+// 使用 RoundingMode.HALF_UP 进行四舍五入，保留两位小数
+BigDecimal roundedValue = value.setScale(2, RoundingMode.HALF_UP);
+// 除以100
+BigDecimal hyCoinAmount = bigDecimalValue.divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
 ```
 
 ## 数组
@@ -861,7 +872,18 @@ OssStsTokenResponse ossStsTokenResponse = JSON.parseObject(JSON.toJSONString(res
 ## 运算
 除法，余数会被丢弃
 
-## 循环遍历
+## 控制结果
+### 条件语句
+```java
+推荐第一种
+Boolean b = checkName();
+第一种：
+if (Boolean.TRUE.equals(b)) {}
+第二种：
+if (titleExistStatus) {}
+```
+
+### 循环语句/循环遍历
 ``` java
 for (JsonNode jsonNode : arrayNode) {
     // 获取数组中的每个JsonNode元素，你可以按需进行操作
@@ -882,7 +904,7 @@ for (int i = 0; i < arr.length; i++) {
 }
 ```
 
-### 无限循环
+#### 无限循环
 ```java
 while (true) {
     // 你的代码逻辑
@@ -913,7 +935,7 @@ for (;;) {
 }
 ```
 
-### 标签（Label）
+#### 标签（Label）
 标签可以与 break 和 continue 语句一起使用，以控制多层循环。
 ```java
 outerLoop:
@@ -927,7 +949,7 @@ for (int n = 0; n < 5; n++) {
 }
 ```
 
-### 循环中注意
+#### 循环中注意
 IDEA提示：String concatenation '+=' in loop 
 使用 += 运算符在循环中进行字符串连接可能会导致性能问题。每次使用 += 进行字符串连接时，都会创建一个新的 String 对象，因为 String 是不可变的。这在循环中反复执行时，可能会导致不必要的内存分配和垃圾回收，从而影响性能。
 为了解决这个问题，建议使用 StringBuilder 或 StringBuffer 来进行字符串连接。这些类是可变的，并且提供了更高效的字符串操作方法。
@@ -943,7 +965,7 @@ for (String word : words) {
 String result = sb.toString().trim(); // 去掉最后一个多余的空格
 ```
 
-### 分批执行
+#### 分批执行
 ```java
 int batchSize = 2000;
 int totalSize = 5000;
@@ -1327,6 +1349,26 @@ import org.springframework.scheduling.annotation.Async;
     @Async
     public void goodsTag(Long id, String url) {
     }
+```
+
+### 自定义ThreadPoolExecutor
+```java
+private static ThreadPoolExecutor pool;
+
+static {
+    ThreadFactory nameThreadFactory = new ThreadFactoryBuilder()
+        .setNameFormat("AsyncTask-%d")
+        .build();
+    pool = new ThreadPoolExecutor(
+        20, // corePoolSize: 核心线程数
+        50, // maximumPoolSize: 最大线程数
+        60L, // keepAliveTime: 非核心线程空闲时的存活时间
+        TimeUnit.MILLISECONDS, // keepAliveTime 的时间单位
+        new LinkedBlockingQueue<Runnable>(1024), // 工作队列
+        nameThreadFactory, // 线程工厂
+        new ThreadPoolExecutor.CallerRunsPolicy() // 拒绝策略
+    );
+}
 ```
 
 ## 异常捕获

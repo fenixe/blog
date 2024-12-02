@@ -739,6 +739,19 @@ with open('./test_runoob.txt', 'w') as file:
     file.write('hello world !')
 ```
 
+### raise
+引发新的异常
+```py
+raise ValueError("Invalid value")
+
+except Exception as e:
+    logger.info(f"数据库操作失败: {e}")
+    raise # 通过 raise 重新引发异常，确保异常继续向上传递，以便调用者可以处理它，或者让程序终止并显示错误信息。
+```
+
+### global
+使用 global 关键字是为了在函数内部声明对全局变量的引用。这样做的目的是为了在函数内部修改全局变量的值，而不仅仅是访问它。
+
 ## 异步任务
 ### FastAPI 后台任务
 ```py
@@ -902,6 +915,34 @@ logging.info('应用程序启动')
 ```py
 from selenium import webdriver
 driver = webdriver.Edge()
+```
+
+## put上传资源
+```py
+def _upload_file_content(self, file_path: str, upload_url: str) -> bool:
+    """
+    上传文件内容
+    :param file_path: 本地文件路径
+    :param upload_url: 上传URL
+    :return: 是否上传成功
+    """
+    try:
+        with open(file_path, 'rb') as f:
+            response = requests.put(
+                upload_url,
+                data=f
+            )
+            
+            if response.status_code == 200:
+                logger.info(f"文件内容上传成功: {file_path}")
+                return True
+            else:
+                logger.error(f"文件内容上传失败: {response.status_code} - {response.text}")
+                return False
+                
+    except Exception as e:
+        logger.error(f"文件内容上传异常: {e}")
+        return False
 ```
 
 # Nacos
@@ -1169,7 +1210,83 @@ OCR：Optical Character Recognition，光学字符识别
 # Paddle
 人工智能 > 机器学习 > 深度学习
 
+# 测试
+```py
+from encryption_processor import EncryptionProcessor
+from loguru import logger
+
+def test_encryption_decryption():
+    try:
+        # 初始化加密处理器
+        processor = EncryptionProcessor()   
+    except Exception as e:
+        logger.error(f"测试过程出错: {e}")
+
+if __name__ == "__main__":
+    test_encryption_decryption() 
+```
+```zsh
+python src/test_encryption.py
+```
+
 # 包
+## os
+获取路径文件名
+```py
+logger.info(os.path.basename("testdir/106608.png"))
+```
+
+## 数据库连接池DBUtils
+连接池（Connection Pool）是一个用于管理数据库连接的技术。它通过维护一组数据库连接来提高应用程序的性能和资源利用率。连接池的主要目的是避免在每次需要访问数据库时都创建和销毁连接，因为这两个操作都是相对昂贵的。
+
+背景：lb-file执行查询后，mysql数据库表死锁，无法更新表字段
+https://www.cnblogs.com/chenjieyouge/p/17351138.html
+但如果变成了web, 每次访问接口都要查询数据, 如果每次都要重新进行 connect 那这个就有点低效了.
+若在外层只连接一次, 重复用 cursor 的话又可能会造成锁表和线程异常问题.
+
+```py
+import pymysql 
+from pymysql import cursors
+from dbutils.pooled_db import PooledDB
+
+
+pool = PooledDB(
+    creator=pymysql,
+    # 创建最大连接
+    maxconnections=6,
+    mincached=2,
+    maxcached=3,
+    maxshared=4,
+    blocking=True,
+    maxusage=None,
+    setsession=[],
+    ping=0,
+    # 这一坨会传给上面的 pymysql
+    host='127.0.0.1',
+    port=3306,
+    user='root',
+    passwd='123456',
+    database='cj',
+    charset='utf8',
+    # 让查询结果是一个 dict
+    cursorclass=cursors.DictCursor
+)
+
+
+# 使用上和 mysql 是一样的
+conn = pool.connection()
+cursor = conn.cursor()
+
+cursor.execute('select order_id, province from market limit 2;')
+data = cursor.fetchall()
+print(data)
+
+# 这里并没有关闭连接, 而是放进了连接池 pool 
+conn.close()
+```
+
+使用 DBUtils 的 PooledDB 与 pymysql 结合后，PooledDB 已经为你处理了连接的有效性检查，因此通常不需要在每次接口请求后手动调用 cnx.ping(reconnect=True)
+
 ## cv2
 cv2是Python语言的一个计算机视觉库，用于图像处理和计算机视觉领域的开发。它是OpenCV库的Python语言绑定，提供了许多图像处理和计算机视觉的算法和方法，使得Python开发者可以方便地实现图像处理和计算机视觉的功能。
 
