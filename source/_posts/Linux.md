@@ -152,6 +152,14 @@ sudo du -h --max-depth=1 /var/
 查询可用内存
 ``` bash
 free -m
+free -h
+
+total：系统总内存。
+used：已使用的内存量。
+free：未使用的内存量。
+shared：多个进程共享的内存量。
+buff/cache：被用作缓冲区和缓存的内存量。
+available：可用于新进程的内存量（考虑了缓存和缓冲区的内存）。
 ```
 
 显示终端下所有用户的程序
@@ -332,6 +340,9 @@ mac
 netstat -anvp tcp |grep 4000
 Linux
 netstat -tunlp | grep 4000
+
+下载文件
+wget url
 
 # niekaifa @ niekaifadeMacBook-Pro in ~/workspace/apowo/tooqing-cordova/tooqing-webapp/src/assets/imgs on git:c91647c o [14:40:47] 
 $ dd if=/dev/zero of=tmp.png bs=1M count=50
@@ -653,6 +664,101 @@ export PATH=$NODE_HOME/bin:$PATH
 curl ip.gs
 当前 IP：xxxx 来自： xxx
 
+# systemctl
+```
+[Unit]
+Description=PyScript
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/root/workspace/py-script
+ExecStart=/root/miniconda3/bin/python /root/workspace/py-script/main.py
+Restart=always
+RestartSec=30
+# print日志
+Environment=PYTHONUNBUFFERED=1
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+
+
+
+[Unit]
+Description=AutoBackup
+After=syslog.target network.target remote-fs.target nss-lookup.target
+
+[Service]
+Type=forking
+
+PIDFile=/root/autobackup.pid
+
+# 这里使用虚拟环境下的gunicorn
+ExecStart=/root/miniconda3/bin/gunicorn --chdir /root/workspace/auto_backup main:app -D -w 1 -b 0.0.0.0:8080 -k uvicorn.workers.UvicornWorker -p /root/autobackup.pid
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
+PrivateTmp=true
+
+[Install]
+```
+
+## 指令
+```zsh
+cp /root/workspace/data-backup/data_backup.service /etc/systemd/system/
+# 重新加载 systemd 服务配置
+systemctl daemon-reload
+# 启动服务
+systemctl start data_backup
+# 查看所有正在运行的服务
+systemctl list-units --type=service --state=running
+journalctl -u data_backup -f
+
+
+# 查看所有服务
+systemctl list-units --type=service
+
+# 查看py_script服务状态
+systemctl status py_script
+# 停用
+systemctl stop py_script
+# 禁用
+systemctl disable py_script
+# 开机自启动
+systemctl enable py_script
+
+# scp copy文件指令
+scp -r /Users/qkil/ikyu/code/py-script root@101.132.81.239:/root/workspace/py-script
+```
+
+## forking
+在 Unix 和 Linux 系统中，许多守护进程（daemon）在启动时会采用一种称为“forking”的方式来运行。这种方式涉及到进程的分叉（fork）和父进程的退出。以下是这个过程的详细解释：
+### 守护进程的启动过程
+
+1. **初始进程启动**：当你启动一个服务时，最初的进程（我们称之为父进程）开始运行。这通常是由 systemd 启动的。
+
+2. **fork 操作**：父进程会调用 `fork()` 系统调用来创建一个子进程。这个子进程是父进程的一个副本。
+
+3. **父进程退出**：在创建子进程后，父进程会立即退出。这是为了让子进程成为一个孤儿进程，由 init 系统（在现代 Linux 系统中通常是 systemd）接管。
+
+4. **子进程成为守护进程**：子进程继续运行，并通常会执行一些额外的操作来完全成为一个守护进程，例如：
+   - 调用 `setsid()` 创建一个新的会话和进程组。
+   - 改变工作目录到根目录或其他指定目录。
+   - 重定向标准输入、输出和错误输出到 `/dev/null` 或其他文件。
+
+5. **记录 PID**：子进程会将自己的进程 ID（PID）写入到一个指定的 `.pid` 文件中。这使得 systemd 或其他进程管理工具能够知道守护进程的 PID，以便进行后续的管理操作。
+
+### 为什么父进程退出？
+
+- **去除控制终端**：通过让父进程退出，子进程可以脱离启动它的终端，从而避免受到终端信号（如挂起、关闭等）的影响。
+- **成为孤儿进程**：子进程成为孤儿进程后，由 init 系统（或 systemd）接管，这样可以确保进程在后台稳定运行。
+- **资源释放**：父进程退出后，系统资源可以被释放，减少不必要的资源占用。
+
+### 在 systemd 中的作用
+
+在 systemd 中，当服务的 `Type` 被设置为 `forking` 时，systemd 预期服务会以这种方式启动。systemd 会等待服务的父进程退出，然后通过 `PIDFile` 中的 PID 来管理和监控子进程（即实际的守护进程）。
+
+这种机制使得 systemd 能够有效地管理传统的 Unix 守护进程，同时确保服务在后台稳定运行。
 
 # 知识
 Shell是Linux/Unix的一个外壳，你理解成衣服也行。它负责外界与Linux内核的交互，接收用户或其他应用程序的命令，然后把这些命令转化成内核能理解的语言，传给内核，内核是真正干活的，干完之后再把结果返回用户或应用程序。

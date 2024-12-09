@@ -232,6 +232,8 @@ select * from config where status = 1 and support_type = 1 and FIND_IN_SET(#{pro
 ```sql
 select max(id) from l
 select min(id) from l
+
+SELECT MAX(id) AS max_id, MIN(id) AS min_id FROM your_table;
 ```
 
 ### 总数
@@ -341,6 +343,11 @@ ORDER BY
     gc.id DESC;
 ```
 
+#### 按中文首字母排序
+```sql
+ORDER BY CONVERT(city USING gbk) ASC
+```
+
 ### 增量查数据
 ```sql
 --基于时间戳
@@ -392,13 +399,18 @@ SET t.`status` = 3,
     t.tel = CASE WHEN t.tel = '' THEN b.tel ELSE t.tel END;
 ```
 
-## 删除表字段
+## 删除
+### 删除表
+```sql
+DROP TABLE a;
+```
+### 删除表字段
 ```sql
 ALTER TABLE logistics_detail
 DROP COLUMN order_no;
 ```
 
-## 删除记录
+### 删除记录
 ```sql
 delete
 from terminal

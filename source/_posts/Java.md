@@ -444,6 +444,27 @@ StringUtils.deleteWhitespace(str)
 str.replaceAll("\\s+", "");
 ```
 
+#### 检测字符串是否有中文
+\\u4E00 到 \\u9FFF 是常用汉字的 Unicode 范围。
+```java
+// 检查快递单号是否有中文
+if (item.getExpressNo().matches(".*[\\u4e00-\\u9fa5].*")) {
+    return false;
+}
+```
+
+#### 解析JSON字符串
+```java
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
+WxMpUser wxMpUser = ...;
+String remark = JSON.toJSONString(wxMpUser)；
+
+// 解析为 WxMpUser 对象
+WxMpUser wxMpUser = JSON.parseObject(remark, WxMpUser.class);
+```
+
 ### int类型
 除法向下取整
 
@@ -1927,6 +1948,8 @@ Map<Long, Item> selectMapByItem(String no);
 ```
 
 ## sql
+在 MyBatis 的 SQL 语句中，`<where>` 元素会自动处理条件的拼接，并在需要时添加 AND
+`<if></if>` 内 在 `<where>` 元素内部，即使不加 AND，MyBatis 也会正确处理。
 ### 排序
 ```xml
 <select id="bgList" resultType="test">

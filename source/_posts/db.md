@@ -206,3 +206,10 @@ stringRedisTemplate.opsForList().leftPush("myList", "Hello");
 leftPush方法是opsForList()返回的操作类中的一个方法，用于将一个或多个值插入到列表的头部。如果列表不存在，一个新的列表会被创建出来，之后再进行推送操作。这个方法的命名中的"left"意味着插入操作是在列表的左端执行，相对地，还有一个rightPush方法用于在列表的右端插入元素。
 
 stringRedisTemplate.opsForList().leftPushAll("myList", messages);
+
+# 其他
+## 存储内存
+SQLite 20万条记录，4个字段，每个字段最多8个长度字符，大概需要多少内存？
+4 个字段 * 8 个字符 = 32字节
+200000 * 32 = 6400000 字节，约为6.4M
+SQLite 数据库的大小会比纯数据大小大一些，但不会大很多。对于 20 万条记录和简单的结构，数据库文件可能会在 10 MB 到 20 MB 之间，具体取决于索引和其他数据库配置。

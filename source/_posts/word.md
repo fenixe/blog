@@ -480,6 +480,9 @@ Stories from the people who build @Instagram
 # spec
 specification 的简写：规格，规范，明细单，说明书；明确说明，详述
 
+# wxmp
+在“wx mp”这个短语中，“wx”通常代表“微信”（WeChat）的缩写，而“mp”代表“公众号”（公众号的英文是“Media Platform”）。
+
 # 计算机
 ## 处理器架构
 ### ARM

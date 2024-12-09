@@ -430,6 +430,18 @@ $ venv\Scripts\Activate.ps1
 $ source venv/Scripts/activate
 ```
 
+# linux安装
+## Miniconda
+### 下载
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+
+### 运行安装脚本
+bash Miniconda3-latest-Linux-x86_64.sh
+
+### 使用
+/root/miniconda3/bin/pip3 install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+/root/miniconda3/bin/python /root/workspace/data-backup/main.py
+
 # 语法
 ## 目录
 ```py
@@ -673,6 +685,12 @@ while True:
     continue # 跳过本次
   print(num)
   time.sleep(1)
+
+# 如果在一个 while True: 循环内使用 return 语句，函数会立即返回，并且循环会终止。
+while True:
+    if number % 2 == 0:
+        return number
+    break  # 这个 break 实际上不会被执行，因为 return 已经退出了函数
 ```
 
 #### for语句
@@ -1231,9 +1249,23 @@ python src/test_encryption.py
 
 # 包
 ## os
-获取路径文件名
+### 获取路径文件名
 ```py
 logger.info(os.path.basename("testdir/106608.png"))
+```
+
+### 获取本地文件的大小
+```py
+import os
+
+# 定义文件路径
+file_path = '/Users/qkil/Downloads/500.png'
+
+# 获取文件大小
+file_size = os.path.getsize(file_path)
+
+# 打印文件大小
+print(f'The size of the file is {file_size} bytes.')
 ```
 
 ## 数据库连接池DBUtils
@@ -1722,3 +1754,4 @@ df.columns = df.columns.str.strip()
 # 使用 duplicated 方法
 print("Duplicated rows:\n", df.duplicated(subset=['name'], keep=False))
 ```
+

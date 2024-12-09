@@ -316,7 +316,7 @@ git stash pop
 ```
 
 #### 切分支
-没提交
+忘记切分支，没提交
 git checkout -b new
 git add .
 git commit - m ''
