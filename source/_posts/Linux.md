@@ -205,6 +205,7 @@ ls -lht
 
 当前文件夹下所有文件（或某个文件）对应大小
 du -sh *
+du -sh ./*
 
 反向列示文件内容
 ```
@@ -675,8 +676,8 @@ Type=simple
 WorkingDirectory=/root/workspace/py-script
 ExecStart=/root/miniconda3/bin/python /root/workspace/py-script/main.py
 Restart=always
-RestartSec=30
-# print日志
+RestartSec=3600
+# print日志, logger可以不设置
 Environment=PYTHONUNBUFFERED=1
 StandardOutput=journal
 StandardError=journal
@@ -729,6 +730,7 @@ systemctl enable py_script
 
 # scp copy文件指令
 scp -r /Users/qkil/ikyu/code/py-script root@101.132.81.239:/root/workspace/py-script
+scp -r /Users/qkil/workspace/code/tools/data-backup root@101.132.81.239:/root/workspace/data-backup
 ```
 
 ## forking
@@ -759,6 +761,35 @@ scp -r /Users/qkil/ikyu/code/py-script root@101.132.81.239:/root/workspace/py-sc
 在 systemd 中，当服务的 `Type` 被设置为 `forking` 时，systemd 预期服务会以这种方式启动。systemd 会等待服务的父进程退出，然后通过 `PIDFile` 中的 PID 来管理和监控子进程（即实际的守护进程）。
 
 这种机制使得 systemd 能够有效地管理传统的 Unix 守护进程，同时确保服务在后台稳定运行。
+
+## 注册信号
+```py
+def register_signal_handlers(self):
+    signal.signal(signal.SIGTERM, self.handle_sigterm)
+
+def handle_sigterm(self, signum, frame):
+    logger.info("接收到终止程序信号，暂停服务...")
+    self.update_record_failed()
+    exit(0)
+
+def start(self):
+    """启动服务"""
+    self.register_signal_handlers()
+    try:
+        while True:
+            self.backup_job()
+            # 任务完成后休眠一段时间（单位秒）
+            time.sleep(self.sleep_time)
+    except KeyboardInterrupt:
+        logger.info("服务被手动停止")
+        self.update_record_failed()
+    except Exception as e:
+        logger.error(f"服务运行出错: {e}")
+        self.update_record_failed()
+        self.feishu_logger.sendMsg(str(e))
+        raise e
+```
+
 
 # 知识
 Shell是Linux/Unix的一个外壳，你理解成衣服也行。它负责外界与Linux内核的交互，接收用户或其他应用程序的命令，然后把这些命令转化成内核能理解的语言，传给内核，内核是真正干活的，干完之后再把结果返回用户或应用程序。

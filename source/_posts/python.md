@@ -263,6 +263,21 @@ if __name__ == '__main__':
     connect.close()
 ```
 
+### cursor.fetchall()返回元组列表
+`[(1, 'Alice'), (2, 'Bob')]`
+
+并且数据库中有以下数据：
+| id | name |
+|----|-------|
+| 1 | Alice |
+| 2 | Bob |
+
+records[0] 将返回 (1, 'Alice')，这是第一行数据。
+records[0][0] 将返回 1，这是第一行的第一个字段（id）。
+
+fetchall() 返回的确实是可以通过索引访问的结构，但每一行数据是以元组的形式存储的，而不是字典。
+如果你希望以字典的形式访问结果，可以使用 cursor.fetchall() 的变体，例如 cursor.fetchall() 结合 cursor.description 来构建字典。
+
 ### 动态sql的拼接
 #### 合法
 参数化查询
@@ -512,8 +527,9 @@ if keyword and keyword in name:
 ### 分割
 data.split('|')
 
-### 去除
+### 去除首位字符
 line.strip('\n')
+parsed_url.path.strip('/')
 
 ### 元组
 存储内容，不可变更
@@ -691,6 +707,27 @@ while True:
     if number % 2 == 0:
         return number
     break  # 这个 break 实际上不会被执行，因为 return 已经退出了函数
+```
+
+##### 无限循环
+```py
+base_sql += " WHERE id >= %s LIMIT %s"
+while True:
+    conn = self.db_manager.get_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute(base_sql, (min_id, batch_size))
+            records = cursor.fetchall()
+            
+            if not records:
+                logger.info("查询的记录为空，终止循环")
+                break
+            
+            # 处理 records
+
+            min_id = current_id + 1
+    finally:
+        conn.close()
 ```
 
 #### for语句
@@ -963,6 +1000,121 @@ def _upload_file_content(self, file_path: str, upload_url: str) -> bool:
         return False
 ```
 
+## 单例模式
+```py
+class Singleton:
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super(Singleton, cls).__new__(cls, *args, **kwargs)
+        return cls._instance
+
+    def __init__(self, value):
+        self.value = value
+
+    # 仅初始化一次例子
+    def __init__(self, db_path: str = "backup.db"):
+        """
+        初始化 SQLite 管理器
+        :param db_path: 数据库文件路径
+        """
+        if not hasattr(self, 'initialized'):  # 确保只初始化一次
+            self.db_path = db_path
+            self._init_db()
+            self.initialized = True
+
+# 测试 Singleton 类
+s1 = Singleton(10)
+s2 = Singleton(20)
+
+print(s1.value)  # 输出: 20
+print(s2.value)  # 输出: 20
+print(s1 is s2)  # 输出: True
+```
+
+# SCP传输
+set_missing_host_key_policy()：设置远程服务器没有在know_hosts文件中记录时的应对策略。目前支持三种策略：
+设置连接的远程主机没有本地主机密钥或HostKeys对象时的策略，目前支持三种：
+ 
+- AutoAddPolicy 自动添加主机名及主机密钥到本地HostKeys对象，不依赖load_system_host_key的配置。即新建立ssh连接时不需要再输入yes或no进行确认
+- WarningPolicy 用于记录一个未知的主机密钥的python警告。并接受，功能上和AutoAddPolicy类似，但是会提示是新连接
+- RejectPolicy 自动拒绝未知的主机名和密钥，依赖load_system_host_key的配置。此为默认选项
+
+exec_command()：在远程服务器执行Linux命令的方法。
+```
+paramiko==3.5.0
+scp==0.15.0
+```
+```py
+import os
+import configparser
+from paramiko import SSHClient, AutoAddPolicy
+from scp import SCPClient
+from loguru import logger
+import time
+
+class ScpUploader:
+    def __init__(self, config_path: str = 'config.ini'):
+        config = configparser.ConfigParser()
+        config.read(config_path, encoding='utf-8')
+        self.host = config['internal_server']['HOST']
+        self.port = config['internal_server'].getint('PORT', 22)
+        self.username = config['internal_server']['USERNAME']
+        self.password = config['internal_server']['PASSWORD']
+        self.remote_base_path = config['internal_server']['BASE_PATH']
+        
+    
+    def upload_file(self, local_path: str, remote_path: str) -> bool:
+        """
+        使用SCP上传文件到远程服务器
+        :param local_path: 本地文件路径
+        :param remote_path: 远程文件路径（相对于基础路径）
+        :return: 是否上传成功
+        """
+        try:
+            ssh = SSHClient()
+            ssh.set_missing_host_key_policy(AutoAddPolicy())
+            ssh.connect(self.host, self.port, self.username, self.password)
+            
+            # 创建完整的远程路径
+            # logger.debug(f"远程基础路径: {self.remote_base_path}")
+            # logger.debug(f"远程路径: {remote_path}")
+            full_remote_path = os.path.join(self.remote_base_path, remote_path)
+            # logger.debug(f"完整远程路径: {full_remote_path}")
+            remote_dir = os.path.dirname(full_remote_path)
+            # logger.debug(f"远程目录: {remote_dir}")
+            
+            # 检查目录是否存在
+            stdin, stdout, stderr = ssh.exec_command(f'ls {remote_dir}')
+            if stderr.read():
+                ssh.exec_command(f'mkdir -p {remote_dir}')
+            
+            # 上传文件
+            with SCPClient(ssh.get_transport()) as scp:
+                self.upload_with_retry(scp, local_path, full_remote_path)
+            
+            logger.info(f"SCP传输成功: {full_remote_path}")
+            return True
+            
+        except Exception as e:
+            logger.error(f"SCP传输失败: {str(e)}")
+            raise e
+        finally:
+            if 'ssh' in locals():
+                ssh.close() 
+    
+    def upload_with_retry(self, scp, local_path, full_remote_path, retries=3, delay=1):
+        for attempt in range(retries):
+            try:
+                scp.put(local_path, full_remote_path)
+                return
+            except Exception as e:
+                logger.info(f"尝试次数 {attempt + 1} 失败: {e}")
+                time.sleep(delay)
+        raise Exception(f"多次尝试后上传失败: {full_remote_path}")
+```
+
 # Nacos
 ```yaml
 aliyun:
@@ -1072,6 +1224,53 @@ except InvalidFileException:
     Tools.rm_files([file_path])
     return return_error("请求url非Excel文件, 请检查url对应资源")
 logger.info("url对应文件格式正确")
+```
+
+### 图片下载
+```py
+def _download_image(self, url: str, save_path: str, di_id: str) -> bool:
+    """
+    下载图片
+    :param url: 图片URL
+    :param save_path: 保存路径
+    :param di_id: 文档ID
+    :return: 是否下载成功
+    """
+    try:            
+        # 设置请求头，模拟浏览器行为
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        }
+        
+        # 先检查URL是否可访问
+        response = requests.head(url, headers=headers, timeout=10)
+        # logger.info(f"正在下载图片: {url}")
+        
+        # 检查URL是否有效
+        if response.status_code != 200:
+            self.sqlite_manager.create_invalid_url_record(url, di_id, f"状态码: {response.status_code}")
+            return False
+        
+        # 下载图片
+        response = requests.get(url, headers=headers, timeout=30, stream=True)
+        if response.status_code == 200:
+            # 写入文件
+            with open(save_path, 'wb') as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    if chunk:
+                        f.write(chunk)
+            logger.info(f"图片下载成功: {save_path}")
+            return True
+        else:
+            self.sqlite_manager.create_invalid_url_record(url, di_id, f"下载失败，状态码: {response.status_code}")
+            return False
+        
+    except requests.RequestException as e:
+        self.sqlite_manager.create_invalid_url_record(url, di_id, f"请求异常: {str(e)}")
+        return False
+    except Exception as e:
+        self.sqlite_manager.create_invalid_url_record(url, di_id, f"其他错误: {str(e)}")
+        return False
 ```
 
 ## 请求参数类型
@@ -1327,7 +1526,7 @@ cv2库提供了常用的图像处理和计算机视觉算法，例如图像分�
 使用Python的cv2包，开发者可以快速实现图像处理和计算机视觉功能，并且可以通过深度学习模型来提高算法的性能。
 
 ## pandas
-简单例子
+例子
 ```py
 # 创建一个字典，包含学生的姓名和年龄
 data = {'姓名': ['张三', '李四', '王五'],

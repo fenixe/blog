@@ -155,6 +155,25 @@ public class MainClass {
 }
 ```
 
+## 抽象类
+抽象类通常用于定义一组相关类的通用接口或基础实现。它们可以包含一些通用的代码逻辑，减少代码重复，并确保子类实现特定的方法。
+```java
+@Getter
+public abstract class CouponBoardBgSaveDomain<T extends CbVisibleConfig> {
+
+    protected abstract List<T> buildConfigList();
+}
+
+@Getter
+public class CbUserTaskBgSaveDomain extends CouponBoardBgSaveDomain<CouponBoardUserTaskConfig> {
+
+    @Override
+    protected List<CouponBoardUserTaskConfig> buildConfigList() {
+        return list
+    }
+}
+```
+
 # 包管理工具
 ## Maven
 ### 基础

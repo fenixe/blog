@@ -207,6 +207,26 @@ leftPush方法是opsForList()返回的操作类中的一个方法，用于将一
 
 stringRedisTemplate.opsForList().leftPushAll("myList", messages);
 
+# SQLite
+```zsh
+sqlite3 --version
+
+# 查看所有表
+.tables
+
+# 查看表结构
+.schema users
+
+# 进入 SQLite 提示符后, 基本命令
+SELECT * FROM users;
+UPDATE users SET age = 31 WHERE name = 'Alice';
+DELETE FROM users WHERE name = 'Bob';
+CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT, age INTEGER);
+INSERT INTO users (name, age) VALUES ('Alice', 30);
+INSERT INTO users (name, age) VALUES ('Bob', 25);
+.exit
+```
+
 # 其他
 ## 存储内存
 SQLite 20万条记录，4个字段，每个字段最多8个长度字符，大概需要多少内存？
