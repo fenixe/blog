@@ -107,7 +107,7 @@ mysql -V
 create table a (
   id bigint auto_increment primary key,
   no varchar(50) default '' not null unique comment 'no',
-  word varchar(300) default '' not null comment 'word'
+  `start_time` datetime DEFAULT '0000-00-00 00:00:00' COMMENT '开始时间'
 ) comment 'b';
 ```
 

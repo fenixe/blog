@@ -153,6 +153,39 @@ spring-api-prod  | false
 spring-api-prod  | https://p.x.cn
 ```
 
+# docker配置模板
+## mysql轻量级
+```yml
+version: '3.8' # 指定 docker-compose 文件版本
+
+services:
+  mysql-low: # 定义服务名称，可以自定义，这里与容器名保持一致
+    image: mysql:5.7 # 指定使用的镜像
+    container_name: mysql-low # 指定容器名称，与 docker run --name 对应
+    environment: # 设置环境变量，与 docker run -e 对应
+      MYSQL_ROOT_PASSWORD: m4533283
+    ports: # 端口映射，与 docker run -p 对应
+      - "3306:3306" # 将宿主机的 3306 端口映射到容器的 3306 端口
+    volumes: # 卷挂载，与 docker run -v 对应
+      # 数据卷挂载 (将宿主机的 /mydata/mysql 映射到容器的 /var/lib/mysql)
+      - /mydata/mysql:/var/lib/mysql
+      # 配置文件挂载 (将宿主机的 /root/workspace/config/mysql_custom.cnf 映射到容器内的配置目录)
+      # 注意：通常将自定义配置挂载到 /etc/mysql/conf.d/ 目录下，MySQL 会自动加载
+      - /root/docker/config/mysql_custom.cnf:/etc/mysql/conf.d/mysql_custom.cnf
+    deploy: # 资源限制，对应 --memory 和 --cpus
+      resources:
+        limits:
+          cpus: "0.5" # 限制 CPU 使用最多为 0.5 核
+          memory: "512m" # 限制内存使用最多为 512MB
+    restart: always # 可选：添加重启策略，比如容器退出时总是自动重启
+```
+
+### 依赖的数据库设置文件
+```cnf
+[mysqld]
+sql_mode = "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+```
+
 # ISSUES
 ## docker Can't close tar writer: io: read/write on closed pipe
 把客户端打开
