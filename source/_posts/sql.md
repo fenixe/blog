@@ -153,6 +153,11 @@ ALTER TABLE dev_project ADD plan_str VARCHAR(255) COMMENT '预估工时';
 -- 添加唯一键
 ALTER TABLE banner_config
 ADD CONSTRAINT uniq_banner_title UNIQUE (title);
+
+-- 某字段后面追加
+ALTER TABLE product_images 
+ADD `sort` int(11) DEFAULT '0' COMMENT '排序顺序' 
+AFTER `url`;
 ```
 
 ## 增
@@ -371,6 +376,11 @@ UPDATE baidu_coord
 SET business = 'olm20mg7t'
 WHERE id BETWEEN 182811 AND 183085;
 ```
+
+值备份
+UPDATE product_image
+SET backup_url = url;
+
 
 ## 更新comment
 ```sql
