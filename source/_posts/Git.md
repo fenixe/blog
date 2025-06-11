@@ -189,6 +189,14 @@ git merge hotfix/bug-fix
 git push origin master
 ```
 
+### 删除tag
+```zsh
+# 本地
+$ git tag -d v1
+# 远程
+$ git push --delete origin v1
+```
+
 ## 切换到指定commit ID
 ```zsh
 git checkout <commit-id>
