@@ -165,6 +165,9 @@ buff/cache：被用作缓冲区和缓存的内存量。
 available：可用于新进程的内存量（考虑了缓存和缓冲区的内存）。
 ```
 
+可视化显示服务器信息
+htop
+
 显示终端下所有用户的程序
 ``` bash
 ps axu|grep nginx

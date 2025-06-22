@@ -5,6 +5,30 @@ tags:
 ---
 
 # Base
+docker-compose down      # 停止并删除容器
+docker-compose build    # 重新构建镜像
+docker-compose up -d    # 创建并启动容器
+
+## 阿里云服务器
+拉取镜像慢
+获取 镜像加速器地址：https://cr.console.aliyun.com/cn-shanghai/instances/mirrors
+mkdir -p /etc/docker
+touch daemon.json
+vim daemon.json
+{
+  "registry-mirrors": ["https://xxxxx.mirror.aliyuncs.com"]
+}
+systemctl daemon-reload
+systemctl restart docker
+
+## 服务器
+apt update
+apt install -y docker.io=27.5.1-0ubuntu3~22.04.2
+apt install docker-compose -y
+docker-compose -v
+docker-compose version 1.29.2, build unknown
+
+
 ## demo
 ```yaml
 # docker-compose.yaml
@@ -157,7 +181,9 @@ spring-api-prod  | https://p.x.cn
 ```
 
 # docker配置模板
+
 ## mysql轻量级
+/root/docker/mysql/docker-compose.yml
 ```yml
 version: '3.8' # 指定 docker-compose 文件版本
 
@@ -166,7 +192,7 @@ services:
     image: mysql:5.7 # 指定使用的镜像
     container_name: mysql-low # 指定容器名称，与 docker run --name 对应
     environment: # 设置环境变量，与 docker run -e 对应
-      MYSQL_ROOT_PASSWORD: m4533283
+      MYSQL_ROOT_PASSWORD: xxxxx
     ports: # 端口映射，与 docker run -p 对应
       - "3306:3306" # 将宿主机的 3306 端口映射到容器的 3306 端口
     volumes: # 卷挂载，与 docker run -v 对应
@@ -174,7 +200,7 @@ services:
       - /mydata/mysql:/var/lib/mysql
       # 配置文件挂载 (将宿主机的 /root/workspace/config/mysql_custom.cnf 映射到容器内的配置目录)
       # 注意：通常将自定义配置挂载到 /etc/mysql/conf.d/ 目录下，MySQL 会自动加载
-      - /root/docker/config/mysql_custom.cnf:/etc/mysql/conf.d/mysql_custom.cnf
+      - /root/docker/mysql/mysql_custom.cnf:/etc/mysql/conf.d/mysql_custom.cnf
     deploy: # 资源限制，对应 --memory 和 --cpus
       resources:
         limits:
@@ -184,6 +210,7 @@ services:
 ```
 
 ### 依赖的数据库设置文件
+/root/docker/mysql/mysql_custom.cnf
 ```cnf
 [mysqld]
 sql_mode = "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
