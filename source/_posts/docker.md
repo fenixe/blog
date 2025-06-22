@@ -48,6 +48,9 @@ docker rmi {image-id}
 ## 验证端口映射
 docker port container_name_or_id
 
+## 查看容器内python日志
+docker logs my-python-app
+
 
 ## 获取容器/镜像
 ```

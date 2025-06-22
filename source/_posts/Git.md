@@ -306,7 +306,7 @@ $ git reset HEAD .
 
 ### 本地通过git add & git commit 之后，想要撤销此次commit
 ``` zsh
-$ git reset commit_id
+$ git reset HEAD~1
 ```
 
 ## 暂存

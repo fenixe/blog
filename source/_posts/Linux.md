@@ -8,6 +8,9 @@ tags:
 ---
 
 # base
+## 登录
+ssh username@ip_address
+
 
 ## 不应该在 home 目录建文件
 l: 太过分了，啥权限都不应该在home目录下建目录啊
