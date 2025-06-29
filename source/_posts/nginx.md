@@ -5,6 +5,33 @@ tags:
 ---
 
 # base
+apt update
+apt install nginx
+启动
+systemctl start nginx
+检查 Nginx 状态
+systemctl status nginx
+如果看到 active (running) 表示 Nginx 已成功运行。
+查看防火墙状态
+ufw status
+Status: inactive 关闭状态
+如果服务器启用了 UFW 防火墙，需要允许 HTTP（80）和 HTTPS（443）流量：
+sudo ufw allow 'Nginx Full'
+sudo ufw enable
+sudo ufw status
+
+systemctl 指令	           等效的 Nginx 原生操作
+systemctl start nginx	    sudo nginx
+systemctl status nginx	  ps aux | grep nginx + curl -I本地测试
+systemctl stop nginx	    sudo nginx -s quit
+
+我在conf.d目录下创建了nginx配置，里面没有default.conf 。为什么现在还是nginx欢迎页
+sites-enabled 目录中的默认配置仍然生效。
+rm /etc/nginx/sites-enabled/default  # 或 000-default，取决于你看到的名称
+
+实时监控日志
+tail -f /var/log/nginx/error.log
+
 ng conf
 ``` nginx
 server {

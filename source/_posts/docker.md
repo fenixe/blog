@@ -28,6 +28,14 @@ apt install docker-compose -y
 docker-compose -v
 docker-compose version 1.29.2, build unknown
 
+/root/docker/mysql/
+docker-compose.yml  mysql_custom.cnf
+
+docker-componse up -d
+
+cd backend
+docker-compose build
+docker-compose up -d
 
 ## demo
 ```yaml
