@@ -9,8 +9,7 @@ tags:
 
 # base
 ## 登录
-ssh username@ip_address
-
+ssh 用户名@服务器IP -p 端口号
 
 ## 不应该在 home 目录建文件
 l: 太过分了，啥权限都不应该在home目录下建目录啊
@@ -21,6 +20,9 @@ gitlab-runner  temp  ubuntu
 如果是只是临时文件  建议使用/tmp/目录 这个目录应该所有用户都有写权限的
 没必要另外创建文件夹
 ## ubuntu
+查看服务器信息
+uname -a
+
 查看所有用户
 cat /etc/shadow
 

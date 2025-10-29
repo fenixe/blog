@@ -24,6 +24,10 @@ VS Code 的全称是 Visual Studio Code，是一款开源的、免费的、跨�
 
 快捷键列表： VS Code 左下角的齿轮按钮 -> 键盘快捷方式
 
+## 设置
+主题是：现代深色
+字体大小：14px
+
 ## VS Code快捷键
 ### 自定义
 cl => console.log();
@@ -505,6 +509,9 @@ ctrl+shift+p 唤出控制台，在搜索栏中输入 settings.json
 
 ## view-git-commit-log
 {% asset_img vscode-view-git-commit-log.png%}
+
+## 多光标
+ctrl+alt+down
 
 # IDEA
 ## plugins

@@ -35,11 +35,6 @@ git diff test.text
 
 # 配置
 
-### ssh 密钥
-```
-ssh-keygen
-```
-
 ### github.com代理
 选择 “编辑PAC用户自定规则” 会打开一个简单编辑器。
 在其中添加自定义的PAC规则，每行一条，规则格式参考 https://adblockplus.org/en/filter-cheatsheet

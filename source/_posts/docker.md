@@ -5,6 +5,9 @@ tags:
 ---
 
 # Base
+docker -V
+
+## 部署指令
 docker-compose down      # 停止并删除容器
 docker-compose build    # 重新构建镜像
 docker-compose up -d    # 创建并启动容器
@@ -22,16 +25,20 @@ systemctl daemon-reload
 systemctl restart docker
 
 ## 服务器
+### 安装docker
 apt update
 apt install -y docker.io=27.5.1-0ubuntu3~22.04.2
 apt install docker-compose -y
+
+### 查看docker版本
+docker --version
 docker-compose -v
 docker-compose version 1.29.2, build unknown
 
 /root/docker/mysql/
 docker-compose.yml  mysql_custom.cnf
 
-docker-componse up -d
+docker-compose up -d
 
 cd backend
 docker-compose build
@@ -200,7 +207,7 @@ services:
     image: mysql:5.7 # 指定使用的镜像
     container_name: mysql-low # 指定容器名称，与 docker run --name 对应
     environment: # 设置环境变量，与 docker run -e 对应
-      MYSQL_ROOT_PASSWORD: xxxxx
+      MYSQL_ROOT_PASSWORD: 123456
     ports: # 端口映射，与 docker run -p 对应
       - "3306:3306" # 将宿主机的 3306 端口映射到容器的 3306 端口
     volumes: # 卷挂载，与 docker run -v 对应
