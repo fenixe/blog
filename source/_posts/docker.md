@@ -80,6 +80,9 @@ docker rm 容器的名称或者 ID
 ## 停止容器
 docker stop 容器的名称或者 ID
 
+## 重启
+docker restart nginx-proxy
+
 ## 删除镜像
 docker images
 docker rmi {image-id}
@@ -127,6 +130,18 @@ d83cab80f13d   mongo   "/entrypoint.sh  3 seconds ago   Up 2 seconds   0.0.0.0:2
 chmod 777 build.sh
 docker-componse up
 ```
+
+## 查看network名称
+docker network ls
+
+## 加入其他网络
+docker network connect shop-network nginx-proxy
+
+## 容器ip
+docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' shop-frontend
+
+
+
 
 ## 官方镜像
 https://hub.docker.com/search?image_filter=official&q=

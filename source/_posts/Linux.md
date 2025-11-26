@@ -106,7 +106,7 @@ $ touch test.text
 创建文件夹
 ``` BASH
 $ mkdir usr
-$ mkdir -p # 允许mkdir创建多级目录路径
+$ mkdir -p # 允许mkdir创建多级目录路径 parents
 ```
 
 移动文件 ｜ 重命名文件：mv 文件名 修改后的文件名
@@ -353,9 +353,9 @@ netstat -tunlp | grep 4000
 下载文件
 wget url
 
-# niekaifa @ niekaifadeMacBook-Pro in ~/workspace/apowo/tooqing-cordova/tooqing-webapp/src/assets/imgs on git:c91647c o [14:40:47] 
-$ dd if=/dev/zero of=tmp.png bs=1M count=50
-dd: bs: illegal numeric value
+查看防火墙状态
+ufw status
+
 
 # niekaifa @ niekaifadeMacBook-Pro in ~/workspace/apowo/tooqing-cordova/tooqing-webapp/src/assets/imgs on git:c91647c o [14:40:50] C:1
 $ dd if=/dev/zero of=tmp.png bs=1m count=20
@@ -366,6 +366,31 @@ $ dd if=/dev/zero of=tmp.png bs=1m count=20
 vim 光标跳转
 1.跳到文本的最后一行：按“G”,即“shift+g”
 2.跳到最后一行的最后一个字符 ： 先重复1的操作即按“G”，之后按“$”键，即“shift+4”。
+
+# 功能
+## 测试是否开启系统代理
+brew安装时开启系统代理，.zshrc要设置代理
+
+$ curl -I https://google.com
+HTTP/1.1 200 Connection established
+
+HTTP/2 301
+location: https://www.google.com/
+content-type: text/html; charset=UTF-8
+content-security-policy-report-only: object-src 'none';base-uri 'self';script-src 'nonce-uI1mN4nTjxSsp8au9mM6SQ' 'strict-dynamic' 'report-sample' 'unsafe-eval' 'unsafe-inline' https: http:;report-uri https://csp.withgoogle.com/csp/gws/other-hp
+date: Tue, 25 Nov 2025 13:42:40 GMT
+expires: Thu, 25 Dec 2025 13:42:40 GMT
+cache-control: public, max-age=2592000
+server: gws
+content-length: 220
+x-xss-protection: 0
+x-frame-options: SAMEORIGIN
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+
+
+# niekaifa @ niekaifadeMacBook-Pro in ~/workspace/apowo/tooqing-cordova/tooqing-webapp/src/assets/imgs on git:c91647c o [14:40:47] 
+$ dd if=/dev/zero of=tmp.png bs=1M count=50
+dd: bs: illegal numeric value
 
 ### 文件同步
 rsync 是一个常用的 Linux 应用程序，用于文件同步。
