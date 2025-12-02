@@ -6,6 +6,50 @@ tags: Java
 
 # Base
 Java是一种强类型语言，这意味着每个变量都必须声明其类型。
+
+## 系统配置
+### 本地安装的Java版本
+```
+$ # 方法 1：通过 java 命令反查路径（推荐）
+/usr/libexec/java_home -V
+Matching Java Virtual Machines (1):
+    1.8.0_265 (x86_64) "AdoptOpenJDK" - "AdoptOpenJDK 8" /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
+/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
+```
+
+### SDKMAN!
+安装
+curl -s "https://get.sdkman.io" | bash
+
+验证
+```
+$ sdk version
+
+SDKMAN!
+script: 5.20.0
+native: 0.7.14 (macos x86_64)
+```
+
+#### 国内镜像
+```
+$ echo 'sdk env set SDKMAN_URL_OVERRIDE https://mirrors.tuna.tsinghua.edu.cn/sdkman' >> ~/.zshrc
+source ~/.zshrc
+```
+
+#### 版本
+sdk list java
+Temurin       |     | 25.0.1       | tem     |            | 25.0.1-tem
+              |     | 24.0.2       | tem     |            | 24.0.2-tem
+              |     | 23.0.2       | tem     |            | 23.0.2-tem
+              |     | 21.0.9       | tem     |            | 21.0.9-tem
+              |     | 17.0.17      | tem     |            | 17.0.17-tem
+              | >>> | 17.0.11      | tem     | local only | 17.0.11-tem
+              |     | 11.0.29      | tem     |            | 11.0.29-tem
+              |     | 8.0.472      | tem     |            | 8.0.472-tem
+
+#### 安装
+sdk install java 17.0.11-tem
+
 ## 变量
 - 变量的声明和初始化
 - 变量的类型
