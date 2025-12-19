@@ -249,6 +249,10 @@ const paramValue = getUrlParameters();
 console.log('paramValue:', paramValue);
 ```
 
+## 把某数组项放在第一个
+const targetItem = array.splice(index, 1)[0]
+oldArray.unshift(targetItem)
+
 # 其他
 ## echarts
 双向柱形图

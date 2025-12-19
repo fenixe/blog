@@ -36,6 +36,21 @@ type id_rsa.pub
 start .
 ```
 
+### 端口占用情况
+PS C:\Users\11413> netstat -ano | findstr 7897
+TCP    0.0.0.0:7897           0.0.0.0:0              LISTENING       22320
+TCP    127.0.0.1:7897         127.0.0.1:50247        TIME_WAIT       0
+
+### 防火墙放行7897
+Windows 防火墙放行 7897
+以管理员身份运行 PowerShell：
+TCP + UDP 都放行 7897：
+netsh advfirewall firewall add rule name="Clash Proxy 7897 TCP" dir=in action=allow protocol=TCP localport=7897
+netsh advfirewall firewall add rule name="Clash Proxy 7897 UDP" dir=in action=allow protocol=UDP localport=7897
+
+校验：
+netsh advfirewall firewall show rule name="Clash Proxy 7897 TCP"
+
 ## 快捷键
 <span class="custom_red">win + I</span> windows设置主页
 

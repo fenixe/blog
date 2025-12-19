@@ -15,6 +15,17 @@ uname -r
 系统版本号
 sudo lsb_release -a
 
+### 查看WLAN网卡对应IP
+``` zsh
+$ # 在 WSL 执行，查 Windows 所有 WLAN 网卡及对应 IP
+powershell.exe -Command "Get-NetIPAddress -AddressFamily IPv4 -InterfaceAlias 'WLAN*' | Select-Object InterfaceAlias,IPAddress"
+
+InterfaceAlias IPAddress
+-------------- ---------
+WLAN 5         169.254.253.194
+WLAN 4         169.254.75.207
+WLAN           192.168.200.197
+```
 
 ## 效果
 {% asset_img seven_pc.png %}

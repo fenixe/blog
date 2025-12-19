@@ -139,6 +139,11 @@ node_modules/
 target/
 ```
 
+#### 不同文件目录区别
+node_modules/    仅忽略目录及其内容             99% 的情况（安全精准）
+node_modules     忽略同名目录、文件、符号链接     可能误伤，除非有特殊需求
+/node_modules/   仅忽略根目录下 node_modules
+
 ## token
 gitlab import github   授权
 {% asset_img register.png%}
@@ -325,6 +330,10 @@ git add .
 git commit - m ''
 git push origin new 
 
+## 复制项目删除git记录
+find . -name ".git" -type d
+删除 admin 的 .git
+rm -rf ./admin/.git
 
 ## 清除已删除的分支
 ### git branch -a 

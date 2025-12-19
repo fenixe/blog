@@ -356,6 +356,9 @@ wget url
 查看防火墙状态
 ufw status
 
+# zsh 主题
+vim ~/.zshrc
+ZSH_THEME="ys"
 
 # niekaifa @ niekaifadeMacBook-Pro in ~/workspace/apowo/tooqing-cordova/tooqing-webapp/src/assets/imgs on git:c91647c o [14:40:50] C:1
 $ dd if=/dev/zero of=tmp.png bs=1m count=20
@@ -552,6 +555,12 @@ curl
 ``` bash
 curl http://gitlab.kaifa.in:9999 -v
 ```
+
+测试后端是否跨域
+curl -i -H "Origin: http://localhost:8080" http://127.0.0.1:8000/api/order/list
+
+下载图片
+curl -o original_image.jpg "https://image.tmdb.org/t/p/original/mVuVohXeJvQdVzLBueALVcxUOac.jpg"
 
 #### etc/hosts
 hosts文件是linux系统中负责ip地址与域名快速解析的文件
