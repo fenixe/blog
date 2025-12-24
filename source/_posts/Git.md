@@ -33,6 +33,12 @@ seven：merge 本地；本地dev 分支需要拉一下
 ## 查看文件修改内容
 git diff test.text
 
+## 比较两个分支
+https://github.com/fenixe/ruiyi-api/compare/master...feature_wx
+以 A（master） 为基准，看 A...B（feature_wx） 的差异时：
+✅ 如果 B 有 A 未合并的新提交 / 新代码 → 会显示「B 比 A 多的内容」（比如你之前的 13 个提交）；
+✅ 如果 A 已经合并了 B 的所有内容 → 对比页面 / 终端命令会显示「无差异」（no differences）；
+
 # 配置
 
 ### github.com代理

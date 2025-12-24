@@ -8,6 +8,13 @@ tags:
 ---
 
 # Base
+## 生命周期
+仅App.vue
+https://uniapp.dcloud.net.cn/collocation/App.html
+- onLaunch
+- onShow
+- onHide
+
 ## 基座
 自定义调试基座是使用开发者申请的第三方SDK配置生成的基座应用，用于HBuilder/HBuilderX开发应用时实时在真机/模拟器上查看运行效果。（注：iOS仅支持真机运行自定义基座，不能使用xcode模拟器运行自定义基座）
 基座：https://ask.dcloud.net.cn/article/35115

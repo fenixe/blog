@@ -615,6 +615,11 @@ Date.now()
 秒级：
 const timestampInSeconds = Math.floor(Date.now() / 1000);
 
+毫秒
+moment().format('x')
+秒
+moment().format('X')
+
 ### 某一天
 new Date('2021-04-01T03:24:00');
 
