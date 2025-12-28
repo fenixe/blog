@@ -16,6 +16,12 @@ https://uniapp.dcloud.net.cn/collocation/App.html
 - onHide
 
 ## 基座
+### 自定义调试基座
+「辅助本地调试」，而非「正式发布包」
+1. 调试基座不含完整业务代码
+2. 依赖 HBuilderX 调试服务连接
+3. 调试基座的 “调试专属” 配置限制
+
 自定义调试基座是使用开发者申请的第三方SDK配置生成的基座应用，用于HBuilder/HBuilderX开发应用时实时在真机/模拟器上查看运行效果。（注：iOS仅支持真机运行自定义基座，不能使用xcode模拟器运行自定义基座）
 基座：https://ask.dcloud.net.cn/article/35115
 keystore生成：https://ask.dcloud.net.cn/article/35777
@@ -25,9 +31,23 @@ keytool -genkey -alias testalias -keyalg RSA -keysize 2048 -validity 36500 -keys
 
 就是一个壳子，包含manifest里面的所有设置，还有HBuilderX版本
 
+### 证书
+使用自有证书
+开发者自己生成证书，正式发布应用时推荐使用此类型证书
+
+使用云证书
+DCloud云打包机自动生成证书，适用于开发证书。
+
+使用公共测试证书
+已下线。请勿使用。
+
+使用DCloud老版证书
+兼容老项目使用之前的DCloud证书时选择，此证书已废弃，请勿使用。
+
 ### 云打包模式
 1. 安心打包，不会上传开发者证书代码
 2. 传统云打包，没有mac需要打ios包的开发者，代码和证书上传到DCloud的mac打包服务器
+
 ## 两套开发模式
 1. HBuilderX 可视化界面
 2. cli创建项目

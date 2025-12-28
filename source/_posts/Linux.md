@@ -356,6 +356,21 @@ wget url
 查看防火墙状态
 ufw status
 
+测试DNS
+nslookup a.com
+获取域名 a.com 对应的 IP 地址及 DNS 服务器的解析信息，是排查域名解析问题的常用工具。
+```
+$ nslookup admin.jewelrystand.shop
+Server:         fe80::44f2:1bff:fe6d:1664%12
+Address:        fe80::44f2:1bff:fe6d:1664%12#53
+
+Non-authoritative answer:
+Name:   admin.jewelrystand.shop
+Address: 172.67.139.160
+Name:   admin.jewelrystand.shop
+Address: 104.21.33.10
+```
+
 # zsh 主题
 vim ~/.zshrc
 ZSH_THEME="ys"
@@ -593,6 +608,9 @@ $ cd ~/.ssh && ls
 id_rsa  id_rsa.pub  known_hosts
 ```
 生成key
+快捷方式 
+ssh-keygen
+自定义模式
 ``` BASH
 $ ssh-keygen -t rsa -C "your_email@example.com"
 ```
@@ -618,7 +636,13 @@ $ ssh-keygen -p
     HostName 47.56.157.52
     User root
 ```
-服务端配置文件 ～/.ssh/authorized_keys
+服务端配置文件 ～/.ssh/
+手动创建 authorized_keys 文件（空文件）
+touch authorized_keys
+
+关键：设置正确的文件权限（SSH 强制要求，否则免密登录失效）
+chmod 600 authorized_keys  # 仅 root 可读可写（最小权限原则）
+chmod 700 ~/.ssh           # 同时确保 .ssh 目录权限正确
 
 ``` BASH
 #k
