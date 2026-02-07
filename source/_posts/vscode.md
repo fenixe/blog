@@ -401,6 +401,13 @@ ignore：指定在使用sftp: sync to remote的时候忽略的文件及文件夹
 
 ### Project Manager
 工作中，我们经常会来回切换多个项目，每次都要找到对应项目的目录再打开，比较麻烦。Project Manager插件可以解决这样的烦恼，它提供了专门的视图来展示你的项目，我们可以把常用的项目保存在这里，需要时一键切换，十分方便。
+Project Manager 插件的项目数据（projects.json）是存储在每个编辑器的独立配置目录中的，因此 Antigravity 无法自动读取 VS Code 的项目列表。
+建立软链接（实时同步，推荐）
+希望以后在 VS Code 中保存的项目，在 Antigravity 中也能实时看到，可以使用软链接让两者指向同一个配置文件。
+1、先删除 Antigravity 现有的（空的）配置文件：
+rm "$HOME/Library/Application Support/Antigravity/User/globalStorage/alefragnani.project-manager/projects.json"
+2、建立软链接：
+ln -s "$HOME/Library/Application Support/Code/User/globalStorage/alefragnani.project-manager/projects.json" "$HOME/Library/Application Support/Antigravity/User/globalStorage/alefragnani.project-manager/projects.json"
 
 ### open in browser
 安装open in browser插件后，在 HTML 文件中「右键选择 --> Open in Default Browser」，即可在浏览器中预览网页。
