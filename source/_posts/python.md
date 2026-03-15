@@ -8,6 +8,13 @@ tags:
 ## 查看系统版本
 python -c "import platform;print(platform.architecture()[0]);print(platform.machine())"
 
+## 查看那种方式安装
+which python3
+
+- 如果输出 /usr/bin/python3 — 系统自带
+- 如果输出 /usr/local/bin/python3 — Homebrew 安装
+- 如果输出含 .pyenv 的路径 — pyenv 安装
+
 ## 在线
 colab.research.google.com
 
@@ -163,6 +170,14 @@ python-build: use zlib from xcode sdk
 WARNING: The Python lzma extension was not compiled. Missing the lzma lib?
 Installed Python-3.9.15 to /Users/qkil/.pyenv/versions/3.9.15
 ```
+
+### .python-version 
+
+⏺ pyenv 的版本标记文件。
+
+  当你 cd 进这个目录时，pyenv 会自动读取 .python-version，把 Python 版本切换到文件里指定的版本。不需要手动 pyenv local 或 pyenv
+  global，进目录就自动切换。
+
 
 ## 语言
 - 高级编程语言
