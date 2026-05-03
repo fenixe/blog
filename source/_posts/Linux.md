@@ -97,6 +97,7 @@ $ sudo apt install gcc g++ make -y
 ## 指令
 发行版本信息
 lsb_release -a
+
 ### 基础
 创建文件
 ``` BASH
