@@ -318,6 +318,11 @@ Emmet可以极大的提高 html 和 css 的编写效率，它提供了一种非�
 [Emmet语法](https://www.jianshu.com/p/9e2f55776bc0)
 
 ## VS Code 插件推荐
+### 复制行复制块-AI协作
+Copy Line
+默认快捷键：Windows/Linux 是 Ctrl+Alt+L，macOS 是 Cmd+Option+L
+File: src/views/appManagement/couponSecurityManage/index.vue (line 36-42)
+
 ### GitLens
 我强烈建议你安装插件GitLens，它是 VS Code 中我最推荐的一个插件，简直是Git神器，码农必备。如果你不知道，那真是out了。
 GitLens 在 Git 管理上有很多强大的功能，比如：
@@ -586,5 +591,25 @@ indent_size = 4
 
 
 # Issues
-VScode在DOM中打入花括号会出现{ }}三个标签的错误
+## VScode在DOM中打入花括号会出现{ }}三个标签的错误
 打开设置  =》  搜索Closing Brackets  =》 找到 Auto Closing Brackets  =》 将aways改成beforeWhitespace。
+
+## 终端打开locathost 在vscode内部打开了
+```
+这是 VS Code 把 `localhost` 链接“拦截”到内置 **Integrated Browser** 里了。
+
+做法（改成点第一个也走外部 Chrome）：
+
+1) 打开设置 `Cmd+,`（Windows/Linux: `Ctrl+,`）  
+2) 搜索 `Open Localhost Links`，把 **Workbench › Browser: Open Localhost Links** 关掉（取消勾选）。 ([code.visualstudio.com](https://code.visualstudio.com/docs/debugtest/integrated-browser?utm_source=openai))  
+3)（可选）搜索 `External Browser`，把 `workbench.externalBrowser` 设为 `chrome`（或 `default`）。 ([code.visualstudio.com](https://code.visualstudio.com/updates/v1_92?utm_source=openai))  
+
+也可以直接在 `settings.json` 加：
+
+```json
+{
+  "workbench.browser.openLocalhostLinks": false,
+  "workbench.externalBrowser": "chrome"
+}
+```
+```
