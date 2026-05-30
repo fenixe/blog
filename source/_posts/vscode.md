@@ -318,10 +318,17 @@ Emmet可以极大的提高 html 和 css 的编写效率，它提供了一种非�
 [Emmet语法](https://www.jianshu.com/p/9e2f55776bc0)
 
 ## VS Code 插件推荐
+### 默认浏览器打开
+open in browser
+
 ### 复制行复制块-AI协作
 Copy Line
 默认快捷键：Windows/Linux 是 Ctrl+Alt+L，macOS 是 Cmd+Option+L
 File: src/views/appManagement/couponSecurityManage/index.vue (line 36-42)
+
+### 文件内，鼠标放在一行后面 可以看到 提交者信息 和 提交时间 (VS Code 自带功能)
+cmd + , 打开设置，搜索：GitLens Blame 。勾选：
+Git > Blame > Editor Decoration: Enabled
 
 ### GitLens
 我强烈建议你安装插件GitLens，它是 VS Code 中我最推荐的一个插件，简直是Git神器，码农必备。如果你不知道，那真是out了。

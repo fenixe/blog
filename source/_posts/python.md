@@ -252,6 +252,9 @@ uvicorn main:app --host '0.0.0.0' --port 8000 --reload
 ## 添加服务
 - pip install fastapi
 
+## 安装依赖
+pip install -r requirements.txt
+
 ## 连接mysql数据库
 pip install pymysql
 同步数据库驱动，会阻塞执行它的线程直到查询完成并且结果返回。
