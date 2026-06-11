@@ -372,6 +372,13 @@ Name:   admin.jewelrystand.shop
 Address: 104.21.33.10
 ```
 
+写入文本
+```
+cat > auth.json << 'EOF'
+这里写json内容
+EOF
+```
+
 # zsh 主题
 vim ~/.zshrc
 ZSH_THEME="ys"

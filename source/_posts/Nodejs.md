@@ -156,6 +156,88 @@ http://registry.npmmirror.com
 设置 -> 扩展 -> npm -> Auto Delect
 资源管理器 -> npm脚本
 
+### 固定间接依赖包版本
+`yarn resolutions` 是 Yarn 用来**强制指定间接依赖版本**的功能。
+
+比如你的项目没有直接依赖 `lodash`，但是某个包依赖了旧版本 `lodash`，你想统一锁到某个安全版本，就可以用 `resolutions`。
+
+示例：
+
+```json
+{
+  "dependencies": {
+    "some-package": "^1.0.0"
+  },
+  "resolutions": {
+    "lodash": "^4.17.21"
+  }
+}
+```
+
+意思是：无论依赖树里谁用到了 `lodash`，都尽量强制解析到 `4.17.21`。
+
+也可以指定更精确的路径：
+
+```json
+{
+  "resolutions": {
+    "some-package/lodash": "4.17.21"
+  }
+}
+```
+
+常见用途：
+
+1. **修安全漏洞**
+   某个间接依赖有 CVE，但上游包还没升级。
+
+2. **解决依赖冲突**
+   多个包依赖同一个库的不同版本，想统一版本。
+
+3. **临时修 bug**
+   某个子依赖版本有 bug，可以先锁到可用版本。
+
+4. **减少重复安装**
+   让依赖树更扁平，减少多个版本共存。
+
+使用后通常执行：
+
+```bash
+yarn install
+```
+
+然后检查 `yarn.lock` 是否更新。
+
+需要注意：
+
+- `resolutions` 是强制覆盖，可能让某些包用到它原本不兼容的版本。
+- 最好只作为临时修复，长期还是等上游依赖升级。
+- Yarn v1 里叫 `resolutions`。
+- npm 对应的是 `overrides`。
+- pnpm 对应的也是 `overrides`。
+
+对比一下：
+
+```json
+// Yarn
+{
+  "resolutions": {
+    "lodash": "4.17.21"
+  }
+}
+```
+
+```json
+// npm / pnpm
+{
+  "overrides": {
+    "lodash": "4.17.21"
+  }
+}
+```
+
+一句话：`resolutions` 就是 Yarn 里的“依赖树版本强制改写器”，最常用于修间接依赖的漏洞或冲突。
+
 ## config
 [config](https://docs.npmjs.com/cli/v6/commands/npm-config)
 list
